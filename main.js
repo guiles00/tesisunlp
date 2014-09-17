@@ -18,11 +18,11 @@ if (style.styleSheet){
 
 head.appendChild(style);
 
-//Inicia el Recorder
-Recorder.init();
+
 
 //Guardo el contenedor de Tareas
 var esta = localStorage.getItem("BPMP");
+ 
 if(!esta){
 localStorage.setItem("BPMP",1);    
 localStorage.setItem("BPM",JSON.stringify(new Array()));
@@ -30,7 +30,8 @@ localStorage.setItem("BPMRECORDING",0);
 localStorage.setItem("BPMEXECUTION",0);
 localStorage.setItem("SHARED_DATA",JSON.stringify(new Array()));
 }
-
+//Inicia el Recorder
+Recorder.init();  
 var table = document.getElementById('table_consola');
 var tableDnD = new TableDnD();
     tableDnD.init(table);
@@ -38,5 +39,6 @@ var tableDnD = new TableDnD();
 if(localStorage.getItem("BPMRECORDING") == 1)document.getElementById('start_record').click();   
 
 if(localStorage.getItem("BPMEXECUTION") == 1)document.getElementById('play_procedure').click(); 
-        
+
+      
 };	

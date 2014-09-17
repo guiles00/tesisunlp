@@ -5,6 +5,31 @@
 window.onbeforeunload = function(e) {
   //console.debug('Se fue de la pagina');
 };
+
+var  handlerPocketEvent = function(e) { 
+			console.debug(e.target.nodeName);
+			//Si toque el boton que no haga nada
+			if(e.target.nodeName == 'INPUT') return false;
+			if (window.getSelection) {
+          	selection = window.getSelection();
+          	console.debug('en getSelection');
+        	} else if (document.selection) {
+          	selection = document.selection.createRange();
+          	console.debug('en createRange');
+        	}
+
+			if(selection.toString().length != 0){
+				
+				var concept = prompt('Que dato Guardar','Concept');
+				
+				if(concept){
+					localStorageManager.saveSharedData(concept,selection.toString());
+					selection = '';
+				}		
+			} 
+		};
+
+
 /**  
 * Listener de eventos cuando cambia el foco, recolecta datos relacionados.
 * @event eventoChange
@@ -30,6 +55,7 @@ var eventoClick = function(event){
 		}
 		
 		var xPath = Object.create(XPathAttribute);
+		xPath._type = XPathAttribute._type;
 		xPath.setValue(sxPath);
 		
 		var o_task = new ClickLinkTask(10,xPath,'',0,0);
@@ -59,8 +85,10 @@ var eventoChange = function(event){
 		}
 
 		var xPath = Object.create(XPathAttribute);
+			xPath._type = XPathAttribute._type;
 			xPath.setValue(sxPath);
 		var objValue = Object.create(ValueAttribute);
+			objValue._type = ValueAttribute._type;		
 			objValue.setValue(el_value);
 
 		//Diferencio los tipos de nodos, ahi le envio el tipo de tarea que recolecto.
@@ -464,8 +492,20 @@ function handleSelectxPath(){
 
 	
 	view.render(el, y);
-
+	
+	
 	/*****/
+	//Hardcodeo el boton |<-|
+	var bind_data = document.createElement("input");
+	bind_data.type = "button";
+	bind_data.value = "<";
+	bind_data.setAttribute('class','class_button');
+	bind_data.onclick = function(){ 
+		Recorder.mostrarPocket();
+	}
+	var div_value = document.getElementById('value_id').parentNode;
+	div_value.appendChild(bind_data);
+
 	var close_edit = document.createElement("input");
 	close_edit.type = "button";
 	close_edit.value = "X";
@@ -502,6 +542,84 @@ function handleSelectxPath(){
 	div_footer.appendChild(edit_button); 
    	div_footer.appendChild(close_edit); 
 
+
+	}//@ToRefactor
+	,formatearTextoPocket: function(texto){
+		
+		var table = document.createElement("table"); 
+		var i;
+		for (i = 0; i < texto.length -1; i = i + 1) {
+		//-----------------------------Boton Seleccionar Valor
+		var sel_button = document.createElement('input');
+		sel_button.type = "button";
+		sel_button.value = "S";
+		sel_button.setAttribute('class','class_button');
+
+		sel_button.onclick = function(x){ 
+		//@offlineComment A tener en cuenta  typeof yourVariable === 'object'
+		//console.debug(x.target.parentNode.parentNode.childNodes[1].innerHTML);
+		var el = document.getElementById("value_id");
+		var sh_d = '{"index":'+x.target.parentNode.parentNode.sectionRowIndex+'}';
+		//el.value = x.target.parentNode.parentNode.childNodes[1].innerHTML;
+		el.value = sh_d;		
+		//Cierro
+		var div_show_pocket = document.getElementById('id_show_pocket');
+ 		div_show_pocket.parentNode.removeChild(div_show_pocket);
+		};
+		//-----------------------------			console.debug(texto[i].concept);
+			
+			var tr = document.createElement("tr");
+			var td_concept = document.createElement("td");
+			var t_node = document.createTextNode(texto[i].concept);
+			td_concept.appendChild(t_node);
+			var td_data = document.createElement("td");
+			var t_data = document.createTextNode(texto[i].data);
+			td_data.appendChild(t_data);
+			var b = document.createElement("td");
+			b.appendChild(sel_button);
+
+			tr.appendChild(td_concept);
+			tr.appendChild(td_data);
+			tr.appendChild(b);
+		
+			table.appendChild(tr);	
+			
+		};
+		return table;
+	}
+	,mostrarPocket: function(aValue,anId,attributes){
+
+		
+	    var div_show_pocket = document.createElement('DIV');
+	    div_show_pocket.id = 'id_show_pocket';
+	    var body = document.getElementsByTagName('body')[0];
+        var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
+  		var table_s_data = Recorder.formatearTextoPocket(array_area);
+  		var texto = document.createTextNode(localStorage.getItem("SHARED_DATA"));
+		//visibility: hidden;
+  		div_show_pocket.style.cssText="position:absolute;width:auto;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
+		//div_show_pocket.appendChild(texto);
+		div_show_pocket.appendChild(table_s_data);
+		var bClose = document.createElement('input');
+		bClose.type = 'button';
+		bClose.value = 'x';
+		bClose.style.cssText = "position:absolute;float:right;top:0;right:0;";
+		bClose.onclick = function(){
+			var el = document.getElementById('id_show_pocket');
+ 				el.parentNode.removeChild(el);
+		}
+		div_show_pocket.appendChild(bClose);
+		
+
+		var bClear = document.createElement('input');
+		bClear.type = 'button';
+		bClear.value = 'clear';
+		bClear.onclick = function(){
+			localStorageManager.clearPocket();
+		}
+		div_show_pocket.appendChild(bClear);
+		body.appendChild(div_show_pocket);  
+
 	}
 	/**  
 	* Dispara el handler de record
@@ -515,6 +633,7 @@ function handleSelectxPath(){
 		
 		document.addEventListener("change", eventoChange , false);   
 		document.addEventListener("click", eventoClick , false);
+		document.addEventListener("mouseup", handlerPocketEvent , false);
 		localStorage.setItem("BPMRECORDING",1);
 
 	}else if(start_record.value == "Stop"){
@@ -522,6 +641,8 @@ function handleSelectxPath(){
     	
     	document.removeEventListener("change", eventoChange, false); 
     	document.removeEventListener("click", eventoClick , false);
+    	document.removeEventListener("mouseup", handlerPocketEvent , false);
+
     	localStorage.setItem("BPMRECORDING",0);
 	}  
      
@@ -585,7 +706,16 @@ if( arr_ls.length == 0){
     		//Instancio xPath y Value (wrappers de atributos)
     		var xPath = Object.create(XPathAttribute); 
     		xPath.setValue(arr_ls[i].xPath.value);
+
+    		//@comment Y esto? Como lo diferencio?? No puedo parsear json e interpretarlo otra vez
+    		//Lo diferencio con el _type que guardo en cada {} asi instancio el que corresponde
+
+    		if( arr_ls[i].value._type === 'CValueAttribute'){
+        	var value = Object.create(CValueAttribute);
+			}else{
 			var value = Object.create(ValueAttribute); 
+    		}
+
     		value.setValue(arr_ls[i].value.value);
 
             }catch(err){

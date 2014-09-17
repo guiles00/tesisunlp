@@ -7,23 +7,17 @@ localStorageManager = {
     clearPocket:function(){
         localStorage.setItem("SHARED_DATA",JSON.stringify(new Array()));
     }
-    ,saveObject: function(text){
-        //var data_area = localStorage.getItem("SHARED_DATA");
+    ,saveSharedData: function(concept,text){
+
         var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
-        array_area.push(text);
-        //var i;
-        //for (i = 0; i < data_area.length; i = i + 1) {
-          
-          localStorage.setItem("SHARED_DATA",JSON.stringify(array_area)); 
+        var data_object = new Object();
+        data_object.concept = concept;
+        data_object.data = text;
+        array_area.push(data_object);
 
-           console.debug('Guardo esto');
-           console.debug(text);
-           console.debug('Quedo esto');
-           console.debug(array_area);
-           // if(temp[i].id == id) return temp[i];
-        //};
+        localStorage.setItem("SHARED_DATA",JSON.stringify(array_area)); 
 
-    return false;
+    return true;
     }
     /**
     * Trae la tarea del localStorage
@@ -38,7 +32,7 @@ localStorageManager = {
             if(temp[i].id == id) return temp[i];
         };
 
-    return false;
+    return true;
     }
  
     /**
@@ -90,8 +84,8 @@ localStorageManager = {
     
     //*************************************/
     var o = JSON.parse(json_object);
-console.debug('inserta esto');
-console.debug(json_object);
+    console.debug('inserta esto');
+    console.debug(json_object);
     if(o.type == 'FillInputTask' || o.type == 'TextAreaTask' || o.type == 'SelectOptionTask' || o.type == 'ClickLinkTask'){
     
     var ls = localStorage.getItem("BPM");

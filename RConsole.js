@@ -417,8 +417,8 @@ var RConsole = {
 	 	var clearButton = this.createClearButton(); 
 	 	var addTaksSelect = this.createaddTasksSelect();
 	 	var loadButton = this.createShowLocalStorageButton();
-		var pocketButton = this.createButtonPocket('X','pocket_id','')
-		var mostrarPocket = this.mostrarPocket('M','mpocket_id','')
+		//var pocketButton = this.createButtonPocket('X','pocket_id','')
+		//var mostrarPocket = this.mostrarPocket('M','mpocket_id','')
 		
 		var container = this.createHeaderContainer();
 		var show_hide = this.createShowHide();
@@ -435,8 +435,8 @@ var RConsole = {
 	 	container_header.appendChild(clearButton);
 	 	container_header.appendChild(loadButton);
 	 	container_header.appendChild(addTaksSelect);
-	 	container_header.appendChild(pocketButton);
-	 	container_header.appendChild(mostrarPocket);
+	 	//container_header.appendChild(pocketButton);
+	 	//container_header.appendChild(mostrarPocket);
 	 	
 		
 		table_console_container.appendChild(table_console);

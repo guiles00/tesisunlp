@@ -2,8 +2,28 @@
  * @module Tasks
  */
 
+var Util = {
+    factory: function(type){
+        switch(type){
+            case 'XPathAttribute':
+            return Object.create(XPathAttribute);
+            break;
+            case 'ValueAttribute':
+            return Object.create(ValueAttribute);
+            break;
+            case 'CValueAttribute':
+            return Object.create(CValueAttribute);
+            break;
+            default:
+            console.debug('nada');
+            break;
+        }
+    }
+}
+
 var IdAttribute = {
-    value:''
+     type:'IdAttribute'
+    ,value:''
     ,html_id:''
     ,label:''
     ,getValue: function(){
@@ -14,7 +34,8 @@ var IdAttribute = {
     }
 } 
 var XPathAttribute = {
-    value:''
+     _type:'XPathAttribute'
+    ,value:''
     ,htmlId:'xpath_id'
     ,label:'xPath'
     ,htmlElement:''
@@ -64,7 +85,8 @@ var StateAttribute = {
     }
 }
 var ValueAttribute = {
-    value:''
+     _type:'ValueAttribute'
+    ,value:''
     ,htmlId:'value_id'
     ,label:'Value'
     ,htmlElement:''
@@ -96,6 +118,47 @@ var ValueAttribute = {
     }
 }
 
+var CValueAttribute = {
+    _type:'CValueAttribute'
+    ,value:''
+    ,htmlId:'value_id'
+    ,label:'Value'
+    ,htmlElement:''
+    ,setValue: function(value){
+        this.value = value;
+    }
+    ,setHtmlId: function(htmlId){
+        this.htmlId = htmlId;
+    }
+    ,setLabel: function(label){
+        this.label = label;
+    }
+    ,getValue: function(){
+        console.debug('trae valor mas complejo');
+        //el valor es un JSON
+        var t = JSON.parse(this.value);
+        console.debug(t.index);
+        console.debug('imprimio el index');
+        var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
+        console.debug(array_area[t.index]);
+        return array_area[t.index].data;
+        //return this.value;
+    }
+    ,getHtmlElement: function(){
+        var input_element = Object.create(inputElement);
+        input_element.label = this.getLabel();
+        input_element.value = this.getValue();
+        input_element.id =   this.getHtmlId();
+            
+       return input_element;
+    }
+    ,getLabel: function(){
+        return this.label;
+    }
+    ,getHtmlId: function(){
+        return this.htmlId;
+    }
+}
 
  /**
  * 
@@ -147,6 +210,9 @@ console.debug('ejecuto esto');
     }else{
         Manager.highlightElement(node)
         //node.value= this.value;   
+        console.debug('y esto?');
+        console.debug(this.value);
+
         node.value= this.value.getValue();
     }
     }else{
@@ -362,13 +428,35 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         var str_xPath = document.getElementById('xpath_id').value;
         var str_value = document.getElementById('value_id').value;
 
+        function isJson(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+        }    
+
+
         //Se que un FillInputTask tiene los campos xPath y value
 
         var xPath = Object.create(XPathAttribute);
         xPath.value = str_xPath;
-        
-        var oValue = Object.create(ValueAttribute);
+
+        if(isJson(str_value)) var temp = JSON.parse(str_value);
+       
+        //@comment Si el str_value es un string u objeto instancio distinto valor
+        if(typeof temp === 'object'){
+        var oValue = Object.create(CValueAttribute);
+        oValue._type = CValueAttribute._type;
         oValue.value = str_value;
+        
+        }else{
+        var oValue = Object.create(ValueAttribute);
+        oValue._type = ValueAttribute._type;
+        oValue.value = str_value;
+        }
+       
         
         var o_task = new FillInputTask(this.id,xPath,oValue,0,0);
         

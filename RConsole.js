@@ -1,26 +1,3 @@
-//=========================RConsole====================
-var  handlerPocket = function(e) { 
-			console.debug(e.target.nodeName);
-			//Si toque el boton que no haga nada
-			if(e.target.nodeName == 'INPUT') return false;
-			if (window.getSelection) {
-          	selection = window.getSelection();
-          	console.debug('en getSelection');
-        	} else if (document.selection) {
-          	selection = document.selection.createRange();
-          	console.debug('en createRange');
-        	}
-
-			if(selection.toString().length != 0){
-
-				if(confirm('Guardar: '+selection.toString()+'?')){
-					localStorageManager.saveObject(selection.toString());
-					selection = '';
-					var elButton = document.getElementById('pocket_id'); 
-				}		
-			} 
-		};
-
 /**
 * Crea todos los elementos de la consola
 * @class RConsole
@@ -251,7 +228,7 @@ var RConsole = {
     div_editor_container.appendChild(div_editor_footer);
 	//div_consola.appendChild(div_editor);
 	
-	console.debug(div_editor_footer);
+	//console.debug(div_editor_footer);
 	return div_editor_container;
 	}
 	/**
@@ -463,31 +440,5 @@ var RConsole = {
 	 }
 }
 
-
-//Draggable Edit Window //===============================================//
-var dragObj = null;
-function draggable(id)
-{
-    var obj = document.getElementById(id);
-    obj.style.position = "absolute";
-    obj.onmousedown = function(){
-            dragObj = obj;
-    }
-}
- 
-document.onmouseup = function(e){
-    dragObj = null;
-};
-
-document.onmousemove = function(e){
-    var x = e.pageX;
-    var y = e.pageY;
-
-    if(dragObj == null)
-        return;
-
-    dragObj.style.left = x +"px";
-    dragObj.style.top= y +"px";
-};
 
   

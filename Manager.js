@@ -28,6 +28,13 @@ var Manager = (function () {
         * @method createFillInputTask
         */
         function createFillInputTask(aId,xPath,value,aMsg,aTipo,aState){
+            //console.debug('dentro de createFillInputTask');
+            //console.debug(value);
+            
+            var a =  new FillInputTask(aId,xPath,value,aMsg,aTipo,aState);
+            //console.debug(a);
+            //console.debug('dentro de createFillInputTask');
+            
         return  new FillInputTask(aId,xPath,value,aMsg,aTipo,aState);
         }
         /**
@@ -84,8 +91,8 @@ var Manager = (function () {
         * @method getNextTask
         */       
            	,getNextTask : function(){ //Me trae la proxima tarea pendiente
-           		////console.debug("Trae la siguiente tarea");
-           		//////console.debug(currentPrimitiveTasks.length);
+           		//////console.debug("Trae la siguiente tarea");
+           		////////console.debug(currentPrimitiveTasks.length);
            		var i;
             	for (i = 0;i < currentPrimitiveTasks.length;i=i+1){
             		   
@@ -93,8 +100,8 @@ var Manager = (function () {
                        if(currentPrimitiveTasks[i].getState() === 0 ) { 
                 return currentPrimitiveTasks[i]; 
                        }else{
-                       	//////console.debug("Esto esta mal");
-        						//////console.debug(i);
+                       	////////console.debug("Esto esta mal");
+        						////////console.debug(i);
                        }
             	}
         	}
@@ -102,8 +109,8 @@ var Manager = (function () {
         * @method getNextTaskTimer
         */    
         	,getNextTaskTimer : function(){ //Me trae la proxima tarea pendiente
-           		////console.debug("Trae la siguiente tarea");
-           		//////console.debug(currentPrimitiveTasks.length);
+           		//////console.debug("Trae la siguiente tarea");
+           		////////console.debug(currentPrimitiveTasks.length);
 
            		var i;
             	for (i = 0;i < currentPrimitiveTasks.length;i=i+1){
@@ -112,8 +119,8 @@ var Manager = (function () {
                        if(currentPrimitiveTasks[i].getState() === 0 ) { 
                           return currentPrimitiveTasks[i]; 
                        }else{
-                       	//////console.debug("Esto esta mal");
-        			    //////console.debug(i);
+                       	////////console.debug("Esto esta mal");
+        			    ////////console.debug(i);
                        }
             	}
         	}
@@ -121,6 +128,8 @@ var Manager = (function () {
         * @method start
         */  
         	,start: function(){
+
+                //console.debug(this);
 
 		          Manager.setIndice(0);
 		          Manager.executeNextTaskWithTimer();
@@ -135,7 +144,6 @@ var Manager = (function () {
         * @method addPrimitiveTask
         */   //Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,value,0,arr_ls[i].state);
         	,addPrimitiveTask : function(aId,aPrimitiveTaskType,xPath,value,tipo,state){
-
     		//Este metodo reemplaza al switch
 	    	var lookup = 
 	    	{ FillInputTask: createFillInputTask(aId,xPath,value,tipo,state)
@@ -146,8 +154,7 @@ var Manager = (function () {
 	    	, def = null ;
 
 	    	lookup[aPrimitiveTaskType] ? subscribe(lookup[aPrimitiveTaskType]) : def();
-		   
-    		}
+		   }
         /**
         * @method getCurrentPrimitiveTasks
         */  
@@ -177,10 +184,10 @@ var Manager = (function () {
             ,hayTareas: function(){
 
             var a = localStorageManager.getCurrentTasks();
-            //console.debug('hay tareas?');
-            //console.debug(a);
+            ////console.debug('hay tareas?');
+            ////console.debug(a);
             if(typeof a == "undefined"){
-            //console.debug('no, no hay');    
+            ////console.debug('no, no hay');    
             return false;
             }
             
@@ -199,7 +206,6 @@ var Manager = (function () {
 
             //Tiene que traer las tareas del localStorage
             var arr_tareas =  Manager.getCurrentPrimitiveTasks();
-            
             //Esto hay que modificarlo, no me gusta como esta
             //Si el indice es igual( ya llego a ejecutar todas las tareas)
 

@@ -1,167 +1,5 @@
  /**
  * @module Tasks
- */
-
-var Util = {
-    factory: function(type){
-        switch(type){
-            case 'XPathAttribute':
-            return Object.create(XPathAttribute);
-            break;
-            case 'ValueAttribute':
-            return Object.create(ValueAttribute);
-            break;
-            case 'CValueAttribute':
-            return Object.create(CValueAttribute);
-            break;
-            default:
-            console.debug('nada');
-            break;
-        }
-    }
-}
-
-var IdAttribute = {
-     type:'IdAttribute'
-    ,value:''
-    ,html_id:''
-    ,label:''
-    ,getValue: function(){
-     return this.value;
-    }
-    ,setValue: function(value){
-    this.value = value;
-    }
-} 
-var XPathAttribute = {
-     _type:'XPathAttribute'
-    ,value:''
-    ,htmlId:'xpath_id'
-    ,label:'xPath'
-    ,htmlElement:''
-    ,setValue: function(value){
-        this.value = value;
-    }
-    ,setHtmlId: function(htmlId){
-        this.htmlId = htmlId;
-    }
-    ,setLabel: function(label){
-        this.label = label;
-    }
-    ,getValue: function(){
-        return this.value;
-    }
-    ,getHtmlElement: function(){
-        var input_element = Object.create(inputElement);
-        input_element.label = this.getLabel();
-        input_element.value = this.getValue();
-        input_element.id =   this.getHtmlId();
-            
-       return input_element;
-    }
-    ,getLabel: function(){
-        return this.label;
-    }
-    ,getHtmlId: function(){
-        return this.htmlId;
-    }
-}
-var TipoAttribute = {
-    value:''
-    ,getValue: function(){
-     return this.value;
-    }
-    ,setValue: function(value){
-    this.value = value;
-    }
-}
-var StateAttribute = {
-    value:''
-    ,getValue: function(){
-     return this.value;
-    }
-    ,setValue: function(value){
-    this.value = value;
-    }
-}
-var ValueAttribute = {
-     _type:'ValueAttribute'
-    ,value:''
-    ,htmlId:'value_id'
-    ,label:'Value'
-    ,htmlElement:''
-    ,setValue: function(value){
-        this.value = value;
-    }
-    ,setHtmlId: function(htmlId){
-        this.htmlId = htmlId;
-    }
-    ,setLabel: function(label){
-        this.label = label;
-    }
-    ,getValue: function(){
-        return this.value;
-    }
-    ,getHtmlElement: function(){
-        var input_element = Object.create(inputElement);
-        input_element.label = this.getLabel();
-        input_element.value = this.getValue();
-        input_element.id =   this.getHtmlId();
-            
-       return input_element;
-    }
-    ,getLabel: function(){
-        return this.label;
-    }
-    ,getHtmlId: function(){
-        return this.htmlId;
-    }
-}
-
-var CValueAttribute = {
-    _type:'CValueAttribute'
-    ,value:''
-    ,htmlId:'value_id'
-    ,label:'Value'
-    ,htmlElement:''
-    ,setValue: function(value){
-        this.value = value;
-    }
-    ,setHtmlId: function(htmlId){
-        this.htmlId = htmlId;
-    }
-    ,setLabel: function(label){
-        this.label = label;
-    }
-    ,getValue: function(){
-        console.debug('trae valor mas complejo');
-        //el valor es un JSON
-        var t = JSON.parse(this.value);
-        console.debug(t.index);
-        console.debug('imprimio el index');
-        var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
-        console.debug(array_area[t.index]);
-        return array_area[t.index].data;
-        //return this.value;
-    }
-    ,getHtmlElement: function(){
-        var input_element = Object.create(inputElement);
-        input_element.label = this.getLabel();
-        input_element.value = this.getValue();
-        input_element.id =   this.getHtmlId();
-            
-       return input_element;
-    }
-    ,getLabel: function(){
-        return this.label;
-    }
-    ,getHtmlId: function(){
-        return this.htmlId;
-    }
-}
-
- /**
- * 
  * PrimitiveTask
  * @class PrimitiveTask
  * @constructor
@@ -196,7 +34,7 @@ this.state= aState;
 PrimitiveTask.prototype.execute = function(){
 
 console.debug('ejecuto esto');
-
+console.debug(this);
 //Precondiciones
 
     var iterator = document.evaluate(this.xPath.getValue(),document,null,0,null);
@@ -206,14 +44,14 @@ console.debug('ejecuto esto');
     if(this.tipo == 1){ //Si es Manual, pide valor
     node.focus();
     var value = prompt("Ingrese Valor","");
-    node.value= value;
+    node.value = value;
     }else{
         Manager.highlightElement(node)
         //node.value= this.value;   
         console.debug('y esto?');
         console.debug(this.value);
 
-        node.value= this.value.getValue();
+        node.value = this.value.getValue();
     }
     }else{
         return false;
@@ -284,9 +122,6 @@ PrimitiveTask.prototype.toHtml = function(properties){
  */
 //aId,xPath,value,aMsg,aTipo,aState
 function FillInputTask(id,xPath,value,tipo,state){
-console.debug('ejecuto tarea INput');
-    console.debug('ejecutando:');
-    console.debug(localStorage.getItem("BPMEXECUTION"));
     PrimitiveTask.call(this,id,xPath,value,tipo,state);
     this.msg = "FillInputTask";
     this.type = "FillInputTask";
@@ -302,6 +137,9 @@ return JSON.stringify(this);
 
 }
 
+FillInputTask.init = function(c){
+  return new FillInputTask(c.id,c.xpath,c.value,c.tipo,c.state);
+};
 /**
  * @method emptyToJson
  */
@@ -452,8 +290,8 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         oValue.value = str_value;
         
         }else{
-        var oValue = Object.create(ValueAttribute);
-        oValue._type = ValueAttribute._type;
+        var oValue = Object.create(SValueAttribute);
+        oValue._type = SValueAttribute._type;
         oValue.value = str_value;
         }
        
@@ -512,6 +350,9 @@ function SelectOptionTask(id,xPath,value,tipo,state){
 }
 SelectOptionTask.prototype = new PrimitiveTask();
 
+SelectOptionTask.init = function(c){
+  return new SelectOptionTask(c.id,c.xpath,c.value,c.tipo,c.state);
+};
 SelectOptionTask.prototype.toHtml = function(properties){
     //Por ahora le paso las propiedades para inflar, pero la misma tarea tiene que saber que elementos HTML tiene
     var obj_properties = JSON.parse(properties);
@@ -612,6 +453,9 @@ function TextAreaTask(id,xPath,value,tipo,state){
 }
 TextAreaTask.prototype = new PrimitiveTask();
 
+TextAreaTask.init = function(c){
+  return new TextAreaTask(c.id,c.xpath,c.value,c.tipo,c.state);
+};
 TextAreaTask.prototype.toJson = function(){
 
 return JSON.stringify(this); 
@@ -709,7 +553,25 @@ TextAreaTask.prototype.toHtml = function(properties){
 
 TextAreaTask.prototype.htmlToJson = function(el_div){
 
-    var obj_json = new Object();
+        var str_xPath = document.getElementById('xpath_id').value;
+        var str_value = document.getElementById('value_id').value;
+
+        
+        var xPath = Object.create(XPathAttribute);
+        xPath.value = str_xPath;
+
+        var oValue = Object.create(SValueAttribute);
+        oValue._type = SValueAttribute._type;
+        oValue.value = str_value;
+        
+        
+        var o_task = new TextAreaTask(this.id,xPath,oValue,0,0);
+        
+    return o_task.toJson();
+
+
+    /****************/
+    /*var obj_json = new Object();
     obj_json.type = "TextAreaTask";
     obj_json.state = 0;
     obj_json.id = this.id;
@@ -740,7 +602,7 @@ TextAreaTask.prototype.htmlToJson = function(el_div){
             }
         }
 
-    return JSON.stringify(obj_json);
+    return JSON.stringify(obj_json);*/
 }
 
 
@@ -758,7 +620,9 @@ function CheckBoxTask(id,xPath,value,tipo,state){
 
 }
 CheckBoxTask.prototype = new PrimitiveTask();
-
+CheckBoxTask.init = function(c){
+  return new CheckBoxTask(c.id,c.xpath,c.value,c.tipo,c.state);
+};
 CheckBoxTask.prototype.execute = function(){
 
 var iterator = document.evaluate(this.xPath,document,null,0,null);
@@ -778,6 +642,10 @@ function RadioTask(id,xPath,value,tipo,state){
 
 }
 RadioTask.prototype = new PrimitiveTask();
+
+RadioTask.init = function(c){
+  return new RadioTask(c.id,c.xpath,c.value,c.tipo,c.state);
+};
 
 RadioTask.prototype.execute = function(){
 
@@ -807,6 +675,9 @@ function ClickLinkTask(id,xPath,value,tipo,state){
     this.state = state;
 }
 ClickLinkTask.prototype = new PrimitiveTask();
+ClickLinkTask.init = function(c){
+  return new ClickLinkTask(c.id,c.xpath,c.value,c.tipo,c.state);
+};
 /**
  * @method toJson
  */

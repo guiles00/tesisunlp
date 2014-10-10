@@ -1,0 +1,221 @@
+//=========================RConsole====================
+var  handlerPocket = function(e) { 
+			console.debug(e.target.nodeName);
+			//Si toque el boton que no haga nada
+			if(e.target.nodeName == 'INPUT') return false;
+			if (window.getSelection) {
+          	selection = window.getSelection();
+          	console.debug('en getSelection');
+        	} else if (document.selection) {
+          	selection = document.selection.createRange();
+          	console.debug('en createRange');
+        	}
+
+			if(selection.toString().length != 0){
+
+				if(confirm('Guardar: '+selection.toString()+'?')){
+					localStorageManager.saveObject(selection.toString());
+					selection = '';
+					var elButton = document.getElementById('pocket_id'); 
+				}		
+			} 
+		};
+
+//=================================================================
+window.onbeforeunload = function(e) {
+  //console.debug('Se fue de la pagina');
+};
+
+var  handlerPocketEvent = function(e) { 
+			console.debug(e.target.nodeName);
+			//Si toque el boton que no haga nada
+			if(e.target.nodeName == 'INPUT') return false;
+			if (window.getSelection) {
+          	selection = window.getSelection();
+          	console.debug('en getSelection');
+        	} else if (document.selection) {
+          	selection = document.selection.createRange();
+          	console.debug('en createRange');
+        	}
+
+			if(selection.toString().length != 0){
+				
+				var concept = prompt('Que dato Guardar','Concept');
+				
+				if(concept){
+					localStorageManager.saveSharedData(concept,selection.toString());
+					selection = '';
+				}		
+			} 
+		};
+
+
+/**  
+* Listener de eventos cuando cambia el foco, recolecta datos relacionados.
+* @event eventoChange
+*/
+
+var eventoClick = function(event){
+
+	if(event.target.nodeName == 'A' ) {
+
+	//console.debug('se va a otro lado, registro el evento/Tarea');
+	
+		var tipo = 0;
+		var el_id = event.target.id;
+		var el_value = event.target.value;
+	
+		//Si tiene id le pongo el xPath //*[@id="THE_ID"]
+		if(el_id){
+		var sxPath = '//*[@id="'+el_id+'"]';
+		}else{ //Si no tiene ID tengo que ver la manera de sacar el absoluto
+		////console.debug("no tiene id, saco el absoluto, uso el ejemplo de stack");
+		var sxPath = Recorder.createXPathFromElement(event.target) ;
+		////console.debug(sxPath);
+		}
+		
+		var xPath = Object.create(XPathAttribute);
+		xPath._type = XPathAttribute._type;
+		xPath.setValue(sxPath);
+		
+		var o_task = new ClickLinkTask(10,xPath,'',0,0);
+		localStorageManager.insert(o_task.toJson());
+		console.debug('o_taskasdasdasdas');
+		console.debug(o_task);
+		console.debug('o_taskasdasdasdas');
+		Recorder.refresh();
+
+	} 
+}
+/**
+* @event
+* eventoChange
+* Registra los cambios en los elementos HTML
+*/
+
+var eventoChange = function(event){
+		var el_id = event.target.id;
+		var el_value = event.target.value;
+		var	o_task;
+
+		if(el_id){
+		var sxPath = '//*[@id="'+el_id+'"]';
+		}else{
+		var sxPath = Recorder.createXPathFromElement(event.target) ;
+		}
+
+		var xPath = Object.create(XPathAttribute);
+			xPath._type = XPathAttribute._type;
+			xPath.setValue(sxPath);
+		var objValue = Object.create(SValueAttribute);
+			objValue._type = SValueAttribute._type;		
+			objValue.setValue(el_value);
+
+		//Diferencio los tipos de nodos, ahi le envio el tipo de tarea que recolecto.
+		switch(event.target.nodeName)
+		{
+		case 'SELECT':
+			o_task = new SelectOptionTask(10,xPath,objValue,0,0);
+	    break;
+		case 'INPUT':
+			if(event.target.type=='radio'){ 
+				o_task = new RadioTask(10,xPath,objValue,0,0);
+			}else if(event.target.type=='checkbox'){
+				o_task = new CheckBoxTask(10,xPath,objValue,0,0);
+			}else{				
+				o_task = new FillInputTask(10,xPath,objValue,0,0);
+			}
+		break;
+	 	case 'TEXTAREA':
+				o_task = new TextAreaTask(10,xPath,objValue,0,0);
+		
+        break;
+		default:
+			console.log('No se encontro Nodo');
+		break;
+		}
+
+		localStorageManager.insert(o_task.toJson());
+		Recorder.refresh();
+		console.log('NodeName:'+event.target.nodeName+',id:'+event.target.id+',xPath:'+sxPath);
+}
+
+var addInputTaskEvent = function(event){
+
+		var tipo = 0;
+		var el_id = event.target.id;
+		var el_value = event.target.value;
+		
+		if(el_id){
+		var sxPath = '//*[@id="'+el_id+'"]';
+		}else{ 
+		var sxPath = Recorder.createXPathFromElement(event.target) ;
+		}
+
+	if(event.target.nodeName == 'INPUT'){ 	
+	
+	var	o_task = new FillInputTask();
+		o_task.xPath = sxPath;
+		o_task.value = el_value;
+		o_task.tipo = tipo;
+		localStorageManager.insert(o_task.toJson());
+		Recorder.refresh();
+	document.removeEventListener("change", addInputTaskEvent, false); 
+
+
+	}
+}
+
+var addTextAreaTaskEvent = function(event){
+
+		var tipo = 0;
+		var el_id = event.target.id;
+		var el_value = event.target.value;
+		
+		if(el_id){
+		var sxPath = '//*[@id="'+el_id+'"]';
+		}else{ 
+		var sxPath = Recorder.createXPathFromElement(event.target) ;
+		}
+//console.debug(event.target.nodeName);
+	//event.target.nodeName
+	if(event.target.nodeName == 'TEXTAREA'){ 	
+	
+	var	o_task = new TextAreaTask();
+		o_task.xPath = sxPath;
+		o_task.value = el_value;
+		o_task.tipo = tipo;
+		localStorageManager.insert(o_task.toJson());
+		Recorder.refresh();
+	document.removeEventListener("change", addTextAreaTaskEvent, false); 
+
+
+	}
+}
+var addSelectOptionTaskEvent = function(event){
+
+		var tipo = 0;
+		var el_id = event.target.id;
+		var el_value = event.target.value;
+		
+		if(el_id){
+		var sxPath = '//*[@id="'+el_id+'"]';
+		}else{ 
+		var sxPath = Recorder.createXPathFromElement(event.target) ;
+		}
+//console.debug(event.target.nodeName);
+	//event.target.nodeName
+	if(event.target.nodeName == 'SELECT'){ 	
+	
+	var	o_task = new SelectOptionTask();
+		o_task.xPath = sxPath;
+		o_task.value = el_value;
+		o_task.tipo = tipo;
+		localStorageManager.insert(o_task.toJson());
+		Recorder.refresh();
+	document.removeEventListener("change", addSelectOptionTaskEvent, false); 
+
+
+	}
+}
+

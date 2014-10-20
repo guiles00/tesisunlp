@@ -73,16 +73,16 @@ var eventoClick = function(event){
 		var sxPath = Recorder.createXPathFromElement(event.target) ;
 		////console.debug(sxPath);
 		}
-		
+
+		var state = Object.create(StateAttribute);
+			state._type = StateAttribute._type;
+			state.setValue(0);		
 		var xPath = Object.create(XPathAttribute);
 		xPath._type = XPathAttribute._type;
 		xPath.setValue(sxPath);
 		
-		var o_task = new ClickLinkTask(10,xPath,'',0,0);
+		var o_task = new ClickLinkTask(10,xPath,'',0,state);
 		localStorageManager.insert(o_task.toJson());
-		console.debug('o_taskasdasdasdas');
-		console.debug(o_task);
-		console.debug('o_taskasdasdasdas');
 		Recorder.refresh();
 
 	} 
@@ -94,6 +94,10 @@ var eventoClick = function(event){
 */
 
 var eventoChange = function(event){
+		
+		
+		var location = document.location.href;
+		
 		var el_id = event.target.id;
 		var el_value = event.target.value;
 		var	o_task;
@@ -104,6 +108,10 @@ var eventoChange = function(event){
 		var sxPath = Recorder.createXPathFromElement(event.target) ;
 		}
 
+
+		var state = Object.create(StateAttribute);
+			state._type = StateAttribute._type;
+			state.setValue(0);
 		var xPath = Object.create(XPathAttribute);
 			xPath._type = XPathAttribute._type;
 			xPath.setValue(sxPath);
@@ -111,32 +119,38 @@ var eventoChange = function(event){
 			objValue._type = SValueAttribute._type;		
 			objValue.setValue(el_value);
 
+		var pre = Object.create(Precondition).init(Object.create(UrlAttribute).init({'value':location}));	
+				
 		//Diferencio los tipos de nodos, ahi le envio el tipo de tarea que recolecto.
 		switch(event.target.nodeName)
 		{
 		case 'SELECT':
-			o_task = new SelectOptionTask(10,xPath,objValue,0,0);
+			o_task = new SelectOptionTask(10,xPath,objValue,0,state);
 	    break;
 		case 'INPUT':
 			if(event.target.type=='radio'){ 
-				o_task = new RadioTask(10,xPath,objValue,0,0);
+				o_task = new RadioTask(10,xPath,objValue,0,state);
 			}else if(event.target.type=='checkbox'){
-				o_task = new CheckBoxTask(10,xPath,objValue,0,0);
-			}else{				
-				o_task = new FillInputTask(10,xPath,objValue,0,0);
+				o_task = new CheckBoxTask(10,xPath,objValue,0,state);
+			}else{
+				o_task = new FillInputTask(10,xPath,objValue,0,state);
 			}
 		break;
 	 	case 'TEXTAREA':
-				o_task = new TextAreaTask(10,xPath,objValue,0,0);
+				o_task = new TextAreaTask(10,xPath,objValue,0,state);
 		
         break;
 		default:
 			console.log('No se encontro Nodo');
 		break;
 		}
-
+	
+		//le paso las precondiciones por un setter
+		o_task.setPrecondition(pre);
+			
 		localStorageManager.insert(o_task.toJson());
 		Recorder.refresh();
+		//console.debug(o_task);
 		console.log('NodeName:'+event.target.nodeName+',id:'+event.target.id+',xPath:'+sxPath);
 }
 

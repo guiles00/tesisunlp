@@ -278,8 +278,11 @@ function handleSelectxPath(){
     var task = localStorageManager.getObject(x.parentNode.parentNode.id); //@comment Podría traer el objeto instanciado
  	var aTask = eval(task.type);
  	var iTask = aTask.init({'id':task.id,'xpath':Object.create(XPathAttribute).init({'value':task.xPath.value})
- 		,'value':Object.create(SValueAttribute).init({'value':task.value.value}),'tipo':0,'state':0});
- 	var y = iTask.toHtml();
+ 		,'value':Object.create(SValueAttribute).init({'value':task.value.value}),'tipo':0,'state':Object.create(StateAttribute).init({'value':(task.state.value).toString()})});
+ 	
+	// 	var pre = Object.create(Precondition).init(Object.create(UrlAttribute).init({'value':task.precondition.url.value}));	
+	//	iTask.setPrecondition(pre);
+	var y = iTask.toHtml();
 
 	view.render(document.getElementById("div_inflate"), y);
 		
@@ -298,7 +301,7 @@ function handleSelectxPath(){
 	//El comportamiento de los botones todavia no se bien como desacoplarlo
 	var b = document.getElementById('id_edit_task');
 	b.onclick = function(){
-    console.debug(iTask.htmlToJson(document.getElementById("div_inflate")));
+    //console.debug(iTask.htmlToJson(document.getElementById("div_inflate")));
 	localStorageManager.setObjectR(iTask.htmlToJson(document.getElementById("div_inflate")));
     el = document.getElementById("div_editor_container");
     el.style.visibility = "hidden";
@@ -389,10 +392,10 @@ function handleSelectxPath(){
 	* @method clickRecord   
 	*/
 	,clickRecord: function(){
-	
     var start_record = document.getElementById('start_record');
 	if(start_record.value == "Record"){
 		start_record.value = "Stop";
+		start_record.src = 'stop.png';
 		
 		document.addEventListener("change", eventoChange , false);   
 		document.addEventListener("click", eventoClick , false);
@@ -401,7 +404,8 @@ function handleSelectxPath(){
 
 	}else if(start_record.value == "Stop"){
     	start_record.value = "Record" ;
-    	
+    	start_record.src = 'record.png';
+
     	document.removeEventListener("change", eventoChange, false); 
     	document.removeEventListener("click", eventoClick , false);
     	document.removeEventListener("mouseup", handlerPocketEvent , false);
@@ -474,15 +478,15 @@ if( arr_ls.length == 0){
 
     		//var value = eval(arr_ls[i].value._type);
     		//value.setValue(arr_ls[i].value.value);
-		if(arr_ls[i].value._type == 'CValueAttribute'){ 
-		var valor = Object.create(CValueAttribute); 
-    		valor.setValue(arr_ls[i].value.value);
-		}else{
-		var valor = Object.create(SValueAttribute); 
-    		valor.setValue(arr_ls[i].value.value);
-		}
-		//console.debug(eval(arr_ls[i].value._type));
-    			
+			if(arr_ls[i].value._type == 'CValueAttribute'){ 
+			var valor = Object.create(CValueAttribute); 
+	    		valor.setValue(arr_ls[i].value.value);
+			}else{
+			var valor = Object.create(SValueAttribute); 
+	    		valor.setValue(arr_ls[i].value.value);
+			}
+			//console.debug(eval(arr_ls[i].value._type));
+	    			
             }catch(err){
             	console.log('error atributos');
             }            
@@ -562,11 +566,6 @@ if( arr_ls.length == 0){
 			var id = this.parentNode.parentNode.id;
 			var row = this.parentNode.parentNode.sectionRowIndex;
 			document.getElementById('table_consola').deleteRow(row);
-			
-			//localStorage.removeItem(id);
-			//
-			
-			//iTask.htmlToJson(el)
 			localStorageManager.removeElement(id);
 
 			}
@@ -578,17 +577,25 @@ if( arr_ls.length == 0){
 		edit_button.setAttribute('class','class_button');
 		edit_button.onclick = function(){
 		Recorder.editRow(this);
-		//console.debug(this);
 		};
 
+	var state_button = document.createElement('input');
+		state_button.type = "button";
+		state_button.value = "S";
+		state_button.setAttribute('class','class_button');
+		state_button.onclick = function(){
+		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
+		task.state.value = 0;
+		localStorageManager.setObjectR(JSON.stringify(task));
+		};
 
 		var id_text = document.createTextNode(id);
 
 		td1.appendChild(id_text);
 		td2.appendChild(text1);
-		//td3.appendChild(add_button);
-		td4.appendChild(edit_button);
-		td5.appendChild(delete_button);
+		td3.appendChild(edit_button);
+		td4.appendChild(delete_button);
+		td5.appendChild(state_button);
 		tr.appendChild(td1);
 		tr.appendChild(td2);
 		tr.appendChild(td3);

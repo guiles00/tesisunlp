@@ -40,6 +40,9 @@ var optionsElement = {
 */
 var selectElement = {
     specs:{}
+    ,label:''
+    ,id:''
+    ,value:''
     ,render: function(){
     
     var iterator = document.evaluate(this.specs,document,null,0,null);

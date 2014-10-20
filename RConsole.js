@@ -248,6 +248,21 @@ var RConsole = {
 
 	return aButton;
 	}
+	,createImageButton: function(aValue,anId,src){
+
+		var aButton = document.createElement("input");	
+	    aButton.setAttribute('type','image');
+	    aButton.setAttribute('value',aValue);
+	    aButton.setAttribute('id',anId);
+		aButton.setAttribute('src',src);
+
+/*
+	      for (var attr in attributes) { 
+	      aButton.setAttribute(attr,attributes[attr]);  
+	      }*/
+
+	return aButton;
+	}
 	,createStopButton: function(){
 		////console.debug('1. crea boton Stop');
 		var attr_stop = {'disabled':true, 'hidden':false };
@@ -258,22 +273,23 @@ var RConsole = {
 	 }
 	 ,createPlayButton: function(){
 	 	////console.debug('2. crea boton Play');
-		var iPlay_recorder = this.createButton('Play','play_procedure',null);
-		iPlay_recorder.className = "class_button";
+		//var iPlay_recorder = this.createButton('Play','play_procedure',null);
+		var iPlay_recorder = this.createImageButton('Play','play_procedure','play.png');
+		//iPlay_recorder.className = "class_button";
 		iPlay_recorder.addEventListener("click", Recorder.clickPlay , false); 
 		return iPlay_recorder;
 	 }
 	 ,createRecordButton: function(){
 
 		////console.debug('3. crea boton Record');
-		var iRecord_recorder = this.createButton('Record','start_record',null);
+		var iRecord_recorder = this.createImageButton('Record','start_record','record.png');
 		iRecord_recorder.addEventListener("click",Recorder.clickRecord, false); 
-		iRecord_recorder.className = "class_button";
+		//iRecord_recorder.className = "class_button";
 		return iRecord_recorder;
 	 }
 	 ,createClearButton: function(){
 	 	////console.debug('4. crea boton Clear');
-		var clear = this.createButton('Clear','clear',null);
+		var clear = this.createButton('CLR','clear',null);
 		clear.className = "class_button";
 		clear.onclick = function(){
 

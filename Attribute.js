@@ -98,7 +98,7 @@ var StateAttribute = {
      ,init: function(c){
         this.value = c.value || '' ;
         this.htmlId = c.htmlId || 'state_id'; 
-        this.label = c.label || 'State';
+        this.label = c.label || 'Ejecutado:';
         return this;
     }
     ,getHtmlElement: function(){
@@ -159,4 +159,57 @@ var CValueAttribute = {
     }
     , __proto__ : Attribute
 
+}
+var OValueAttribute = {
+     _type:'OValueAttribute'
+      ,init: function(c){
+        this.value = c.value || '' ;
+        this.htmlId = c.htmlId || 'value_id'; 
+        this.label = c.label || 'Value';
+        return this;
+    }
+    ,getHtmlElement: function(){
+        var option_element = Object.create(optionElement);
+        option_element.label = this.getLabel();
+        option_element.value = this.getValue();
+        option_element.id =   this.getHtmlId();
+            
+       return option_element;
+    }
+    , __proto__ : Attribute
+}
+
+var UrlAttribute = {
+     _type:'UrlAttribute'
+      ,init: function(c){
+        this.value = c.value || '' ;
+        this.htmlId = c.htmlId || 'url_id'; 
+        this.label = c.label || 'Url';
+        return this;
+    }/*
+    ,getValue: function(){
+        return this.value;
+    }*/
+    ,getHtmlElement: function(){
+        var input_element = Object.create(inputElement);
+        input_element.label = this.getLabel();
+        input_element.value = this.getValue();
+        input_element.id =   this.getHtmlId();
+            
+       return input_element;
+    }
+    , __proto__ : Attribute
+}
+
+//Objeto que encapsula varios atributos y comportamiento
+var Precondition = {
+    _type:'Precondition'
+     ,url:''
+     ,init: function(url){
+        this.url = url || '' ; //Objeto
+        return this;
+    }
+    ,getUrl: function(){
+        return this.url;
+    }
 }

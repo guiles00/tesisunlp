@@ -62,10 +62,7 @@ localStorageManager = {
     * @params: json_tasks (un objeto JSON)
     */
     ,setObjectR: function(json_task){
-        ////console.debug('esto es lo que guarda');
         var o = JSON.parse(json_task);
-        ////console.debug(json_task);
-        ////console.debug(o);
         var tasks = localStorage.getItem("BPM");
         var obj_tasks = JSON.parse(tasks);
         var i;
@@ -76,7 +73,6 @@ localStorageManager = {
                 obj_tasks[i] = o; 
             }
         };
-   // ////console.debug(JSON.stringify(obj_tasks));
     localStorage.setItem("BPM",JSON.stringify(obj_tasks)); 
     return true;
     }
@@ -114,14 +110,12 @@ localStorageManager = {
     }
     ,getCurrentTasks: function(){
         var tasks = localStorage.getItem("BPM");
-        //console.debug('Traogp esta tareas');
-        //console.debug(tasks);
         var temp = JSON.parse(tasks);
+            
         var currentTasks = new Array();
         var i;
         for (i = 0; i < temp.length; i = i + 1) {
-
-            if(temp[i].state == 0) {
+            if(temp[i].state.value == 0) {
                 currentTasks.push(temp[i]);
             }
         };

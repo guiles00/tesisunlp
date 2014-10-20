@@ -33,7 +33,9 @@ var RConsole = {
 		
 
 		var bClear = document.createElement('input');
-		bClear.type = 'button';
+		//bClear.type = 'button';
+		bClear.type = 'image';
+		bClear.src = 'clear.png';
 		bClear.value = 'clear';
 		bClear.onclick = function(){
 			localStorageManager.clearPocket();
@@ -221,7 +223,7 @@ var RConsole = {
 	div_editor_footer.id = "div_editor_footer";
 	div_editor_footer.style.cssText="";
     
-    // div_consola.style.visibility = "hidden";
+    //div_consola.style.visibility = "hidden";
     div_editor_container.appendChild(div_editor_header);
     div_editor_container.appendChild(div_editor_preconditions);
     div_editor_container.appendChild(div_inflate);
@@ -289,8 +291,8 @@ var RConsole = {
 	 }
 	 ,createClearButton: function(){
 	 	////console.debug('4. crea boton Clear');
-		var clear = this.createButton('CLR','clear',null);
-		clear.className = "class_button";
+		var clear = this.createImageButton('CLR','clear','clear.png');
+		//clear.className = "class_button";
 		clear.onclick = function(){
 
 		//localStorage.clear();
@@ -301,8 +303,9 @@ var RConsole = {
 	 }
 	 ,createShowLocalStorageButton: function(){
 		var load = document.createElement('input');
-		load.className = "class_button";
-		load.type = "button";
+		//load.className = "class_button";
+		load.type = "image";
+		load.src = "ls.png";
 		load.value = "LS";
 		load.id = "load";
 
@@ -324,6 +327,8 @@ var RConsole = {
 		////console.debug('5. crea Select Tasks');
 		var sAddTask = document.createElement('select');
 		sAddTask.className = "class_button";
+		//sAddTask.style.visibility = "hidden";
+	 	
 		sAddTask.setAttribute('id','add_task');
 	 	var j;
 	 	var aOptions=['Add Task','Primitive Task','Augmented Task'];
@@ -343,7 +348,7 @@ var RConsole = {
 		////console.debug('7. Crea el div consola');		
 		var div_consola = document.createElement("div");
 			div_consola.id = "div_consola";		
-			div_consola.style.cssText = "overflow:scroll;z-index: 300;position:fixed;left: 0px;width:auto;height: 100%;border:solid 1px #e1e1e1;vertical-align: middle;background: #A2AFA0;text-align:center;";
+			div_consola.style.cssText = "overflow:scroll;z-index: 300;position:fixed;left: 0px;width:auto;height: 100%;border:solid 1px #e1e1e1;vertical-align: middle;background: #A2AFA0;"; //text-align:center;
 		return div_consola;
 
 	 }
@@ -364,7 +369,7 @@ var RConsole = {
 		////console.debug('10. Crea la tabla contenedora de la consola');
 		var table_consola = document.createElement("table")
 		table_consola.id = "table_consola"
-		table_consola.style.cssText = "min-width:auto;font-family: Helvetica,Arial;";
+		table_consola.style.cssText = "min-width:auto;font-family: Helvetica,Arial; font-size: 16px";
 		return table_consola;
 	 }
 	 ,createShowHide: function(){
@@ -404,7 +409,7 @@ var RConsole = {
 	 }
 	 ,init: function(){
 
-	 	var stopButton = this.createStopButton();
+	 	//var stopButton = this.createStopButton();
 	 	var playButton = this.createPlayButton();
 	 	var recordButton = this.createRecordButton();
 	 	var clearButton = this.createClearButton(); 
@@ -422,7 +427,7 @@ var RConsole = {
 		var add_container = this.createAddContainer();
 	 	var add_aug_container = this.createAddAugContainer();
 
-	 	container_header.appendChild(stopButton);
+	 	//container_header.appendChild(stopButton);
 	 	container_header.appendChild(recordButton);
 		container_header.appendChild(playButton);
 	 	container_header.appendChild(clearButton);

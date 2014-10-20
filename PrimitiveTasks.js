@@ -134,7 +134,7 @@ PrimitiveTask.prototype.toHtml = function(properties){
 //aId,xPath,value,aMsg,aTipo,aState
 function FillInputTask(id,xPath,value,tipo,state){
     PrimitiveTask.call(this,id,xPath,value,tipo,state);
-    this.msg = "FillInputTask";
+    this.msg = "Enter String to Input ";
     this.type = "FillInputTask";
     this.state = state;
     //this.precondition = {};
@@ -448,7 +448,7 @@ SelectOptionTask.prototype.htmlToJson = function(el_div){
 //Herencia --> PrimitiveTask
 function TextAreaTask(id,xPath,value,tipo,state){
     PrimitiveTask.call(this,id,xPath,value,tipo,state);
-    this.msg = "TextAreaTask";
+    this.msg = "Enter String TextArea ";
     this.type = "TextAreaTask";
     this.state = state;
 }
@@ -630,7 +630,7 @@ function ClickLinkTask(id,xPath,value,tipo,state){
     console.debug(localStorage.getItem("BPMEXECUTION"));
 
     PrimitiveTask.call(this,id,xPath,value,tipo,state);
-    this.msg = "ClickLinkTask";
+    this.msg = "Click Link ";
     this.type = "ClickLinkTask";
     this.state = state;
 }

@@ -529,14 +529,92 @@ if( arr_ls.length == 0){
 			
 			//console.debug('escribe esto');
 			//console.debug(ls_tasks);
-             this.writer(arr_tasks[i].id,arr_tasks[i].type,-1);
+             this.writer(arr_tasks[i].id,arr_tasks[i].msg,-1);
            }
 	}
+	,writer: function(id,text,index){
+
+		var table_consola = document.getElementById("table_consola");
+
+		//Inserto registro
+		var tr = document.getElementById('table_consola').insertRow(index);
+        tr.id= id;
+	    var pTask = document.createTextNode('Primitive Task');
+	    var spTask = document.createElement('span');
+	    spTask.setAttribute('style', 'font-size: 10px'); 
+	    spTask.appendChild(pTask);
+	    
+	    var td1 = document.createElement('td');
+	    td1.style.visibility = "hidden";
+	    
+	    var td2 = document.createElement('td');
+	    /*var td3 = document.createElement('td');
+	    var td4 = document.createElement('td');
+	    var td5 = document.createElement('td');
+		*/
+		//Pruebo si el doble clic funciona
+		tr.addEventListener("dblclick",function(){
+			Recorder.editRow(this);
+		} ,false);
+
+
+	 	var text1 = document.createTextNode(text);
+	    var delete_button = document.createElement('input');
+		delete_button.type = "button";
+		delete_button.value = "Delete";
+		delete_button.setAttribute('class','class_button');
+
+		delete_button.onclick = function(x){ 
+
+			if(confirm('Desea borrar el regitro?')){
+			var id = this.parentNode.parentNode.id;
+			var row = this.parentNode.parentNode.sectionRowIndex;
+			document.getElementById('table_consola').deleteRow(row);
+			localStorageManager.removeElement(id);
+
+			}
+		};
+
+		var edit_button = document.createElement('input');
+		edit_button.type = "button";
+		edit_button.value = "Edit";
+		edit_button.setAttribute('class','class_button');
+		edit_button.onclick = function(){
+		Recorder.editRow(this);
+		};
+
+	var state_button = document.createElement('input');
+		state_button.type = "button";
+		state_button.value = "State";
+		state_button.setAttribute('class','class_button');
+		state_button.onclick = function(){
+		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
+		task.state.value = 0;
+		localStorageManager.setObjectR(JSON.stringify(task));
+		};
+
+		var id_text = document.createTextNode(id);
+		var br = document.createElement('br');
+		td1.appendChild(id_text);
+		td2.appendChild(text1);
+		td2.appendChild(edit_button);
+		td2.appendChild(delete_button);
+		td2.appendChild(state_button);
+		td2.appendChild(br);
+		td2.appendChild(spTask);
+		
+		//tr.appendChild(td1);
+		tr.appendChild(td2);
+		/*
+		tr.appendChild(td3);
+		tr.appendChild(td4);
+		tr.appendChild(td5);
+		*/}
 	/**  
 	* Escribe en la consola
 	* @method writer 
 	*/
-	,writer: function(id,text,index){
+	,xwriter: function(id,text,index){
 
 		var table_consola = document.getElementById("table_consola");
 

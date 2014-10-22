@@ -12,6 +12,23 @@
  /**
  * @class Manager
  */
+function procedureHandler(e){
+        
+    var indice = Manager.getIndice();           
+    console.debug(indice);
+    //Si llego un finalizado incrementa indice
+    Manager.incrementIndice(); 
+    Manager.executeNextTaskWithTimer();                     
+
+console.log(
+        "Ejecuto esta tarea y la da como finalizada "+e.currentTarget.nodeName+", "
+        +e.detail.id+": "+e.detail.message
+    );
+    
+}
+
+
+
 var Manager = (function () {
 	"use strict";
     var currentPrimitiveTasks = []; //Array de las tareas a realizar cuando se ejecuta el Manager
@@ -27,15 +44,11 @@ var Manager = (function () {
         /**
         * @method createFillInputTask
         */
-        function createFillInputTask(aId,xPath,value,aMsg,aTipo,aState){
+        function createFillInputTask(aId,xPath,value,aMsg,aTipo,aState,aTaskTitle){
             //console.debug('dentro de createFillInputTask');
             //console.debug(value);
             
-            var a =  new FillInputTask(aId,xPath,value,aMsg,aTipo,aState);
-            //console.debug(a);
-            //console.debug('dentro de createFillInputTask');
-            
-        return  new FillInputTask(aId,xPath,value,aMsg,aTipo,aState);
+        return  new FillInputTask(aId,xPath,value,aMsg,aTipo,aState,aTaskTitle);
         }
         /**
         * @method createSelectOptionTask
@@ -132,7 +145,16 @@ var Manager = (function () {
                 //console.debug(this);
 
 		          Manager.setIndice(0);
-		          Manager.executeNextTaskWithTimer();
+
+                  document.addEventListener('finalizado',procedureHandler,false);
+
+                  var arr_tareas =  Manager.getCurrentPrimitiveTasks();
+                //console.debug(arr_tareas);
+                  var indice = Manager.getIndice();
+                  var task = arr_tareas[indice]; 
+                  task.execute();
+
+		          //Manager.executeNextTaskWithTimer();
         	}
         /**
         * @method clearCurrentPrimitiveTasks
@@ -143,10 +165,10 @@ var Manager = (function () {
         /**
         * @method addPrimitiveTask
         */   //Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,value,0,arr_ls[i].state);
-        	,addPrimitiveTask : function(aId,aPrimitiveTaskType,xPath,value,tipo,state){
+        	,addPrimitiveTask : function(aId,aPrimitiveTaskType,xPath,value,tipo,state,taskTitle){
     		//Este metodo reemplaza al switch
 	    	var lookup = 
-	    	{ FillInputTask: createFillInputTask(aId,xPath,value,tipo,state)
+	    	{ FillInputTask: createFillInputTask(aId,xPath,value,tipo,state,taskTitle)
 	    	, SelectOptionTask: createSelectOptionTask(aId,xPath,value,tipo,state)
 	    	, TextAreaTask: createTextAreaTask(aId,xPath,value,tipo,state)
 	    	, CheckBoxTask: createCheckBoxTask(aId,xPath,value,tipo,state)
@@ -227,8 +249,8 @@ var Manager = (function () {
                             var task = arr_tareas[indice]; 
                             task.execute();
                             
-                            Manager.incrementIndice(); 
-                            Manager.executeNextTaskWithTimer();                     
+                            //Manager.incrementIndice(); 
+                            //Manager.executeNextTaskWithTimer();                     
 
                     }
 

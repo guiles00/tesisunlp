@@ -3,6 +3,7 @@
  * @class Recorder
  */
 
+
 var Recorder = {
     /**
      * @method createButton
@@ -278,7 +279,11 @@ function handleSelectxPath(){
     var task = localStorageManager.getObject(x.parentNode.parentNode.id); //@comment Podría traer el objeto instanciado
  	var aTask = eval(task.type);
  	var iTask = aTask.init({'id':task.id,'xpath':Object.create(XPathAttribute).init({'value':task.xPath.value})
- 		,'value':Object.create(SValueAttribute).init({'value':task.value.value}),'tipo':0,'state':Object.create(StateAttribute).init({'value':(task.state.value).toString()})});
+ 		,'value':Object.create(SValueAttribute).init({'value':task.value.value})
+ 		,'tipo':Object.create(TipoAttribute).init({'value':task.tipo.value})
+ 		,'state':Object.create(StateAttribute).init({'value':(task.state.value).toString()})
+ 		,'taskTitle':Object.create(TaskTitleAttribute).init({'value':(task.taskTitle.value).toString()}),
+ 	});
  	
 	// 	var pre = Object.create(Precondition).init(Object.create(UrlAttribute).init({'value':task.precondition.url.value}));	
 	//	iTask.setPrecondition(pre);
@@ -438,6 +443,9 @@ function handleSelectxPath(){
 	*/
 	,clickPlay: function(){
 
+		//Registro listener
+		document.addEventListener('finalizado',procedureHandler,false);
+
 		//Parche!!! Le mando al localStorage el estado de ejecucion		
 		localStorage.setItem("BPMEXECUTION",1);
 
@@ -449,6 +457,8 @@ var arr_ls = Manager.initCurrentPrimitiveTasks();
 if( arr_ls.length == 0){
 	////console.debug('no hay mas tareas');
 	localStorage.setItem("BPMEXECUTION",0);
+	document.removeEventListener('finalizado',procedureHandler,false);
+
 	return false;
 }
 
@@ -473,6 +483,8 @@ if( arr_ls.length == 0){
     		//Instancio xPath y Value (wrappers de atributos)
     		var xPath = Object.create(XPathAttribute); 
     		xPath.setValue(arr_ls[i].xPath.value);
+			var tipo = Object.create(TipoAttribute); 
+    		tipo.setValue(arr_ls[i].tipo.value);
 
     		//Lo diferencio con el _type que guardo en cada {} asi instancio el que corresponde
 
@@ -493,7 +505,7 @@ if( arr_ls.length == 0){
 
         	try{
             
-            Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,0,arr_ls[i].state);
+            Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);
         	}catch(err){
             	console.log(err);
             }

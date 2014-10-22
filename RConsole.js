@@ -35,7 +35,8 @@ var RConsole = {
 		var bClear = document.createElement('input');
 		//bClear.type = 'button';
 		bClear.type = 'image';
-		bClear.src = 'clear.png';
+		//bClear.src = 'clear.png';
+		bClear.src = 'http://s13.postimg.org/ngpmrmhkj/clear.png';
 		bClear.value = 'clear';
 		bClear.onclick = function(){
 			localStorageManager.clearPocket();
@@ -123,7 +124,7 @@ var RConsole = {
         option_aug_el.options[0] = ['Select Task',0]; //deberia ser disabled
         option_aug_el.options[1] = ['GoToLink ATask',1];
         option_aug_el.options[2] = ['Another Task',2];
-        console.debug(option_aug_el);
+        //console.debug(option_aug_el);
         elements.push(option_aug_el);
       	view.render(div_select_aug_tasks, elements);	
 	//==========================
@@ -291,7 +292,7 @@ var RConsole = {
 	 }
 	 ,createClearButton: function(){
 	 	////console.debug('4. crea boton Clear');
-		var clear = this.createImageButton('CLR','clear','clear.png');
+		var clear = this.createImageButton('CLR','clear','http://s13.postimg.org/ngpmrmhkj/clear.png');
 		//clear.className = "class_button";
 		clear.onclick = function(){
 

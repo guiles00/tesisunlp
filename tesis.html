@@ -1,5 +1,16 @@
 <html>
 <head>
+<script type="text/javascript">
+<!--
+    function toggle_visibility(id) {
+       var e = document.getElementById(id);
+       if(e.style.display == 'block')
+          e.style.display = 'none';
+       else
+          e.style.display = 'block';
+    }
+//-->
+</script>
 <script type="text/javascript" src= './Attribute.js'></script>	
 <script type="text/javascript" src= './Utils.js'></script>	
 <script type="text/javascript" src= './listeners.js'></script>
@@ -46,6 +57,13 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
 </p>
 <br>
 <a href="./otra_pagina.html">Ir a otra pagina dentro del mismo domimio</a>
+<a data-google-track="Click/Action: index/advsearch" href="#toggle_advaced_search" class="b_advanced_search_toggler b-sprite-wrap">
+<i class="b-sprite right_dark"></i>
+Additional search options
+</a>
+<br>
+<a href="#" onclick="toggle_visibility('foo');">Click here to toggle visibility of element #foo</a>
+<div id="foo">This is foo</div>
 </div>
 </body>
 <html>	

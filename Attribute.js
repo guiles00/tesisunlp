@@ -36,6 +36,26 @@ var Attribute = {
     }
 }
 
+var TaskTitleAttribute = {
+     _type:'TaskTitleAttribute'
+    ,init: function(c){
+        this.value = c.value || '' ;
+        this.htmlId = c.htmlId || 'task_title_id'; 
+        this.label = c.label || 'Task Title';
+        return this;
+    }
+    ,getHtmlElement: function(){
+        var input_element = Object.create(inputElement);
+        input_element.label = this.getLabel();
+        input_element.value = this.getValue();
+        input_element.id =   this.getHtmlId();
+            
+       return input_element;
+    }
+    , __proto__ : Attribute
+}
+
+
 var XPathAttribute = {
      _type:'XPathAttribute'
     ,init: function(c){
@@ -54,6 +74,25 @@ var XPathAttribute = {
     }
     , __proto__ : Attribute
 }
+
+var TipoAttribute = {
+    type:'TipoAttribute'
+    ,init: function(c){
+        this.value = c.value || '' ;
+        this.htmlId = c.htmlId || 'tipo_id'; 
+        this.label = c.label || 'Auto';
+        return this;
+    } 
+    ,getHtmlElement: function(){
+        var input_element = Object.create(inputElement);
+        input_element.label = this.getLabel();
+        input_element.value = this.getValue();
+        input_element.id =   this.getHtmlId();
+            
+       return input_element;
+    }
+    , __proto__ : Attribute
+} 
 
 
 var IdAttribute = {
@@ -75,24 +114,6 @@ var IdAttribute = {
     , __proto__ : Attribute
 } 
 
-var TipoAttribute = {
-    _type:'TipoAttribute'
-    ,init: function(c){
-        this.value = c.value || '' ;
-        this.htmlId = c.htmlId || 'tipo_id'; 
-        this.label = c.label || 'Tipo';
-        return this;
-    }
-    ,getHtmlElement: function(){
-        var input_element = Object.create(inputElement);
-        input_element.label = this.getLabel();
-        input_element.value = this.getValue();
-        input_element.id =   this.getHtmlId();
-            
-       return input_element;
-    }
-    , __proto__ : Attribute
-}
 var StateAttribute = {
     _type:'StateAttribute'
      ,init: function(c){
@@ -111,6 +132,8 @@ var StateAttribute = {
     }
     , __proto__ : Attribute
 }
+
+
 var SValueAttribute = {
      _type:'SValueAttribute'
       ,init: function(c){

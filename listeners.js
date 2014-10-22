@@ -108,6 +108,13 @@ var eventoChange = function(event){
 		var sxPath = Recorder.createXPathFromElement(event.target) ;
 		}
 
+		var taskTitle = Object.create(TaskTitleAttribute);
+			taskTitle._type = TaskTitleAttribute._type;
+			//taskTitle.setValue('task');
+
+		var tipo = Object.create(TipoAttribute);
+			tipo._type = TipoAttribute._type;
+			tipo.setValue(1);
 
 		var state = Object.create(StateAttribute);
 			state._type = StateAttribute._type;
@@ -125,19 +132,19 @@ var eventoChange = function(event){
 		switch(event.target.nodeName)
 		{
 		case 'SELECT':
-			o_task = new SelectOptionTask(10,xPath,objValue,0,state);
+			o_task = new SelectOptionTask(10,xPath,objValue,tipo,state);
 	    break;
 		case 'INPUT':
 			if(event.target.type=='radio'){ 
-				o_task = new RadioTask(10,xPath,objValue,0,state);
+				o_task = new RadioTask(10,xPath,objValue,tipo,state);
 			}else if(event.target.type=='checkbox'){
-				o_task = new CheckBoxTask(10,xPath,objValue,0,state);
+				o_task = new CheckBoxTask(10,xPath,objValue,tipo,state);
 			}else{
-				o_task = new FillInputTask(10,xPath,objValue,0,state);
+				o_task = new FillInputTask(10,xPath,objValue,tipo,state,taskTitle);
 			}
 		break;
 	 	case 'TEXTAREA':
-				o_task = new TextAreaTask(10,xPath,objValue,0,state);
+				o_task = new TextAreaTask(10,xPath,objValue,tipo,state);
 		
         break;
 		default:
@@ -147,16 +154,16 @@ var eventoChange = function(event){
 	
 		//le paso las precondiciones por un setter
 		o_task.setPrecondition(pre);
-			
+
 		localStorageManager.insert(o_task.toJson());
 		Recorder.refresh();
 		//console.debug(o_task);
 		console.log('NodeName:'+event.target.nodeName+',id:'+event.target.id+',xPath:'+sxPath);
 }
-
+/*
 var addInputTaskEvent = function(event){
 
-		var tipo = 0;
+		//var tipo = 0;
 		var el_id = event.target.id;
 		var el_value = event.target.value;
 		
@@ -171,14 +178,14 @@ var addInputTaskEvent = function(event){
 	var	o_task = new FillInputTask();
 		o_task.xPath = sxPath;
 		o_task.value = el_value;
-		o_task.tipo = tipo;
+		//o_task.tipo = tipo;
 		localStorageManager.insert(o_task.toJson());
 		Recorder.refresh();
 	document.removeEventListener("change", addInputTaskEvent, false); 
 
 
 	}
-}
+}*/
 
 var addTextAreaTaskEvent = function(event){
 

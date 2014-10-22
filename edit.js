@@ -13,7 +13,7 @@ var optionsElement = {
     ,render: function(){
     
     //select.id="id_options";
-    //console.debug(select);
+    ////console.debug(select);
     //return select;
         
         var div_select = document.createElement('div');
@@ -49,7 +49,7 @@ var selectElement = {
     var node = iterator.iterateNext();
     var select = node.cloneNode(true);
     select.id="id_select";
-    //console.debug(select);
+    ////console.debug(select);
     //return select;
         
         var div_select = document.createElement('div');
@@ -101,10 +101,10 @@ var inputElement = {
 */
 var view = {
       render: function(target, elements) {
-      console.debug('----------------------');
-      console.debug(target);
-      console.debug(elements);
-      console.debug('----------------------');
+      //console.debug('----------------------');
+      //console.debug(target);
+      //console.debug(elements);
+      //console.debug('----------------------');
       if(target){
       //target.firstChild.innerHTML="";
       target.innerHTML = "";
@@ -174,7 +174,7 @@ var editor = {
 				for (j = 0; j < elements.length ; j = j + 1){
 					//recorro otra vez el dom y armo el objeto
 					if(elements[j].nodeName == "#text"){
-					////console.debug(elements[j].textContent);
+					//////console.debug(elements[j].textContent);
 					obj_atributo.label = elements[j].textContent;
 					}
 					if(elements[j].nodeName == "INPUT"){
@@ -208,13 +208,13 @@ Highlighter.prototype.highlight = function(event)
 
 //Create the tooltip.
 Highlighter.prototype.createTooltip = function (event){
-    //console.log("createTooltip() starts.");
+    ////console.log("createTooltip() starts.");
 
-    //console.log("The tooltip is generate.");
+    ////console.log("The tooltip is generate.");
 
     var tooltip = document.createElement("div");
     
-    //console.log("The tooltip styles are defined.");
+    ////console.log("The tooltip styles are defined.");
     
     tooltip.id = "Tooltip";
     tooltip.style.position = "absolute";
@@ -229,7 +229,7 @@ Highlighter.prototype.createTooltip = function (event){
     tooltip.style.backgroundColor = "rgba(0, 0, 0, 0.50)";
     tooltip.style.zIndex = "100";
     
-    //console.log("The tooltip text is set.");
+    ////console.log("The tooltip text is set.");
     
     tooltip.innerHTML = event.target.tagName.toLowerCase().toString();
     
@@ -252,7 +252,7 @@ Highlighter.prototype.createTooltip = function (event){
         );
     }
     
-    //console.log("The tooltip is returned.");
+    ////console.log("The tooltip is returned.");
     
     return tooltip;
 }
@@ -263,43 +263,43 @@ Highlighter.prototype.createTooltip = function (event){
 Highlighter.prototype.init = function ()
 {
 //Setup a global event for onmouseover.
-//console.log("Global handlers are set.");
+////console.log("Global handlers are set.");
 
 document.onmouseover = mouseoverHandler;
 document.onmouseout = mouseoutHandler;
 document.onclick = onClickHandler;
 
-//console.log("Script ends.");
+////console.log("Script ends.");
 }
 //Remove the highlight on the previous selected element.
 Highlighter.prototype.stop = function ()
 {
 //Setup a global event for onmouseover.
-//console.log("Global handlers are set.");
+////console.log("Global handlers are set.");
 document.onmouseover = null;
 document.onmouseout = null;
 document.onclick = null;
 
-//console.log("Script ends.");
+////console.log("Script ends.");
 }
 
 //Creates a function to handle the global event.
 var mouseoverHandler = function (event)
 {
-    //console.log("mouseover event is trigger.");
+    ////console.log("mouseover event is trigger.");
 
-    //console.log("highlight() is called.");    
+    ////console.log("highlight() is called.");    
     var high = new Highlighter();
    high.highlight(event);
     
-    //console.log("createTooltip() is called and the callback is append to the event target.");
+    ////console.log("createTooltip() is called and the callback is append to the event target.");
     
     event.target.appendChild(high.createTooltip(event));
 }
 //Remove the highlight on the previous selected element.
 var mouseoutHandler = function (event)
 {
-    //console.log("mouseout event is trigger.");
+    ////console.log("mouseout event is trigger.");
     var high = new Highlighter();
     var tooltip = document.getElementById("Tooltip");
 
@@ -313,7 +313,7 @@ var mouseoutHandler = function (event)
 //Remove the highlight on the previous selected element.
 var onClickHandler = function (event)
 {
-    console.log("onClick event is trigger.");
+    //console.log("onClick event is trigger.");
     var xPath = Recorder.createXPathFromElement(event.target) ;
     var el = document.getElementById("id_xpath");
     el.value = xPath;

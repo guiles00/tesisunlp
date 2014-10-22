@@ -4,7 +4,7 @@
  * @class PrimitiveTask
  * @constructor
  */
-function PrimitiveTask(id,xPath,value,tipo,state){ //Constructor
+function PrimitiveTask(id,xPath,value,tipo,state,taskTitle){ //Constructor
 this.tipo = tipo;    
 this.xPath = xPath;
 this.value = value;
@@ -13,6 +13,7 @@ this.id = id;
 this.msg = "PrimitiveTask"
 this.type = "PrimitiveTask"
 this.precondition = {};
+this.taskTitle = taskTitle;
 }
 
 
@@ -38,29 +39,72 @@ return this.state;
 PrimitiveTask.prototype.setState = function(aState){ 
 this.state= aState;
 }
+PrimitiveTask.prototype.tempChequeoCondicion = function(texto){
+return false;
+}
 /**
  * 
  * @method execute
  */
 PrimitiveTask.prototype.execute = function(){
 
-//console.debug('ejecuto esto');
-//console.debug(this);
+console.debug('ejecuto esto');
+console.debug(this);
 //Precondiciones
 
     var iterator = document.evaluate(this.xPath.getValue(),document,null,0,null);
     var node = iterator.iterateNext();
-    
+    //Auto = 1 , Manual = 0
     if(node){
-    if(this.tipo == 1){ //Si es Manual, pide valor
-    node.focus();
+        Manager.highlightElement(node)
+        node.value = this.value.getValue();
+    
+    this.finalizo(this.id);
+
+    return node;
+
+    if(this.tipo == 0){ 
+    
+    //Por ahora agrego el evento aca si es manual
+    var temp = function(e){ 
+        console.debug('escucho texto'); console.debug(e.target);  
+        var el_id = event.target.id;
+        
+        if(el_id){
+        var sxPath = '//*[@id="'+el_id+'"]';
+        }else{
+        var sxPath = Recorder.createXPathFromElement(event.target) ;
+        }
+
+        document.removeEventListener("change", this , false);   
+
+    }
+    document.addEventListener("change", temp , false);   
+
+
+    //alert('Es Manual, Tengo que ver la condicion de finalizacion?');
+    //console.debug(this);
+
+
+
+    //document.removeEventListener("change", temp , false);   
+
+    //Por ejemplo, si es FillInputTask, tiene que esperar un evento del tipo change y que sea igual a ese xpath
+    //var value = prompt("Ingrese Valor","");
+    //if(value !='') alert('todo ok - continuo');
+
+    //if(this.tempChequeoCondicion()) alert('Ok');
+
+    /*node.focus();
     var value = prompt("Ingrese Valor","");
     node.value = value;
+    */
+
     }else{
         Manager.highlightElement(node)
         //node.value= this.value;   
-        console.debug('y esto?');
-        console.debug(this.value);
+        //console.debug('y esto?');
+        //console.debug(this.value);
 
         node.value = this.value.getValue();
     }
@@ -75,6 +119,19 @@ PrimitiveTask.prototype.execute = function(){
 
 PrimitiveTask.prototype.finalizo = function(id){
 
+//Mando evento de que finalizio la tarea
+var event = new CustomEvent("finalizado",{detail: { message: "Finalizado",id: id,},bubbles: true,cancelable: true});
+
+    document.dispatchEvent(event);
+
+
+//////////
+    var oTask = localStorageManager.getObject(id);
+    oTask.state.value = 1;
+    localStorageManager.setObjectR(JSON.stringify(oTask));
+/*
+    console.debug(localStorageManager.getObject(id));
+
     var bpm = localStorage.getItem("BPM");
     var arr_tasks = JSON.parse(bpm);
     //recorro los objetos para buscar la tarea a editar
@@ -84,7 +141,8 @@ PrimitiveTask.prototype.finalizo = function(id){
                 arr_tasks[i].state.value = 1;
             } 
     }
-    localStorage.setItem("BPM",JSON.stringify(arr_tasks));  
+
+    localStorage.setItem("BPM",JSON.stringify(arr_tasks));*/  
 }
 
 /**
@@ -132,14 +190,47 @@ PrimitiveTask.prototype.toHtml = function(properties){
  * @extends PrimitiveTask
  */
 //aId,xPath,value,aMsg,aTipo,aState
-function FillInputTask(id,xPath,value,tipo,state){
-    PrimitiveTask.call(this,id,xPath,value,tipo,state);
+function FillInputTask(id,xPath,value,tipo,state,taskTitle){
+    PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
     this.msg = "Enter String to Input ";
+    this.taskTitle = taskTitle;
     this.type = "FillInputTask";
     this.state = state;
     //this.precondition = {};
 }
 FillInputTask.prototype = new PrimitiveTask();
+//Sobrescribo para hace runa prueba
+
+FillInputTask.prototype.execute = function(){
+
+//Precondiciones
+
+    var iterator = document.evaluate(this.xPath.getValue(),document,null,0,null);
+    var node = iterator.iterateNext();
+    //Auto = 1 , Manual = 0
+    //Ejecuta una tarea manual
+    
+    console.debug(this);
+    var that = this;
+    if(node){
+        if(this.tipo.getValue() == 1){
+        Manager.highlightElement(node)
+        node.value = this.value.getValue();
+        this.finalizo(this.id);
+        }else{
+            Manager.highlightElement(node)
+            node.addEventListener('change',
+        function(){
+           that.finalizo(that.id);
+        }
+        ,false);
+        }
+    
+
+    return node;
+    }
+}
+
 /**
  * @method toJson
  */
@@ -150,7 +241,7 @@ return JSON.stringify(this);
 }
 
 FillInputTask.init = function(c){
-  return new FillInputTask(c.id,c.xpath,c.value,c.tipo,c.state);
+  return new FillInputTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
 };
 
 /**
@@ -203,10 +294,13 @@ FillInputTask.prototype.toHtml = function(properties){
     var array_elementos = new Array();
     
     //array_elementos.push(this.precondition.getUrl().getHtmlElement());
-    //console.debug(this.precondition.getUrl().getHtmlElement());
+    ////console.debug(this.precondition.getUrl().getHtmlElement());
+    array_elementos.push(this.taskTitle.getHtmlElement());
     array_elementos.push(this.xPath.getHtmlElement());
     array_elementos.push(this.value.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());
+    array_elementos.push(this.tipo.getHtmlElement());
+    
     return array_elementos;
 }
 
@@ -215,9 +309,12 @@ FillInputTask.prototype.toHtml = function(properties){
 */
 FillInputTask.prototype.htmlToJson = function(el_div){
 
+        var str_taskTitle = document.getElementById('task_title_id').value;
         var str_xPath = document.getElementById('xpath_id').value;
         var str_value = document.getElementById('value_id').value;
         var str_state = document.getElementById('state_id').value;
+        var str_tipo = document.getElementById('tipo_id').value;
+
 
         function isJson(str) {
         try {
@@ -249,9 +346,19 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         var oState = Object.create(StateAttribute);
         oState._type = StateAttribute._type;
         oState.value = str_state;
-         
-        var o_task = new FillInputTask(this.id,xPath,oValue,0,oState);
         
+
+        var oTipo = Object.create(TipoAttribute);
+        oTipo._type = TipoAttribute._type;
+        oTipo.value = str_tipo;
+
+    var oTaskTitle = Object.create(TaskTitleAttribute);
+        oTaskTitle._type = TaskTitleAttribute._type;
+        oTaskTitle.value = str_taskTitle ;
+        
+        var o_task = new FillInputTask(this.id,xPath,oValue,oTipo,oState);
+        o_task.taskTitle = oTaskTitle; //Lo hago por ahora, hay que hacer
+    
     return o_task.toJson();
 }
 
@@ -279,7 +386,7 @@ FillInputTask.prototype.NOhtmlToJson = function(el_div){
                 for (j = 0; j < elements.length ; j = j + 1){
                     //recorro otra vez el dom y armo el objeto
                     if(elements[j].nodeName == "#text"){
-                    ////console.debug(elements[j].textContent);
+                    //////console.debug(elements[j].textContent);
                     obj_atributo.label = elements[j].textContent;
                     }
                     if(elements[j].nodeName == "INPUT"){
@@ -317,6 +424,8 @@ SelectOptionTask.prototype.toHtml = function(properties){
     array_elementos.push(el_select);
     array_elementos.push(this.value.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());
+    array_elementos.push(this.tipo.getHtmlElement());
+
     
     return array_elementos;
 }
@@ -340,7 +449,7 @@ SelectOptionTask.prototype.NotoHtml = function(properties){
             break;
             
             case 'select':
-        console.debug('es un select, le paso el xPath');
+        //console.debug('es un select, le paso el xPath');
         conscole.debug(xPath);  
             el_inflator = Object.create(selectElement);
 
@@ -375,6 +484,8 @@ FillInputTask.prototype.NOhtmlToJson = function(el_div){
         var str_xPath = document.getElementById('xpath_id').value;
         var str_value = document.getElementById('value_id').value;
         var str_state = document.getElementById('state_id').value;
+        var str_tipo = document.getElementById('tipo_id').value;
+
 
         function isJson(str) {
         try {
@@ -424,7 +535,7 @@ SelectOptionTask.prototype.htmlToJson = function(el_div){
                 for (j = 0; j < elements.length ; j = j + 1){
                     //recorro otra vez el dom y armo el objeto
                     if(elements[j].nodeName == "#text"){
-                    ////console.debug(elements[j].textContent);
+                    //////console.debug(elements[j].textContent);
                     obj_atributo.label = elements[j].textContent;
                     }
                     if(elements[j].nodeName == "INPUT"){
@@ -515,6 +626,7 @@ TextAreaTask.prototype.toHtml = function(properties){
     array_elementos.push(this.xPath.getHtmlElement());
     array_elementos.push(this.value.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());
+    array_elementos.push(this.tipo.getHtmlElement());
 
     return array_elementos;
   }
@@ -525,7 +637,7 @@ TextAreaTask.prototype.htmlToJson = function(el_div){
         var str_xPath = document.getElementById('xpath_id').value;
         var str_value = document.getElementById('value_id').value;
         var str_state = document.getElementById('state_id').value;
-
+        var str_tipo = document.getElementById('tipo_id').value;
         
         var xPath = Object.create(XPathAttribute);
         xPath.value = str_xPath;
@@ -533,7 +645,12 @@ TextAreaTask.prototype.htmlToJson = function(el_div){
         var oState = Object.create(StateAttribute);
         oState._type = StateAttribute._type;
         oState.value = str_state;
-        
+
+
+        var oTipo = Object.create(TipoAttribute);
+        oTipo._type = TipoAttribute._type;
+        oTipo.value = str_tipo;
+                
 
          function isJson(str) {
             try {
@@ -560,7 +677,7 @@ TextAreaTask.prototype.htmlToJson = function(el_div){
         }
 
         
-        var o_task = new TextAreaTask(this.id,xPath,oValue,0,oState);
+        var o_task = new TextAreaTask(this.id,xPath,oValue,oTipo,oState);
         
     return o_task.toJson();
 }
@@ -625,9 +742,9 @@ var node = iterator.iterateNext();
 
 
 function ClickLinkTask(id,xPath,value,tipo,state){
-    console.debug('ejecuto tarea click Link');
-    console.debug('ejecutando:');
-    console.debug(localStorage.getItem("BPMEXECUTION"));
+    //console.debug('ejecuto tarea click Link');
+    //console.debug('ejecutando:');
+    //console.debug(localStorage.getItem("BPMEXECUTION"));
 
     PrimitiveTask.call(this,id,xPath,value,tipo,state);
     this.msg = "Click Link ";
@@ -656,7 +773,8 @@ ClickLinkTask.prototype.toHtml = function(){
     array_elementos.push(this.xPath.getHtmlElement());
     array_elementos.push(this.value.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());
-    
+    array_elementos.push(this.tipo.getHtmlElement());
+
     return array_elementos;
 }
 
@@ -667,6 +785,8 @@ ClickLinkTask.prototype.htmlToJson = function(el_div){
 
         var str_xPath = document.getElementById('xpath_id').value;
         var str_state = document.getElementById('state_id').value;
+        var str_tipo = document.getElementById('tipo_id').value;
+
 
         var xPath = Object.create(XPathAttribute);
         xPath.value = str_xPath;
@@ -675,7 +795,12 @@ ClickLinkTask.prototype.htmlToJson = function(el_div){
         oState._type = StateAttribute._type;
         oState.value = str_state;
         
-        var o_task = new ClickLinkTask(this.id,xPath,'',0,oState);
+
+        var oTipo = Object.create(TipoAttribute);
+        oTipo._type = TipoAttribute._type;
+        oTipo.value = str_tipo;
+
+        var o_task = new ClickLinkTask(this.id,xPath,'',oTipo,oState);
         
     return o_task.toJson();
 }
@@ -684,8 +809,9 @@ ClickLinkTask.prototype.execute = function(){
 
     var iterator = document.evaluate(this.xPath.getValue(),document,null,0,null);
     var node = iterator.iterateNext();
+    
+    console.debug(node);
     //Como es un clic, hago clic en el nodo.
-
     node.click();
     
     //si salio todo ok modifico el estado de la tarea ( por ahora asumo que sale ok)
@@ -729,9 +855,9 @@ AugmentedTask.prototype.finalizo = function(id){
 }
 
 function LinkATask(id,link,value,msg,tipo,state){
-    console.debug('ejecuto tarea LinkATask');
-    console.debug('ejecutando:');
-    console.debug(localStorage.getItem("BPMEXECUTION"));
+    //console.debug('ejecuto tarea LinkATask');
+    //console.debug('ejecutando:');
+    //console.debug(localStorage.getItem("BPMEXECUTION"));
 
     //PrimitiveTask.call(this,id,link,value,tipo,state);
     this.msg = "LinkATask";
@@ -831,7 +957,7 @@ LinkATask.prototype.htmlToJson = function(el_div){
                 for (j = 0; j < elements.length ; j = j + 1){
                     //recorro otra vez el dom y armo el objeto
                     if(elements[j].nodeName == "#text"){
-                    ////console.debug(elements[j].textContent);
+                    //////console.debug(elements[j].textContent);
                     obj_atributo.label = elements[j].textContent;
                     }
                     if(elements[j].nodeName == "INPUT"){
@@ -883,7 +1009,7 @@ LinkATask.prototype.execute = function(){
     //window.open(aLink);
     var myWindow = window.open(aLink, "MsgWindow", "width=200, height=100");
     //myWindow.document.write("<p>This is 'MsgWindow'. I am 200px wide and 100px tall!</p>");//alert('ejecuto!!!');
-   // console.debug('finalizo esta');
+   // //console.debug('finalizo esta');
     
     this.finalizo(this.id);
 

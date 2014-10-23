@@ -97,7 +97,6 @@ var eventoChange = function(event){
 		
 		
 		var location = document.location.href;
-		
 		var el_id = event.target.id;
 		var el_value = event.target.value;
 		var	o_task;
@@ -108,10 +107,10 @@ var eventoChange = function(event){
 		var sxPath = Recorder.createXPathFromElement(event.target) ;
 		}
 
-		var taskTitle = Object.create(TaskTitleAttribute);
+		/*var taskTitle = Object.create(TaskTitleAttribute);
 			taskTitle._type = TaskTitleAttribute._type;
-			//taskTitle.setValue('task');
-
+			taskTitle.setValue('Enter ');
+		*/
 		var tipo = Object.create(TipoAttribute);
 			tipo._type = TipoAttribute._type;
 			tipo.setValue(1);
@@ -140,7 +139,7 @@ var eventoChange = function(event){
 			}else if(event.target.type=='checkbox'){
 				o_task = new CheckBoxTask(10,xPath,objValue,tipo,state);
 			}else{
-				o_task = new FillInputTask(10,xPath,objValue,tipo,state,taskTitle);
+				o_task = new FillInputTask(10,xPath,objValue,tipo,state);//,taskTitle);
 			}
 		break;
 	 	case 'TEXTAREA':

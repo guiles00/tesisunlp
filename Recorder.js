@@ -282,7 +282,7 @@ function handleSelectxPath(){
  		,'value':Object.create(SValueAttribute).init({'value':task.value.value})
  		,'tipo':Object.create(TipoAttribute).init({'value':task.tipo.value})
  		,'state':Object.create(StateAttribute).init({'value':(task.state.value).toString()})
- 		,'taskTitle':Object.create(TaskTitleAttribute).init({'value':(task.taskTitle.value).toString()}),
+ 		,'taskTitle':Object.create(TaskTitleAttribute).init({'value':task.taskTitle.value})
  	});
  	
 	// 	var pre = Object.create(Precondition).init(Object.create(UrlAttribute).init({'value':task.precondition.url.value}));	
@@ -310,7 +310,8 @@ function handleSelectxPath(){
 	localStorageManager.setObjectR(iTask.htmlToJson(document.getElementById("div_inflate")));
     el = document.getElementById("div_editor_container");
     el.style.visibility = "hidden";
-  	
+  	Recorder.refresh();
+
 	}; 
 
 
@@ -541,7 +542,7 @@ if( arr_ls.length == 0){
 			
 			//console.debug('escribe esto');
 			//console.debug(ls_tasks);
-             this.writer(arr_tasks[i].id,arr_tasks[i].msg,-1);
+             this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
            }
 	}
 	,writer: function(id,text,index){
@@ -550,7 +551,7 @@ if( arr_ls.length == 0){
 
 		//Inserto registro
 		var tr = document.getElementById('table_consola').insertRow(index);
-        tr.id= id;
+        tr.id = id;
 	    var pTask = document.createTextNode('Primitive Task');
 	    var spTask = document.createElement('span');
 	    spTask.setAttribute('style', 'font-size: 10px'); 

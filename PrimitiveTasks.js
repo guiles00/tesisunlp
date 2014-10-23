@@ -37,7 +37,7 @@ return this.state;
  * @method setState
  */
 PrimitiveTask.prototype.setState = function(aState){ 
-this.state= aState;
+this.state = aState;
 }
 PrimitiveTask.prototype.tempChequeoCondicion = function(texto){
 return false;
@@ -193,7 +193,9 @@ PrimitiveTask.prototype.toHtml = function(properties){
 function FillInputTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
     this.msg = "Enter String to Input ";
-    this.taskTitle = taskTitle;
+    //this.taskTitle = taskTitle;
+    this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Enter String to Input '})
+        
     this.type = "FillInputTask";
     this.state = state;
     //this.precondition = {};
@@ -403,7 +405,7 @@ FillInputTask.prototype.NOhtmlToJson = function(el_div){
 }
 
 //Herencia --> PrimitiveTask
-function SelectOptionTask(id,xPath,value,tipo,state){
+function SelectOptionTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state);
     this.msg = "SelectOptionTask";
     this.type = "SelectOptionTask";
@@ -557,10 +559,11 @@ SelectOptionTask.prototype.htmlToJson = function(el_div){
 }
 
 //Herencia --> PrimitiveTask
-function TextAreaTask(id,xPath,value,tipo,state){
-    PrimitiveTask.call(this,id,xPath,value,tipo,state);
+function TextAreaTask(id,xPath,value,tipo,state,taskTitle){
+    PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
     this.msg = "Enter String TextArea ";
     this.type = "TextAreaTask";
+    this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Enter String TextArea '})
     this.state = state;
 }
 TextAreaTask.prototype = new PrimitiveTask();
@@ -623,6 +626,7 @@ TextAreaTask.prototype.emptyToJson = function(){
 TextAreaTask.prototype.toHtml = function(properties){
     
     var array_elementos = new Array();
+    array_elementos.push(this.taskTitle.getHtmlElement());
     array_elementos.push(this.xPath.getHtmlElement());
     array_elementos.push(this.value.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());
@@ -634,6 +638,7 @@ TextAreaTask.prototype.toHtml = function(properties){
 
 TextAreaTask.prototype.htmlToJson = function(el_div){
 
+        var str_taskTitle = document.getElementById('task_title_id').value;
         var str_xPath = document.getElementById('xpath_id').value;
         var str_value = document.getElementById('value_id').value;
         var str_state = document.getElementById('state_id').value;
@@ -677,7 +682,12 @@ TextAreaTask.prototype.htmlToJson = function(el_div){
         }
 
         
-        var o_task = new TextAreaTask(this.id,xPath,oValue,oTipo,oState);
+
+        var oTaskTitle = Object.create(TaskTitleAttribute);
+        oTaskTitle._type = TaskTitleAttribute._type;
+        oTaskTitle.value = str_taskTitle;
+
+        var o_task = new TextAreaTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
         
     return o_task.toJson();
 }
@@ -689,7 +699,7 @@ TextAreaTask.prototype.htmlToJson = function(el_div){
  * @class CheckBoxTask
  * @constructor
  */
-function CheckBoxTask(id,xPath,value,tipo,state){
+function CheckBoxTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state);
     this.msg = "CheckBoxTask";
     this.type = "CheckBoxTask";
@@ -711,7 +721,7 @@ var node = iterator.iterateNext();
     return node;
 }
 
-function RadioTask(id,xPath,value,tipo,state){
+function RadioTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state);
     this.msg = "RadioTask";
     this.type = "RadioTask";
@@ -741,7 +751,7 @@ var node = iterator.iterateNext();
 
 
 
-function ClickLinkTask(id,xPath,value,tipo,state){
+function ClickLinkTask(id,xPath,value,tipo,state,taskTitle){
     //console.debug('ejecuto tarea click Link');
     //console.debug('ejecutando:');
     //console.debug(localStorage.getItem("BPMEXECUTION"));
@@ -831,7 +841,7 @@ ClickLinkTask.prototype.execute = function(){
  * @class PrimitiveTask
  * @constructor
  */
-function AugmentedTask(id,link,value,tipo,state){ //Constructor
+function AugmentedTask(id,link,value,tipo,state,taskTitle){
 this.tipo = tipo;
 this.xPath = '';    
 this.link = link;
@@ -854,7 +864,7 @@ AugmentedTask.prototype.finalizo = function(id){
     localStorage.setItem("BPM",JSON.stringify(arr_tasks));  
 }
 
-function LinkATask(id,link,value,msg,tipo,state){
+function LinkATask(id,link,value,msg,tipo,state,taskTitle){
     //console.debug('ejecuto tarea LinkATask');
     //console.debug('ejecutando:');
     //console.debug(localStorage.getItem("BPMEXECUTION"));

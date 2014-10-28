@@ -118,7 +118,35 @@ var eventoClick = function(event){
 		var o_task = new ClickInputTask(10,xPath,'',tipo,state);
 		localStorageManager.insert(o_task.toJson());
 		Recorder.refresh();
+		
+		break;
+		//Si hizo clic en un input/button
+		case 'BUTTON':
 
+		var tipo = 0;
+		var el_id = event.target.id;
+		var el_value = event.target.value;
+		//Si tiene id le pongo el xPath //*[@id="THE_ID"]
+		if(el_id){
+		var sxPath = '//*[@id="'+el_id+'"]';
+		}else{ //Si no tiene ID tengo que ver la manera de sacar el absoluto
+		var sxPath = Recorder.createXPathFromElement(event.target) ;
+		}
+		var tipo = Object.create(TipoAttribute);
+			tipo._type = TipoAttribute._type;
+			tipo.setValue(1);
+		var state = Object.create(StateAttribute);
+			state._type = StateAttribute._type;
+			state.setValue(0);		
+		var xPath = Object.create(XPathAttribute);
+		xPath._type = XPathAttribute._type;
+		xPath.setValue(sxPath);
+		var o_task = new ClickInputTask(10,xPath,'',tipo,state);
+		localStorageManager.insert(o_task.toJson());
+		Recorder.refresh();
+		
+		break;
+		
 		default:
 		break;
 	}

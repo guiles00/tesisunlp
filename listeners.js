@@ -1,3 +1,8 @@
+var  logHandler = function(e) { 
+			console.debug('Evento Capturado '+e.target.nodeName);
+			console.debug(e.target);
+		};
+
 //=========================RConsole====================
 var  handlerPocket = function(e) { 
 			console.debug(e.target.nodeName);

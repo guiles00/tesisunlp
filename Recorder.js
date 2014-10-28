@@ -407,6 +407,7 @@ function handleSelectxPath(){
 		document.addEventListener("change", eventoChange , false);   
 		document.addEventListener("click", eventoClick , false);
 		document.addEventListener("mouseup", handlerPocketEvent , false);
+		document.addEventListener("click", logHandler , false);
 		localStorage.setItem("BPMRECORDING",1);
 
 	}else if(start_record.value == "Stop"){
@@ -416,6 +417,7 @@ function handleSelectxPath(){
     	document.removeEventListener("change", eventoChange, false); 
     	document.removeEventListener("click", eventoClick , false);
     	document.removeEventListener("mouseup", handlerPocketEvent , false);
+		document.removeEventListener("click", logHandler , false);
 
     	localStorage.setItem("BPMRECORDING",0);
 	}  

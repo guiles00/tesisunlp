@@ -82,7 +82,9 @@ localStorageManager = {
     var o = JSON.parse(json_object);
     console.debug('inserta esto');
     console.debug(json_object);
-    if(o.type == 'FillInputTask' || o.type == 'TextAreaTask' || o.type == 'SelectOptionTask' || o.type == 'ClickLinkTask'){
+    //@TODO: Que onda este if? 
+    if(o.type == 'FillInputTask' || o.type == 'TextAreaTask' || o.type == 'SelectOptionTask' 
+        || o.type == 'ClickLinkTask' || o.type == 'ClickInputTask'){
     
     var ls = localStorage.getItem("BPM");
     var arr_ls = JSON.parse(ls);

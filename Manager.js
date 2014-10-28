@@ -83,6 +83,12 @@ var Manager = (function () {
         function createClickLinkTask(aId,xPath,value,aMsg,aTipo,aState){
         return new ClickLinkTask(aId,xPath,value,aMsg,aTipo,aState);
         }
+        /**
+        * @method createClickLinkTask
+        */
+        function createClickInputTask(aId,xPath,value,aMsg,aTipo,aState){
+        return new ClickInputTask(aId,xPath,value,aMsg,aTipo,aState);
+        }
     	return {
         /**
         * @method incrementIndice
@@ -174,7 +180,8 @@ var Manager = (function () {
 	    	, SelectOptionTask: createSelectOptionTask(aId,xPath,value,tipo,state)
 	    	, TextAreaTask: createTextAreaTask(aId,xPath,value,tipo,state)
 	    	, CheckBoxTask: createCheckBoxTask(aId,xPath,value,tipo,state)
-            , ClickLinkTask: createClickLinkTask(aId,xPath,value,tipo,state) } 
+            , ClickLinkTask: createClickLinkTask(aId,xPath,value,tipo,state)
+            , ClickInputTask: createClickInputTask(aId,xPath,value,tipo,state) } 
 	    	, def = null ;
 
 	    	lookup[aPrimitiveTaskType] ? subscribe(lookup[aPrimitiveTaskType]) : def();

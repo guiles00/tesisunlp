@@ -65,7 +65,7 @@ var eventoClick = function(event){
 	if( event.target.id == 'start_record' || event.target.id == 'stop_record' || event.target.id == 'play_procedure') return false; 
 
 	//Hago switch, el que tiene mejor idea que me la pase
-
+alert(event.target.nodeName);
 	switch(event.target.nodeName) {
 		//Si hizo clic en un link
 		case 'A':

@@ -1,3 +1,4 @@
+//Este script es para prueba solamente, usar uglify para unir todos los archivos
 var tesis_script = document.createElement('script');
 tesis_script.setAttribute('src','https://raw.githubusercontent.com/guiles/unlptesis/master/Attribute.js');
 document.head.appendChild(tesis_script);

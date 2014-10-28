@@ -74,6 +74,10 @@ var eventoClick = function(event){
 		////console.debug(sxPath);
 		}
 
+		var tipo = Object.create(TipoAttribute);
+			tipo._type = TipoAttribute._type;
+			tipo.setValue(1);
+
 		var state = Object.create(StateAttribute);
 			state._type = StateAttribute._type;
 			state.setValue(0);		
@@ -81,7 +85,7 @@ var eventoClick = function(event){
 		xPath._type = XPathAttribute._type;
 		xPath.setValue(sxPath);
 		
-		var o_task = new ClickLinkTask(10,xPath,'',0,state);
+		var o_task = new ClickLinkTask(10,xPath,'',tipo,state);
 		localStorageManager.insert(o_task.toJson());
 		Recorder.refresh();
 
@@ -107,10 +111,6 @@ var eventoChange = function(event){
 		var sxPath = Recorder.createXPathFromElement(event.target) ;
 		}
 
-		/*var taskTitle = Object.create(TaskTitleAttribute);
-			taskTitle._type = TaskTitleAttribute._type;
-			taskTitle.setValue('Enter ');
-		*/
 		var tipo = Object.create(TipoAttribute);
 			tipo._type = TipoAttribute._type;
 			tipo.setValue(1);

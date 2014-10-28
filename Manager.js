@@ -15,8 +15,9 @@
 function procedureHandler(e){
         
     var indice = Manager.getIndice();           
-    console.debug(indice);
+    //console.debug(indice);
     //Si llego un finalizado incrementa indice
+    Recorder.refresh();
     Manager.incrementIndice(); 
     Manager.executeNextTaskWithTimer();                     
 
@@ -24,6 +25,7 @@ console.log(
         "Ejecuto esta tarea y la da como finalizada "+e.currentTarget.nodeName+", "
         +e.detail.id+": "+e.detail.message
     );
+    //refresco la consola
     
 }
 

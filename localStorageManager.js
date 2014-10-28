@@ -31,8 +31,8 @@ localStorageManager = {
            // ////console.debug(temp[i]);
             if(temp[i].id == id) return temp[i];
         };
-
-    return true;
+//Si no trajo ninguna
+    return false;
     }
  
     /**

@@ -253,6 +253,7 @@ function handleSelectxPath(){
 
 		close_edit.onclick = function(){ 
 		   el = document.getElementById("div_editor_container");
+	
 		   el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
 		}
 
@@ -552,6 +553,12 @@ if( arr_ls.length == 0){
 		//Inserto registro
 		var tr = document.getElementById('table_consola').insertRow(index);
         tr.id = id;
+        
+        var task = localStorageManager.getObject(id);
+
+        //Si la tarea se ejecuto ( estado 1 ), se pone verde
+        if(task.state.value) tr.style.backgroundColor='green';
+        //Hardcodeado!!!!
 	    var pTask = document.createTextNode('Primitive Task');
 	    var spTask = document.createElement('span');
 	    spTask.setAttribute('style', 'font-size: 10px'); 

@@ -148,20 +148,22 @@ var Manager = (function () {
         /**
         * @method start
         */  
-        	,start: function(){
-
-                //console.debug(this);
-
-		          Manager.setIndice(0);
+        	,start: function(n){
+               
+                var indice = n - 1 || 0;
+		        console.debug('ejecuta desde:'+indice);
+                Manager.setIndice(indice);
 
                   document.addEventListener('finalizado',procedureHandler,false);
 
                   var arr_tareas =  Manager.getCurrentPrimitiveTasks();
-                //console.debug(arr_tareas);
+                  console.debug(arr_tareas);
                   var indice = Manager.getIndice();
                   var task = arr_tareas[indice]; 
+                  console.debug(task);
+                  
                   task.execute();
-
+                  console.debug('ejecuto o no ejecuto?');
 		          //Manager.executeNextTaskWithTimer();
         	}
         /**
@@ -264,6 +266,70 @@ var Manager = (function () {
                     }
 
                 , 1000);
+            }
+            ,playFromTask: function(n){
+
+            //Tengo que para la ejecucion y empezar una nueva
+
+            //Registro listener
+            document.addEventListener('finalizado',procedureHandler,false);
+
+            //Parche!!! Le mando al localStorage el estado de ejecucion     
+            localStorage.setItem("BPMEXECUTION",1);
+
+            //==================================================
+            //NO ME CIERRAAAAA!!!!
+            Manager.clearCurrentPrimitiveTasks();
+            var arr_ls = Manager.initCurrentPrimitiveTasks();
+
+            if( arr_ls.length == 0){
+                ////console.debug('no hay mas tareas');
+                localStorage.setItem("BPMEXECUTION",0);
+                document.removeEventListener('finalizado',procedureHandler,false);
+
+                return false;
+            }
+
+            //=================================================
+        console.debug('y???');
+        var i; //Recorro el array de tareas
+        for (i=0;i < arr_ls.length ;i++){
+            
+            try{
+
+            //Instancio xPath y Value (wrappers de atributos)
+            var xPath = Object.create(XPathAttribute); 
+            xPath.setValue(arr_ls[i].xPath.value);
+            var tipo = Object.create(TipoAttribute); 
+            tipo.setValue(arr_ls[i].tipo.value);
+
+            //Lo diferencio con el _type que guardo en cada {} asi instancio el que corresponde
+
+            //var value = eval(arr_ls[i].value._type);
+            //value.setValue(arr_ls[i].value.value);
+            if(arr_ls[i].value._type == 'CValueAttribute'){ 
+            var valor = Object.create(CValueAttribute); 
+                valor.setValue(arr_ls[i].value.value);
+            }else{
+            var valor = Object.create(SValueAttribute); 
+                valor.setValue(arr_ls[i].value.value);
+            }
+            //console.debug(eval(arr_ls[i].value._type));
+                    
+            }catch(err){
+                console.log('error atributos');
+            }            
+
+            try{
+            
+            Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);
+            }catch(err){
+                console.log(err);
+            }
+        }
+        console.debug( Manager.getCurrentPrimitiveTasks() );
+        Manager.start(n);
+
             }
             ,init: function(){
 

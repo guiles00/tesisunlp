@@ -311,6 +311,7 @@ function handleSelectxPath(){
 	localStorageManager.setObjectR(iTask.htmlToJson(document.getElementById("div_inflate")));
     el = document.getElementById("div_editor_container");
     el.style.visibility = "hidden";
+  	
   	Recorder.refresh();
 
 	}; 
@@ -446,7 +447,79 @@ function handleSelectxPath(){
 	* @method clickPlay 
 	*/
 	,clickPlay: function(){
+		
+		//Registro listener
+		document.addEventListener('finalizado',procedureHandler,false);
 
+		//Parche!!! Le mando al localStorage el estado de ejecucion		
+		localStorage.setItem("BPMEXECUTION",1);
+
+//==================================================
+//NO ME CIERRAAAAA!!!!
+Manager.clearCurrentPrimitiveTasks();
+var arr_ls = Manager.initCurrentPrimitiveTasks();
+
+if( arr_ls.length == 0){
+	////console.debug('no hay mas tareas');
+	localStorage.setItem("BPMEXECUTION",0);
+	document.removeEventListener('finalizado',procedureHandler,false);
+
+	return false;
+}
+
+//=================================================
+		
+  		var i; //Recorro el array de tareas
+        for (i=0;i < arr_ls.length ;i++){
+			
+			//Hardcodeo para ver si funciona, creo que tengo que modificar la manera en que se instancian las tareas
+
+        	if(arr_ls[i].type == 'LinkATask'){
+			
+			var aug_task = new LinkATask(arr_ls[i].id,arr_ls[i].atributos[1].value,xpath,valor,'',0,arr_ls[i].state);
+			
+			var c_t = Manager.getCurrentPrimitiveTasks();
+			c_t.push(aug_task);
+
+        	}
+
+            try{
+
+    		//Instancio xPath y Value (wrappers de atributos)
+    		var xPath = Object.create(XPathAttribute); 
+    		xPath.setValue(arr_ls[i].xPath.value);
+			var tipo = Object.create(TipoAttribute); 
+    		tipo.setValue(arr_ls[i].tipo.value);
+
+    		//Lo diferencio con el _type que guardo en cada {} asi instancio el que corresponde
+
+    		//var value = eval(arr_ls[i].value._type);
+    		//value.setValue(arr_ls[i].value.value);
+			if(arr_ls[i].value._type == 'CValueAttribute'){ 
+			var valor = Object.create(CValueAttribute); 
+	    		valor.setValue(arr_ls[i].value.value);
+			}else{
+			var valor = Object.create(SValueAttribute); 
+	    		valor.setValue(arr_ls[i].value.value);
+			}
+			//console.debug(eval(arr_ls[i].value._type));
+	    			
+            }catch(err){
+            	console.log('error atributos');
+            }            
+
+        	try{
+            
+            Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);
+        	}catch(err){
+            	console.log(err);
+            }
+        }
+        
+        Manager.start();
+          
+	}
+	,tempclickPlay: function(){
 		//Registro listener
 		document.addEventListener('finalizado',procedureHandler,false);
 
@@ -540,11 +613,8 @@ if( arr_ls.length == 0){
 			try{
 			var concept = JSON.parse(value).type;	
 			}catch(err){
-				////////console.debug(err);
+				console.log(err);
 			}
-			
-			//console.debug('escribe esto');
-			//console.debug(ls_tasks);
              this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
            }
 	}
@@ -559,7 +629,8 @@ if( arr_ls.length == 0){
         var task = localStorageManager.getObject(id);
 
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
-        if(task.state.value) tr.style.backgroundColor='green';
+
+        if(task.state.value == 1 )  tr.style.backgroundColor='green';
         //Hardcodeado!!!!
 	    var pTask = document.createTextNode('Primitive Task');
 	    var spTask = document.createElement('span');
@@ -613,7 +684,24 @@ if( arr_ls.length == 0){
 		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
 		task.state.value = 0;
 		localStorageManager.setObjectR(JSON.stringify(task));
+		Recorder.refresh();
 		};
+
+
+	var play_button = document.createElement('input');
+		play_button.type = "button";
+		play_button.value = ">";
+		play_button.setAttribute('class','class_button');
+		play_button.onclick = function(){
+		
+		//alert('Empieza desde aca'+this.parentNode.parentNode.id);
+		console.debug('Empieza desde aca'+this.parentNode.parentNode.id);
+		Manager.playFromTask(this.parentNode.parentNode.id);
+	/*	var task = localStorageManager.getObject(this.parentNode.parentNode.id);
+		task.state.value = 0;
+		localStorageManager.setObjectR(JSON.stringify(task));
+		Recorder.refresh();
+	*/	};
 
 		var id_text = document.createTextNode(id);
 		var br = document.createElement('br');
@@ -622,6 +710,7 @@ if( arr_ls.length == 0){
 		td2.appendChild(edit_button);
 		td2.appendChild(delete_button);
 		td2.appendChild(state_button);
+		td2.appendChild(play_button);
 		td2.appendChild(br);
 		td2.appendChild(spTask);
 		

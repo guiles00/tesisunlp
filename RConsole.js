@@ -297,7 +297,9 @@ var RConsole = {
 		clear.onclick = function(){
 
 		//localStorage.clear();
-		localStorage.setItem("BPM",JSON.stringify(new Array()));
+		//localStorage.setItem("BPM",JSON.stringify(new Array()));
+		localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
+
         document.getElementById("table_consola").innerHTML = "";
 		}; 
 		return clear;
@@ -344,6 +346,35 @@ var RConsole = {
 		sAddTask.addEventListener("change", Recorder.addPrimitiveTask , false); 
 
 		return sAddTask;
+	 }
+	 ,createProceduresSelect: function(){
+
+		////console.debug('5. crea Select Tasks');
+		var sProcedures = document.createElement('select');
+		sProcedures.className = "class_button";
+		//sAddTask.style.visibility = "hidden";
+	 	
+		sProcedures.setAttribute('id','procedures_select');
+	 	var j;
+	 	//Esto lo trae del localStorageManager
+	 	var aOptions = ['Proc.','P1','P2'];
+		for (j = 0; j < aOptions.length; j = j + 1) {
+			opt = document.createElement('option');
+			opt.value = 'P'+j;
+			if(j===0){opt.disabled = true;opt.selected = true;} 
+			opt.innerHTML = aOptions[j];
+			sProcedures.appendChild(opt);
+		}
+		//sAddTask.addEventListener("change", Recorder.addTask , false); 
+		sProcedures.addEventListener("change", function(){ 
+			console.debug('cambia a otro procedure');
+			var proc = document.getElementById('procedures_select').value;
+			console.debug(proc);
+			localStorage.setItem('BPMPROC',proc);
+		  	Recorder.refresh();
+		} , false); 
+
+		return sProcedures;
 	 }
 	 ,createHeaderContainer: function(){
 		////console.debug('7. Crea el div consola');		
@@ -427,13 +458,14 @@ var RConsole = {
 		var editor_container = this.createEditionContainer();
 		var add_container = this.createAddContainer();
 	 	var add_aug_container = this.createAddAugContainer();
-
+	 	var procedures_select = this.createProceduresSelect();
 	 	//container_header.appendChild(stopButton);
 	 	container_header.appendChild(recordButton);
 		container_header.appendChild(playButton);
 	 	container_header.appendChild(clearButton);
 	 	container_header.appendChild(loadButton);
 	 	container_header.appendChild(addTaksSelect);
+	 	container_header.appendChild(procedures_select);
 	 	//container_header.appendChild(pocketButton);
 	 	//container_header.appendChild(mostrarPocket);
 	 	

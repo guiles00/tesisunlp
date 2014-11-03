@@ -156,7 +156,7 @@ var Manager = (function () {
 
                   document.addEventListener('finalizado',procedureHandler,false);
 
-                  var arr_tareas =  Manager.getCurrentPrimitiveTasks();
+                  var arr_tareas = Manager.getCurrentPrimitiveTasks();
                   console.debug(arr_tareas);
                   var indice = Manager.getIndice();
                   var task = arr_tareas[indice]; 

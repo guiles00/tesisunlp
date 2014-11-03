@@ -22,12 +22,23 @@ head.appendChild(style);
 
 //Guardo el contenedor de Tareas
 var esta = localStorage.getItem("BPMP");
- 
+
+//localStorage.setItem("BPM", JSON.stringify( {'P1':[] } ) );
+//localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
+//localStorage.setItem("BPMPROC",'');
+//console.debug(localStorage.getItem('BPMPROC'));
+//localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
+
 if(!esta){
 localStorage.setItem("BPMP",1);    
-localStorage.setItem("BPM",JSON.stringify(new Array()));
+localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
+
+//localStorage.setItem("BPM",JSON.stringify(new Array()));
+//localStorage.setItem("BPM",JSON.stringify(new Object()));
+
 localStorage.setItem("BPMRECORDING",0);
 localStorage.setItem("BPMEXECUTION",0);
+localStorage.setItem("BPMPROC",'P1');
 localStorage.setItem("SHARED_DATA",JSON.stringify(new Array()));
 }
 //Inicia el Recorder
@@ -36,9 +47,24 @@ var table = document.getElementById('table_consola');
 var tableDnD = new TableDnD();
     tableDnD.init(table);
 
-if(localStorage.getItem("BPMRECORDING") == 1)document.getElementById('start_record').click();   
+//console.debug(localStorage.getItem('BPMRECORDING'));
 
-if(localStorage.getItem("BPMEXECUTION") == 1)document.getElementById('play_procedure').click(); 
-
-      
+if(localStorage.getItem("BPMRECORDING") == 1){
+	//alert('selecciona el procedure correspondiente');
+	//Trae el procedure
+	var proc = localStorage.getItem('BPMPROC');
+	var sel_proc = document.getElementById('procedures_select');
+	sel_proc.value = proc;
+	Recorder.refresh();
+	document.getElementById('start_record').click();   
+}
+//Si esta ejecutando tendria que tener el procedimiento
+if(localStorage.getItem("BPMEXECUTION") == 1){
+	var proc = localStorage.getItem('BPMPROC');
+	var sel_proc = document.getElementById('procedures_select');
+	sel_proc.value = proc;
+	Recorder.refresh();
+	document.getElementById('play_procedure').click(); 
+}
+     
 };	

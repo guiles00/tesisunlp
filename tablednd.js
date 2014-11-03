@@ -91,13 +91,19 @@ function TableDnD() {
     /** Initialise the drag and drop by capturing mouse move events */
     this.init = function(table) {
         this.table = table;
-        var rows = table.tBodies[0].rows; //getElementsByTagName("tr")
-        for (var i=0; i<rows.length; i++) {
-			// John Tarr: added to ignore rows that I've added the NoDnD attribute to (Category and Header rows)
-			var nodrag = rows[i].getAttribute("NoDrag")
-			if (nodrag == null || nodrag == "undefined") { //There is no NoDnD attribute on rows I want to drag
-				this.makeDraggable(rows[i]);
-			}
+        try{
+            var rows = table.tBodies[0].rows; 
+            //getElementsByTagName("tr")
+            for (var i=0; i<rows.length; i++) {
+    			// John Tarr: added to ignore rows that I've added the NoDnD attribute to (Category and Header rows)
+    			var nodrag = rows[i].getAttribute("NoDrag")
+    			if (nodrag == null || nodrag == "undefined") { //There is no NoDnD attribute on rows I want to drag
+    				this.makeDraggable(rows[i]);
+    			}
+            }
+
+        }catch(err){
+            console.log(err);
         }
     }
 

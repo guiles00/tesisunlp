@@ -403,8 +403,9 @@ function handleSelectxPath(){
     var start_record = document.getElementById('start_record');
 	if(start_record.value == "Record"){
 		start_record.value = "Stop";
-		start_record.src = 'stop.png';
-		
+		//start_record.src = 'stop.png';
+		start_record.src = 'http://s30.postimg.org/wd91sajn1/stop.png';
+
 		document.addEventListener("change", eventoChange , false);   
 		document.addEventListener("click", eventoClick , false);
 		document.addEventListener("mouseup", handlerPocketEvent , false);
@@ -413,8 +414,8 @@ function handleSelectxPath(){
 
 	}else if(start_record.value == "Stop"){
     	start_record.value = "Record" ;
-    	start_record.src = 'record.png';
-
+    	//start_record.src = 'record.png';
+    	start_record.src = 'http://s27.postimg.org/6chig4jb3/record.png';
     	document.removeEventListener("change", eventoChange, false); 
     	document.removeEventListener("click", eventoClick , false);
     	document.removeEventListener("mouseup", handlerPocketEvent , false);

@@ -36,6 +36,7 @@ var RConsole = {
 		//bClear.type = 'button';
 		bClear.type = 'image';
 		//bClear.src = 'clear.png';
+
 		bClear.src = 'http://s13.postimg.org/ngpmrmhkj/clear.png';
 		bClear.value = 'clear';
 		bClear.onclick = function(){
@@ -279,6 +280,7 @@ var RConsole = {
 		//var iPlay_recorder = this.createButton('Play','play_procedure',null);
 		var iPlay_recorder = this.createImageButton('Play','play_procedure','play.png');
 		//iPlay_recorder.className = "class_button";
+		iPlay_recorder.src = 'http://s30.postimg.org/yofdl7bal/play.png';
 		iPlay_recorder.addEventListener("click", Recorder.clickPlay , false); 
 		return iPlay_recorder;
 	 }
@@ -288,6 +290,7 @@ var RConsole = {
 		var iRecord_recorder = this.createImageButton('Record','start_record','record.png');
 		iRecord_recorder.addEventListener("click",Recorder.clickRecord, false); 
 		//iRecord_recorder.className = "class_button";
+		iRecord_recorder.src = 'http://s27.postimg.org/6chig4jb3/record.png';
 		return iRecord_recorder;
 	 }
 	 ,createClearButton: function(){

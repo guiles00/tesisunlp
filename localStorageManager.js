@@ -106,7 +106,9 @@ localStorageManager = {
     ,insert: function(json_object){ //Esto es como un insert en el localStorage, arriba esta el set y se puede reutilizar(?)
     //Lo inserta en el procedure correspondiente
     var procedure = document.getElementById('procedures_select').value;
-
+    
+    if(procedure == 'P0'){alert('Selecciona un procedimiento');return false; } 
+    
     //*************************************/
     var o = JSON.parse(json_object);
     
@@ -117,8 +119,8 @@ localStorageManager = {
     var ls = localStorage.getItem("BPM");
     var o_ls = JSON.parse(ls);
     var arr_ls = o_ls[procedure];
-    
     var id = arr_ls.length;
+    
     o.id = id;
     arr_ls.push(o);
     //reemplaza el array del procedure

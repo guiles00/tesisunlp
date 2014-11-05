@@ -299,9 +299,8 @@ var RConsole = {
 		//clear.className = "class_button";
 		clear.onclick = function(){
 
-		//localStorage.clear();
-		//localStorage.setItem("BPM",JSON.stringify(new Array()));
-		localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
+		localStorageManager.clear();	
+		//localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
 
         document.getElementById("table_consola").innerHTML = "";
 		}; 

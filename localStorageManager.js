@@ -4,8 +4,20 @@
 * @class localStorageManager
 */
 localStorageManager = {
-    clearPocket:function(){
+    clear: function(){
+        localStorage.setItem("BPMP",1);    
+        localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
+
+        localStorage.setItem("BPMRECORDING",0);
+        localStorage.setItem("BPMEXECUTION",0);
+        localStorage.setItem("BPMPROC",'P1');
+
+    }
+    ,clearPocket:function(){
         localStorage.setItem("SHARED_DATA",JSON.stringify(new Array()));
+
+
+
     }
     ,saveSharedData: function(concept,text){
 
@@ -118,7 +130,9 @@ localStorageManager = {
     
     var ls = localStorage.getItem("BPM");
     var o_ls = JSON.parse(ls);
+    
     var arr_ls = o_ls[procedure];
+    
     var id = arr_ls.length;
     
     o.id = id;

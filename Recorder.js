@@ -609,27 +609,24 @@ if( arr_ls.length == 0){
             {
               table_consola.removeChild(table_consola.firstChild);
             }
-          //var procedure = 'P1';  
-          var procedure = document.getElementById('procedures_select').value;
 
+          var procedure = document.getElementById('procedures_select').value;
+          //Si no trae procedure  ( es P0 ) no tiene nada que mostrar, no hace nada
+          if(procedure == 'P0') return false;
+          
           //1. Traigo el objeto BPM y luego el array de tareas correspondiente
           var o_bpm = localStorage.getItem("BPM");
           var tasks = JSON.parse(o_bpm);
           var arr_tasks = tasks[procedure];
-          //console.debug(arr_tasks);
-          //return false;
-          //1. Traigo del localStorage el array
-          /*var ls_tasks = localStorage.getItem("BPM");
-          var arr_tasks = JSON.parse(ls_tasks);
-		  */
+          
 		  try{
           for (var i=0;i < arr_tasks.length;i++){
-			console.debug(arr_tasks[i].taskTitle)
+			/*
 			try{
 			var concept = JSON.parse(value).type;	
 			}catch(err){
 				console.log(err);
-			}
+			}*/
              this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
            }
        }catch(err){

@@ -76,8 +76,13 @@ function TableDnD() {
     /** Initialise the drag and drop by capturing mouse move events */
     this.init = function(table) {
         this.table = table;
+        //Si no esta declarado, no tiene nada que hacer
+        if(typeof table.tBodies[0] == 'undefined') return false;
+
         try{
+
             var rows = table.tBodies[0].rows; 
+            
             //getElementsByTagName("tr")
             for (var i=0; i<rows.length; i++) {
     			// John Tarr: added to ignore rows that I've added the NoDnD attribute to (Category and Header rows)

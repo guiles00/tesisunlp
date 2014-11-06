@@ -581,7 +581,12 @@ ClickInputTask.prototype.execute = function(){
     var iterator = document.evaluate(this.xPath.getValue(),document,null,0,null);
     var node = iterator.iterateNext();
     //Como es un clic, hago clic en el nodo.
-    node.click();
+    try{
+    node.click();    
+    }catch(err){
+        console.log(err);
+        return false;
+    }
     //si salio todo ok modifico el estado de la tarea ( por ahora asumo que sale ok)
     this.finalizo(this.id);
     return true;

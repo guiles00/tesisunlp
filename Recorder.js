@@ -410,8 +410,9 @@ function handleSelectxPath(){
 		document.addEventListener("click", eventoClick , false);
 		document.addEventListener("mouseup", handlerPocketEvent , false);
 		document.addEventListener("click", logHandler , false);
-		localStorage.setItem("BPMRECORDING",1);
-
+		
+		localStorageManager.setStartRecording();
+	
 	}else if(start_record.value == "Stop"){
     	start_record.value = "Record" ;
     	//start_record.src = 'record.png';
@@ -421,7 +422,7 @@ function handleSelectxPath(){
     	document.removeEventListener("mouseup", handlerPocketEvent , false);
 		document.removeEventListener("click", logHandler , false);
 
-    	localStorage.setItem("BPMRECORDING",0);
+		localStorageManager.setStopRecording();
 	}  
      
 	var table = document.getElementById('table_consola');
@@ -453,8 +454,7 @@ function handleSelectxPath(){
 		document.addEventListener('finalizado',procedureHandler,false);
 
 		//Parche!!! Le mando al localStorage el estado de ejecucion		
-		localStorage.setItem("BPMEXECUTION",1);
-
+		localStorageManager.setStartExecuting();
 //==================================================
 //NO ME CIERRAAAAA!!!!
 Manager.clearCurrentPrimitiveTasks();
@@ -462,7 +462,7 @@ var arr_ls = Manager.initCurrentPrimitiveTasks();
 
 if( arr_ls.length == 0){
 	////console.debug('no hay mas tareas');
-	localStorage.setItem("BPMEXECUTION",0);
+	localStorageManager.setStopExecuting();
 	document.removeEventListener('finalizado',procedureHandler,false);
 
 	return false;
@@ -525,7 +525,7 @@ if( arr_ls.length == 0){
 		document.addEventListener('finalizado',procedureHandler,false);
 
 		//Parche!!! Le mando al localStorage el estado de ejecucion		
-		localStorage.setItem("BPMEXECUTION",1);
+			localStorageManager.setStartExecuting();
 
 //==================================================
 //NO ME CIERRAAAAA!!!!
@@ -533,8 +533,7 @@ Manager.clearCurrentPrimitiveTasks();
 var arr_ls = Manager.initCurrentPrimitiveTasks();
 
 if( arr_ls.length == 0){
-	////console.debug('no hay mas tareas');
-	localStorage.setItem("BPMEXECUTION",0);
+	localStorageManager.setStopExecuting();
 	document.removeEventListener('finalizado',procedureHandler,false);
 
 	return false;

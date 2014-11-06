@@ -252,7 +252,8 @@ var Manager = (function () {
                             //Asumo que finalizo el procedimiento
                             //Fijate un metodo que trae la siguiente tarea 
                             //La finalizacion del procedimiento pone en cero el estado y sale.    
-                            localStorage.setItem("BPMEXECUTION",0);
+                            
+                            localStorageManager.setStopExecuting();
                             return false;
                         }
                         //siempre trae las tareas con estado 0, este if esta al pedo.
@@ -275,8 +276,8 @@ var Manager = (function () {
             document.addEventListener('finalizado',procedureHandler,false);
 
             //Parche!!! Le mando al localStorage el estado de ejecucion     
-            localStorage.setItem("BPMEXECUTION",1);
-
+            
+            localStorageManager.setStartExecuting();
             //==================================================
             //NO ME CIERRAAAAA!!!!
             Manager.clearCurrentPrimitiveTasks();
@@ -284,7 +285,8 @@ var Manager = (function () {
 
             if( arr_ls.length == 0){
                 ////console.debug('no hay mas tareas');
-                localStorage.setItem("BPMEXECUTION",0);
+                
+                localStorageManager.setStopExecuting();
                 document.removeEventListener('finalizado',procedureHandler,false);
 
                 return false;

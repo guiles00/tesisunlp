@@ -63,21 +63,6 @@ function getEventSource(evt) {
     }
 }
 
-/*function actualizarOrden(table){
-    
-        var tasks_temp = new Array();
-        //armo el array con el orden indicado ( no se si sera mejor agregar un atributo de orden)
-        var rows = table.tBodies[0].rows; 
-        for (var i=0; i<rows.length; i++) {
-            var id = rows[i].id;
-            var obj_task = localStorageManager.getObject(id);
-            tasks_temp.push(obj_task);
-            
-        }
-        
-        localStorage.setItem("BPM",JSON.stringify(tasks_temp));
-}
-*/
 function TableDnD() {
     /** Keep hold of the current drag object if any */
     this.dragObject = null;

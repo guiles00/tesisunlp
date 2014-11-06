@@ -300,8 +300,7 @@ var RConsole = {
 		clear.onclick = function(){
 
 		localStorageManager.clear();	
-		//localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
-
+		
         document.getElementById("table_consola").innerHTML = "";
 		}; 
 		return clear;
@@ -323,7 +322,6 @@ var RConsole = {
 		console.log(localStorage.getItem("BPMRECORDING"));
 		console.log(localStorage);
 
-									////console.debug("Tamano:");////console.debug(localStorage.length);
 								};
 	     return load;
 		 }
@@ -344,18 +342,16 @@ var RConsole = {
 			opt.innerHTML = aOptions[j];
 			sAddTask.appendChild(opt);
 		}
-		//sAddTask.addEventListener("change", Recorder.addTask , false); 
+		
 		sAddTask.addEventListener("change", Recorder.addPrimitiveTask , false); 
 
 		return sAddTask;
 	 }
 	 ,createProceduresSelect: function(){
 
-		////console.debug('5. crea Select Tasks');
 		var sProcedures = document.createElement('select');
 		sProcedures.className = "class_button";
-		//sAddTask.style.visibility = "hidden";
-	 	
+		
 		sProcedures.setAttribute('id','procedures_select');
 	 	var j;
 	 	//Esto lo trae del localStorageManager
@@ -367,12 +363,11 @@ var RConsole = {
 			opt.innerHTML = aOptions[j];
 			sProcedures.appendChild(opt);
 		}
-		//sAddTask.addEventListener("change", Recorder.addTask , false); 
+		
 		sProcedures.addEventListener("change", function(){ 
-			console.debug('cambia a otro procedure');
+			
 			var proc = document.getElementById('procedures_select').value;
-			console.debug(proc);
-			localStorage.setItem('BPMPROC',proc);
+		  	localStorageManager.setCurrentProc(proc);
 		  	Recorder.refresh();
 		} , false); 
 

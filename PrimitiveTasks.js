@@ -617,7 +617,8 @@ AugmentedTask.prototype.finalizo = function(id){
                 arr_tasks[i].state = 1;
             } 
     }
-    localStorage.setItem("BPM",JSON.stringify(arr_tasks));  
+    //@TODO Actualizo en el localStorage el estado finalizado
+
 }
 
 function LinkATask(id,link,value,msg,tipo,state,taskTitle){

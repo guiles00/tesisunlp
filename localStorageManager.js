@@ -4,7 +4,19 @@
 * @class localStorageManager
 */
 localStorageManager = {
-    clear: function(){
+    setStopRecording: function(){
+        localStorage.setItem("BPMRECORDING",0);
+    }
+    ,setStartRecording: function(){
+    localStorage.setItem("BPMRECORDING",1);   
+    }
+    ,setStopExecuting: function() { 
+        localStorage.setItem("BPMEXECUTION",0); 
+    }
+    ,setStartExecuting: function(){
+     localStorage.setItem("BPMEXECUTION",1);   
+    }
+    ,clear: function(){
         localStorage.setItem("BPMP",1);    
         localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
 
@@ -35,26 +47,9 @@ localStorageManager = {
     * Trae la tarea del localStorage
     * @method
     */
-    ,NOgetObject: function(id){ //3 de Noviembre 
-        var tasks = localStorage.getItem("BPM");
-        
-        var temp = JSON.parse(tasks);
-        var i;
-        
-        for (i = 0; i < temp.length; i = i + 1) {
-           // ////console.debug(temp[i]);
-            if(temp[i].id == id) return temp[i];
-        };
-    //Si no trajo ninguna
-    return false;
-    }
-    /**
-    * Trae la tarea del localStorage
-    * @method
-    */
     ,getObject: function(id){
         var tasks = localStorage.getItem("BPM");
-        //var procedure = 'P1'; //esto lo saco del select
+        
         var procedure = document.getElementById('procedures_select').value;
 
         var parseo_ls = JSON.parse(tasks);
@@ -62,7 +57,7 @@ localStorageManager = {
         
         var i;
         for (i = 0; i < arr_ls.length; i = i + 1) {
-           // ////console.debug(temp[i]);
+           
             if(arr_ls[i].id == id) return arr_ls[i];
         };
     //Si no trajo ninguna
@@ -73,7 +68,8 @@ localStorageManager = {
     * @method
     */
     ,setObject: function(id,json_task){
-        
+        var procedure = document.getElementById('procedures_select').value;
+
         var tasks = localStorage.getItem("BPM");
         var obj_tasks = JSON.parse(tasks);
         var i;
@@ -85,8 +81,19 @@ localStorageManager = {
                 obj_tasks[i].atributos = task.atributos; 
             }
         };
+
+    var ls = localStorage.getItem("BPM");
     
-    localStorage.setItem("BPM",JSON.stringify(obj_tasks)); 
+    var o_ls = JSON.parse(ls);    
+    var arr_ls = o_ls[procedure];
+    
+    var id = arr_ls.length;    
+    o.id = id;
+    arr_ls.push(o);
+    o_ls[procedure] = arr_ls; 
+    var json_task = JSON.stringify(o_ls);
+    localStorage.setItem("BPM",json_task);
+
     return true;
     }
     /**
@@ -110,9 +117,10 @@ localStorageManager = {
                 arr_ls[i] = o; 
             }
         };
-        obj_tasks[procedure] = arr_ls;
-
+    
+    obj_tasks[procedure] = arr_ls;
     localStorage.setItem("BPM",JSON.stringify(obj_tasks)); 
+
     return true;
     }
     ,insert: function(json_object){ //Esto es como un insert en el localStorage, arriba esta el set y se puede reutilizar(?)
@@ -130,7 +138,6 @@ localStorageManager = {
     
     var ls = localStorage.getItem("BPM");
     var o_ls = JSON.parse(ls);
-    
     var arr_ls = o_ls[procedure];
     
     var id = arr_ls.length;
@@ -204,30 +211,34 @@ localStorageManager = {
     }
     ,removeElement: function(id){
         
-        //No me funciono el splice
+        var procedure = document.getElementById('procedures_select').value;
+
         var tasks = localStorage.getItem("BPM");
         var array_temp = new Array();
         var obj_tasks = JSON.parse(tasks);
-        console.debug('antes');
-        console.debug(obj_tasks);
+        var arr_ls = obj_tasks[procedure];
+        
         var i;
-        for (i = 0; i < obj_tasks.length; i = i + 1) {
+        for (i = 0; i < arr_ls.length; i = i + 1) {
        
-            if(obj_tasks[i].id == id) {
-                //console.debug(i);
-                //array.splice(i,1,obj_tasks);
+            if(arr_ls[i].id == id) {
+            //nothing
             }else{
-                array_temp.push(obj_tasks[i]);
+                array_temp.push(arr_ls[i]);
             }
         };
-        //console.debug('despues');
-        //console.debug(array_temp);
-    localStorage.setItem("BPM",JSON.stringify(array_temp)); 
+    
+    obj_tasks[procedure] = array_temp; 
+    var json_task = JSON.stringify(obj_tasks);
+    localStorage.setItem("BPM",json_task);
+
+    //localStorage.setItem("BPM",JSON.stringify(array_temp)); 
     return true;
     }
 
-
     ,actualizarOrden: function(table){
+
+        var procedure = document.getElementById('procedures_select').value;
 
         var tasks_temp = new Array();
         //armo el array con el orden indicado ( no se si sera mejor agregar un atributo de orden)
@@ -239,6 +250,12 @@ localStorageManager = {
             
         }
         
-        localStorage.setItem("BPM",JSON.stringify(tasks_temp));
+        var ls = localStorage.getItem("BPM");
+        var o_ls = JSON.parse(ls);
+        o_ls[procedure] = tasks_temp;
+        localStorage.setItem("BPM",JSON.stringify(o_ls));
+    }
+    ,setCurrentProc: function(p){
+        localStorage.setItem('BPMPROC',p);
     }
 }

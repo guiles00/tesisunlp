@@ -22,7 +22,10 @@ head.appendChild(style);
 
 //Guardo el contenedor de Tareas
 var esta = localStorage.getItem("BPMP");
-
+//var y = localStorage.getItem("BPM");
+//console.debug('esta');
+//console.debug(y);
+//console.debug('esta');
 //localStorage.setItem("BPM", JSON.stringify( {'P1':[] } ) );
 //localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
 //localStorage.setItem("BPMPROC",'');

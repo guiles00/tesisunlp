@@ -333,7 +333,14 @@ function handleSelectxPath(){
 		//@offlineComment A tener en cuenta  typeof yourVariable === 'object'
 		////console.debug(x.target.parentNode.parentNode.childNodes[1].innerHTML);
 		var el = document.getElementById("value_id");
-		var sh_d = '{"index":'+x.target.parentNode.parentNode.sectionRowIndex+'}';
+		console.debug('muestra el elemento');
+		console.debug(x.target.parentNode.parentNode);
+		
+		console.debug( x.target.parentNode.parentNode.rowIndex );
+		console.debug( x.target.parentNode.parentNode.sectionRowIndex );
+		//var sh_d = '{"index":'+x.target.parentNode.parentNode.sectionRowIndex+'}';
+		var sh_d = '{"index":'+x.target.parentNode.parentNode.rowIndex+'}';
+		
 		//el.value = x.target.parentNode.parentNode.childNodes[1].innerHTML;
 		el.value = sh_d;		
 		//Cierro
@@ -384,7 +391,6 @@ function handleSelectxPath(){
 		}
 		div_show_pocket.appendChild(bClose);
 		
-
 		var bClear = document.createElement('input');
 		bClear.type = 'button';
 		bClear.value = 'clear';

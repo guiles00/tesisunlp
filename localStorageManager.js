@@ -138,11 +138,15 @@ localStorageManager = {
     
     var ls = localStorage.getItem("BPM");
     var o_ls = JSON.parse(ls);
+
     var arr_ls = o_ls[procedure];
+    /*
+    var a = localStorageManager.getNextId(o_ls[procedure]);
+    //console.debug(a);
     
     var id = arr_ls.length;
-    
-    o.id = id;
+    */
+    o.id = localStorageManager.getNextId(o_ls[procedure]);
     arr_ls.push(o);
     //reemplaza el array del procedure
     o_ls[procedure] = arr_ls; 
@@ -165,6 +169,18 @@ localStorageManager = {
     //Lo convierto en JSON
     var json_task = JSON.stringify(arr_ls);
     localStorage.setItem("BPM",json_task);
+    }
+    ,getNextId: function(t){
+        //si no hay tareas devolve id 1
+        if(t.length == 0 ) return 1;
+        var i;
+        var id = t[0].id;
+        //Traigo el numero mas alto
+        for ( i = 0; i < t.length ; i = i + 1) {
+            if(t[i].id > id) id = t[i].id;
+        };
+        //proximo id
+        return id + 1;
     }
     ,NOgetCurrentTasks: function(){
         var tasks = localStorage.getItem("BPM");
@@ -231,7 +247,9 @@ localStorageManager = {
     obj_tasks[procedure] = array_temp; 
     var json_task = JSON.stringify(obj_tasks);
     localStorage.setItem("BPM",json_task);
-
+    
+    ////console.debug('obj_tasks[procedure]');
+    ////console.debug(obj_tasks[procedure]);
     //localStorage.setItem("BPM",JSON.stringify(array_temp)); 
     return true;
     }

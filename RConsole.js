@@ -378,6 +378,8 @@ var RConsole = {
 		var div_consola = document.createElement("div");
 			div_consola.id = "div_consola";		
 			div_consola.style.cssText = "overflow:scroll;z-index: 300;position:fixed;left: 0px;width:auto;height: 100%;border:solid 1px #e1e1e1;vertical-align: middle;background: #A2AFA0;"; //text-align:center;
+			div_consola.style.visibility = "hidden";
+
 		return div_consola;
 
 	 }
@@ -403,7 +405,7 @@ var RConsole = {
 	 }
 	 ,createShowHide: function(){
 
-	////console.debug('14. crea el div para la solapa show/hide');
+	//console.debug('14. crea el div para la solapa show/hide');
 	//Agrego la solapa para mostrar/ocultar
 	var div_pestana = document.createElement("div");
 	div_pestana.id =  "div_pestana"; 
@@ -414,7 +416,7 @@ var RConsole = {
 	input_label.type = "button";
 	//input_label.style.cssText = "background-color: #A2AFA0; border: 0; border-radius: 2px; color: #fff; font-size: 12px; font-weight: 700; padding: 10px 30px 11px; text-transform: uppercase;vertical-align: bottom;";
 	input_label.style.cssText = "background-color: #A2AFA0; border: 0; border-radius: 2px; color: black; font-size: 11px; font-weight: 700; padding: 10px 30px 11px; text-transform: uppercase;vertical-align: bottom;";
-	input_label.value ="show/hide";
+	input_label.value ="show/hide Console";
 	input_label.id ="toc-label";
 	input_label.onclick = function(){ 
 
@@ -422,19 +424,34 @@ var RConsole = {
 	var body   = document.body || document.getElementsByTagName('body')[0];
 
 	   if(div_consola.style.visibility=='visible'){
-
-		div_consola.style.visibility = "hidden";
+	   	RConsole.hideConsola();
+	/*	div_consola.style.visibility = "hidden";
 		body.style.marginLeft = "";
-		}else{
-
-		div_consola.style.visibility = "visible";
-		body.style.marginLeft = "500px";
+	*/	}else{
+		RConsole.showConsola();
+	/*		div_consola.style.visibility = "visible";
+		body.style.marginLeft = "400px";
+	*/		
 		}
 	};
 
 	div_pestana.appendChild(input_label);
 
 	return div_pestana;
+	 }
+	 ,showConsola: function(){
+	 	var div_consola = document.getElementById('div_consola');
+		var body   = document.body || document.getElementsByTagName('body')[0];
+		div_consola.style.visibility = "visible";
+		body.style.marginLeft = "400px";
+	
+	 }
+	 ,hideConsola: function(){
+	 	var div_consola = document.getElementById('div_consola');
+		var body   = document.body || document.getElementsByTagName('body')[0];
+		div_consola.style.visibility = "hidden";
+		body.style.marginLeft = "";
+	
 	 }
 	 ,init: function(){
 
@@ -485,9 +502,8 @@ var RConsole = {
 		body.appendChild(editor_container);
 		body.appendChild(add_container);
 		body.appendChild(add_aug_container);
-	 	////console.debug('15. Agrega la pestana show/hide');    	
-		body.appendChild(show_hide); 
-    	body.style.marginLeft = "500px";
+	 	body.appendChild(show_hide); 
+    	//body.style.marginLeft = "500px";
 	 }
 }
 

@@ -333,11 +333,6 @@ function handleSelectxPath(){
 		//@offlineComment A tener en cuenta  typeof yourVariable === 'object'
 		////console.debug(x.target.parentNode.parentNode.childNodes[1].innerHTML);
 		var el = document.getElementById("value_id");
-		console.debug('muestra el elemento');
-		console.debug(x.target.parentNode.parentNode);
-		
-		console.debug( x.target.parentNode.parentNode.rowIndex );
-		console.debug( x.target.parentNode.parentNode.sectionRowIndex );
 		//var sh_d = '{"index":'+x.target.parentNode.parentNode.sectionRowIndex+'}';
 		var sh_d = '{"index":'+x.target.parentNode.parentNode.rowIndex+'}';
 		
@@ -675,13 +670,12 @@ if( arr_ls.length == 0){
 
 		delete_button.onclick = function(x){ 
 
-			if(confirm('Desea borrar el regitro?')){
+			//if(confirm('Desea borrar el regitro?')){
 			var id = this.parentNode.parentNode.id;
 			var row = this.parentNode.parentNode.sectionRowIndex;
 			document.getElementById('table_consola').deleteRow(row);
 			localStorageManager.removeElement(id);
-
-			}
+			//}
 		};
 
 		var edit_button = document.createElement('input');
@@ -767,13 +761,12 @@ if( arr_ls.length == 0){
 
 		delete_button.onclick = function(x){ 
 
-			if(confirm('Desea borrar el regitro?')){
+			//if(confirm('Desea borrar el regitro?')){
 			var id = this.parentNode.parentNode.id;
 			var row = this.parentNode.parentNode.sectionRowIndex;
 			document.getElementById('table_consola').deleteRow(row);
 			localStorageManager.removeElement(id);
-
-			}
+			//}
 		};
 
 		var edit_button = document.createElement('input');

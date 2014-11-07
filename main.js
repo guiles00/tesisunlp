@@ -59,6 +59,7 @@ if(localStorage.getItem("BPMRECORDING") == 1){
 	var sel_proc = document.getElementById('procedures_select');
 	sel_proc.value = proc;
 	Recorder.refresh();
+	RConsole.showConsola();
 	document.getElementById('start_record').click();   
 }
 //Si esta ejecutando tendria que tener el procedimiento
@@ -67,6 +68,7 @@ if(localStorage.getItem("BPMEXECUTION") == 1){
 	var sel_proc = document.getElementById('procedures_select');
 	sel_proc.value = proc;
 	Recorder.refresh();
+	RConsole.showConsola();
 	document.getElementById('play_procedure').click(); 
 }
      

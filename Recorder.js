@@ -128,7 +128,7 @@ function handleSelectxPath(){
 	var save_task = document.createElement("input");
 	save_task.type = "button";
 	save_task.value = "Save";
-	//save_task.setAttribute('class','class_button');
+	//save_task.setAttribute('class','tesisunlp_button');
 
 	save_task.onclick = function(x){ 
 	//Que tipo de tarea tiene que guardar!?
@@ -172,7 +172,7 @@ function handleSelectxPath(){
 	close_edit.value = "Close";
 	close_edit.style.cssText = "position:absolute;float:right;top:0;right:0;";
 
-	//close_edit.setAttribute('class','class_button');
+	//close_edit.setAttribute('class','tesisunlp_button');
 
 
 
@@ -201,7 +201,7 @@ function handleSelectxPath(){
 		select_xpath.type = "button";
 		select_xpath.id = "select_xpath";
 		select_xpath.value = "X";
-		select_xpath.setAttribute('class','class_button');
+		select_xpath.setAttribute('class','tesisunlp_button');
 	 	//el.appendChild(select_xpath);
 		select_xpath.onclick = function(){ 
 	  var high = new Highlighter();
@@ -248,7 +248,7 @@ function handleSelectxPath(){
 		close_edit.type = "button";
 		close_edit.value = "X";
 		close_edit.style.cssText = "position:absolute;float:right;top:0;right:0;";
-		close_edit.setAttribute('class','class_button');
+		close_edit.setAttribute('class','tesisunlp_button');
 
 
 		close_edit.onclick = function(){ 
@@ -261,7 +261,7 @@ function handleSelectxPath(){
 		edit_button.type = "button";
 		edit_button.value = "Save";
 		edit_button.id = "id_edit_task";
-		edit_button.setAttribute('class','class_button');
+		edit_button.setAttribute('class','tesisunlp_button');
 
 	    var div_footer = document.getElementById("div_editor_footer");
 	    div_footer.innerHTML="";
@@ -297,7 +297,7 @@ function handleSelectxPath(){
 	var bind_data = document.createElement("input");
 	bind_data.type = "button";
 	bind_data.value = "<";
-	bind_data.setAttribute('class','class_button');
+	bind_data.setAttribute('class','tesisunlp_button');
 	bind_data.onclick = function(){ 
 		Recorder.mostrarPocket();
 	}
@@ -327,7 +327,7 @@ function handleSelectxPath(){
 		var sel_button = document.createElement('input');
 		sel_button.type = "button";
 		sel_button.value = "S";
-		sel_button.setAttribute('class','class_button');
+		sel_button.setAttribute('class','tesisunlp_button');
 
 		sel_button.onclick = function(x){ 
 		//@offlineComment A tener en cuenta  typeof yourVariable === 'object'
@@ -666,7 +666,7 @@ if( arr_ls.length == 0){
 	    var delete_button = document.createElement('input');
 		delete_button.type = "button";
 		delete_button.value = "Delete";
-		delete_button.setAttribute('class','class_button');
+		delete_button.setAttribute('class','tesisunlp_button');
 
 		delete_button.onclick = function(x){ 
 
@@ -681,7 +681,7 @@ if( arr_ls.length == 0){
 		var edit_button = document.createElement('input');
 		edit_button.type = "button";
 		edit_button.value = "Edit";
-		edit_button.setAttribute('class','class_button');
+		edit_button.setAttribute('class','tesisunlp_button');
 		edit_button.onclick = function(){
 		Recorder.editRow(this);
 		};
@@ -689,7 +689,7 @@ if( arr_ls.length == 0){
 	var state_button = document.createElement('input');
 		state_button.type = "button";
 		state_button.value = "State";
-		state_button.setAttribute('class','class_button');
+		state_button.setAttribute('class','tesisunlp_button');
 		state_button.onclick = function(){
 		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
 		task.state.value = 0;
@@ -701,7 +701,7 @@ if( arr_ls.length == 0){
 	var play_button = document.createElement('input');
 		play_button.type = "button";
 		play_button.value = ">";
-		play_button.setAttribute('class','class_button');
+		play_button.setAttribute('class','tesisunlp_button');
 		play_button.onclick = function(){
 		
 		//alert('Empieza desde aca'+this.parentNode.parentNode.id);
@@ -757,7 +757,7 @@ if( arr_ls.length == 0){
 	    var delete_button = document.createElement('input');
 		delete_button.type = "button";
 		delete_button.value = "X";
-		delete_button.setAttribute('class','class_button');
+		delete_button.setAttribute('class','tesisunlp_button');
 
 		delete_button.onclick = function(x){ 
 
@@ -772,7 +772,7 @@ if( arr_ls.length == 0){
 		var edit_button = document.createElement('input');
 		edit_button.type = "button";
 		edit_button.value = "E";
-		edit_button.setAttribute('class','class_button');
+		edit_button.setAttribute('class','tesisunlp_button');
 		edit_button.onclick = function(){
 		Recorder.editRow(this);
 		};
@@ -780,7 +780,7 @@ if( arr_ls.length == 0){
 	var state_button = document.createElement('input');
 		state_button.type = "button";
 		state_button.value = "S";
-		state_button.setAttribute('class','class_button');
+		state_button.setAttribute('class','tesisunlp_button');
 		state_button.onclick = function(){
 		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
 		task.state.value = 0;

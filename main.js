@@ -1,6 +1,7 @@
 window.onload = function(){
 
-var css_styles = {
+//Esto desaparece, se agrega los estilos como se agrega el js
+/*var css_styles = {
 	class_button:"background-color:#24890d;border:1px;border-radius:2px;color:#fff;font-size: 8px;font-weight: 700;padding: 10px 30px 11px;text-transform: uppercase;vertical-align: bottom;"
 };
 //Agrego los estilos para el plugin
@@ -17,7 +18,7 @@ if (style.styleSheet){
 }
 
 head.appendChild(style);
-
+*/
 
 
 //Guardo el contenedor de Tareas

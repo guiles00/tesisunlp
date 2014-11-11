@@ -1,0 +1,24 @@
+.tesisunlp_button { 
+	cursor: hand ;
+	background-color: #A2AFA0 ;
+	border:1px solid ;
+	border-color: grey ; 
+	color: black ; 
+	font-family: Helvetica, Arial; 
+	font-size: 9px; font-weight: 400; 
+	padding: 5px 7px 6px; 
+	text-transform: uppercase;vertical-align: bottom;
+} 
+
+.cssClass{ outline: 0.25em solid #FFFF00;} 
+
+.tesisunlp_td { 
+	border-bottom:1px solid #005000;
+} 
+.tesisunlp_table {  
+	background-color: #A2AFA0;  
+	min-width:323px ;
+	font-family: Helvetica,Arial; 
+	font-size: 11px;
+} 
+

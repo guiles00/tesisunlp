@@ -279,7 +279,7 @@ var RConsole = {
 	 	////console.debug('2. crea boton Play');
 		//var iPlay_recorder = this.createButton('Play','play_procedure',null);
 		var iPlay_recorder = this.createImageButton('Play','play_procedure','play.png');
-		//iPlay_recorder.className = "class_button";
+		//iPlay_recorder.className = "tesisunlp_button";
 		iPlay_recorder.src = 'http://s30.postimg.org/yofdl7bal/play.png';
 		iPlay_recorder.addEventListener("click", Recorder.clickPlay , false); 
 		return iPlay_recorder;
@@ -289,14 +289,14 @@ var RConsole = {
 		////console.debug('3. crea boton Record');
 		var iRecord_recorder = this.createImageButton('Record','start_record','record.png');
 		iRecord_recorder.addEventListener("click",Recorder.clickRecord, false); 
-		//iRecord_recorder.className = "class_button";
+		//iRecord_recorder.className = "tesisunlp_button";
 		iRecord_recorder.src = 'http://s27.postimg.org/6chig4jb3/record.png';
 		return iRecord_recorder;
 	 }
 	 ,createClearButton: function(){
 	 	////console.debug('4. crea boton Clear');
 		var clear = this.createImageButton('CLR','clear','http://s13.postimg.org/ngpmrmhkj/clear.png');
-		//clear.className = "class_button";
+		//clear.className = "tesisunlp_button";
 		clear.onclick = function(){
 
 		localStorageManager.clear();	
@@ -307,7 +307,7 @@ var RConsole = {
 	 }
 	 ,createShowLocalStorageButton: function(){
 		var load = document.createElement('input');
-		//load.className = "class_button";
+		//load.className = "tesisunlp_button";
 		load.type = "image";
 		load.src = "ls.png";
 		load.value = "LS";
@@ -329,7 +329,7 @@ var RConsole = {
 
 		////console.debug('5. crea Select Tasks');
 		var sAddTask = document.createElement('select');
-		sAddTask.className = "class_button";
+		sAddTask.className = "tesisunlp_button";
 		//sAddTask.style.visibility = "hidden";
 	 	
 		sAddTask.setAttribute('id','add_task');
@@ -350,7 +350,7 @@ var RConsole = {
 	 ,createProceduresSelect: function(){
 
 		var sProcedures = document.createElement('select');
-		sProcedures.className = "class_button";
+		sProcedures.className = "tesisunlp_button";
 		
 		sProcedures.setAttribute('id','procedures_select');
 	 	var j;

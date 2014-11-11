@@ -497,19 +497,22 @@ var RConsole = {
 
 	 	var body   = document.body || document.getElementsByTagName('body')[0];
 	 	
+	 	if( !inIframe() ) {
 		if (document.body.firstChild){
 		      document.body.insertBefore(container, document.body.firstChild);
+		      
 		    }else{
 		      document.body.appendChild(container);
+
 		}
-
-
 
 		body.appendChild(editor_container);
 		body.appendChild(add_container);
 		body.appendChild(add_aug_container);
 	 	body.appendChild(show_hide); 
     	//body.style.marginLeft = "500px";
+    	}
+
 	 }
 }
 

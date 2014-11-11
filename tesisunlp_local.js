@@ -1,4 +1,11 @@
+//Este script es para greasemonkey
 
+var tesis_css = document.createElement('link');
+tesis_css.setAttribute("rel","stylesheet");
+tesis_css.setAttribute("type","text/css");
+tesis_css.setAttribute("href","http://127.0.0.1/tesis/tesisunlp/tesisunlp.css");
+
+document.head.appendChild(tesis_css);
 //Este script es para prueba solamente, usar uglify para unir todos los archivos
 var tesis_script = document.createElement('script');
 tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/Attribute.js');
@@ -47,6 +54,5 @@ document.head.appendChild(tesis_script);
 var tesis_script = document.createElement('script');
 tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/PrimitiveTasks.js');
 document.head.appendChild(tesis_script);
-
 
 

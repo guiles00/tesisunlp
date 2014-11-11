@@ -16,15 +16,17 @@ var RConsole = {
 	    div_show_pocket.id = 'id_show_pocket';
 	    var body = document.getElementsByTagName('body')[0];
         var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
-  		console.debug(array_area);
+  		//console.debug(array_area);
   		var texto = document.createTextNode(localStorage.getItem("SHARED_DATA"));
 		//visibility: hidden;
-  		div_show_pocket.style.cssText="position:absolute;width:auto;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
+  		//div_show_pocket.style.cssText="position:absolute;width:auto;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
+		div_show_pocket.setAttribute('class','tesisunlp_div_show_pocket');
 		div_show_pocket.appendChild(texto);
 		var bClose = document.createElement('input');
 		bClose.type = 'button';
 		bClose.value = 'x';
-		bClose.style.cssText = "position:absolute;float:right;top:0;right:0;";
+		//bClose.style.cssText = "position:absolute;float:right;top:0;right:0;";
+		bClose.setAttribute('class','tesisunlp_close_button');
 		bClose.onclick = function(){
 			var el = document.getElementById('id_show_pocket');
  				el.parentNode.removeChild(el);
@@ -84,7 +86,7 @@ var RConsole = {
 	
 	var div_add_aug_container = document.createElement("div");	
 	div_add_aug_container.id = "div_add_aug_container";
-	div_add_aug_container.style.cssText="padding: 10px;visibility: hidden;position:absolute;width:200px;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
+	//div_add_aug_container.style.cssText="padding: 10px;visibility: hidden;position:absolute;width:200px;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
 	//div_editor_container.style.cssText="position:absolute;width:200px;height:200px;top:20%;left:50%;margin-top:-100px;margin-left:-100px;background-color:red";
 	
 
@@ -139,7 +141,7 @@ var RConsole = {
 	
 	var div_add_container = document.createElement("div");	
 	div_add_container.id = "div_add_container";
-	div_add_container.style.cssText="visibility: hidden;position:absolute;width:200px;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
+	//div_add_container.style.cssText="visibility: hidden;position:absolute;width:200px;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
 	//div_editor_container.style.cssText="position:absolute;width:200px;height:200px;top:20%;left:50%;margin-top:-100px;margin-left:-100px;background-color:red";
 	
 
@@ -193,7 +195,8 @@ var RConsole = {
 	
 	var div_editor_container = document.createElement("div");	
 	div_editor_container.id = "div_editor_container";
-	div_editor_container.style.cssText="padding: 10px;visibility: hidden;position:absolute;width:auto;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background: #A2AFA0;border: solid #A2AFFF;";
+	//div_editor_container.style.cssText="padding: 10px;visibility: hidden;position:absolute;width:auto;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background: #A2AFA0;border: solid #A2AFFF;";
+	div_editor_container.setAttribute('class','tesisunlp_div_editor_container');
 	//div_editor_container.style.cssText="position:absolute;width:200px;height:200px;top:20%;left:50%;margin-top:-100px;margin-left:-100px;background-color:red";
 	//overflow:scroll;z-index: 300;position:fixed;left: 0px;width:auto;height: 100%;border:solid 1px #e1e1e1;vertical-align: middle;background: #A2AFA0;text-align:center;";
 
@@ -377,7 +380,8 @@ var RConsole = {
 		////console.debug('7. Crea el div consola');		
 		var div_consola = document.createElement("div");
 			div_consola.id = "div_consola";		
-			div_consola.style.cssText = "overflow:scroll;z-index: 300;position:fixed;left: 0px;width:auto;height: 100%;border:solid 1px #e1e1e1;vertical-align: middle;background: #A2AFA0;"; //text-align:center;
+			//div_consola.style.cssText = "overflow:scroll;z-index: 300;position:fixed;left: 0px;width:auto;height: 100%;border:solid 1px #e1e1e1;vertical-align: middle;background: #A2AFA0;"; //text-align:center;
+			div_consola.setAttribute('class','tesisunlp_div_consola');
 			div_consola.style.visibility = "hidden";
 
 		return div_consola;
@@ -400,7 +404,8 @@ var RConsole = {
 		////console.debug('10. Crea la tabla contenedora de la consola');
 		var table_consola = document.createElement("table")
 		table_consola.id = "table_consola"
-		table_consola.style.cssText = "min-width:auto;font-family: Helvetica,Arial; font-size: 16px";
+		//table_consola.style.cssText = "min-width:auto;font-family: Helvetica,Arial; font-size: 16px";
+		table_consola.setAttribute('class','tesisunlp_table_consola');
 		return table_consola;
 	 }
 	 ,createShowHide: function(){
@@ -410,12 +415,13 @@ var RConsole = {
 	var div_pestana = document.createElement("div");
 	div_pestana.id =  "div_pestana"; 
 	//div_pestana.style.cssText = "display: inline-block;background: #37abc8;opacity: 0.67;position: fixed;right: 0;bottom: 3.2em;z-index: 100;font-size: 14px;font-family: Helvetica, arial, freesans, clean, sans-serif;" ;
-	div_pestana.style.cssText = "display: inline-block;background: #A2AFA0;position: fixed;right: 0;bottom: 3.2em;z-index: 100;font-size: 14px;font-family: Helvetica, arial, freesans, clean, sans-serif;" ;
-
+	//div_pestana.style.cssText = "display: inline-block;background: #A2AFA0;position: fixed;right: 0;bottom: 3.2em;z-index: 100;font-size: 14px;font-family: Helvetica, arial, freesans, clean, sans-serif;" ;
+	div_pestana.setAttribute('class','tesisunlp_div_pestana');
 	var input_label = document.createElement("input");
 	input_label.type = "button";
 	//input_label.style.cssText = "background-color: #A2AFA0; border: 0; border-radius: 2px; color: #fff; font-size: 12px; font-weight: 700; padding: 10px 30px 11px; text-transform: uppercase;vertical-align: bottom;";
-	input_label.style.cssText = "background-color: #A2AFA0; border: 0; border-radius: 2px; color: black; font-size: 11px; font-weight: 700; padding: 10px 30px 11px; text-transform: uppercase;vertical-align: bottom;";
+	//input_label.style.cssText = "background-color: #A2AFA0; border: 0; border-radius: 2px; color: black; font-size: 11px; font-weight: 700; padding: 10px 30px 11px; text-transform: uppercase;vertical-align: bottom;";
+	input_label.setAttribute('class','tesisunlp_input_label');
 	input_label.value ="show/hide Console";
 	input_label.id ="toc-label";
 	input_label.onclick = function(){ 

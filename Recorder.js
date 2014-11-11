@@ -170,9 +170,9 @@ function handleSelectxPath(){
 	var close_edit = document.createElement("input");
 	close_edit.type = "button";
 	close_edit.value = "Close";
-	close_edit.style.cssText = "position:absolute;float:right;top:0;right:0;";
+	//close_edit.style.cssText = "position:absolute;float:right;top:0;right:0;";
 
-	//close_edit.setAttribute('class','tesisunlp_button');
+	close_edit.setAttribute('class','tesisunlp_close_button');
 
 
 
@@ -373,13 +373,15 @@ function handleSelectxPath(){
   		var table_s_data = Recorder.formatearTextoPocket(array_area);
   		var texto = document.createTextNode(localStorage.getItem("SHARED_DATA"));
 		//visibility: hidden;
-  		div_show_pocket.style.cssText="position:absolute;width:auto;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
+  		//div_show_pocket.style.cssText="position:absolute;width:auto;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
 		//div_show_pocket.appendChild(texto);
+		div_show_pocket.setAttribute('class','tesisunlp_div_show_pocket');
 		div_show_pocket.appendChild(table_s_data);
 		var bClose = document.createElement('input');
 		bClose.type = 'button';
 		bClose.value = 'x';
-		bClose.style.cssText = "position:absolute;float:right;top:0;right:0;";
+		//bClose.style.cssText = "position:absolute;float:right;top:0;right:0;";
+		bClose.setAttribute('class','tesisunlp_close_button');
 		bClose.onclick = function(){
 			var el = document.getElementById('id_show_pocket');
  				el.parentNode.removeChild(el);
@@ -637,6 +639,7 @@ if( arr_ls.length == 0){
 		var tr = document.getElementById('table_consola').insertRow(index);
         tr.id = id;
         
+        //tr.setAttribute('class','');
         var task = localStorageManager.getObject(id);
 
         //Si la tarea se ejecuto ( estado 1 ), se pone verde

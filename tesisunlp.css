@@ -22,3 +22,70 @@
 	font-size: 11px;
 } 
 
+.tesisunlp_div_consola {
+	overflow:scroll;
+	z-index: 300;
+	position:fixed;
+	left: 0px;
+	width:auto;
+	height: 100%;
+	border:solid 1px #e1e1e1;
+	vertical-align: middle;
+	background: #A2AFA0;
+}
+.tesisunlp_table_consola {
+
+	min-width:auto;
+	font-family: Helvetica,Arial; 
+	font-size: 16px;
+}
+
+.tesisunlp_div_pestana {
+	display: inline-block;
+	background: #A2AFA0;
+	position: fixed;
+	right: 0;bottom: 3.2em;
+	z-index: 100;
+	font-size: 14px;
+	font-family: Helvetica, arial, freesans, clean, sans-serif;
+}
+
+.tesisunlp_input_label {
+	background-color: #A2AFA0; 
+	border: 0; border-radius: 2px; 
+	color: black; font-size: 11px; 
+	font-weight: 700; 
+	padding: 10px 30px 11px; 
+	text-transform: uppercase;vertical-align: bottom;
+}
+
+.tesisunlp_close_button {
+	position:absolute;
+	float:right;
+	top:0;
+	right:0;
+}
+.tesisunlp_div_show_pocket {
+	position:absolute;
+	width:auto;
+	height:auto;
+	top:30%;
+	left:50%;
+	margin-top:-100px;
+	margin-left:-100px;
+	background: #A2AFA0;
+	border: solid black;
+}
+.tesisunlp_div_editor_container {
+	padding: 10px;
+	visibility: hidden;
+	position:absolute;
+	width:auto;
+	height:auto;
+	top:30%;
+	left:50%;
+	margin-top:-100px;
+	margin-left:-100px;
+	background: #A2AFA0;
+	border: solid #A2AFFF;
+}

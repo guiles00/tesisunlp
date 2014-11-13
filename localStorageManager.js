@@ -276,4 +276,20 @@ localStorageManager = {
     ,setCurrentProc: function(p){
         localStorage.setItem('BPMPROC',p);
     }
+    ,addProcedure: function(){
+
+        var bpm = JSON.parse(localStorage.getItem("BPM"));
+        var keys = Object.keys(bpm);
+        var next_key = 'P'+(Number((keys[keys.length - 1]).substr(1,1)) + 1);
+        bpm[next_key] = new Array();
+        
+        localStorage.setItem("BPM",JSON.stringify(bpm)); 
+
+        return next_key;        
+    }
+    ,getPrceduresKeys: function(){
+        var bpm = JSON.parse(localStorage.getItem("BPM"));
+        var keys = Object.keys(bpm);
+        return keys;
+    }
 }

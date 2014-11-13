@@ -247,7 +247,7 @@ function handleSelectxPath(){
 		var close_edit = document.createElement("input");
 		close_edit.type = "button";
 		close_edit.value = "X";
-		close_edit.style.cssText = "position:absolute;float:right;top:0;right:0;";
+		//close_edit.style.cssText = "position:absolute;float:right;top:0;right:0;";
 		close_edit.setAttribute('class','tesisunlp_button');
 
 

@@ -88,11 +88,12 @@ var RConsole = {
 	div_add_aug_container.id = "div_add_aug_container";
 	//div_add_aug_container.style.cssText="padding: 10px;visibility: hidden;position:absolute;width:200px;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
 	//div_editor_container.style.cssText="position:absolute;width:200px;height:200px;top:20%;left:50%;margin-top:-100px;margin-left:-100px;background-color:red";
-	
+	div_add_aug_container.style.visibility = "hidden";
 
 	var div_add_aug_header = document.createElement("div");	
 	div_add_aug_header.id = "div_add_aug_header";
-	div_add_aug_header.style.cssText="";
+	//div_add_aug_header.style.cssText="";
+	//div_add_aug_header.style.visibility = "hidden";
 
     var header_aug_title = document.createTextNode('Augmented Tasks');
 	div_add_aug_header.appendChild(header_aug_title);
@@ -143,7 +144,7 @@ var RConsole = {
 	div_add_container.id = "div_add_container";
 	//div_add_container.style.cssText="visibility: hidden;position:absolute;width:200px;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
 	//div_editor_container.style.cssText="position:absolute;width:200px;height:200px;top:20%;left:50%;margin-top:-100px;margin-left:-100px;background-color:red";
-	
+	div_add_container.style.visibility = 'hidden';
 
 	var div_add_header = document.createElement("div");	
 	div_add_header.id = "div_add_header";
@@ -308,11 +309,45 @@ var RConsole = {
 		}; 
 		return clear;
 	 }
+	 ,createShowSharedButton: function(){
+	 	var shared_button = this.createImageButton('SHD','shared_data','http://s8.postimg.org/fya7herkh/shared.png');
+		shared_button.onclick = function(){
+			Recorder.mostrarPocket();
+		}; 
+		return shared_button;
+	 }
+
+	 ,createAddProcedureButton: function(){
+	 	var add_procedure = this.createImageButton('+','add_procedure','');
+		
+		add_procedure.onclick = function(){
+			localStorageManager.addProcedure();
+			/**/
+			var el = document.getElementById('procedures_select');
+			el.innerHTML = '';
+		var aOptions = localStorageManager.getPrceduresKeys();
+		for (j = 0; j < aOptions.length; j = j + 1) {
+			opt = document.createElement('option');
+			opt.value = aOptions[j];
+			opt.innerHTML = aOptions[j];
+			el.appendChild(opt);
+		}
+			opt = document.createElement('option');
+			opt.value = 'P0';
+			opt.innerHTML = 'Add';
+			el.appendChild(opt);
+			/**/
+
+			alert('Procedure creado');
+		}; 
+		return add_procedure;
+	 }
 	 ,createShowLocalStorageButton: function(){
 		var load = document.createElement('input');
 		//load.className = "tesisunlp_button";
 		load.type = "image";
-		load.src = "ls.png";
+		//load.src = "ls.png";
+		load.src = 'http://s23.postimg.org/j9db6rcc7/image.png';
 		load.value = "LS";
 		load.id = "load";
 
@@ -337,7 +372,8 @@ var RConsole = {
 	 	
 		sAddTask.setAttribute('id','add_task');
 	 	var j;
-	 	var aOptions=['Add Task','Primitive Task','Augmented Task'];
+	 	//var aOptions=['Add Task','Primitive Task','Augmented Task'];
+	 	var aOptions=['Add Task'];
 		for (j = 0; j < aOptions.length; j = j + 1) {
 			opt = document.createElement('option');
 			opt.value = j;
@@ -357,15 +393,18 @@ var RConsole = {
 		
 		sProcedures.setAttribute('id','procedures_select');
 	 	var j;
-	 	//Esto lo trae del localStorageManager
-	 	var aOptions = ['Proc.','P1','P2'];
+	 	 
+		var aOptions = localStorageManager.getPrceduresKeys();
 		for (j = 0; j < aOptions.length; j = j + 1) {
 			opt = document.createElement('option');
-			opt.value = 'P'+j;
-			if(j===0){opt.disabled = true;opt.selected = true;} 
+			opt.value = aOptions[j];
 			opt.innerHTML = aOptions[j];
 			sProcedures.appendChild(opt);
 		}
+			opt = document.createElement('option');
+			opt.value = 'P0';
+			opt.innerHTML = 'Add';
+			sProcedures.appendChild(opt);
 		
 		sProcedures.addEventListener("change", function(){ 
 			
@@ -431,13 +470,8 @@ var RConsole = {
 
 	   if(div_consola.style.visibility=='visible'){
 	   	RConsole.hideConsola();
-	/*	div_consola.style.visibility = "hidden";
-		body.style.marginLeft = "";
-	*/	}else{
+		}else{
 		RConsole.showConsola();
-	/*		div_consola.style.visibility = "visible";
-		body.style.marginLeft = "400px";
-	*/		
 		}
 	};
 
@@ -449,7 +483,7 @@ var RConsole = {
 	 	var div_consola = document.getElementById('div_consola');
 		var body   = document.body || document.getElementsByTagName('body')[0];
 		div_consola.style.visibility = "visible";
-		body.style.marginLeft = "400px";
+		body.style.marginLeft = "200px";
 	
 	 }
 	 ,hideConsola: function(){
@@ -467,7 +501,8 @@ var RConsole = {
 	 	var clearButton = this.createClearButton(); 
 	 	var addTaksSelect = this.createaddTasksSelect();
 	 	var loadButton = this.createShowLocalStorageButton();
-		//var pocketButton = this.createButtonPocket('X','pocket_id','')
+		var pocketButton = this.createShowSharedButton();
+		
 		//var mostrarPocket = this.mostrarPocket('M','mpocket_id','')
 		
 		var container = this.createHeaderContainer();
@@ -479,6 +514,7 @@ var RConsole = {
 		var add_container = this.createAddContainer();
 	 	var add_aug_container = this.createAddAugContainer();
 	 	var procedures_select = this.createProceduresSelect();
+	 	var add_proc_button = this.createAddProcedureButton();
 	 	//container_header.appendChild(stopButton);
 	 	container_header.appendChild(recordButton);
 		container_header.appendChild(playButton);
@@ -486,8 +522,9 @@ var RConsole = {
 	 	container_header.appendChild(loadButton);
 	 	container_header.appendChild(addTaksSelect);
 	 	container_header.appendChild(procedures_select);
-	 	//container_header.appendChild(pocketButton);
-	 	//container_header.appendChild(mostrarPocket);
+	 	container_header.appendChild(add_proc_button);
+	 	container_header.appendChild(pocketButton);
+	 	
 	 	
 		
 		table_console_container.appendChild(table_console);
@@ -497,7 +534,8 @@ var RConsole = {
 
 	 	var body   = document.body || document.getElementsByTagName('body')[0];
 	 	
-	 	if( !inIframe() ) {
+	 	//if( !inIframe() ) {
+		if(window.self === window.top){
 		if (document.body.firstChild){
 		      document.body.insertBefore(container, document.body.firstChild);
 		      

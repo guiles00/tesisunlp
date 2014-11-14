@@ -287,6 +287,14 @@ localStorageManager = {
 
         return next_key;        
     }
+    ,removeProcedure: function(p){
+
+        var bpm = JSON.parse(localStorage.getItem("BPM"));
+        delete bpm[p];
+        localStorage.setItem("BPM",JSON.stringify(bpm)); 
+
+        return true;
+    }
     ,getPrceduresKeys: function(){
         var bpm = JSON.parse(localStorage.getItem("BPM"));
         var keys = Object.keys(bpm);

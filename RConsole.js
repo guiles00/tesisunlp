@@ -316,14 +316,8 @@ var RConsole = {
 		}; 
 		return shared_button;
 	 }
-
-	 ,createAddProcedureButton: function(){
-	 	var add_procedure = this.createImageButton('+','add_procedure','');
-		
-		add_procedure.onclick = function(){
-			localStorageManager.addProcedure();
-			/**/
-			var el = document.getElementById('procedures_select');
+	 ,refreshProceduresSelect:function(){
+	 	var el = document.getElementById('procedures_select');
 			el.innerHTML = '';
 		var aOptions = localStorageManager.getPrceduresKeys();
 		for (j = 0; j < aOptions.length; j = j + 1) {
@@ -336,13 +330,24 @@ var RConsole = {
 			opt.value = 'P0';
 			opt.innerHTML = 'Add';
 			el.appendChild(opt);
-			/**/
+			/**/	
+	 } 
+	 ,createRemoveProcedureButton: function(){
+	 	var remove_procedure = this.createImageButton('DEL','delete_procedure','');
+		
+		remove_procedure.onclick = function(){
+		
+			if(confirm('Desea eliminar el procedimiento?')){
+			var el = document.getElementById( "procedures_select" );
+			var proc = el.options[ el.selectedIndex ].value;
 
-			alert('Procedure creado');
-		}; 
-		return add_procedure;
-	 }
-	 ,createShowLocalStorageButton: function(){
+				localStorageManager.removeProcedure(proc);
+				RConsole.refreshProceduresSelect();
+				Recorder.refresh();
+			}	
+	 	}
+	 	return remove_procedure;
+	 },createShowLocalStorageButton: function(){
 		var load = document.createElement('input');
 		//load.className = "tesisunlp_button";
 		load.type = "image";
@@ -413,6 +418,14 @@ var RConsole = {
 		  	Recorder.refresh();
 		} , false); 
 
+		sProcedures.addEventListener("change", function(e){ 
+			
+			var option =  e.target.options[e.target.options.selectedIndex].value ;
+			if(option!=='P0') return false;
+			localStorageManager.addProcedure();
+			RConsole.refreshProceduresSelect();
+
+		} , false);
 		return sProcedures;
 	 }
 	 ,createHeaderContainer: function(){
@@ -514,7 +527,7 @@ var RConsole = {
 		var add_container = this.createAddContainer();
 	 	var add_aug_container = this.createAddAugContainer();
 	 	var procedures_select = this.createProceduresSelect();
-	 	var add_proc_button = this.createAddProcedureButton();
+	 	var del_proc_button = this.createRemoveProcedureButton();
 	 	//container_header.appendChild(stopButton);
 	 	container_header.appendChild(recordButton);
 		container_header.appendChild(playButton);
@@ -522,7 +535,7 @@ var RConsole = {
 	 	container_header.appendChild(loadButton);
 	 	container_header.appendChild(addTaksSelect);
 	 	container_header.appendChild(procedures_select);
-	 	container_header.appendChild(add_proc_button);
+	 	container_header.appendChild(del_proc_button);
 	 	container_header.appendChild(pocketButton);
 	 	
 	 	

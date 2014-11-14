@@ -424,7 +424,8 @@ var RConsole = {
 			if(option!=='P0') return false;
 			localStorageManager.addProcedure();
 			RConsole.refreshProceduresSelect();
-
+			/**focus ultimo elemento agregado*/
+			/***/
 		} , false);
 		return sProcedures;
 	 }
@@ -496,7 +497,7 @@ var RConsole = {
 	 	var div_consola = document.getElementById('div_consola');
 		var body   = document.body || document.getElementsByTagName('body')[0];
 		div_consola.style.visibility = "visible";
-		body.style.marginLeft = "200px";
+		body.style.marginLeft = "350px";
 	
 	 }
 	 ,hideConsola: function(){

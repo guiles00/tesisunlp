@@ -116,25 +116,48 @@ function FillInputTask(id,xPath,value,tipo,state,taskTitle){
 FillInputTask.prototype = new PrimitiveTask();
 
 FillInputTask.prototype.execute = function(){
-
+    
+    var that = this;
+/**handlers*/
+var handlers = function(){
+    console.debug('finaliza esta');
+    //console.debug(handlers);
+    that.finalizo(that.id);
+    document.removeEventListener('change',handlers,false);
+    if(node) node.removeEventListener('change',handlers,false);
+       
+}
 //Precondiciones
 //
+    if(this.xPath.getValue() == ''){
+
+
+        document.addEventListener('change',
+                    /*function(){
+                        console.debug(this.callee);
+                        document.removeEventListener('change',this,false);
+                    }*/handlers
+                    ,false);
+        return true;
+    }
     var iterator = document.evaluate(this.xPath.getValue(),document,null,0,null);
     var node = iterator.iterateNext();
     //Auto = 1 , Manual = 0
-    var that = this;
+    
     if(node){
         if(this.tipo.getValue() == 1){
         Manager.highlightElement(node)
         node.value = this.value.getValue();
         this.finalizo(this.id);
         }else{
-            Manager.highlightElement(node)
-            node.addEventListener('change',
-        function(){
-           that.finalizo(that.id);
-        }
-        ,false);
+                Manager.highlightElement(node)
+                node.addEventListener('change',
+                    /*function(){
+                        that.finalizo(that.id);
+                        console.debug(this);
+                        node.removeEventListener('change',this,false);
+                    }*/handlers
+                    ,false);    
         }
     return node;
     }

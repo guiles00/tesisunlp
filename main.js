@@ -48,10 +48,10 @@ localStorage.setItem("SHARED_DATA",JSON.stringify(new Array()));
 }
 //Inicia el Recorder
 Recorder.init();  
-var table = document.getElementById('table_consola');
+/*var table = document.getElementById('table_consola');
 var tableDnD = new TableDnD();
     tableDnD.init(table);
-
+*/
 //console.debug(localStorage.getItem('BPMRECORDING'));
 
 if(localStorage.getItem("BPMRECORDING") == 1){

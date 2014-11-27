@@ -599,9 +599,12 @@ if( arr_ls.length == 0){
 	* @method refresh   
 	*/
 	,refresh: function(){
-
+			//Cada vez que hago un refresh le pongo el drag and drop
+	
 		  var table_consola = document.getElementById("table_consola");
-  
+  			// Nothing to do here ... 
+  			if(table_consola == null) return false;
+  			
             while(table_consola.hasChildNodes())
             {
               table_consola.removeChild(table_consola.firstChild);
@@ -629,6 +632,10 @@ if( arr_ls.length == 0){
        }catch(err){
        	console.log(err);
        }
+    	//Drag and drop
+       	var tableDnD = new TableDnD();
+	    tableDnD.init(table_consola);
+
 
 	}
 	,writer: function(id,text,index){
@@ -636,9 +643,17 @@ if( arr_ls.length == 0){
 		var table_consola = document.getElementById("table_consola");
 
 		//Inserto registro
-		var tr = document.getElementById('table_consola').insertRow(index);
-        tr.id = id;
+		//var tr = document.getElementById('table_consola').insertRow(index);
+        //tr.id = id;
         
+        var tr = document.getElementById('table_consola').insertRow(index);
+        tr.id = id;
+        /** Para cuando sepa drag and drop
+        //var tr = document.createElement('div');
+        //tr.class = "Row";
+        //table_consola.appendChild(tr);
+        */
+
         //tr.setAttribute('class','');
         var task = localStorageManager.getObject(id);
 
@@ -654,7 +669,9 @@ if( arr_ls.length == 0){
 	    var td1 = document.createElement('td');
 	    td1.style.visibility = "hidden";
 	    
-	    var td2 = document.createElement('td');
+	    //var td2 = document.createElement('td');
+	    var td2 = document.createElement('div');
+	    td2.class = "Cell";
 	    /*var td3 = document.createElement('td');
 	    var td4 = document.createElement('td');
 	    var td5 = document.createElement('td');
@@ -669,7 +686,7 @@ if( arr_ls.length == 0){
 	    var delete_button = document.createElement('input');
 		delete_button.type = "button";
 		delete_button.value = "Delete";
-		delete_button.setAttribute('class','tesisunlp_button');
+		delete_button.setAttribute('class','tesisunlp_button_right');
 
 		delete_button.onclick = function(x){ 
 
@@ -684,7 +701,7 @@ if( arr_ls.length == 0){
 		var edit_button = document.createElement('input');
 		edit_button.type = "button";
 		edit_button.value = "Edit";
-		edit_button.setAttribute('class','tesisunlp_button');
+		edit_button.setAttribute('class','tesisunlp_button_right');
 		edit_button.onclick = function(){
 		Recorder.editRow(this);
 		};
@@ -692,7 +709,7 @@ if( arr_ls.length == 0){
 	var state_button = document.createElement('input');
 		state_button.type = "button";
 		state_button.value = "State";
-		state_button.setAttribute('class','tesisunlp_button');
+		state_button.setAttribute('class','tesisunlp_button_right');
 		state_button.onclick = function(){
 		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
 		task.state.value = 0;
@@ -704,7 +721,8 @@ if( arr_ls.length == 0){
 	var play_button = document.createElement('input');
 		play_button.type = "button";
 		play_button.value = ">";
-		play_button.setAttribute('class','tesisunlp_button');
+		play_button.setAttribute('class','tesisunlp_button_right');
+		//play_button.setAttribute('class','tesisunlp_button');
 		play_button.onclick = function(){
 		
 		//alert('Empieza desde aca'+this.parentNode.parentNode.id);
@@ -720,10 +738,11 @@ if( arr_ls.length == 0){
 		var br = document.createElement('br');
 		td1.appendChild(id_text);
 		td2.appendChild(text1);
-		td2.appendChild(edit_button);
-		td2.appendChild(delete_button);
-		td2.appendChild(state_button);
 		td2.appendChild(play_button);
+		td2.appendChild(state_button);
+		td2.appendChild(delete_button);
+		td2.appendChild(edit_button);
+		
 		td2.appendChild(br);
 		td2.appendChild(spTask);
 		

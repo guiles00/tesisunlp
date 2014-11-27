@@ -100,8 +100,8 @@ function TableDnD() {
     /** This function is called when you drop a row, so redefine it in your code
         to do whatever you want, for example use Ajax to update the server */
     this.onDrop = function(table, droppedRow) {
-        // Do nothing for now
         localStorageManager.actualizarOrden(table);
+        Recorder.refresh();
     }
 
 	/** Get the position of an element by going up the DOM tree and adding up all the offsets */

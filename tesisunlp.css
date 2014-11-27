@@ -9,7 +9,18 @@
 	padding: 5px 7px 6px; 
 	text-transform: uppercase;vertical-align: bottom;
 } 
-
+.tesisunlp_button_right{
+	float:right;
+	cursor: hand ;
+	background-color: #A2AFA0 ;
+	border:1px solid ;
+	border-color: grey ; 
+	color: black ; 
+	font-family: Helvetica, Arial; 
+	font-size: 9px; font-weight: 400; 
+	padding: 5px 7px 6px; 
+	text-transform: uppercase;vertical-align: bottom;
+}
 .cssClass{ outline: 0.25em solid #FFFF00;} 
 
 .tesisunlp_td { 
@@ -20,6 +31,7 @@
 	min-width:323px ;
 	font-family: Helvetica,Arial; 
 	font-size: 11px;
+	width: auto;
 } 
 
 .tesisunlp_div_consola {
@@ -27,7 +39,7 @@
 	z-index: 300;
 	position:fixed;
 	left: 0px;
-	width:auto;
+	width: 350px;
 	height: 100%;
 	border:solid 1px #e1e1e1;
 	vertical-align: middle;

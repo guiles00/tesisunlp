@@ -451,14 +451,18 @@ var RConsole = {
 	 	////console.debug('9. Crea el div consola table');
 		var div_table_consola = document.createElement("div");
 		div_table_consola.id =  "div_table_consola";
+		//div_table_consola.class = "Table";
 		return div_table_consola;
 	 }
-	 ,createTable: function(){
+	 ,createTable: function(){ //Creo con divs
 		////console.debug('10. Crea la tabla contenedora de la consola');
 		var table_consola = document.createElement("table")
+		//var table_consola = document.createElement("div") --> Para cuando sepa lo del drag and drop
+		
 		table_consola.id = "table_consola"
 		//table_consola.style.cssText = "min-width:auto;font-family: Helvetica,Arial; font-size: 16px";
-		table_consola.setAttribute('class','tesisunlp_table_consola');
+		//table_consola.setAttribute('class','tesisunlp_table_consola');
+		table_consola.class = "Table";
 		return table_consola;
 	 }
 	 ,createShowHide: function(){
@@ -497,7 +501,7 @@ var RConsole = {
 	 	var div_consola = document.getElementById('div_consola');
 		var body   = document.body || document.getElementsByTagName('body')[0];
 		div_consola.style.visibility = "visible";
-		body.style.marginLeft = "350px";
+		body.style.marginLeft = "355px";
 	
 	 }
 	 ,hideConsola: function(){

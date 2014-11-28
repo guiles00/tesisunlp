@@ -405,6 +405,9 @@ function handleSelectxPath(){
 	,clickRecord: function(){
     var start_record = document.getElementById('start_record');
 	if(start_record.value == "Record"){
+		/**/
+		console.log('comienza a grabar');
+		Manager.addUrlTask();
 		start_record.value = "Stop";
 		//start_record.src = 'stop.png';
 		start_record.src = 'http://s30.postimg.org/wd91sajn1/stop.png';
@@ -476,6 +479,7 @@ if( arr_ls.length == 0){
   		var i; //Recorro el array de tareas
         for (i=0;i < arr_ls.length ;i++){
 			
+
 			//Hardcodeo para ver si funciona, creo que tengo que modificar la manera en que se instancian las tareas
 
         	if(arr_ls[i].type == 'LinkATask'){
@@ -513,8 +517,9 @@ if( arr_ls.length == 0){
             }            
 
         	try{
+        		//Esto para ver si funciona ok, despues lo saco.
+            Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);	
             
-            Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);
         	}catch(err){
             	console.log(err);
             }
@@ -669,9 +674,9 @@ if( arr_ls.length == 0){
 	    var td1 = document.createElement('td');
 	    td1.style.visibility = "hidden";
 	    
-	    //var td2 = document.createElement('td');
-	    var td2 = document.createElement('div');
-	    td2.class = "Cell";
+	    var td2 = document.createElement('td');
+	    //var td2 = document.createElement('div');
+	    //td2.class = "Cell";
 	    /*var td3 = document.createElement('td');
 	    var td4 = document.createElement('td');
 	    var td5 = document.createElement('td');

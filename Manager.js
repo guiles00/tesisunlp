@@ -44,6 +44,12 @@ var Manager = (function () {
          currentPrimitiveTasks.push(aPrimitiveTask);
         }
         /**
+        * @method createUrlTask
+        */
+        function createUrlTask(aId,xPath,value,aMsg,aTipo,aState){
+        return new UrlTask(aId,xPath,value,aMsg,aTipo,aState);
+        }
+        /**
         * @method createFillInputTask
         */
         function createFillInputTask(aId,xPath,value,aMsg,aTipo,aState,aTaskTitle){
@@ -183,7 +189,9 @@ var Manager = (function () {
 	    	, TextAreaTask: createTextAreaTask(aId,xPath,value,tipo,state)
 	    	, CheckBoxTask: createCheckBoxTask(aId,xPath,value,tipo,state)
             , ClickLinkTask: createClickLinkTask(aId,xPath,value,tipo,state)
-            , ClickInputTask: createClickInputTask(aId,xPath,value,tipo,state) } 
+            , ClickInputTask: createClickInputTask(aId,xPath,value,tipo,state) 
+            , UrlTask: createUrlTask(aId,xPath,value,tipo,state) 
+            } 
 	    	, def = null ;
 
 	    	lookup[aPrimitiveTaskType] ? subscribe(lookup[aPrimitiveTaskType]) : def();
@@ -338,6 +346,35 @@ var Manager = (function () {
              //Si esta ejecutando 
              //Este metodo es para inicializar el Manager y para que contemple todos los escenarios
             
+            }
+            ,addUrlTask: function(){
+
+
+                var location = document.location.href;
+                
+                var el_id = event.target.id;
+                var el_value = event.target.value;
+                var o_task;
+
+                var tipo = Object.create(TipoAttribute);
+                    tipo._type = TipoAttribute._type;
+                    tipo.setValue(1);
+
+                var state = Object.create(StateAttribute);
+                    state._type = StateAttribute._type;
+                    state.setValue(0);
+                var xPath = Object.create(XPathAttribute);
+                    xPath._type = XPathAttribute._type;
+                    xPath.setValue('sxPath');
+                var objValue = Object.create(SValueAttribute);
+                    objValue._type = SValueAttribute._type;     
+                    objValue.setValue(location);
+
+                o_task = new UrlTask(10,xPath,objValue,tipo,state);
+                o_task.setLocation(location);
+                localStorageManager.insert(o_task.toJson());
+                Recorder.refresh();
+
             }
         };
 }());

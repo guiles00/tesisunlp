@@ -451,6 +451,7 @@ var RConsole = {
 	 	////console.debug('9. Crea el div consola table');
 		var div_table_consola = document.createElement("div");
 		div_table_consola.id =  "div_table_consola";
+		div_table_consola.setAttribute('class','aParent');
 		//div_table_consola.class = "Table";
 		return div_table_consola;
 	 }

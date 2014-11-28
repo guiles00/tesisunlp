@@ -827,3 +827,92 @@ LinkATask.prototype.execute = function(){
 
 }
 */
+
+
+
+//Tarea que no tiene interaccion con el usuario
+
+
+function UrlTask(id,xPath,value,tipo,state,taskTitle){
+    PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
+    this.msg = "Init ";
+    this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Init '})
+    this.type = "UrlTask";
+    this.state = state;
+    this.location = '';
+}
+UrlTask.prototype = new PrimitiveTask();
+
+UrlTask.prototype.execute = function(){
+    //alert(this.value.getValue());
+
+    //var url = this.location;
+    window.location.href = this.value.getValue(); //Usa this.value.getValue() para guardar la ubicacion 
+    this.finalizo(this.id);
+
+}
+UrlTask.prototype.setLocation = function(url){
+    this.location = url;
+}
+UrlTask.init = function(c){
+  return new UrlTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
+};
+
+/**
+* @method htmlToJson
+*/
+UrlTask.prototype.htmlToJson = function(el_div){
+// Nothing to do here... 
+return false;
+        var str_taskTitle = document.getElementById('task_title_id').value;
+        var str_xPath = document.getElementById('xpath_id').value;
+        var str_value = document.getElementById('value_id').value;
+        var str_state = document.getElementById('state_id').value;
+        var str_tipo = document.getElementById('tipo_id').value;
+
+
+        function isJson(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+        }    
+
+        //Se que un FillInputTask tiene los campos xPath y value
+        var xPath = Object.create(XPathAttribute);
+        xPath.value = str_xPath;
+
+        if(isJson(str_value)) var temp = JSON.parse(str_value);
+       
+        //@comment Si el str_value es un string u objeto instancio distinto valor
+        if(typeof temp === 'object'){
+        var oValue = Object.create(CValueAttribute);
+        oValue._type = CValueAttribute._type;
+        oValue.value = str_value;
+        
+        }else{
+        var oValue = Object.create(SValueAttribute);
+        oValue._type = SValueAttribute._type;
+        oValue.value = str_value;
+        }
+       
+        var oState = Object.create(StateAttribute);
+        oState._type = StateAttribute._type;
+        oState.value = str_state;
+        
+
+        var oTipo = Object.create(TipoAttribute);
+        oTipo._type = TipoAttribute._type;
+        oTipo.value = str_tipo;
+
+        var oTaskTitle = Object.create(TaskTitleAttribute);
+        oTaskTitle._type = TaskTitleAttribute._type;
+        oTaskTitle.value = str_taskTitle ;
+        
+        var o_task = new FillInputTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
+        //o_task.taskTitle = oTaskTitle; //Lo hago por ahora, hay que hacer
+    
+    return o_task.toJson();
+}

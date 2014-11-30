@@ -352,8 +352,8 @@ var Manager = (function () {
 
                 var location = document.location.href;
                 
-                var el_id = event.target.id;
-                var el_value = event.target.value;
+                //var el_id = event.target.id;
+                //var el_value = event.target.value;
                 var o_task;
 
                 var tipo = Object.create(TipoAttribute);

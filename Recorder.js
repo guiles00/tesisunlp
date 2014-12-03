@@ -321,7 +321,29 @@ function handleSelectxPath(){
 	b.onclick = function(){
     
     localStorageManager.setObjectR(iTask.htmlToJson(document.getElementById("div_inflate")));
-    
+  	//Trae el dato a guardar
+  	  function isJson(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+        } 
+        
+  	var str_value = document.getElementById('value_id').value;
+  	if(isJson(str_value)) var temp = JSON.parse(str_value);
+
+  	if(typeof temp === 'object'){
+        var oValue = Object.create(CValueAttribute);
+        oValue._type = CValueAttribute._type;
+        oValue.value = str_value;
+        
+        }else{
+        var oValue = Object.create(SValueAttribute);
+        oValue._type = SValueAttribute._type;
+        oValue.value = str_value;
+     }
   	/**En el caso de que sea un DataCollector tiene que editar otra tarea
   	*/
   	if(typeof task.destData !== 'undefined'){
@@ -331,11 +353,14 @@ function handleSelectxPath(){
   	var dest_id = document.getElementById('tsgc_dest_data_id').value;
   	var otask_dest = localStorageManager.getObject(dest_id) ;
 	    console.debug(otask_dest);
-	    if( otask_dest === false) return false;
+	    if( otask_dest === false) throw "no encontro tarea";
 	     //Si trae algo que guarde
-	    	otask_dest.value.value = iTask.value.getValue() ;
+	    	otask_dest.value = oValue ;
 	  		localStorageManager.setObjectR( JSON.stringify(otask_dest) );	
-	    
+			//Recorder.refresh();	    
+  	}else{
+  		console.debug('entro al else');
+  		
   	}
   	/*
   	**/

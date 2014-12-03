@@ -633,7 +633,11 @@ this.value = value;
 this.state = state;
 this.id = id;
 this.msg = "Augmentation"
+this.type = "PrimitiveTask"
+this.precondition = {};
+this.taskTitle = taskTitle;
 }
+
 AugmentedTask.prototype.finalizo = function(id){
 
     var bpm = localStorage.getItem("BPM");
@@ -832,7 +836,6 @@ LinkATask.prototype.execute = function(){
 
 //Tarea que no tiene interaccion con el usuario
 
-
 function UrlTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
     this.msg = "Init ";
@@ -916,3 +919,106 @@ return false;
     
     return o_task.toJson();
 }
+
+
+function DataCollectionTask(id,xPath,value,tipo,state,taskTitle,destData){
+    PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
+    this.msg = "Init ";
+    this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Data Collection '})
+    this.type = "DataCollectionTask";
+    this.state = state;
+    this.location = '';
+    this.destData = destData || Object.create(DestDataAttribute).init({'value':''}); //No se instancia en el constructor, lo hago desde el init
+}
+//Lo pongo como primitiva, por ahora es igual
+DataCollectionTask.prototype = new PrimitiveTask();
+
+DataCollectionTask.prototype.execute = function(){
+    console.log('nothing...yet')
+    this.finalizo(this.id);
+
+}
+DataCollectionTask.prototype.setLocation = function(url){
+    this.location = url;
+}
+DataCollectionTask.init = function(c){
+  return new DataCollectionTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle,c.destData);
+};
+
+/**
+* @method htmlToJson
+*/
+DataCollectionTask.prototype.htmlToJson = function(el_div){
+
+        var str_taskTitle = document.getElementById('task_title_id').value;
+        var str_xPath = document.getElementById('xpath_id').value;
+        var str_value = document.getElementById('value_id').value;
+        var str_state = document.getElementById('state_id').value;
+        var str_tipo = document.getElementById('tipo_id').value;
+        var str_destData = document.getElementById('tsgc_dest_data_id').value;
+
+        function isJson(str) {
+        try {
+            JSON.parse(str);
+        } catch (e) {
+            return false;
+        }
+        return true;
+        }    
+
+        //Se que un FillInputTask tiene los campos xPath y value
+        var xPath = Object.create(XPathAttribute);
+        xPath.value = str_xPath;
+
+        if(isJson(str_value)) var temp = JSON.parse(str_value);
+       
+        //@comment Si el str_value es un string u objeto instancio distinto valor
+        if(typeof temp === 'object'){
+        var oValue = Object.create(CValueAttribute);
+        oValue._type = CValueAttribute._type;
+        oValue.value = str_value;
+        
+        }else{
+        var oValue = Object.create(SValueAttribute);
+        oValue._type = SValueAttribute._type;
+        oValue.value = str_value;
+        }
+       
+        var oState = Object.create(StateAttribute);
+        oState._type = StateAttribute._type;
+        oState.value = str_state;
+        
+
+        var oTipo = Object.create(TipoAttribute);
+        oTipo._type = TipoAttribute._type;
+        oTipo.value = str_tipo;
+
+        var oTaskTitle = Object.create(TaskTitleAttribute);
+        oTaskTitle._type = TaskTitleAttribute._type;
+        oTaskTitle.value = str_taskTitle ;
+        
+
+        var oDestData = Object.create(DestDataAttribute);
+        oDestData._type = DestDataAttribute._type;
+        oDestData.value = str_destData ;
+        
+        var o_task = new DataCollectionTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle,oDestData);
+        
+    return o_task.toJson();
+}
+
+DataCollectionTask.prototype.toHtml = function(properties){
+
+    var array_elementos = new Array();
+ 
+    array_elementos.push(this.taskTitle.getHtmlElement());
+    array_elementos.push(this.xPath.getHtmlElement());
+    array_elementos.push(this.value.getHtmlElement());
+    array_elementos.push(this.destData.getHtmlElement());
+    array_elementos.push(this.state.getHtmlElement());
+    array_elementos.push(this.tipo.getHtmlElement());
+
+    return array_elementos;
+}
+
+

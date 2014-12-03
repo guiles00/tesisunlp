@@ -62,7 +62,8 @@ if(localStorage.getItem("BPMRECORDING") == 1){
 	sel_proc.value = proc;
 	Recorder.refresh();
 	RConsole.showConsola();
-	document.getElementById('start_record').click();   
+	//document.getElementById('start_record').click();   
+	Recorder.clickRecord();
 }
 //Si esta ejecutando tendria que tener el procedimiento
 if(localStorage.getItem("BPMEXECUTION") == 1){
@@ -71,7 +72,8 @@ if(localStorage.getItem("BPMEXECUTION") == 1){
 	sel_proc.value = proc;
 	Recorder.refresh();
 	RConsole.showConsola();
-	document.getElementById('play_procedure').click(); 
+	//document.getElementById('play_procedure').click(); 
+	Recorder.clickPlay();
 }
      
 };	

@@ -279,13 +279,25 @@ function handleSelectxPath(){
 	
     var task = localStorageManager.getObject(x.parentNode.parentNode.id); //@comment Podría traer el objeto instanciado
  	var aTask = eval(task.type);
- 	var iTask = aTask.init({'id':task.id,'xpath':Object.create(XPathAttribute).init({'value':task.xPath.value})
+ 	//*Hasta que le encuntre la solucion diferencio las tareas**/
+	if(typeof task.destData == 'undefined'){
+			var iTask = aTask.init({'id':task.id,'xpath':Object.create(XPathAttribute).init({'value':task.xPath.value})
  		,'value':Object.create(SValueAttribute).init({'value':task.value.value})
  		,'tipo':Object.create(TipoAttribute).init({'value':task.tipo.value})
  		,'state':Object.create(StateAttribute).init({'value':(task.state.value).toString()})
  		,'taskTitle':Object.create(TaskTitleAttribute).init({'value':task.taskTitle.value})
+ 	});	
+	}else{
+		var iTask = aTask.init({'id':task.id,'xpath':Object.create(XPathAttribute).init({'value':task.xPath.value})
+ 		,'value':Object.create(SValueAttribute).init({'value':task.value.value})
+ 		,'tipo':Object.create(TipoAttribute).init({'value':task.tipo.value})
+ 		,'state':Object.create(StateAttribute).init({'value':(task.state.value).toString()})
+ 		,'taskTitle':Object.create(TaskTitleAttribute).init({'value':task.taskTitle.value})
+ 		,'destData':Object.create(DestDataAttribute).init({'value':task.destData.value})
  	});
+	}
  	
+ 	//console.debug(Object.create(DestDataAttribute).init({'value':task.destData.value}));
 	// 	var pre = Object.create(Precondition).init(Object.create(UrlAttribute).init({'value':task.precondition.url.value}));	
 	//	iTask.setPrecondition(pre);
 	var y = iTask.toHtml();
@@ -307,11 +319,29 @@ function handleSelectxPath(){
 	//El comportamiento de los botones todavia no se bien como desacoplarlo
 	var b = document.getElementById('id_edit_task');
 	b.onclick = function(){
-    //console.debug(iTask.htmlToJson(document.getElementById("div_inflate")));
-	localStorageManager.setObjectR(iTask.htmlToJson(document.getElementById("div_inflate")));
+    
+    localStorageManager.setObjectR(iTask.htmlToJson(document.getElementById("div_inflate")));
+    
+  	/**En el caso de que sea un DataCollector tiene que editar otra tarea
+  	*/
+  	if(typeof task.destData !== 'undefined'){
+	//console.debug(iTask);
+  	//1. Traigo Tarea
+  	//Lo traigo del HTML
+  	var dest_id = document.getElementById('tsgc_dest_data_id').value;
+  	var otask_dest = localStorageManager.getObject(dest_id) ;
+	    console.debug(otask_dest);
+	    if( otask_dest === false) return false;
+	     //Si trae algo que guarde
+	    	otask_dest.value.value = iTask.value.getValue() ;
+	  		localStorageManager.setObjectR( JSON.stringify(otask_dest) );	
+	    
+  	}
+  	/*
+  	**/
     el = document.getElementById("div_editor_container");
     el.style.visibility = "hidden";
-  	
+
   	Recorder.refresh();
 
 	}; 
@@ -321,6 +351,7 @@ function handleSelectxPath(){
 	,formatearTextoPocket: function(texto){
 		
 		var table = document.createElement("table"); 
+		var tbody = document.createElement("tbody");
 		var i;
 		for (i = 0; i < texto.length -1; i = i + 1) {
 		//-----------------------------Boton Seleccionar Valor
@@ -358,7 +389,8 @@ function handleSelectxPath(){
 			tr.appendChild(td_data);
 			tr.appendChild(b);
 		
-			table.appendChild(tr);	
+			tbody.appendChild(tr);
+			table.appendChild(tbody);	
 			
 		};
 		return table;
@@ -398,6 +430,7 @@ function handleSelectxPath(){
 		body.appendChild(div_show_pocket);  
 
 	}
+
 	/**  
 	* Dispara el handler de record
 	* @method clickRecord   
@@ -666,7 +699,7 @@ if( arr_ls.length == 0){
 
         if(task.state.value == 1 )  tr.style.backgroundColor='green';
         //Hardcodeado!!!!
-	    var pTask = document.createTextNode('Primitive Task');
+	    var pTask = document.createTextNode(text + 'Task - id:'+tr.id);
 	    var spTask = document.createElement('span');
 	    spTask.setAttribute('style', 'font-size: 10px'); 
 	    spTask.appendChild(pTask);

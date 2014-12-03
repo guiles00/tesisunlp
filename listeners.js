@@ -49,6 +49,10 @@ var  handlerPocketEvent = function(e) {
 				
 				if(concept){
 					localStorageManager.saveSharedData(concept,selection.toString());
+					//Agrego DataCollectionTask
+					console.log('Add:'+selection.toString());
+					
+					Manager.addDataCollectionTask(selection.toString());
 					selection = '';
 				}		
 			} 

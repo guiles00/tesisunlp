@@ -134,7 +134,8 @@ localStorageManager = {
     
     //@TODO: Que onda este if? 
     if(o.type == 'FillInputTask' || o.type == 'TextAreaTask' || o.type == 'SelectOptionTask' 
-        || o.type == 'ClickLinkTask' || o.type == 'ClickInputTask' || o.type == 'UrlTask'){
+        || o.type == 'ClickLinkTask' || o.type == 'ClickInputTask' 
+        || o.type == 'UrlTask' || o.type == 'DataCollectionTask'){
     
     var ls = localStorage.getItem("BPM");
     var o_ls = JSON.parse(ls);

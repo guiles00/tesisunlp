@@ -43,6 +43,10 @@ var Manager = (function () {
         function subscribe(aPrimitiveTask){ //Este metodo por ahora solo agrega el objeto 
          currentPrimitiveTasks.push(aPrimitiveTask);
         }
+        
+        function createDataCollectionTask(aId,xPath,value,aMsg,aTipo,aState){
+        return new DataCollectionTask(aId,xPath,value,aMsg,aTipo,aState);
+        }
         /**
         * @method createUrlTask
         */
@@ -191,6 +195,7 @@ var Manager = (function () {
             , ClickLinkTask: createClickLinkTask(aId,xPath,value,tipo,state)
             , ClickInputTask: createClickInputTask(aId,xPath,value,tipo,state) 
             , UrlTask: createUrlTask(aId,xPath,value,tipo,state) 
+            , DataCollectionTask: createDataCollectionTask(aId,xPath,value,tipo,state)             
             } 
 	    	, def = null ;
 
@@ -371,6 +376,36 @@ var Manager = (function () {
                     objValue.setValue(location);
 
                 o_task = new UrlTask(10,xPath,objValue,tipo,state);
+                o_task.setLocation(location);
+                localStorageManager.insert(o_task.toJson());
+                Recorder.refresh();
+
+            }
+            ,addDataCollectionTask: function(data){
+
+
+                //var el_id = event.target.id;
+                //var el_value = event.target.value;
+                var o_task;
+
+                var tipo = Object.create(TipoAttribute);
+                    tipo._type = TipoAttribute._type;
+                    tipo.setValue(1);
+                var state = Object.create(StateAttribute);
+                    state._type = StateAttribute._type;
+                    state.setValue(0);
+                var xPath = Object.create(XPathAttribute);
+                    xPath._type = XPathAttribute._type;
+                    xPath.setValue('sxPath');
+                var objValue = Object.create(SValueAttribute);
+                    objValue._type = SValueAttribute._type;     
+                    objValue.setValue(data);
+
+                var destData = Object.create(DestDataAttribute);
+                    destData._type = DestDataAttribute._type;     
+                    destData.setValue('');
+                        
+                o_task = new DataCollectionTask(10,xPath,objValue,tipo,state,null,destData);
                 o_task.setLocation(location);
                 localStorageManager.insert(o_task.toJson());
                 Recorder.refresh();

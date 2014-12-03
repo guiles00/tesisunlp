@@ -56,6 +56,26 @@ var TaskTitleAttribute = {
 }
 
 
+var DestDataAttribute = {
+     _type:'DestDataAttribute'
+    ,init: function(c){
+        this.value = c.value || '' ;
+        this.htmlId = c.htmlId || 'tsgc_dest_data_id'; 
+        this.label = c.label || 'Dest.';
+        return this;
+    }
+    ,getHtmlElement: function(){
+        var input_element = Object.create(inputElement);
+        input_element.label = this.getLabel();
+        input_element.value = this.getValue();
+        input_element.id =   this.getHtmlId();
+            
+       return input_element;
+    }
+    , __proto__ : Attribute
+}
+
+
 var XPathAttribute = {
      _type:'XPathAttribute'
     ,init: function(c){

@@ -5,10 +5,49 @@
 
 
 var Recorder = {
+    saveDestData: function(){
+
+		    	//Trae el dato a guardar
+		  	function isJson(str) {
+	        try {
+	            JSON.parse(str);
+	        } catch (e) {
+	            return false;
+	        }
+	        return true;
+	        } 
+	        
+		  	var str_value = document.getElementById('value_id').value;
+		  	if(isJson(str_value)) var temp = JSON.parse(str_value);
+
+		  	if(typeof temp === 'object'){
+		        var oValue = Object.create(CValueAttribute);
+		        oValue._type = CValueAttribute._type;
+		        oValue.value = str_value;
+		        
+		        }else{
+		        var oValue = Object.create(SValueAttribute);
+		        oValue._type = SValueAttribute._type;
+		        oValue.value = str_value;
+		     }
+		  	/**En el caso de que sea un DataCollector tiene que editar otra tarea
+		  	*/
+		  	//1. Traigo Tarea desde el HTML
+		  	var dest_id = document.getElementById('tsgc_dest_data_id').value;
+		  	var otask_dest = localStorageManager.getObject(dest_id) ;
+			//console.debug(otask_dest);
+			if( otask_dest === false) throw "no encontro tarea";
+			//Si trae algo que guarde
+			otask_dest.value = oValue ;
+			localStorageManager.setObjectR( JSON.stringify(otask_dest) );	
+    	
+    		return true;
+    }
+    
     /**
      * @method createButton
      */
-	createButton: function(aValue,anId,attributes){
+	,createButton: function(aValue,anId,attributes){
 
 	var aButton = document.createElement("input");	
     aButton.setAttribute('type','button');
@@ -26,7 +65,16 @@ var Recorder = {
 	* @method addPrimitiveTask    
 	*/
 	,addPrimitiveTask: function(event) {
+		var id_selected = event.target.options[event.target.options.selectedIndex].value;
 		
+		if(id_selected == 1){ //Si es DataCollectorTask
+		Manager.addDataCollectionTask('empty');		
+		return true;	
+		}
+
+
+		return false;
+		//Este codigo no se si funciona
 		var id_selected = event.target.options[event.target.options.selectedIndex].value;
 		if(id_selected == 2){
 		Recorder.addAugmentedTask();
@@ -321,53 +369,14 @@ function handleSelectxPath(){
 	b.onclick = function(){
     
     localStorageManager.setObjectR(iTask.htmlToJson(document.getElementById("div_inflate")));
-  	//Trae el dato a guardar
-  	  function isJson(str) {
-        try {
-            JSON.parse(str);
-        } catch (e) {
-            return false;
-        }
-        return true;
-        } 
-        
-  	var str_value = document.getElementById('value_id').value;
-  	if(isJson(str_value)) var temp = JSON.parse(str_value);
 
-  	if(typeof temp === 'object'){
-        var oValue = Object.create(CValueAttribute);
-        oValue._type = CValueAttribute._type;
-        oValue.value = str_value;
-        
-        }else{
-        var oValue = Object.create(SValueAttribute);
-        oValue._type = SValueAttribute._type;
-        oValue.value = str_value;
-     }
-  	/**En el caso de que sea un DataCollector tiene que editar otra tarea
-  	*/
-  	if(typeof task.destData !== 'undefined'){
-	//console.debug(iTask);
-  	//1. Traigo Tarea
-  	//Lo traigo del HTML
-  	var dest_id = document.getElementById('tsgc_dest_data_id').value;
-  	var otask_dest = localStorageManager.getObject(dest_id) ;
-	    console.debug(otask_dest);
-	    if( otask_dest === false) throw "no encontro tarea";
-	     //Si trae algo que guarde
-	    	otask_dest.value = oValue ;
-	  		localStorageManager.setObjectR( JSON.stringify(otask_dest) );	
-			//Recorder.refresh();	    
-  	}else{
-  		console.debug('entro al else');
-  		
-  	}
-  	/*
-  	**/
-    el = document.getElementById("div_editor_container");
+  	el = document.getElementById("div_editor_container");
     el.style.visibility = "hidden";
-
-  	Recorder.refresh();
+    //Si es DataCollectorTask
+    if(typeof task.destData !== 'undefined'){
+  	Recorder.saveDestData();
+  	}
+    Recorder.refresh();
 
 	}; 
 

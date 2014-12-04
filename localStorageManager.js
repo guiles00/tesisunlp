@@ -102,8 +102,8 @@ localStorageManager = {
     * @params: json_tasks (un objeto JSON)
     */
     ,setObjectR: function(json_task){
-        console.log('guarda este objeto');
-        console.debug(json_task);
+       // console.log('guarda este objeto');
+       // console.debug(json_task);
         var procedure = document.getElementById('procedures_select').value;
 
         var o = JSON.parse(json_task);

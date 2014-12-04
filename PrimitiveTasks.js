@@ -934,9 +934,35 @@ function DataCollectionTask(id,xPath,value,tipo,state,taskTitle,destData){
 DataCollectionTask.prototype = new PrimitiveTask();
 
 DataCollectionTask.prototype.execute = function(){
-    console.log('nothing...yet')
-    this.finalizo(this.id);
+    
+    var that = this;
+    function handler(){
+        
+        var o = localStorageManager.getObject(that.id);
+        var otask_dest = localStorageManager.getObject(o.destData.value); 
+        
 
+        if (window.getSelection) {
+            selection = window.getSelection();
+            console.debug('en getSelection');
+            } else if (document.selection) {
+            selection = document.selection.createRange();
+            console.debug('en createRange');
+        }
+        
+        otask_dest.value.value = selection.toString();
+        localStorageManager.setObjectR(JSON.stringify(otask_dest));
+
+        that.finalizo(that.id);
+        document.removeEventListener('mouseup',handler,false);
+    
+     }
+    
+    if(this.tipo.getValue() == 1){
+        this.finalizo(this.id);
+        }else{
+        document.addEventListener("mouseup", handler, false);
+        }
 }
 DataCollectionTask.prototype.setLocation = function(url){
     this.location = url;

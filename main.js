@@ -34,17 +34,16 @@ var esta = localStorage.getItem("BPMP");
 //console.debug(localStorage.getItem('BPMPROC'));
 //localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
 
+//var o = 
+	
 if(!esta){
 localStorage.setItem("BPMP",1);    
 localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );
-
-//localStorage.setItem("BPM",JSON.stringify(new Array()));
-//localStorage.setItem("BPM",JSON.stringify(new Object()));
-
 localStorage.setItem("BPMRECORDING",0);
 localStorage.setItem("BPMEXECUTION",0);
 localStorage.setItem("BPMPROC",'P1');
-localStorage.setItem("SHARED_DATA",JSON.stringify(new Array()));
+//localStorage.setItem("SHARED_DATA",JSON.stringify(new Array()));
+localStorage.setItem('SHARED_DATA',JSON.stringify(new Object()));
 }
 //Inicia el Recorder
 Recorder.init();  

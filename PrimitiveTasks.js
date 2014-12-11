@@ -178,7 +178,7 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         var str_state = document.getElementById('state_id').value;
         var str_tipo = document.getElementById('tipo_id').value;
 
-
+/*
         function isJson(str) {
         try {
             JSON.parse(str);
@@ -186,16 +186,17 @@ FillInputTask.prototype.htmlToJson = function(el_div){
             return false;
         }
         return true;
-        }    
+        }    */
 
         //Se que un FillInputTask tiene los campos xPath y value
         var xPath = Object.create(XPathAttribute);
         xPath.value = str_xPath;
 
-        if(isJson(str_value)) var temp = JSON.parse(str_value);
+        //Si es un concepto guarda un CAttribute 
+        //Por ahora pregunto si el primer caracter es [
        
         //@comment Si el str_value es un string u objeto instancio distinto valor
-        if(typeof temp === 'object'){
+        if( str_value.charAt(0) == '[' ){
         var oValue = Object.create(CValueAttribute);
         oValue._type = CValueAttribute._type;
         oValue.value = str_value;
@@ -937,11 +938,7 @@ DataCollectionTask.prototype.execute = function(){
     
     var that = this;
     function handler(){
-        
-        var o = localStorageManager.getObject(that.id);
-        var otask_dest = localStorageManager.getObject(o.destData.value); 
-        
-
+           
         if (window.getSelection) {
             selection = window.getSelection();
             console.debug('en getSelection');
@@ -950,8 +947,10 @@ DataCollectionTask.prototype.execute = function(){
             console.debug('en createRange');
         }
         
-        otask_dest.value.value = selection.toString();
-        localStorageManager.setObjectR(JSON.stringify(otask_dest));
+        //Traigo el texto seleccionado 
+        var concept = that.value.value.substring(1,that.value.value.length -1);
+        var object = {'value':selection.toString()};
+        localStorageManager.saveSharedData(concept,object);
 
         that.finalizo(that.id);
         document.removeEventListener('mouseup',handler,false);
@@ -961,6 +960,7 @@ DataCollectionTask.prototype.execute = function(){
     if(this.tipo.getValue() == 1){
         this.finalizo(this.id);
         }else{
+            //alert('selecciona texto');
         document.addEventListener("mouseup", handler, false);
         }
 }

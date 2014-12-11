@@ -182,15 +182,9 @@ var CValueAttribute = {
         return this;
     }
     ,getValue: function(){
-        console.debug('trae valor mas complejo');
-        //el valor es un JSON
-        var t = JSON.parse(this.value);
-        console.debug(t.index);
-        console.debug('imprimio el index');
-        var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
-        console.debug(array_area[t.index]);
-        return array_area[t.index].data;
-        //return this.value;
+    var concept = this.value.substring(1,this.value.length -1);
+        
+    return localStorageManager.getConceptValue(concept);
     }
     ,getHtmlElement: function(){
         var input_element = Object.create(inputElement);

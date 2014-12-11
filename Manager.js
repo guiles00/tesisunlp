@@ -399,13 +399,9 @@ var Manager = (function () {
                     xPath.setValue('sxPath');
                 var objValue = Object.create(CValueAttribute);
                     objValue._type = SValueAttribute._type;     
-                    objValue.setValue(concept+'=>'+data);
-
-                /*var destData = Object.create(DestDataAttribute); //Esto no va
-                    destData._type = DestDataAttribute._type;     
-                    destData.setValue('');
-                */        
-                o_task = new DataCollectionTask(10,xPath,objValue,tipo,state,null/*,destData*/);
+                    objValue.setValue('['+concept+']');
+   
+                o_task = new DataCollectionTask(10,xPath,objValue,tipo,state,null);
                 o_task.setLocation(location);
                 localStorageManager.insert(o_task.toJson());
                 Recorder.refresh();

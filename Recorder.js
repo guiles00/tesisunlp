@@ -328,24 +328,14 @@ function handleSelectxPath(){
     var task = localStorageManager.getObject(x.parentNode.parentNode.id); //@comment Podría traer el objeto instanciado
  	var aTask = eval(task.type);
  	//*Hasta que le encuntre la solucion diferencio las tareas**/
-	if(typeof task.destData == 'undefined'){
-			var iTask = aTask.init({'id':task.id,'xpath':Object.create(XPathAttribute).init({'value':task.xPath.value})
- 		,'value':Object.create(SValueAttribute).init({'value':task.value.value})
- 		,'tipo':Object.create(TipoAttribute).init({'value':task.tipo.value})
- 		,'state':Object.create(StateAttribute).init({'value':(task.state.value).toString()})
- 		,'taskTitle':Object.create(TaskTitleAttribute).init({'value':task.taskTitle.value})
- 	});	
-	}else{
-		var iTask = aTask.init({'id':task.id,'xpath':Object.create(XPathAttribute).init({'value':task.xPath.value})
- 		,'value':Object.create(SValueAttribute).init({'value':task.value.value})
- 		,'tipo':Object.create(TipoAttribute).init({'value':task.tipo.value})
- 		,'state':Object.create(StateAttribute).init({'value':(task.state.value).toString()})
- 		,'taskTitle':Object.create(TaskTitleAttribute).init({'value':task.taskTitle.value})
- 		,'destData':Object.create(DestDataAttribute).init({'value':task.destData.value})
+	
+	var iTask = aTask.init({'id':task.id,'xpath':Object.create(XPathAttribute).init({'value':task.xPath.value})
+	,'value':Object.create(SValueAttribute).init({'value':task.value.value})
+	,'tipo':Object.create(TipoAttribute).init({'value':task.tipo.value})
+	,'state':Object.create(StateAttribute).init({'value':(task.state.value).toString()})
+	,'taskTitle':Object.create(TaskTitleAttribute).init({'value':task.taskTitle.value})
  	});
-	}
  	
- 	//console.debug(Object.create(DestDataAttribute).init({'value':task.destData.value}));
 	// 	var pre = Object.create(Precondition).init(Object.create(UrlAttribute).init({'value':task.precondition.url.value}));	
 	//	iTask.setPrecondition(pre);
 	var y = iTask.toHtml();
@@ -372,62 +362,59 @@ function handleSelectxPath(){
 
   	el = document.getElementById("div_editor_container");
     el.style.visibility = "hidden";
-    //Si es DataCollectorTask
-    if(typeof task.destData !== 'undefined'){
-  	Recorder.saveDestData();
-  	}
+    
     Recorder.refresh();
 
 	}; 
 
 
-	}//@ToRefactor
-	,formatearTextoPocket: function(texto){
+	}//Le paso el objeto shared data
+	,formatearTextoPocket: function(shared_data){
 		
 		var table = document.createElement("table"); 
 		var tbody = document.createElement("tbody");
-		var i;
-		for (i = 0; i < texto.length -1; i = i + 1) {
-		//-----------------------------Boton Seleccionar Valor
+		//var i;
+		for (var i in shared_data){
+
 		var sel_button = document.createElement('input');
 		sel_button.type = "button";
 		sel_button.value = "S";
 		sel_button.setAttribute('class','tesisunlp_button');
-
+		/*****************************************/
 		sel_button.onclick = function(x){ 
 		//@offlineComment A tener en cuenta  typeof yourVariable === 'object'
-		////console.debug(x.target.parentNode.parentNode.childNodes[1].innerHTML);
 		var el = document.getElementById("value_id");
-		//var sh_d = '{"index":'+x.target.parentNode.parentNode.sectionRowIndex+'}';
-		var sh_d = '{"index":'+x.target.parentNode.parentNode.rowIndex+'}';
-		
+		//var sh_d = '{"index":'+x.target.parentNode.parentNode.rowIndex+'}';
+		var concept = x.target.parentNode.parentNode.firstChild.innerHTML;
+		//guardo el concepto
+		var sh_d = '['+concept+']';
 		//el.value = x.target.parentNode.parentNode.childNodes[1].innerHTML;
 		el.value = sh_d;		
 		//Cierro
 		var div_show_pocket = document.getElementById('id_show_pocket');
  		div_show_pocket.parentNode.removeChild(div_show_pocket);
 		};
-		//-----------------------------			//console.debug(texto[i].concept);
-			
-			var tr = document.createElement("tr");
-			var td_concept = document.createElement("td");
-			var t_node = document.createTextNode(texto[i].concept);
-			td_concept.appendChild(t_node);
-			var td_data = document.createElement("td");
-			var t_data = document.createTextNode(texto[i].data);
-			td_data.appendChild(t_data);
-			var b = document.createElement("td");
-			b.appendChild(sel_button);
+      	
+      	/***************************************/
+		var tr = document.createElement("tr");
+		var td_concept = document.createElement("td");
+		var t_node = document.createTextNode(i);
+		td_concept.appendChild(t_node);
+		var td_data = document.createElement("td");
+		var t_data = document.createTextNode(shared_data[i].value);
+		td_data.appendChild(t_data);
+		var b = document.createElement("td");
+		b.appendChild(sel_button);
 
-			tr.appendChild(td_concept);
-			tr.appendChild(td_data);
-			tr.appendChild(b);
-		
-			tbody.appendChild(tr);
-			table.appendChild(tbody);	
-			
-		};
-		return table;
+		tr.appendChild(td_concept);
+		tr.appendChild(td_data);
+		tr.appendChild(b);
+	
+		tbody.appendChild(tr);
+	
+   		} 		
+		table.appendChild(tbody);
+   		return table;	
 	}
 	,mostrarPocket: function(aValue,anId,attributes){
 
@@ -435,18 +422,18 @@ function handleSelectxPath(){
 	    var div_show_pocket = document.createElement('DIV');
 	    div_show_pocket.id = 'id_show_pocket';
 	    var body = document.getElementsByTagName('body')[0];
-        var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
-  		var table_s_data = Recorder.formatearTextoPocket(array_area);
-  		var texto = document.createTextNode(localStorage.getItem("SHARED_DATA"));
-		//visibility: hidden;
-  		//div_show_pocket.style.cssText="position:absolute;width:auto;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
-		//div_show_pocket.appendChild(texto);
+        
+        var shared_data = JSON.parse(localStorage.getItem("SHARED_DATA"));
+  		
+  		var table_s_data = Recorder.formatearTextoPocket(shared_data);
+  		//var texto = document.createTextNode(localStorage.getItem("SHARED_DATA"));
+		
 		div_show_pocket.setAttribute('class','tesisunlp_div_show_pocket');
 		div_show_pocket.appendChild(table_s_data);
 		var bClose = document.createElement('input');
+		
 		bClose.type = 'button';
 		bClose.value = 'x';
-		//bClose.style.cssText = "position:absolute;float:right;top:0;right:0;";
 		bClose.setAttribute('class','tesisunlp_close_button');
 		bClose.onclick = function(){
 			var el = document.getElementById('id_show_pocket');

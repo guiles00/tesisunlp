@@ -68,7 +68,7 @@ var Recorder = {
 		var id_selected = event.target.options[event.target.options.selectedIndex].value;
 		
 		if(id_selected == 1){ //Si es DataCollectorTask
-		Manager.addDataCollectionTask('empty');		
+		Manager.addDataCollectionTask('Select a Concept');		
 		return true;	
 		}
 
@@ -780,13 +780,20 @@ if( arr_ls.length == 0){
 
 	var state_button = document.createElement('input');
 		state_button.type = "button";
-		state_button.value = "State";
+		state_button.value = "P/D";
 		state_button.setAttribute('class','tesisunlp_button_right');
 		state_button.onclick = function(){
+		
 		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
+		if( task.state.value == 1 ){
 		task.state.value = 0;
+		}else{
+		task.state.value = 1;
+		}
 		localStorageManager.setObjectR(JSON.stringify(task));
+		
 		Recorder.refresh();
+		
 		};
 
 

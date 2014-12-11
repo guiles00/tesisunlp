@@ -31,6 +31,14 @@ localStorageManager = {
 
 
     }
+    ,getConceptValue: function(concept){
+
+        var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
+        console.debug("lo que trae del localStorage es un objeto\n");
+        console.debug("asocia el mapeo por clave valor del objeto, si no existe tira error");
+
+    return 'Valor del concepto';
+    }
     ,saveSharedData: function(concept,text){
 
         var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));

@@ -52,7 +52,7 @@ var  handlerPocketEvent = function(e) {
 					//Agrego DataCollectionTask
 					console.log('Add:'+selection.toString());
 					
-					Manager.addDataCollectionTask(selection.toString());
+					Manager.addDataCollectionTask(concept,selection.toString());
 					selection = '';
 				}		
 			} 

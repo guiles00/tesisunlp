@@ -921,14 +921,14 @@ return false;
 }
 
 
-function DataCollectionTask(id,xPath,value,tipo,state,taskTitle,destData){
+function DataCollectionTask(id,xPath,value,tipo,state,taskTitle/*,destData*/){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
     this.msg = "Init ";
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Data Collection '})
     this.type = "DataCollectionTask";
     this.state = state;
     this.location = '';
-    this.destData = destData || Object.create(DestDataAttribute).init({'value':''}); //No se instancia en el constructor, lo hago desde el init
+    //this.destData = destData || Object.create(DestDataAttribute).init({'value':''}); //No se instancia en el constructor, lo hago desde el init
 }
 //Lo pongo como primitiva, por ahora es igual
 DataCollectionTask.prototype = new PrimitiveTask();
@@ -968,7 +968,7 @@ DataCollectionTask.prototype.setLocation = function(url){
     this.location = url;
 }
 DataCollectionTask.init = function(c){
-  return new DataCollectionTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle,c.destData);
+  return new DataCollectionTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle/*,c.destData*/);
 };
 
 /**
@@ -981,7 +981,7 @@ DataCollectionTask.prototype.htmlToJson = function(el_div){
         var str_value = document.getElementById('value_id').value;
         var str_state = document.getElementById('state_id').value;
         var str_tipo = document.getElementById('tipo_id').value;
-        var str_destData = document.getElementById('tsgc_dest_data_id').value;
+        //var str_destData = document.getElementById('tsgc_dest_data_id').value;
 
         function isJson(str) {
         try {
@@ -1024,11 +1024,11 @@ DataCollectionTask.prototype.htmlToJson = function(el_div){
         oTaskTitle.value = str_taskTitle ;
         
 
-        var oDestData = Object.create(DestDataAttribute);
+      /*  var oDestData = Object.create(DestDataAttribute);
         oDestData._type = DestDataAttribute._type;
         oDestData.value = str_destData ;
-        
-        var o_task = new DataCollectionTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle,oDestData);
+      */  
+        var o_task = new DataCollectionTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle/*,oDestData*/);
         
     return o_task.toJson();
 }
@@ -1040,7 +1040,7 @@ DataCollectionTask.prototype.toHtml = function(properties){
     array_elementos.push(this.taskTitle.getHtmlElement());
     array_elementos.push(this.xPath.getHtmlElement());
     array_elementos.push(this.value.getHtmlElement());
-    array_elementos.push(this.destData.getHtmlElement());
+    //array_elementos.push(this.destData.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());
     array_elementos.push(this.tipo.getHtmlElement());
 

@@ -381,7 +381,7 @@ var Manager = (function () {
                 Recorder.refresh();
 
             }
-            ,addDataCollectionTask: function(data){
+            ,addDataCollectionTask: function(concept,data){
 
 
                 //var el_id = event.target.id;
@@ -397,15 +397,15 @@ var Manager = (function () {
                 var xPath = Object.create(XPathAttribute);
                     xPath._type = XPathAttribute._type;
                     xPath.setValue('sxPath');
-                var objValue = Object.create(SValueAttribute);
+                var objValue = Object.create(CValueAttribute);
                     objValue._type = SValueAttribute._type;     
-                    objValue.setValue(data);
+                    objValue.setValue(concept+'=>'+data);
 
-                var destData = Object.create(DestDataAttribute);
+                /*var destData = Object.create(DestDataAttribute); //Esto no va
                     destData._type = DestDataAttribute._type;     
                     destData.setValue('');
-                        
-                o_task = new DataCollectionTask(10,xPath,objValue,tipo,state,null,destData);
+                */        
+                o_task = new DataCollectionTask(10,xPath,objValue,tipo,state,null/*,destData*/);
                 o_task.setLocation(location);
                 localStorageManager.insert(o_task.toJson());
                 Recorder.refresh();

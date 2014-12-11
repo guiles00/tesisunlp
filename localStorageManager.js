@@ -31,7 +31,16 @@ localStorageManager = {
 
 
     }
-    ,saveSharedData: function(concept,text){
+    ,saveSharedData: function(concept,object){
+
+    var data = JSON.parse(localStorage.getItem("SHARED_DATA") );
+    
+    data[concept] = object;
+    localStorage.setItem('SHARED_DATA',JSON.stringify(data));
+
+    return data;
+    }
+    ,NOsaveSharedData: function(concept,text){
 
         var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
         var data_object = new Object();

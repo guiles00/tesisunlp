@@ -43,7 +43,11 @@ var Manager = (function () {
         function subscribe(aPrimitiveTask){ //Este metodo por ahora solo agrega el objeto 
          currentPrimitiveTasks.push(aPrimitiveTask);
         }
-        
+
+        function createHighLightTask(aId,xPath,value,aMsg,aTipo,aState){
+         return new HighLightTask(aId,xPath,value,aMsg,aTipo,aState);   
+        }
+
         function createDataCollectionTask(aId,xPath,value,aMsg,aTipo,aState){
         return new DataCollectionTask(aId,xPath,value,aMsg,aTipo,aState);
         }
@@ -173,7 +177,7 @@ var Manager = (function () {
                   console.debug(task);
                   
                   task.execute();
-                  console.debug('ejecuto o no ejecuto?');
+                  //console.debug('ejecuto o no ejecuto?');
 		          //Manager.executeNextTaskWithTimer();
         	}
         /**
@@ -196,6 +200,7 @@ var Manager = (function () {
             , ClickInputTask: createClickInputTask(aId,xPath,value,tipo,state) 
             , UrlTask: createUrlTask(aId,xPath,value,tipo,state) 
             , DataCollectionTask: createDataCollectionTask(aId,xPath,value,tipo,state)             
+            , HighLightTask: createHighLightTask(aId,xPath,value,tipo,state)
             } 
 	    	, def = null ;
 
@@ -402,6 +407,29 @@ var Manager = (function () {
                     objValue.setValue('['+concept+']');
    
                 o_task = new DataCollectionTask(10,xPath,objValue,tipo,state,null);
+                o_task.setLocation(location);
+                localStorageManager.insert(o_task.toJson());
+                Recorder.refresh();
+
+            }
+            ,addHighLightTask: function(searchText){
+
+                var o_task;
+
+                var tipo = Object.create(TipoAttribute);
+                    tipo._type = TipoAttribute._type;
+                    tipo.setValue(1);
+                var state = Object.create(StateAttribute);
+                    state._type = StateAttribute._type;
+                    state.setValue(0);
+                var xPath = Object.create(XPathAttribute);
+                    xPath._type = XPathAttribute._type;
+                    xPath.setValue('sxPath');
+                var objValue = Object.create(CValueAttribute);
+                    objValue._type = SValueAttribute._type;     
+                    objValue.setValue(searchText);
+   
+                o_task = new HighLightTask(10,xPath,objValue,tipo,state,null);
                 o_task.setLocation(location);
                 localStorageManager.insert(o_task.toJson());
                 Recorder.refresh();

@@ -70,6 +70,9 @@ var Recorder = {
 		if(id_selected == 1){ //Si es DataCollectorTask
 		Manager.addDataCollectionTask('Select a Concept');		
 		return true;	
+		}else if(id_selected == 2){
+		Manager.addHighLightTask('');			
+		return true;	
 		}
 
 

@@ -101,3 +101,10 @@
 	background: #A2AFA0;
 	border: solid #A2AFFF;
 }
+
+.animationLiveHighlighting {
+	   border-width:1px;
+	   border-color:red; 
+	   background-color:yellow;
+}
+	

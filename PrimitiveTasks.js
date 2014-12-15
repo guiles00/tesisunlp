@@ -324,21 +324,8 @@ TextAreaTask.prototype.htmlToJson = function(el_div){
         oTipo._type = TipoAttribute._type;
         oTipo.value = str_tipo;
                 
-
-         function isJson(str) {
-            try {
-                JSON.parse(str);
-            } catch (e) {
-                return false;
-            }
-            return true;
-            }    
-
-
-        if(isJson(str_value)) var temp = JSON.parse(str_value);
-       
-        //@comment Si el str_value es un string u objeto instancio distinto valor
-        if(typeof temp === 'object'){
+//@comment Si el str_value es un string u objeto instancio distinto valor
+        if( str_value.charAt(0) == '[' ){
         var oValue = Object.create(CValueAttribute);
         oValue._type = CValueAttribute._type;
         oValue.value = str_value;
@@ -348,6 +335,7 @@ TextAreaTask.prototype.htmlToJson = function(el_div){
         oValue._type = SValueAttribute._type;
         oValue.value = str_value;
         }
+       
 
         var oTaskTitle = Object.create(TaskTitleAttribute);
         oTaskTitle._type = TaskTitleAttribute._type;
@@ -1062,20 +1050,13 @@ function HighLightTask(id,xPath,value,tipo,state,taskTitle/*,destData*/){
     this.type = "HighLightTask";
     this.state = state;
     this.location = '';
-    //this.destData = destData || Object.create(DestDataAttribute).init({'value':''}); //No se instancia en el constructor, lo hago desde el init
 }
 //Lo pongo como primitiva, por ahora es igual
 HighLightTask.prototype = new PrimitiveTask();
 
 HighLightTask.prototype.execute = function(){
-        //Trae contenido body de la pagina
-        var bodyText = document.getElementsByTagName('body')[0].innerHTML;
-        //var a = doHighlight(bodyText,this.value.value);
-        searchText(this.value.value)
-        //document.getElementById('resultado').innerHTML = a;
-        //.childNodes[2].innerHTML
-        //document.getElementsByTagName('body')[0].innerHTML = doHighlight(bodyText,this.value.value);
-        //console.debug(document.getElementsByTagName('body')[0]); //.childNodes[2]
+
+        searchText(this.value.getValue())
         this.finalizo(this.id);
 }
 HighLightTask.prototype.setLocation = function(url){
@@ -1096,14 +1077,22 @@ HighLightTask.prototype.htmlToJson = function(el_div){
         var str_state = document.getElementById('state_id').value;
         var str_tipo = document.getElementById('tipo_id').value;
         
-        //Se que un FillInputTask tiene los campos xPath y value
+        
         var xPath = Object.create(XPathAttribute);
         xPath.value = str_xPath;
 
+        //@comment Si el str_value es un string u objeto instancio distinto valor
+        if( str_value.charAt(0) == '[' ){
+        var oValue = Object.create(CValueAttribute);
+        oValue._type = CValueAttribute._type;
+        oValue.value = str_value;
+        
+        }else{
         var oValue = Object.create(SValueAttribute);
         oValue._type = SValueAttribute._type;
         oValue.value = str_value;
-        
+        }
+       
         var oState = Object.create(StateAttribute);
         oState._type = StateAttribute._type;
         oState.value = str_state;

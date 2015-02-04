@@ -466,8 +466,8 @@ function handleSelectxPath(){
 		console.log('comienza a grabar');
 		Manager.addUrlTask();
 		start_record.value = "Stop";
-		start_record.src = 'http://s30.postimg.org/wd91sajn1/stop.png';
-		start_record.src = './images/stop.png';
+		//start_record.src = 'http://s30.postimg.org/wd91sajn1/stop.png';
+		start_record.src = 'http://raw.githubusercontent.com/guiles/unlptesis/master/images/stop.png';
 		
 		document.addEventListener("change", eventoChange , false);   
 		document.addEventListener("click", eventoClick , false);
@@ -479,8 +479,8 @@ function handleSelectxPath(){
 	}else if(start_record.value == "Stop"){
     	start_record.value = "Record" ;
     	
-    	start_record.src = 'http://s27.postimg.org/6chig4jb3/record.png';
-    	start_record.src = './images/record.png';
+    	//start_record.src = 'http://s27.postimg.org/6chig4jb3/record.png';
+    	start_record.src = 'http://raw.githubusercontent.com/guiles/unlptesis/master/images/record.png';
     	document.removeEventListener("change", eventoChange, false); 
     	document.removeEventListener("click", eventoClick , false);
     	document.removeEventListener("mouseup", handlerPocketEvent , false);

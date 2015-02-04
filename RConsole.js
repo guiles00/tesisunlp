@@ -39,7 +39,8 @@ var RConsole = {
 		bClear.type = 'image';
 		//bClear.src = 'clear.png';
 
-		bClear.src = 'http://s13.postimg.org/ngpmrmhkj/clear.png';
+		//bClear.src = 'http://s13.postimg.org/ngpmrmhkj/clear.png';
+		bClear.src = 'http://raw.githubusercontent.com/guiles/unlptesis/master/images/clear.png';
 		bClear.value = 'clear';
 		bClear.onclick = function(){
 			localStorageManager.clearPocket();
@@ -285,8 +286,8 @@ var RConsole = {
 		var iPlay_recorder = this.createImageButton('Play','play_procedure','play.png');
 		//iPlay_recorder.className = "tesisunlp_button";
 		iPlay_recorder.title = "Play procedure";
-		iPlay_recorder.src = 'http://s30.postimg.org/yofdl7bal/play.png';
-		iPlay_recorder.src = './images/play.png';
+		//iPlay_recorder.src = 'http://s30.postimg.org/yofdl7bal/play.png';
+		iPlay_recorder.src = 'http://raw.githubusercontent.com/guiles/unlptesis/master/images/play.png';
 		
 		iPlay_recorder.addEventListener("click", Recorder.clickPlay , false); 
 		return iPlay_recorder;
@@ -298,14 +299,15 @@ var RConsole = {
 		iRecord_recorder.addEventListener("click",Recorder.clickRecord, false); 
 		//iRecord_recorder.className = "tesisunlp_button";
 		iRecord_recorder.title = "Start Record Procedure";
-		iRecord_recorder.src = 'http://s27.postimg.org/6chig4jb3/record.png';
-		iRecord_recorder.src = './images/record.png';
+		//iRecord_recorder.src = 'http://s27.postimg.org/6chig4jb3/record.png';
+		iRecord_recorder.src = 'http://raw.githubusercontent.com/guiles/unlptesis/master/images/record.png';
+		
 		return iRecord_recorder;
 	 }
 	 ,createClearButton: function(){
 	 	////console.debug('4. crea boton Clear');
-		var clear = this.createImageButton('CLR','clear','http://s13.postimg.org/ngpmrmhkj/clear.png');
-		var clear = this.createImageButton('CLR','clear','./images/clear.png');
+		//var clear = this.createImageButton('CLR','clear','http://s13.postimg.org/ngpmrmhkj/clear.png');
+		var clear = this.createImageButton('CLR','clear','http://raw.githubusercontent.com/guiles/unlptesis/master/images/clear.png');
 		//clear.className = "tesisunlp_button";
 		clear.onclick = function(){
 
@@ -317,7 +319,7 @@ var RConsole = {
 	 }
 	 ,createShowSharedButton: function(){
 	 	//var shared_button = this.createImageButton('SHD','shared_data','http://s8.postimg.org/fya7herkh/shared.png');
-		var shared_button = this.createImageButton('SHD','shared_data','./images/shared.png');
+		var shared_button = this.createImageButton('SHD','shared_data','http://raw.githubusercontent.com/guiles/unlptesis/master/images/shared.png');
 		
 		shared_button.onclick = function(){
 			Recorder.mostrarPocket();
@@ -341,7 +343,7 @@ var RConsole = {
 			/**/	
 	 } 
 	 ,createRemoveProcedureButton: function(){
-	 	var remove_procedure = this.createImageButton('DEL','delete_procedure','./images/delete.png');
+	 	var remove_procedure = this.createImageButton('DEL','delete_procedure','http://raw.githubusercontent.com/guiles/unlptesis/master/images/delete.png');
 		
 		remove_procedure.onclick = function(){
 		
@@ -361,7 +363,7 @@ var RConsole = {
 		load.type = "image";
 		//load.src = "ls.png";
 		//load.src = 'http://s23.postimg.org/j9db6rcc7/image.png';
-		load.src = './images/ls.png';
+		load.src = 'http://raw.githubusercontent.com/guiles/unlptesis/master/images/ls.png';
 		
 		load.value = "LS";
 		load.id = "load";

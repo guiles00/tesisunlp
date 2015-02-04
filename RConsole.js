@@ -263,7 +263,7 @@ var RConsole = {
 	    aButton.setAttribute('value',aValue);
 	    aButton.setAttribute('id',anId);
 		aButton.setAttribute('src',src);
-
+		aButton.setAttribute('title',anId);
 /*
 	      for (var attr in attributes) { 
 	      aButton.setAttribute(attr,attributes[attr]);  
@@ -284,7 +284,10 @@ var RConsole = {
 		//var iPlay_recorder = this.createButton('Play','play_procedure',null);
 		var iPlay_recorder = this.createImageButton('Play','play_procedure','play.png');
 		//iPlay_recorder.className = "tesisunlp_button";
+		iPlay_recorder.title = "Play procedure";
 		iPlay_recorder.src = 'http://s30.postimg.org/yofdl7bal/play.png';
+		iPlay_recorder.src = './images/play.png';
+		
 		iPlay_recorder.addEventListener("click", Recorder.clickPlay , false); 
 		return iPlay_recorder;
 	 }
@@ -294,12 +297,15 @@ var RConsole = {
 		var iRecord_recorder = this.createImageButton('Record','start_record','record.png');
 		iRecord_recorder.addEventListener("click",Recorder.clickRecord, false); 
 		//iRecord_recorder.className = "tesisunlp_button";
+		iRecord_recorder.title = "Start Record Procedure";
 		iRecord_recorder.src = 'http://s27.postimg.org/6chig4jb3/record.png';
+		iRecord_recorder.src = './images/record.png';
 		return iRecord_recorder;
 	 }
 	 ,createClearButton: function(){
 	 	////console.debug('4. crea boton Clear');
 		var clear = this.createImageButton('CLR','clear','http://s13.postimg.org/ngpmrmhkj/clear.png');
+		var clear = this.createImageButton('CLR','clear','./images/clear.png');
 		//clear.className = "tesisunlp_button";
 		clear.onclick = function(){
 
@@ -310,7 +316,9 @@ var RConsole = {
 		return clear;
 	 }
 	 ,createShowSharedButton: function(){
-	 	var shared_button = this.createImageButton('SHD','shared_data','http://s8.postimg.org/fya7herkh/shared.png');
+	 	//var shared_button = this.createImageButton('SHD','shared_data','http://s8.postimg.org/fya7herkh/shared.png');
+		var shared_button = this.createImageButton('SHD','shared_data','./images/shared.png');
+		
 		shared_button.onclick = function(){
 			Recorder.mostrarPocket();
 		}; 
@@ -333,7 +341,7 @@ var RConsole = {
 			/**/	
 	 } 
 	 ,createRemoveProcedureButton: function(){
-	 	var remove_procedure = this.createImageButton('DEL','delete_procedure','');
+	 	var remove_procedure = this.createImageButton('DEL','delete_procedure','./images/delete.png');
 		
 		remove_procedure.onclick = function(){
 		
@@ -352,7 +360,9 @@ var RConsole = {
 		//load.className = "tesisunlp_button";
 		load.type = "image";
 		//load.src = "ls.png";
-		load.src = 'http://s23.postimg.org/j9db6rcc7/image.png';
+		//load.src = 'http://s23.postimg.org/j9db6rcc7/image.png';
+		load.src = './images/ls.png';
+		
 		load.value = "LS";
 		load.id = "load";
 
@@ -437,7 +447,10 @@ var RConsole = {
 			//div_consola.style.cssText = "overflow:scroll;z-index: 300;position:fixed;left: 0px;width:auto;height: 100%;border:solid 1px #e1e1e1;vertical-align: middle;background: #A2AFA0;"; //text-align:center;
 			div_consola.setAttribute('class','tesisunlp_div_consola');
 			div_consola.style.visibility = "hidden";
-
+		
+			var hr_el = document.createElement("hr");
+			div_consola.appendChild(hr_el);	
+		
 		return div_consola;
 
 	 }
@@ -445,6 +458,9 @@ var RConsole = {
 	 	////console.debug('8. Crea el div consola header');
 		var div_consola_header = document.createElement("div");
 		div_consola_header.id = "consola_header"
+		
+		//var hr_el = document.createElement("hr");
+		//	div_consola_header.appendChild(hr_el);	
 		
 		return div_consola_header;
 	 }
@@ -465,6 +481,10 @@ var RConsole = {
 		//table_consola.style.cssText = "min-width:auto;font-family: Helvetica,Arial; font-size: 16px";
 		//table_consola.setAttribute('class','tesisunlp_table_consola');
 		table_consola.class = "Table";
+
+		//	var hr_el = document.createElement("hr");
+		//	table_consola.appendChild(hr_el);	
+		
 		return table_consola;
 	 }
 	 ,createShowHide: function(){
@@ -539,13 +559,15 @@ var RConsole = {
 	 	container_header.appendChild(recordButton);
 		container_header.appendChild(playButton);
 	 	container_header.appendChild(clearButton);
-	 	container_header.appendChild(loadButton);
 	 	container_header.appendChild(addTaksSelect);
 	 	container_header.appendChild(procedures_select);
 	 	container_header.appendChild(del_proc_button);
+	 	container_header.appendChild(loadButton);
 	 	container_header.appendChild(pocketButton);
 	 	
-	 	
+	 	var hr_el = document.createElement("hr");
+			container_header.appendChild(hr_el);	
+		
 		
 		table_console_container.appendChild(table_console);
 		container.appendChild(container_header);

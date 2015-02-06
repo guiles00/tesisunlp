@@ -5,7 +5,32 @@
 
 
 var Recorder = {
-    saveDestData: function(){
+	importProcedure: function(e){
+		
+		//console.debug('lee el archivo');
+		
+		var file = e.target.files;
+		
+	    var reader = new FileReader();
+	    var proc;
+	      // Evento que usa para leer el archivo
+	      reader.onload = (function(file) {
+	        return function(e) {
+	         proc = JSON.parse(e.target.result);
+	        
+	        var p = document.getElementById('procedures_select').value;
+ 	      	var bpm = JSON.parse(localStorage.getItem("BPM") );
+	      	bpm[p] = proc;
+	      	localStorage.setItem("BPM",JSON.stringify(bpm));
+    		Recorder.refresh();
+	        }
+	      })(file);
+	      // Lo lee como un archivo de texto
+	      reader.readAsText(file[0]);
+
+ 	      
+	}	
+    ,saveDestData: function(){
 
 		    	//Trae el dato a guardar
 		  	function isJson(str) {

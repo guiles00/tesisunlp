@@ -271,7 +271,60 @@ var RConsole = {
 	      }*/
 
 	return aButton;
+	} 
+	//Temp 
+	,downloadProcedure: function (filename, text) {
+		  var pom = document.createElement('a');
+		  pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+		  pom.setAttribute('download', filename);
+		  pom.click();
 	}
+	,createExportButton: function(){
+		////console.debug('1. crea boton Stop');
+		var b_export = document.createElement("input");	
+	    b_export.setAttribute('type','button');
+	    b_export.setAttribute('value','E');
+	    b_export.setAttribute('class','tesisunlp_button');
+	    b_export.setAttribute('id','g_b_export');
+		//s_import.addEventListener("click", Recorder.import , false); 
+		b_export.onclick = function(){
+			
+
+	        var p = document.getElementById('procedures_select').value;
+ 	      	var bpm = JSON.parse(localStorage.getItem("BPM") );
+	      	RConsole.downloadProcedure('test.json',JSON.stringify( bpm[p] ) );
+			
+		}
+		return b_export;
+	 }
+	,createShowImportButton: function(){
+		////console.debug('1. crea boton Stop');
+		var s_import = document.createElement("input");	
+	    s_import.setAttribute('type','button');
+	    s_import.setAttribute('value','I');
+	    s_import.setAttribute('class','tesisunlp_button');
+	    s_import.setAttribute('id','g_s_import');
+		//s_import.addEventListener("click", Recorder.import , false); 
+		s_import.onclick = function(){
+			
+			var el = document.getElementById('g_import');
+			//el.hidden = false ;
+			el.hidden = (el.hidden)? false :  true; 
+		}
+		return s_import;
+	 }
+
+	,createImportButton: function(){
+		////console.debug('1. crea boton Stop');
+		var b_import = document.createElement("input");	
+	    b_import.setAttribute('type','file');
+	    b_import.hidden = true;
+	    //b_import.setAttribute('value','I');
+	    b_import.setAttribute('id','g_import');
+		b_import.addEventListener("change", Recorder.importProcedure , false); 
+		
+		return b_import;
+	 }
 	,createStopButton: function(){
 		////console.debug('1. crea boton Stop');
 		var attr_stop = {'disabled':true, 'hidden':false };
@@ -557,6 +610,10 @@ var RConsole = {
 	 	var add_aug_container = this.createAddAugContainer();
 	 	var procedures_select = this.createProceduresSelect();
 	 	var del_proc_button = this.createRemoveProcedureButton();
+	 	var import_proc_button = this.createImportButton();
+		var show_import_button = this.createShowImportButton();
+	 	var export_button = this.createExportButton();
+	 	//console.debug(import_proc_button);
 	 	//container_header.appendChild(stopButton);
 	 	container_header.appendChild(recordButton);
 		container_header.appendChild(playButton);
@@ -566,6 +623,9 @@ var RConsole = {
 	 	container_header.appendChild(del_proc_button);
 	 	container_header.appendChild(loadButton);
 	 	container_header.appendChild(pocketButton);
+		container_header.appendChild(show_import_button);
+		container_header.appendChild(export_button);
+		container_header.appendChild(import_proc_button);
 	 	
 	 	var hr_el = document.createElement("hr");
 			container_header.appendChild(hr_el);	

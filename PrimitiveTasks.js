@@ -1055,8 +1055,8 @@ function HighLightTask(id,xPath,value,tipo,state,taskTitle/*,destData*/){
 HighLightTask.prototype = new PrimitiveTask();
 
 HighLightTask.prototype.execute = function(){
-
-        searchText(this.value.getValue())
+       
+        searchText(this.value.getValue().toString());
         this.finalizo(this.id);
 }
 HighLightTask.prototype.setLocation = function(url){
@@ -1177,6 +1177,10 @@ function doHighlight(bodyText, searchTerm, highlightStartTag, highlightEndTag)
 };
 
 function searchText(a){
+
+    //Por las dudas saco los espacios
+    var a = a.trim();
+
     var items = document.getElementsByTagName("*");
     
     var tags_allowed = ['P','H2','H3','H4','H5','A','INPUT','FORM'];

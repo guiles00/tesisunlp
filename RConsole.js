@@ -277,8 +277,12 @@ var RConsole = {
 		  var pom = document.createElement('a');
 		  pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
 		  pom.setAttribute('download', filename);
-		  alert('whaat');
+		  
+		  // Append anchor to body.
+		  document.body.appendChild(pom)
 		  pom.click();
+		  document.body.removeChild(pom)
+
 	}
 	,createExportButton: function(){
 		////console.debug('1. crea boton Stop');

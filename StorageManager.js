@@ -14,7 +14,7 @@ function send_request_jsonp(url, callback) {
 StorageManager = {
 	getTasks: function(p){
 		
-		var url = 'http://localhost:8080/api/getTasks?p=1'; 
+		var url = 'http://localhost:8080/api/getTasks?p='+p; 
 		//console.debug(url);
 		//Envia peticion a la apiREST
 		send_request_jsonp(url, function(data) {
@@ -25,7 +25,17 @@ StorageManager = {
            }
 
 	    
-		});
+		});	
+	}
+	,getTaskById: function(p,id,callback){
 		
+		var url = 'http://localhost:8080/api/getTaskById?p='+p+'&id='+id; 
+		console.debug(url);
+		//Envia peticion a la apiREST
+		send_request_jsonp(url, function(data) {
+   		
+			console.log(data);
+			callback(data);	    
+		});	
 	}
 }

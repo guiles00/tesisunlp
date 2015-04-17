@@ -1,3 +1,4 @@
+console.debug('new issue');
 window.onload = function(){
 //Check if there is BPMP in localStorage
 var bpmp = localStorage.getItem("BPMP");

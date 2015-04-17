@@ -107,4 +107,20 @@
 	   border-color:red; 
 	   background-color:yellow;
 }
-	
+
+.topcorner{
+position:absolute;
+top:10;
+right:10;
+height: 100px;
+width: 200px;
+border-color: grey;
+border-style: solid;
+}
+
+.topcorner ul,li {
+list-style-type: none;
+padding: 0px;
+margin: 0px;
+font-size: 9px;
+}

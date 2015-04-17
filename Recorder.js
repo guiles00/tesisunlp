@@ -91,12 +91,15 @@ var Recorder = {
 	*/
 	,addPrimitiveTask: function(event) {
 		var id_selected = event.target.options[event.target.options.selectedIndex].value;
-		
+		//Esto es TEMPORAL, es una cagada
 		if(id_selected == 1){ //Si es DataCollectorTask
 		Manager.addDataCollectionTask('Select a Concept');		
 		return true;	
 		}else if(id_selected == 2){
 		Manager.addHighLightTask('');			
+		return true;	
+		}else if(id_selected == 3){
+		Manager.addSumatoriaTask('');			
 		return true;	
 		}
 

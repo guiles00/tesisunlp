@@ -715,7 +715,7 @@ if( arr_ls.length == 0){
 			}catch(err){
 				console.log(err);
 			}*/
-             this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
+            // this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
            }
        }catch(err){
        	console.log(err);
@@ -723,7 +723,8 @@ if( arr_ls.length == 0){
     	//Drag and drop
        	var tableDnD = new TableDnD();
 	    tableDnD.init(table_consola);
-
+		//Trae desde la base
+		StorageManager.getTasks();
 
 	}
 	,writer: function(id,text,index){

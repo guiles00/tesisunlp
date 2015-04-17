@@ -32,6 +32,10 @@ tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/localStorageMa
 document.head.appendChild(tesis_script);
 
 var tesis_script = document.createElement('script');
+tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/StorageManager.js');
+document.head.appendChild(tesis_script);
+
+var tesis_script = document.createElement('script');
 tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/Manager.js');
 document.head.appendChild(tesis_script);
 

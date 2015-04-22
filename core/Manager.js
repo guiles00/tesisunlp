@@ -210,6 +210,24 @@ var Manager = (function () {
 
 	    	lookup[aPrimitiveTaskType] ? subscribe(lookup[aPrimitiveTaskType]) : def();
 		   }
+           ,factoryTask : function(aId,aPrimitiveTaskType,xPath,value,tipo,state,taskTitle){
+            //Este metodo reemplaza al switch
+            var lookup = 
+            { FillInputTask: createFillInputTask(aId,xPath,value,tipo,state,taskTitle)
+            , SelectOptionTask: createSelectOptionTask(aId,xPath,value,tipo,state)
+            , TextAreaTask: createTextAreaTask(aId,xPath,value,tipo,state)
+            , CheckBoxTask: createCheckBoxTask(aId,xPath,value,tipo,state)
+            , ClickLinkTask: createClickLinkTask(aId,xPath,value,tipo,state)
+            , ClickInputTask: createClickInputTask(aId,xPath,value,tipo,state) 
+            , UrlTask: createUrlTask(aId,xPath,value,tipo,state) 
+            , DataCollectionTask: createDataCollectionTask(aId,xPath,value,tipo,state)             
+            , HighLightTask: createHighLightTask(aId,xPath,value,tipo,state)
+            , SumatoriaTask: createSumatoriaTask(aId,xPath,value,tipo,state)
+            } 
+            , def = null ;
+
+            return lookup[aPrimitiveTaskType] ;
+           }
         /**
         * @method getCurrentPrimitiveTasks
         */  
@@ -355,6 +373,36 @@ var Manager = (function () {
         Manager.start(n);
 
             }
+            ,playTaskById: function(id){
+
+
+            var task = localStorageManager.getObject(id);
+            console.debug(task);
+            
+            //Instancio xPath y Value (wrappers de atributos)
+            var xPath = Object.create(XPathAttribute); 
+            xPath.setValue(task.xPath.value);
+            var tipo = Object.create(TipoAttribute); 
+            tipo.setValue(task.tipo.value);
+            
+            if(task.value._type == 'CValueAttribute'){ 
+            var valor = Object.create(CValueAttribute); 
+                valor.setValue(task.value.value);
+            }else{
+            var valor = Object.create(SValueAttribute); 
+                valor.setValue(task.value.value);
+            }
+            
+            //Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);
+            //Creo el objeto tarea
+            var oTask = Manager.factoryTask(task.id,task.type,xPath,valor,tipo,task.state,task.taskTitle);
+            console.debug(oTask);
+            oTask.execute();
+            Recorder.refresh();
+            return;   
+
+            }
+
             ,init: function(){
 
              //Si esta ejecutando 

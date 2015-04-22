@@ -831,7 +831,9 @@ if( arr_ls.length == 0){
 		
 		//alert('Empieza desde aca'+this.parentNode.parentNode.id);
 		console.debug('Empieza desde aca'+this.parentNode.parentNode.id);
-		Manager.playFromTask(this.parentNode.parentNode.id);
+		//Manager.playFromTask(this.parentNode.parentNode.id);
+		Manager.playTaskById(this.parentNode.parentNode.id);
+
 	/*	var task = localStorageManager.getObject(this.parentNode.parentNode.id);
 		task.state.value = 0;
 		localStorageManager.setObjectR(JSON.stringify(task));

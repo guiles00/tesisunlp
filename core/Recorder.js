@@ -712,12 +712,12 @@ if( arr_ls.length == 0){
           
 		  try{
           for (var i=0;i < arr_tasks.length;i++){
-			/*
+			
 			try{
 			var concept = JSON.parse(value).type;	
 			}catch(err){
 				console.log(err);
-			}*/
+			}
              this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
            }
        }catch(err){
@@ -726,7 +726,8 @@ if( arr_ls.length == 0){
     	//Drag and drop
        	var tableDnD = new TableDnD();
 	    tableDnD.init(table_consola);
-
+		//Trae desde la base
+		//StorageManager.getTasks(1); //Este metodo trae los datos y lo muestra en consola ( es asincrono)
 
 	}
 	,writer: function(id,text,index){
@@ -744,10 +745,15 @@ if( arr_ls.length == 0){
         //tr.class = "Row";
         //table_consola.appendChild(tr);
         */
-
-        //tr.setAttribute('class','');
+        //Trae uno solo
         var task = localStorageManager.getObject(id);
-
+        //Como es asincrono tengo que hacerlo dentro de un callback
+     /*   StorageManager.getTaskById(1,id,function(res) {
+        	console.log('Result: ', res[0].state.value);
+        	if(res[0].state.value == 1 ) 
+        	 tr.style.backgroundColor='green';
+		});
+        */
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
 
         if(task.state.value == 1 )  tr.style.backgroundColor='green';

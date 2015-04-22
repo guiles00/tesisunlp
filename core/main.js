@@ -32,5 +32,5 @@ if(localStorage.getItem("BPMEXECUTION") == 1){
 	RConsole.showConsola();
 	Recorder.clickPlay();
 }
-     
+    
 };	

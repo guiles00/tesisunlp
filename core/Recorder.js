@@ -101,6 +101,9 @@ var Recorder = {
 		}else if(id_selected == 3){
 		Manager.addSumatoriaTask('');			
 		return true;	
+		}else if(id_selected == 4){
+		Manager.addNotasTask('');			
+		return true;	
 		}
 
 

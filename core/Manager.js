@@ -44,6 +44,9 @@ var Manager = (function () {
          currentPrimitiveTasks.push(aPrimitiveTask);
         }
 
+        function createNotasTask(aId,xPath,value,aMsg,aTipo,aState){
+         return new NotasTask(aId,xPath,value,aMsg,aTipo,aState);   
+        }
         function createSumatoriaTask(aId,xPath,value,aMsg,aTipo,aState){
          return new SumatoriaTask(aId,xPath,value,aMsg,aTipo,aState);   
         }
@@ -205,6 +208,7 @@ var Manager = (function () {
             , DataCollectionTask: createDataCollectionTask(aId,xPath,value,tipo,state)             
             , HighLightTask: createHighLightTask(aId,xPath,value,tipo,state)
             , SumatoriaTask: createSumatoriaTask(aId,xPath,value,tipo,state)
+            , NotasTask: createNotasTask(aId,xPath,value,tipo,state)
             } 
 	    	, def = null ;
 
@@ -223,6 +227,7 @@ var Manager = (function () {
             , DataCollectionTask: createDataCollectionTask(aId,xPath,value,tipo,state)             
             , HighLightTask: createHighLightTask(aId,xPath,value,tipo,state)
             , SumatoriaTask: createSumatoriaTask(aId,xPath,value,tipo,state)
+            , NotasTask: createNotasTask(aId,xPath,value,tipo,state)
             } 
             , def = null ;
 
@@ -538,6 +543,29 @@ var Manager = (function () {
                 document.addEventListener('mouseup', handlerSum,false);
                 //localStorage.setItem('sumatoria',JSON.stringify({values:[]}));
 
+            }
+            ,addNotasTask: function(){
+
+                var o_task;
+
+                var tipo = Object.create(TipoAttribute);
+                    tipo._type = TipoAttribute._type;
+                    tipo.setValue(1);
+                var state = Object.create(StateAttribute);
+                    state._type = StateAttribute._type;
+                    state.setValue(0);
+                var xPath = Object.create(XPathAttribute);
+                    xPath._type = XPathAttribute._type;
+                    xPath.setValue('sxPath');
+                var objValue = Object.create(CValueAttribute);
+                    objValue._type = SValueAttribute._type;     
+                    objValue.setValue(searchText);
+   
+                o_task = new NotasTask(10,xPath,objValue,tipo,state,null);
+                //o_task.setLocation(location);
+                localStorageManager.insert(o_task.toJson());
+                Recorder.refresh();
+                
             }
         };
 }());

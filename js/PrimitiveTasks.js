@@ -1219,7 +1219,32 @@ SumatoriaTask.prototype = new PrimitiveTask();
 
 SumatoriaTask.prototype.execute = function(){
        
-        console.log('suma todo lo que le ponga!!!')
+        console.log('suma todo lo que le ponga!!!');
+        console.log('Hago visible el cuadrito');
+        var el = document.getElementById('sum_container');
+        /*Esto no es asi, lo hago ahora para la demo*/
+            var div = document.createElement("div");
+                div.classList.add('topcorner');
+                div.id = "sum_container";
+
+                var stop = document.createElement("input");
+                stop.value="X";
+                stop.type="button";
+                stop.addEventListener('click',function(){
+                    
+                     document.removeEventListener('mouseup', handlerSum,false);
+                });
+
+                var div_sum = document.createElement("div");
+                //div.classList.add('topcorner');
+                div_sum.id = "sum";
+                var body = document.getElementsByTagName("body")[0];
+                div.appendChild(div_sum);
+                div.appendChild(stop);
+                
+                body.appendChild(div);
+        
+        /*****/
         this.finalizo(this.id);
 }
 SumatoriaTask.prototype.setLocation = function(url){

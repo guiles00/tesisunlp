@@ -1,4 +1,4 @@
-/*var AbstractTask =(function(){
+var AbstractTask =(function(){
 
 
  function AbstractTask(id,xPath,value,tipo,state,taskTitle){ //Constructor

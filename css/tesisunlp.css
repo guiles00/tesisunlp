@@ -109,9 +109,9 @@
 }
 
 .topcorner{
-position:absolute;
-top:10;
-right:10;
+position:fixed;
+top:1em;
+right:1em;
 height: 100px;
 width: 200px;
 border-color: grey;

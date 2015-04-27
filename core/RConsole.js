@@ -209,6 +209,13 @@ var RConsole = {
 	var el_hr = document.createElement('hr');
 	
     var header_title = document.createTextNode('Task Editor');
+	//Creo un boton para mover con facilidad el Editor
+	var mov = document.createElement("input");
+	mov.type = "button";
+	mov.id = "g_move_edit_box";
+	mov.value = "^";
+
+	div_editor_header.appendChild(mov);	
 	div_editor_header.appendChild(header_title);	
 	div_editor_header.appendChild(el_hr);
 	

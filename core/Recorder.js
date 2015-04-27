@@ -91,6 +91,9 @@ var Recorder = {
 	*/
 	,addPrimitiveTask: function(event) {
 		var id_selected = event.target.options[event.target.options.selectedIndex].value;
+		
+		//Ya me traje el id ahora vuelvo el select a addTask
+		event.target.options.selectedIndex = 0;
 		//Esto es TEMPORAL, es una cagada
 		if(id_selected == 1){ //Si es DataCollectorTask
 		Manager.addDataCollectionTask('Select a Concept');		
@@ -106,6 +109,7 @@ var Recorder = {
 		return true;	
 		}
 
+		
 
 		return false;
 		//Este codigo no se si funciona
@@ -335,8 +339,8 @@ function handleSelectxPath(){
 
 		close_edit.onclick = function(){ 
 		   el = document.getElementById("div_editor_container");
-	
 		   el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
+		   removeListenersEditBox();
 		}
 
 		var edit_button = document.createElement('input');
@@ -803,7 +807,9 @@ if( arr_ls.length == 0){
 		edit_button.value = "Edit";
 		edit_button.setAttribute('class','tesisunlp_button_right');
 		edit_button.onclick = function(){
-		Recorder.editRow(this);
+			//Add Listener to move de edit box
+			addListenersEditBox();
+			Recorder.editRow(this);
 		};
 
 	var state_button = document.createElement('input');

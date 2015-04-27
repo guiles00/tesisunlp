@@ -23,3 +23,32 @@ document.onmousemove = function(e){
     dragObj.style.left = x +"px";
     dragObj.style.top= y +"px";
 };
+
+
+function mouseUpEditBox()
+{
+    window.removeEventListener('mousemove', moveEditBox, true);
+}
+
+function mouseDownEditBox(e){
+  window.addEventListener('mousemove', moveEditBox, true);
+}
+
+function moveEditBox(e){
+var div = document.getElementById('div_editor_container');
+  div.style.position = 'absolute';
+  div.style.top = e.clientY + 'px';
+  div.style.left = e.clientX + 'px';
+}
+
+
+function addListenersEditBox(){
+   document.getElementById('g_move_edit_box').addEventListener('mousedown', mouseDownEditBox, false);
+    window.addEventListener('mouseup', mouseUpEditBox, false);
+
+}
+function removeListenersEditBox(){
+    document.getElementById('g_header_title_id').removeEventListener('mousedown', mouseDownEditBox, false);
+    window.removeEventListener('mouseup', mouseUpEditBox, false);
+
+}

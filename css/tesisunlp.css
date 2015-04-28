@@ -89,6 +89,7 @@
 	border: solid black;
 }
 .tesisunlp_div_editor_container {
+
 	padding: 10px;
 	visibility: hidden;
 	position:absolute;
@@ -100,6 +101,7 @@
 	margin-left:-100px;
 	background: #A2AFA0;
 	border: solid #A2AFFF;
+	z-index: 500;
 }
 
 .animationLiveHighlighting {
@@ -116,6 +118,7 @@ height: 100px;
 width: 200px;
 border-color: grey;
 border-style: solid;
+z-index: 500;
 }
 
 .topcorner ul,li {

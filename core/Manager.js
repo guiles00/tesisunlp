@@ -525,20 +525,27 @@ var Manager = (function () {
                 stop.value="X";
                 stop.type="button";
                 stop.addEventListener('click',function(){
-                    
+                     //Guardo en el objeto creado
+                        
                      document.removeEventListener('mouseup', handlerSum,false);
                 });
 
                 var div_sum = document.createElement("div");
                 //div.classList.add('topcorner');
                 div_sum.id = "sum";
+
                 var body = document.getElementsByTagName("body")[0];
                 div.appendChild(div_sum);
                 div.appendChild(stop);
                 
                 body.appendChild(div);
 
+                //Inicializo localStorage
+                localStorage.setItem('sumatoria',JSON.stringify({values:[]}));
 
+              //  var st = [];
+             //   localStorage.setItem('sumatoria',JSON.stringify(st));
+              //  console.debug(localStorage.getItem('sumatoria'));
                 //Asumo que se agrego la tarea y empezo a escuchar 
                 document.addEventListener('mouseup', handlerSum,false);
                 //localStorage.setItem('sumatoria',JSON.stringify({values:[]}));
@@ -584,7 +591,7 @@ var  handlerSum = function(e) {
             selection = document.selection.createRange();
             console.debug('en createRange');
             }
-
+                    
             if(selection.toString().length != 0){
 
                 if(confirm('Seleccionar: '+selection.toString()+'?')){
@@ -593,6 +600,8 @@ var  handlerSum = function(e) {
                     var st = JSON.parse(localStorage.getItem('sumatoria'));
                     //Agrego elemento
                     st.values.push(val);
+
+
                     //guardo en el localStorage
                     localStorage.setItem('sumatoria',JSON.stringify(st));
                     

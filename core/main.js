@@ -2,6 +2,8 @@ window.onload = function(){
 //Check if there is BPMP in localStorage
 var bpmp = localStorage.getItem("BPMP");
 
+// localStorage.setItem('sumatoria',JSON.stringify({values:[]}));
+
 if(!bpmp){
 localStorage.setItem("BPMP",1);    
 localStorage.setItem("BPM", JSON.stringify( {'P1':[],'P2':[] } ) );

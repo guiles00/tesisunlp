@@ -30,7 +30,7 @@ window.onload = (function(){
 	        loadScript(absolute_path+'./core/',objects[i]+'.js');
 	};
 
-	var tasks = ['AbstractTask','PrimitiveTasks','Attribute','Utils','Sumatoria','NotasTask'];
+	var tasks = ['AbstractTask','PrimitiveTasks','Attribute','Utils','NotasTask','SumatoriaTask'];
 	//Load tasks
 	for (var i = 0; i < tasks.length; i++) {
 	        loadScript(absolute_path+'./js/',tasks[i]+'.js');

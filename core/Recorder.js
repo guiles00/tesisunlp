@@ -952,7 +952,7 @@ if( arr_ls.length == 0){
 	   var allNodes = document.getElementsByTagName('*'); 
 	   for (segs = []; elm && elm.nodeType == 1; elm = elm.parentNode) 
 	   { 
-	       if (elm.hasAttribute('id')) { 
+	       if (elm.hasAttribute('id') && false) { //no estra nunca a este if
 	       var uniqueIdCount = 0; 
 	       for (var n=0;n < allNodes.length;n++) { 
 	           if (allNodes[n].hasAttribute('id') && allNodes[n].id == elm.id) uniqueIdCount++; 
@@ -964,7 +964,7 @@ if( arr_ls.length == 0){
 	       } else { 
 	           segs.unshift(elm.localName.toLowerCase() + '[@id="' + elm.getAttribute('id') + '"]'); 
 	       } 
-	       } else if (elm.hasAttribute('class')) { 
+	       } else if (elm.hasAttribute('class') && false) { //Tampoco entra aca 
 	           segs.unshift(elm.localName.toLowerCase() + '[@class="' + elm.getAttribute('class') + '"]'); 
 	       } else { 
 	           for (i = 1, sib = elm.previousSibling; sib; sib = sib.previousSibling) { 

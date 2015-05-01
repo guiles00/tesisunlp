@@ -43,11 +43,11 @@ HighLightTask.prototype.instanciamela = function(o){
     this.tipo = Object.create(TipoAttribute).init({'value':o.tipo.value})
     this.state = Object.create(StateAttribute).init({'value':(o.state.value).toString()})
     this.taskTitle = Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value})
-    this.value = Object.create(SValueAttribute).init({'value':o.value.value});
+   // this.value = Object.create(SValueAttribute).init({'value':o.value.value});
 
     //ojo porque depende el tipo de valor, guardo diferente objeto
     
-   // this.value = (o.value._type =='CValueAttribute')?Object.create(CValueAttribute).init({'value':o.value.value}):Object.create(SValueAttribute).init({'value':o.value.value});
+    this.value = (o.value._type =='CValueAttribute')?Object.create(CValueAttribute).init({'concept':o.value.value,'value':o.value.value}):Object.create(SValueAttribute).init({'value':o.value.value});
 
     
     return this;
@@ -73,7 +73,9 @@ HighLightTask.prototype.htmlToJson = function(el_div){
         if( str_value.charAt(0) == '[' ){
         var oValue = Object.create(CValueAttribute);
         oValue._type = CValueAttribute._type;
-        oValue.value = str_value;
+        var str = str_value.toString();
+        
+        oValue.value = str_value;//str.substring(1,str.length -1);;
         
         }else{
         var oValue = Object.create(SValueAttribute);

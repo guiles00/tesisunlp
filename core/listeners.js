@@ -226,7 +226,6 @@ var eventoClick = function(event){
 */
 var eventoChange = function(event){
 		
-		
 		var location = document.location.href;
 		var el_id = event.target.id;
 		var el_value = event.target.value;

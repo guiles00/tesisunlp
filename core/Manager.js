@@ -437,7 +437,7 @@ var Manager = (function () {
             if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
                || task.type == 'SumatoriaTask' || task.type == 'FillInputTask'
                || task.type == 'TextAreaTask' || task.type =='SelectOptionTask'
-               || task.type == 'CheckBoxTask'){
+               || task.type == 'CheckBoxTask' || task.type == 'DataCollectionTask'){
             //var oTask = Manager.factoryTask(task.id,task.type,xPath,valor,tipo,task.state,task.taskTitle,xPath2);
             //var oTask = eval(task.type);
             var oTask = construct(window[task.type]);

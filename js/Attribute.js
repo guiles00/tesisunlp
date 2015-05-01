@@ -182,19 +182,26 @@ var CValueAttribute = {
         this.value = c.value || '' ;
         this.htmlId = c.htmlId || 'value_id'; 
         this.label = c.label || 'Value';
+        this.concept = c.concept || 'concept1';
+        
         return this;
     }
     ,getValue: function(){
 
     var concept = this.value.substring(1,this.value.length -1);
+    //console.debug(concept);
              //   console.debug('entro a este getValue');
              //   console.log(localStorageManager.getConceptValue(concept));
     return localStorageManager.getConceptValue(concept);
     }
+    ,getConcept: function(){
+        return this.concept;
+    }
     ,getHtmlElement: function(){
         var input_element = Object.create(inputElement);
         input_element.label = this.getLabel();
-        input_element.value = this.getValue();
+        //input_element.value = this.getValue();
+        input_element.value = this.getConcept();
         input_element.id =   this.getHtmlId();
             
        return input_element;

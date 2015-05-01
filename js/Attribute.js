@@ -8,6 +8,7 @@ var Attribute = {
     ,label:''
     ,htmlElement:''
     ,init: function(c){
+
         this.value = c.value || 'aValue' ;
         this.htmlId = c.htmlId || 'aId'; 
         this.label = c.label || 'aLabel';
@@ -79,6 +80,7 @@ var DestDataAttribute = {
 var XPathAttribute = {
      _type:'XPathAttribute'
     ,init: function(c){
+       
         this.value = c.value || '' ;
         this.htmlId = c.htmlId || 'xpath_id'; 
         this.label = c.label || 'xPath';
@@ -163,6 +165,7 @@ var SValueAttribute = {
         return this;
     }
     ,getHtmlElement: function(){
+       // console.debug('trae elemento');
         var input_element = Object.create(inputElement);
         input_element.label = this.getLabel();
         input_element.value = this.getValue();
@@ -182,8 +185,10 @@ var CValueAttribute = {
         return this;
     }
     ,getValue: function(){
+
     var concept = this.value.substring(1,this.value.length -1);
-        
+             //   console.debug('entro a este getValue');
+             //   console.log(localStorageManager.getConceptValue(concept));
     return localStorageManager.getConceptValue(concept);
     }
     ,getHtmlElement: function(){
@@ -250,3 +255,29 @@ var Precondition = {
         return this.url;
     }
 }
+
+
+
+function XPath2Attribute(c){
+     this._type = 'XPathAttribute';
+     this.value = c.value || '' ;
+     this.htmlId = c.htmlId || 'xpath_id'; 
+     this.label = c.label || 'xPath';
+     
+     return this;
+}
+XPath2Attribute.init = function(c){
+       
+        this.value = c.value || '' ;
+        this.htmlId = c.htmlId || 'xpath_id'; 
+        this.label = c.label || 'xPath';
+        return this;
+    }
+XPath2Attribute.getHtmlElement = function(){
+        var input_element = Object.create(inputElement);
+        input_element.label = this.getLabel();
+        input_element.value = this.getValue();
+        input_element.id =   this.getHtmlId();
+            
+       return input_element;
+    }

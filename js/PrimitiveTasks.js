@@ -86,7 +86,6 @@ console.debug(oTask);
 PrimitiveTask.prototype.toHtml = function(properties){
 
     var array_elementos = new Array();
- 
     array_elementos.push(this.taskTitle.getHtmlElement());
     array_elementos.push(this.xPath.getHtmlElement());
     array_elementos.push(this.value.getHtmlElement());
@@ -105,20 +104,20 @@ return JSON.stringify(this);
 
 
 /**
- * FillInputTask
- * @class FillInputTask
+ * noFillInputTask
+ * @class noFillInputTask
  * @extends PrimitiveTask
  */
-function FillInputTask(id,xPath,value,tipo,state,taskTitle){
+function noFillInputTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
     this.msg = "Enter String to Input ";
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Enter String to Input '})
-    this.type = "FillInputTask";
+    this.type = "noFillInputTask";
     this.state = state;
 }
-FillInputTask.prototype = new PrimitiveTask();
+noFillInputTask.prototype = new PrimitiveTask();
 
-FillInputTask.prototype.execute = function(){
+noFillInputTask.prototype.execute = function(){
     
     var that = this;
 /**handlers*/
@@ -166,14 +165,14 @@ var handlers = function(){
     }
 }
 
-FillInputTask.init = function(c){
-  return new FillInputTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
+noFillInputTask.prototype.init = function(c){
+  return new noFillInputTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
 };
 
 /**
 * @method htmlToJson
 */
-FillInputTask.prototype.htmlToJson = function(el_div){
+noFillInputTask.prototype.htmlToJson = function(el_div){
 
         var str_taskTitle = document.getElementById('task_title_id').value;
         var str_xPath = document.getElementById('xpath_id').value;
@@ -191,7 +190,7 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         return true;
         }    */
 
-        //Se que un FillInputTask tiene los campos xPath y value
+        //Se que un noFillInputTask tiene los campos xPath y value
         var xPath = Object.create(XPathAttribute);
         xPath.value = str_xPath;
 
@@ -223,7 +222,7 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         oTaskTitle._type = TaskTitleAttribute._type;
         oTaskTitle.value = str_taskTitle ;
         
-        var o_task = new FillInputTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
+        var o_task = new noFillInputTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
         //o_task.taskTitle = oTaskTitle; //Lo hago por ahora, hay que hacer
     
     return o_task.toJson();
@@ -239,7 +238,7 @@ function TextAreaTask(id,xPath,value,tipo,state,taskTitle){
 }
 TextAreaTask.prototype = new PrimitiveTask();
 
-TextAreaTask.init = function(c){
+TextAreaTask.prototype.init = function(c){
   return new TextAreaTask(c.id,c.xpath,c.value,c.tipo,c.state);
 };
 TextAreaTask.prototype.toJson = function(){
@@ -251,7 +250,7 @@ return JSON.stringify(this);
  * @method emptyToJson
  */
 TextAreaTask.prototype.emptyToJson = function(){
-//{"id":0,"type":"FillInputTask","state":0,"atributos":[{"label":"ID","el_type":"input","value":10,"id":"id"},{"label":"xPath","el_type":"input","id":"id_xpath"},{"label":"Valor","el_type":"input","id":"id_value"}]} 
+//{"id":0,"type":"noFillInputTask","state":0,"atributos":[{"label":"ID","el_type":"input","value":10,"id":"id"},{"label":"xPath","el_type":"input","id":"id_xpath"},{"label":"Valor","el_type":"input","id":"id_value"}]} 
 //Aqui armo el objeto JSON segun especifcaciones, que por ahora es igual que JUNIO 20 
    var obj_task = new Object();
     obj_task.id = 0 ;    
@@ -302,7 +301,11 @@ TextAreaTask.prototype.toHtml = function(properties){
     array_elementos.push(this.value.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());
     array_elementos.push(this.tipo.getHtmlElement());
+console.debug('asd');
+console.debug(this.value);
 
+console.debug(this.value.getHtmlElement());
+    console.debug('asd');
     return array_elementos;
   }
 
@@ -360,7 +363,7 @@ function SelectOptionTask(id,xPath,value,tipo,state,taskTitle){
 }
 SelectOptionTask.prototype = new PrimitiveTask();
 
-SelectOptionTask.init = function(c){
+SelectOptionTask.prototype.init = function(c){
   return new SelectOptionTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
 };
 SelectOptionTask.prototype.toHtml = function(properties){
@@ -403,7 +406,7 @@ SelectOptionTask.prototype.htmlToJson = function(el_div){
         return true;
         }    
 
-        //Se que un FillInputTask tiene los campos xPath y value
+        //Se que un noFillInputTask tiene los campos xPath y value
         var xPath = Object.create(XPathAttribute);
         xPath.value = str_xPath;
 
@@ -442,7 +445,7 @@ function CheckBoxTask(id,xPath,value,tipo,state,taskTitle){
 
 }
 CheckBoxTask.prototype = new PrimitiveTask();
-CheckBoxTask.init = function(c){
+CheckBoxTask.prototype.init = function(c){
   return new CheckBoxTask(c.id,c.xpath,c.value,c.tipo,c.state);
 };
 CheckBoxTask.prototype.execute = function(){
@@ -465,7 +468,7 @@ function RadioTask(id,xPath,value,tipo,state,taskTitle){
 }
 RadioTask.prototype = new PrimitiveTask();
 
-RadioTask.init = function(c){
+RadioTask.prototype.init = function(c){
   return new RadioTask(c.id,c.xpath,c.value,c.tipo,c.state);
 };
 
@@ -553,7 +556,7 @@ function ClickInputTask(id,xPath,value,tipo,state,taskTitle){
 }
 ClickInputTask.prototype = new PrimitiveTask();
 
-ClickInputTask.init = function(c){
+ClickInputTask.prototype.init = function(c){
   return new ClickInputTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
 };
 
@@ -849,7 +852,7 @@ UrlTask.prototype.execute = function(){
 UrlTask.prototype.setLocation = function(url){
     this.location = url;
 }
-UrlTask.init = function(c){
+UrlTask.prototype.init = function(c){
   return new UrlTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
 };
 
@@ -875,7 +878,7 @@ return false;
         return true;
         }    
 
-        //Se que un FillInputTask tiene los campos xPath y value
+        //Se que un noFillInputTask tiene los campos xPath y value
         var xPath = Object.create(XPathAttribute);
         xPath.value = str_xPath;
 
@@ -906,7 +909,7 @@ return false;
         oTaskTitle._type = TaskTitleAttribute._type;
         oTaskTitle.value = str_taskTitle ;
         
-        var o_task = new FillInputTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
+        var o_task = new noFillInputTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
         //o_task.taskTitle = oTaskTitle; //Lo hago por ahora, hay que hacer
     
     return o_task.toJson();
@@ -958,7 +961,7 @@ DataCollectionTask.prototype.execute = function(){
 DataCollectionTask.prototype.setLocation = function(url){
     this.location = url;
 }
-DataCollectionTask.init = function(c){
+DataCollectionTask.prototype.init = function(c){
   return new DataCollectionTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle/*,c.destData*/);
 };
 
@@ -983,7 +986,7 @@ DataCollectionTask.prototype.htmlToJson = function(el_div){
         return true;
         }    
 
-        //Se que un FillInputTask tiene los campos xPath y value
+        //Se que un noFillInputTask tiene los campos xPath y value
         var xPath = Object.create(XPathAttribute);
         xPath.value = str_xPath;
 
@@ -1040,166 +1043,6 @@ DataCollectionTask.prototype.toHtml = function(properties){
 
 
 /**
- *  Augmented Task - Highlight searchText
- *
- *
- *
- */
-
-function HighLightTask(id,xPath,value,tipo,state,taskTitle/*,destData*/){
-    PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
-    this.msg = "Init ";
-    this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'HighLight Task '})
-    this.type = "HighLightTask";
-    this.state = state;
-    this.location = '';
-}
-//Lo pongo como primitiva, por ahora es igual
-HighLightTask.prototype = new PrimitiveTask();
-
-HighLightTask.prototype.execute = function(){
-       
-        searchText(this.value.getValue().toString());
-        this.finalizo(this.id);
-}
-HighLightTask.prototype.setLocation = function(url){
-    this.location = url;
-}
-HighLightTask.init = function(c){
-  return new HighLightTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
-};
-
-/**
-* @method htmlToJson
-*/
-HighLightTask.prototype.htmlToJson = function(el_div){
-
-        var str_taskTitle = document.getElementById('task_title_id').value;
-        var str_xPath = document.getElementById('xpath_id').value;
-        var str_value = document.getElementById('value_id').value;
-        var str_state = document.getElementById('state_id').value;
-        var str_tipo = document.getElementById('tipo_id').value;
-        
-        
-        var xPath = Object.create(XPathAttribute);
-        xPath.value = str_xPath;
-
-        //@comment Si el str_value es un string u objeto instancio distinto valor
-        if( str_value.charAt(0) == '[' ){
-        var oValue = Object.create(CValueAttribute);
-        oValue._type = CValueAttribute._type;
-        oValue.value = str_value;
-        
-        }else{
-        var oValue = Object.create(SValueAttribute);
-        oValue._type = SValueAttribute._type;
-        oValue.value = str_value;
-        }
-       
-        var oState = Object.create(StateAttribute);
-        oState._type = StateAttribute._type;
-        oState.value = str_state;
-
-
-        var oTipo = Object.create(TipoAttribute);
-        oTipo._type = TipoAttribute._type;
-        oTipo.value = str_tipo;
-
-        var oTaskTitle = Object.create(TaskTitleAttribute);
-        oTaskTitle._type = TaskTitleAttribute._type;
-        oTaskTitle.value = str_taskTitle ;
-        
-  
-        var o_task = new HighLightTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
-        
-    return o_task.toJson();
-}
-
-HighLightTask.prototype.toHtml = function(properties){
-
-    var array_elementos = new Array();
- 
-    array_elementos.push(this.taskTitle.getHtmlElement());
-    array_elementos.push(this.xPath.getHtmlElement());
-    array_elementos.push(this.value.getHtmlElement());
-    array_elementos.push(this.state.getHtmlElement());
-    array_elementos.push(this.tipo.getHtmlElement());
-
-    return array_elementos;
-}
-
-/**
- * Funcion auxiliar -doHighLight
- *
- *
- */
-
-function doHighlight(bodyText, searchTerm, highlightStartTag, highlightEndTag) 
-{
-  // the highlightStartTag and highlightEndTag parameters are optional
-  if ((!highlightStartTag) || (!highlightEndTag)) {
-    highlightStartTag = "<font class='animationLiveHighlighting'>";
-    highlightEndTag = "</font>";
-  }
-  
-  // find all occurences of the search term in the given text,
-  // and add some "highlight" tags to them (we're not using a
-  // regular expression search, because we want to filter out
-  // matches that occur within HTML tags and script blocks, so
-  // we have to do a little extra validation)
-  var newText = "";
-  var i = -1;
-  var lcSearchTerm = searchTerm.toLowerCase();
-  var lcBodyText = bodyText.toLowerCase();
-    
-  while (bodyText.length > 0) {
-    i = lcBodyText.indexOf(lcSearchTerm, i+1);
-    if (i < 0) {
-      newText += bodyText;
-      bodyText = "";
-    } else {
-      // skip anything inside an HTML tag
-      if (bodyText.lastIndexOf(">", i) >= bodyText.lastIndexOf("<", i)) {
-    
-        // skip anything inside a <script> block
-        if (lcBodyText.lastIndexOf("/script>", i) >= lcBodyText.lastIndexOf("<script", i)) {
-            //Saca la consola tambien
-          if (lcBodyText.lastIndexOf("/div>", i) >= lcBodyText.lastIndexOf('div_consola', i)) {
-          
-          newText += bodyText.substring(0, i) + highlightStartTag + bodyText.substr(i, searchTerm.length) + highlightEndTag;
-          bodyText = bodyText.substr(i + searchTerm.length);
-          lcBodyText = bodyText.toLowerCase();
-          i = -1;
-        }
-    }
-      }
-    }
-  }
-  
-  return newText;
-};
-
-function searchText(a){
-
-    //Por las dudas saco los espacios
-    var a = a.trim();
-
-    var items = document.getElementsByTagName("*");
-    
-    var tags_allowed = ['P','H2','H3','H4','H5','A','INPUT','FORM'];
-    for (var i = 0; i < items.length ; i++) {
-        //Sólo reemplaza los tags permitidos 
-        if(tags_allowed.indexOf(items[i].nodeName) >= 0){
-          //items[i].innerHTML = items[i].innerHTML.replace(a,'<font class="animationLiveHighlighting">'+a+'</font>');    
-          items[i].innerHTML = doHighlight(items[i].innerHTML, a)      
-        }
-    }
-    return false;
-    
-}
-
-
-/**
  *  Augmented Task - Sumatoria
  *
  *
@@ -1250,7 +1093,7 @@ SumatoriaTask.prototype.execute = function(){
 SumatoriaTask.prototype.setLocation = function(url){
     this.location = url;
 }
-SumatoriaTask.init = function(c){
+SumatoriaTask.prototype.init = function(c){
   return new SumatoriaTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
 };
 

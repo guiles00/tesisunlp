@@ -30,7 +30,7 @@ NotasTask.prototype.execute = function(){
 NotasTask.prototype.setLocation = function(url){
     this.location = url;
 }
-NotasTask.init = function(c){
+NotasTask.prototype.init = function(c){
   return new NotasTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
 };
 

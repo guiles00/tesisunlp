@@ -3,6 +3,7 @@ window.onload = function(){
 var bpmp = localStorage.getItem("BPMP");
 
 // localStorage.setItem('sumatoria',JSON.stringify({values:[]}));
+//localStorage.setItem('SHARED_DATA',JSON.stringify(new Object()));
 
 if(!bpmp){
 localStorage.setItem("BPMP",1);    
@@ -34,5 +35,5 @@ if(localStorage.getItem("BPMEXECUTION") == 1){
 	RConsole.showConsola();
 	Recorder.clickPlay();
 }
-    
+
 };	

@@ -17,6 +17,7 @@ document.head.appendChild(tesis_css);
 window.onload = (function(){
 
 	var absolute_path = 'http://127.0.0.1/tesis/tesisunlp/';
+	//var absolute_path = 'var/www/tesis/tesisunlp/js/';
 
 	function loadScript (dir, file) {
 	 var scr = document.createElement("script");
@@ -30,7 +31,8 @@ window.onload = (function(){
 	        loadScript(absolute_path+'./core/',objects[i]+'.js');
 	};
 
-	var tasks = ['AbstractTask','PrimitiveTasks','Attribute','Utils','NotasTask','SumatoriaTask'];
+	var tasks = ['PrimitiveTasks','AbstractTask','Attribute','Utils'
+	,'NotasTask','SumatoriaTask','ConcatStringTask','HighLightTask','FillInputTask'];
 	//Load tasks
 	for (var i = 0; i < tasks.length; i++) {
 	        loadScript(absolute_path+'./js/',tasks[i]+'.js');

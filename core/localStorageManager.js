@@ -117,18 +117,20 @@ localStorageManager = {
     * @params: json_tasks (un objeto JSON)
     */
     ,setObjectR: function(json_task){
+        console.debug(json_task);
        // console.log('guarda este objeto');
        // console.debug(json_task);
         var procedure = document.getElementById('procedures_select').value;
 
         var o = JSON.parse(json_task);
+        console.debug(o);
         var tasks = localStorage.getItem("BPM");
         var obj_tasks = JSON.parse(tasks);
         var arr_ls = obj_tasks[procedure];
         
         var i;
         for (i = 0; i < arr_ls.length; i = i + 1) {
-       
+            console.debug(arr_ls[i]);
             if(arr_ls[i].id == o.id) {
                 
                 arr_ls[i] = o; 
@@ -150,11 +152,11 @@ localStorageManager = {
     var o = JSON.parse(json_object);
     
     //@TODO: Que onda este if? 
-    if(o.type == 'FillInputTask' || o.type == 'TextAreaTask' || o.type == 'SelectOptionTask' 
+    /*if(o.type == 'FillInputTask' || o.type == 'TextAreaTask' || o.type == 'SelectOptionTask' 
         || o.type == 'ClickLinkTask' || o.type == 'ClickInputTask' 
         || o.type == 'UrlTask' || o.type == 'DataCollectionTask' || o.type == 'HighLightTask' 
         || o.type == 'SumatoriaTask' || o.type == 'NotasTask'){
-    
+    */
     var ls = localStorage.getItem("BPM");
     var o_ls = JSON.parse(ls);
 
@@ -174,7 +176,7 @@ localStorageManager = {
     localStorage.setItem("BPM",json_task);
 
     return false; 
-    }
+    //}
 
     //PARCHE--> Cuando modifique el JSON ya no va a estar mas
     //Traigo el array

@@ -44,6 +44,11 @@ var Manager = (function () {
          currentPrimitiveTasks.push(aPrimitiveTask);
         }
 
+        function createConcatStringTask(aId,xPath,value,aMsg,aTipo,aState,xPath2){
+                                        //(aId,xPath,value,tipo,state,xPath2)
+         return new ConcatStringTask(aId,xPath,value,aMsg,aTipo,aState,xPath2);   
+        }
+
         function createNotasTask(aId,xPath,value,aMsg,aTipo,aState){
          return new NotasTask(aId,xPath,value,aMsg,aTipo,aState);   
         }
@@ -177,12 +182,12 @@ var Manager = (function () {
                   document.addEventListener('finalizado',procedureHandler,false);
 
                   var arr_tareas = Manager.getCurrentPrimitiveTasks();
-                  console.debug(arr_tareas);
                   var indice = Manager.getIndice();
                   var task = arr_tareas[indice]; 
-                  console.debug(task);
+            
+                  task.execute();  
+           
                   
-                  task.execute();
                   //console.debug('ejecuto o no ejecuto?');
 		          //Manager.executeNextTaskWithTimer();
         	}
@@ -195,7 +200,7 @@ var Manager = (function () {
         /**
         * @method addPrimitiveTask
         */   //Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,value,0,arr_ls[i].state);
-        	,addPrimitiveTask : function(aId,aPrimitiveTaskType,xPath,value,tipo,state,taskTitle){
+        	,addPrimitiveTask : function(aId,aPrimitiveTaskType,xPath,value,tipo,state,taskTitle,xPath2){
     		//Este metodo reemplaza al switch
 	    	var lookup = 
 	    	{ FillInputTask: createFillInputTask(aId,xPath,value,tipo,state,taskTitle)
@@ -209,12 +214,15 @@ var Manager = (function () {
             , HighLightTask: createHighLightTask(aId,xPath,value,tipo,state)
             , SumatoriaTask: createSumatoriaTask(aId,xPath,value,tipo,state)
             , NotasTask: createNotasTask(aId,xPath,value,tipo,state)
+            , ConcatStringTask: createConcatStringTask(aId,xPath,value,tipo,state,xPath2)
+
             } 
 	    	, def = null ;
 
 	    	lookup[aPrimitiveTaskType] ? subscribe(lookup[aPrimitiveTaskType]) : def();
 		   }
-           ,factoryTask : function(aId,aPrimitiveTaskType,xPath,value,tipo,state,taskTitle){
+           ,factoryTask : function(aId,aPrimitiveTaskType,xPath,value,tipo,state,taskTitle,xPath2){
+            
             //Este metodo reemplaza al switch
             var lookup = 
             { FillInputTask: createFillInputTask(aId,xPath,value,tipo,state,taskTitle)
@@ -228,6 +236,7 @@ var Manager = (function () {
             , HighLightTask: createHighLightTask(aId,xPath,value,tipo,state)
             , SumatoriaTask: createSumatoriaTask(aId,xPath,value,tipo,state)
             , NotasTask: createNotasTask(aId,xPath,value,tipo,state)
+            , ConcatStringTask: createConcatStringTask(aId,xPath,value,'',tipo,state,xPath2)
             } 
             , def = null ;
 
@@ -350,6 +359,16 @@ var Manager = (function () {
             var tipo = Object.create(TipoAttribute); 
             tipo.setValue(arr_ls[i].tipo.value);
 
+            console.debug('uncanenenen');
+
+            //TODO30052015
+             if(arr_ls[i].type == 'ConcatStringTask'){
+            var xPath2 = Object.create(XPathAttribute); 
+            xPath2.setValue(arr_ls[i].xPath2.value);
+            xPath2.htmlId = arr_ls[i].xPath2.htmlId;
+            console.debug(xPath2);
+            console.debug('uncanenenen');
+            }
             //Lo diferencio con el _type que guardo en cada {} asi instancio el que corresponde
 
             //var value = eval(arr_ls[i].value._type);
@@ -368,8 +387,15 @@ var Manager = (function () {
             }            
 
             try{
-            
+           
+           if(arr_ls[i].type == 'ConcatStringTask'){
+            Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle,xPath2);
+           
+            }else{
             Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);
+            } 
+            
+
             }catch(err){
                 console.log(err);
             }
@@ -382,11 +408,19 @@ var Manager = (function () {
 
 
             var task = localStorageManager.getObject(id);
-            console.debug(task);
+            //console.debug(task);
             
             //Instancio xPath y Value (wrappers de atributos)
             var xPath = Object.create(XPathAttribute); 
             xPath.setValue(task.xPath.value);
+            
+            //TODO30052015
+      /*      if(task.type == 'ConcatStringTask'){
+            //TEMP
+            var xPath2 = Object.create(XPathAttribute); 
+            xPath2.setValue(task.xPath2.value);
+            xPath2.htmlId = task.xPath2.htmlId;
+            }*/
             var tipo = Object.create(TipoAttribute); 
             tipo.setValue(task.tipo.value);
             
@@ -400,7 +434,19 @@ var Manager = (function () {
             
             //Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);
             //Creo el objeto tarea
+            if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
+               || task.type == 'SumatoriaTask'){
+            //var oTask = Manager.factoryTask(task.id,task.type,xPath,valor,tipo,task.state,task.taskTitle,xPath2);
+            //var oTask = eval(task.type);
+            var oTask = construct(window[task.type]);
+
+            oTask.instanciamela(task);//.execute();
+            oTask.execute();
+            return;
+            }else{
             var oTask = Manager.factoryTask(task.id,task.type,xPath,valor,tipo,task.state,task.taskTitle);
+            }
+           //ACa tambien hay que diferenciarlo
             console.debug(oTask);
             oTask.execute();
             Recorder.refresh();
@@ -471,7 +517,7 @@ var Manager = (function () {
             }
             ,addHighLightTask: function(searchText){
 
-                var o_task;
+/*                var o_task;
 
                 var tipo = Object.create(TipoAttribute);
                     tipo._type = TipoAttribute._type;
@@ -491,6 +537,14 @@ var Manager = (function () {
                 localStorageManager.insert(o_task.toJson());
                 Recorder.refresh();
 
+
+*/
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new HighLightTask();
+                localStorageManager.insert(a_task.toJson());
+                //No te olvides de actualizar la consola
+                Recorder.refresh();
+
             },addSumatoriaTask: function(){
 
                 var o_task;
@@ -506,13 +560,12 @@ var Manager = (function () {
                     xPath.setValue('sxPath');
                 var objValue = Object.create(CValueAttribute);
                     objValue._type = SValueAttribute._type;     
-                    objValue.setValue(searchText);
+                    //objValue.setValue(searchText);
    
                 o_task = new SumatoriaTask(10,xPath,objValue,tipo,state,null);
                 o_task.setLocation(location);
                 localStorageManager.insert(o_task.toJson());
                 Recorder.refresh();
-                //alert('agrego?');
                 
                 //Este augmenter tiene mas comportamiento, donde lo pongo??
                 //Pensar algun injector de todo el codigo JS
@@ -566,11 +619,44 @@ var Manager = (function () {
                     xPath.setValue('sxPath');
                 var objValue = Object.create(CValueAttribute);
                     objValue._type = SValueAttribute._type;     
-                    objValue.setValue(searchText);
+                   // objValue.setValue(searchText);
    
                 o_task = new NotasTask(10,xPath,objValue,tipo,state,null);
                 //o_task.setLocation(location);
                 localStorageManager.insert(o_task.toJson());
+                Recorder.refresh();
+                
+            }
+            ,addConcatStringTask: function(){
+
+            /*    var o_task;
+
+                var tipo = Object.create(TipoAttribute);
+                    tipo._type = TipoAttribute._type;
+                    tipo.setValue(1);
+                var state = Object.create(StateAttribute);
+                    state._type = StateAttribute._type;
+                    state.setValue(0);
+                var xPath = Object.create(XPathAttribute);
+                    xPath._type = XPathAttribute._type;
+                    xPath.setValue('sxPath');
+
+                var xPath2 = Object.create(XPathAttribute);
+                    xPath2._type = XPathAttribute._type;
+                    xPath2.setValue('sxPath');
+                    xPath2.htmlId = 'xpath2_id';
+
+                var objValue = Object.create(CValueAttribute);
+                    objValue._type = SValueAttribute._type;     
+                    objValue.setValue(searchText);
+   
+                o_task = new ConcatStringTask(10,xPath,objValue,tipo,state,null,xPath2);
+                localStorageManager.insert(o_task.toJson());
+                */
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new ConcatStringTask();
+                localStorageManager.insert(a_task.toJson());
+                //No te olvides de actualizar la consola
                 Recorder.refresh();
                 
             }

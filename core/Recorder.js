@@ -2,8 +2,13 @@
 /**
  * @class Recorder
  */
-
-
+function construct(constructor, args) {
+    function F() {
+        return constructor.apply(this, args);
+    }
+    F.prototype = constructor.prototype;
+    return new F();
+}
 var Recorder = {
 	importProcedure: function(e){
 		
@@ -106,6 +111,9 @@ var Recorder = {
 		return true;	
 		}else if(id_selected == 4){
 		Manager.addNotasTask('');			
+		return true;	
+		}else if(id_selected == 5){
+		Manager.addConcatStringTask('');			
 		return true;	
 		}
 
@@ -364,20 +372,34 @@ function handleSelectxPath(){
 	Recorder.createEditorContainer();
 	
     var task = localStorageManager.getObject(x.parentNode.parentNode.id); //@comment Podría traer el objeto instanciado
- 	var aTask = eval(task.type);
+ 	console.debug(task);
+ 	var aTask = construct(window[task.type]);
  	//*Hasta que le encuntre la solucion diferencio las tareas**/
-	
-	var iTask = aTask.init({'id':task.id,'xpath':Object.create(XPathAttribute).init({'value':task.xPath.value})
+	//TODOEDIT Esto lo hago para ir pasando el comportamiento a las tareas
+	if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
+	 || task.type == 'SumatoriaTask' || task.type == 'FillInputTask'  ){
+	//En este punto yo se que traigo y como lo interpreto
+	//var iTask = aTask.instanciate(task);
+	aTask.instanciamela(task);
+console.debug(aTask);
+	//return;
+	var y = aTask.toHtml();
+
+	}else{
+	var iTask = aTask.init({'id':task.id,
+	'xpath':Object.create(XPathAttribute).init({'value':task.xPath.value})
 	,'value':Object.create(SValueAttribute).init({'value':task.value.value})
 	,'tipo':Object.create(TipoAttribute).init({'value':task.tipo.value})
 	,'state':Object.create(StateAttribute).init({'value':(task.state.value).toString()})
 	,'taskTitle':Object.create(TaskTitleAttribute).init({'value':task.taskTitle.value})
  	});
- 	
+	
+	var y = iTask.toHtml();
+	}
+	//return;
 	// 	var pre = Object.create(Precondition).init(Object.create(UrlAttribute).init({'value':task.precondition.url.value}));	
 	//	iTask.setPrecondition(pre);
-	var y = iTask.toHtml();
-
+	
 	view.render(document.getElementById("div_inflate"), y);
 		
 	/*****/
@@ -395,9 +417,16 @@ function handleSelectxPath(){
 	//El comportamiento de los botones todavia no se bien como desacoplarlo
 	var b = document.getElementById('id_edit_task');
 	b.onclick = function(){
-    
+    if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
+    	||  task.type == 'SumatoriaTask' ||  task.type == 'FillInputTask'){
+	//En este punto yo se que traigo y como lo interpreto
+	//var iTask = aTask.instanciate(task);
+	
+	 localStorageManager.setObjectR(aTask.htmlToJson(document.getElementById("div_inflate")));
+	 //return;
+    }else{
     localStorageManager.setObjectR(iTask.htmlToJson(document.getElementById("div_inflate")));
-
+    }
   	el = document.getElementById("div_editor_container");
     el.style.visibility = "hidden";
     
@@ -571,8 +600,8 @@ if( arr_ls.length == 0){
 		
   		var i; //Recorro el array de tareas
         for (i=0;i < arr_ls.length ;i++){
-			
-
+			console.debug(arr_ls[i]);
+        	//TODO30052015
 			//Hardcodeo para ver si funciona, creo que tengo que modificar la manera en que se instancian las tareas
 
         	if(arr_ls[i].type == 'LinkATask'){
@@ -581,6 +610,42 @@ if( arr_ls.length == 0){
 			
 			var c_t = Manager.getCurrentPrimitiveTasks();
 			c_t.push(aug_task);
+
+        	}
+
+        	if(arr_ls[i].type == 'ConcatStringTask' || arr_ls[i].type == 'SumatoriaTask'
+        		|| arr_ls[i].type == 'HighLightTask'){
+
+         /*   var xPath2 = Object.create(XPathAttribute); 
+            xPath2.setValue(arr_ls[i].xPath2.value);
+            xPath2.htmlId = arr_ls[i].xPath2.htmlId;*/
+
+            	var xPath = Object.create(XPathAttribute); 
+    		xPath.setValue(arr_ls[i].xPath.value);
+			var tipo = Object.create(TipoAttribute); 
+    		tipo.setValue(arr_ls[i].tipo.value);
+
+			if(arr_ls[i].value._type == 'CValueAttribute'){ 
+			var valor = Object.create(CValueAttribute); 
+	    		valor.setValue(arr_ls[i].value.value);
+			}else{
+			var valor = Object.create(SValueAttribute); 
+	    		valor.setValue(arr_ls[i].value.value);
+			}
+			//como es una de las tareas nuevas la convierto otra vez en JSON
+			var json_task = localStorageManager.getObject(arr_ls[i].id);
+			/*if(arr_ls[i].type == 'SumatoriaTask'){
+			var c_task = construct(window[arr_ls[i].type]);
+			console.debug(c_task.instanciamela(json_task));
+			return;	
+			}*/
+			var c_task = construct(window[arr_ls[i].type]);
+			
+			//var c_task = new ConcatStringTask();
+			c_task.instanciamela(json_task);
+			
+			var c_t = Manager.getCurrentPrimitiveTasks();
+			c_t.push(c_task);
 
         	}
 
@@ -611,6 +676,8 @@ if( arr_ls.length == 0){
 
         	try{
         		//Esto para ver si funciona ok, despues lo saco.
+           if(arr_ls[i].type !== 'ConcatStringTask')
+
             Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);	
             
         	}catch(err){
@@ -838,7 +905,6 @@ if( arr_ls.length == 0){
 		//play_button.setAttribute('class','tesisunlp_button');
 		play_button.onclick = function(){
 		
-		//alert('Empieza desde aca'+this.parentNode.parentNode.id);
 		console.debug('Empieza desde aca'+this.parentNode.parentNode.id);
 		//Manager.playFromTask(this.parentNode.parentNode.id);
 		Manager.playTaskById(this.parentNode.parentNode.id);

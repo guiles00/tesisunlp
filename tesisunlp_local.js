@@ -25,14 +25,16 @@ window.onload = (function(){
 	 document.body.appendChild(scr);
 	}
 
-	var objects = ['main','edit','listeners','RConsole','Recorder','Manager','localStorageManager','StorageManager'];
+	var objects = ['main','edit','listeners','RConsole','Recorder'
+	,'Manager','localStorageManager','StorageManager'];
 	//Load core
 	for (var i = 0; i < objects.length; i++) {
 	        loadScript(absolute_path+'./core/',objects[i]+'.js');
 	};
 
 	var tasks = ['PrimitiveTasks','AbstractTask','Attribute','Utils'
-	,'NotasTask','SumatoriaTask','ConcatStringTask','HighLightTask','FillInputTask'];
+	,'NotasTask','SumatoriaTask','ConcatStringTask','HighLightTask'
+	,'FillInputTask','TextAreaTask','SelectOptionTask','CheckBoxTask'];
 	//Load tasks
 	for (var i = 0; i < tasks.length; i++) {
 	        loadScript(absolute_path+'./js/',tasks[i]+'.js');

@@ -229,19 +229,19 @@ noFillInputTask.prototype.htmlToJson = function(el_div){
 }
 
 //Herencia --> PrimitiveTask
-function TextAreaTask(id,xPath,value,tipo,state,taskTitle){
+function noTextAreaTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
     this.msg = "Enter String TextArea ";
-    this.type = "TextAreaTask";
+    this.type = "noTextAreaTask";
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Enter String TextArea '})
     this.state = state;
 }
-TextAreaTask.prototype = new PrimitiveTask();
+noTextAreaTask.prototype = new PrimitiveTask();
 
-TextAreaTask.prototype.init = function(c){
-  return new TextAreaTask(c.id,c.xpath,c.value,c.tipo,c.state);
+noTextAreaTask.prototype.init = function(c){
+  return new noTextAreaTask(c.id,c.xpath,c.value,c.tipo,c.state);
 };
-TextAreaTask.prototype.toJson = function(){
+noTextAreaTask.prototype.toJson = function(){
 
 return JSON.stringify(this); 
 
@@ -249,12 +249,12 @@ return JSON.stringify(this);
 /**
  * @method emptyToJson
  */
-TextAreaTask.prototype.emptyToJson = function(){
+noTextAreaTask.prototype.emptyToJson = function(){
 //{"id":0,"type":"noFillInputTask","state":0,"atributos":[{"label":"ID","el_type":"input","value":10,"id":"id"},{"label":"xPath","el_type":"input","id":"id_xpath"},{"label":"Valor","el_type":"input","id":"id_value"}]} 
 //Aqui armo el objeto JSON segun especifcaciones, que por ahora es igual que JUNIO 20 
    var obj_task = new Object();
     obj_task.id = 0 ;    
-    obj_task.type = 'TextAreaTask';
+    obj_task.type = 'noTextAreaTask';
     obj_task.state = 0;
     obj_task.atributos  = new Array();
 
@@ -293,7 +293,7 @@ TextAreaTask.prototype.emptyToJson = function(){
     return JSON.stringify(obj_task);
 }
 
-TextAreaTask.prototype.toHtml = function(properties){
+noTextAreaTask.prototype.toHtml = function(properties){
     
     var array_elementos = new Array();
     array_elementos.push(this.taskTitle.getHtmlElement());
@@ -310,7 +310,7 @@ console.debug(this.value.getHtmlElement());
   }
 
 
-TextAreaTask.prototype.htmlToJson = function(el_div){
+noTextAreaTask.prototype.htmlToJson = function(el_div){
 
         var str_taskTitle = document.getElementById('task_title_id').value;
         var str_xPath = document.getElementById('xpath_id').value;
@@ -341,32 +341,30 @@ TextAreaTask.prototype.htmlToJson = function(el_div){
         oValue._type = SValueAttribute._type;
         oValue.value = str_value;
         }
-       
-
         var oTaskTitle = Object.create(TaskTitleAttribute);
         oTaskTitle._type = TaskTitleAttribute._type;
         oTaskTitle.value = str_taskTitle;
 
-        var o_task = new TextAreaTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
+        var o_task = new noTextAreaTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
         
     return o_task.toJson();
 }
 
 
-//SelectOptionTask
-function SelectOptionTask(id,xPath,value,tipo,state,taskTitle){
+//noSelectOptionTask
+function noSelectOptionTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
-    this.msg = "SelectOptionTask";
-    this.type = "SelectOptionTask";
+    this.msg = "noSelectOptionTask";
+    this.type = "noSelectOptionTask";
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Select Option '})
     this.state = state;
 }
-SelectOptionTask.prototype = new PrimitiveTask();
+noSelectOptionTask.prototype = new PrimitiveTask();
 
-SelectOptionTask.prototype.init = function(c){
-  return new SelectOptionTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
+noSelectOptionTask.prototype.init = function(c){
+  return new noSelectOptionTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
 };
-SelectOptionTask.prototype.toHtml = function(properties){
+noSelectOptionTask.prototype.toHtml = function(properties){
 
     var array_elementos = new Array();
     
@@ -387,7 +385,7 @@ SelectOptionTask.prototype.toHtml = function(properties){
 /**
 * @method htmlToJson
 */
-SelectOptionTask.prototype.htmlToJson = function(el_div){
+noSelectOptionTask.prototype.htmlToJson = function(el_div){
 
         var str_taskTitle = document.getElementById('task_title_id').value;
         var str_xPath = document.getElementById('xpath_id').value;
@@ -426,29 +424,29 @@ SelectOptionTask.prototype.htmlToJson = function(el_div){
         oTipo._type = TipoAttribute._type;
         oTipo.value = str_tipo;
              
-        var o_task = new SelectOptionTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
+        var o_task = new noSelectOptionTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
         
     return o_task.toJson();
 }
 
 /**
  * 
- * CheckBoxTask
- * @class CheckBoxTask
+ * noCheckBoxTask
+ * @class noCheckBoxTask
  * @constructor
  */
-function CheckBoxTask(id,xPath,value,tipo,state,taskTitle){
+function noCheckBoxTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state);
-    this.msg = "CheckBoxTask";
-    this.type = "CheckBoxTask";
+    this.msg = "noCheckBoxTask";
+    this.type = "noCheckBoxTask";
     this.state = state;
 
 }
-CheckBoxTask.prototype = new PrimitiveTask();
-CheckBoxTask.prototype.init = function(c){
-  return new CheckBoxTask(c.id,c.xpath,c.value,c.tipo,c.state);
+noCheckBoxTask.prototype = new PrimitiveTask();
+noCheckBoxTask.prototype.init = function(c){
+  return new noCheckBoxTask(c.id,c.xpath,c.value,c.tipo,c.state);
 };
-CheckBoxTask.prototype.execute = function(){
+noCheckBoxTask.prototype.execute = function(){
 
 var iterator = document.evaluate(this.xPath,document,null,0,null);
 var node = iterator.iterateNext();
@@ -1049,18 +1047,18 @@ DataCollectionTask.prototype.toHtml = function(properties){
  *
  */
 
-function SumatoriaTask(id,xPath,value,tipo,state,taskTitle/*,destData*/){
+function noSumatoriaTask(id,xPath,value,tipo,state,taskTitle/*,destData*/){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
     this.msg = "Init ";
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Sumatoria Task '})
-    this.type = "SumatoriaTask";
+    this.type = "noSumatoriaTask";
     this.state = state;
     this.location = '';
 }
 //Lo pongo como primitiva, por ahora es igual
-SumatoriaTask.prototype = new PrimitiveTask();
+noSumatoriaTask.prototype = new PrimitiveTask();
 
-SumatoriaTask.prototype.execute = function(){
+noSumatoriaTask.prototype.execute = function(){
        
         console.log('suma todo lo que le ponga!!!');
         console.log('Hago visible el cuadrito');
@@ -1090,17 +1088,17 @@ SumatoriaTask.prototype.execute = function(){
         /*****/
         this.finalizo(this.id);
 }
-SumatoriaTask.prototype.setLocation = function(url){
+noSumatoriaTask.prototype.setLocation = function(url){
     this.location = url;
 }
-SumatoriaTask.prototype.init = function(c){
-  return new SumatoriaTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
+noSumatoriaTask.prototype.init = function(c){
+  return new noSumatoriaTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
 };
 
 /**
 * @method htmlToJson
 */
-SumatoriaTask.prototype.htmlToJson = function(el_div){
+noSumatoriaTask.prototype.htmlToJson = function(el_div){
 
         var str_taskTitle = document.getElementById('task_title_id').value;
         var str_xPath = document.getElementById('xpath_id').value;
@@ -1138,12 +1136,12 @@ SumatoriaTask.prototype.htmlToJson = function(el_div){
         oTaskTitle.value = str_taskTitle ;
         
   
-        var o_task = new SumatoriaTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
+        var o_task = new noSumatoriaTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
         
     return o_task.toJson();
 }
 
-SumatoriaTask.prototype.toHtml = function(properties){
+noSumatoriaTask.prototype.toHtml = function(properties){
 
     var array_elementos = new Array();
  

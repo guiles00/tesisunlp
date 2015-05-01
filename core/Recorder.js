@@ -377,11 +377,12 @@ function handleSelectxPath(){
  	//*Hasta que le encuntre la solucion diferencio las tareas**/
 	//TODOEDIT Esto lo hago para ir pasando el comportamiento a las tareas
 	if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
-	 || task.type == 'SumatoriaTask' || task.type == 'FillInputTask'  ){
+	 || task.type == 'SumatoriaTask' || task.type == 'FillInputTask' 
+	 || task.type == 'TextAreaTask' || task.type =='SelectOptionTask'
+	 || task.type == 'CheckBoxTask' ){
 	//En este punto yo se que traigo y como lo interpreto
 	//var iTask = aTask.instanciate(task);
 	aTask.instanciamela(task);
-console.debug(aTask);
 	//return;
 	var y = aTask.toHtml();
 
@@ -418,7 +419,9 @@ console.debug(aTask);
 	var b = document.getElementById('id_edit_task');
 	b.onclick = function(){
     if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
-    	||  task.type == 'SumatoriaTask' ||  task.type == 'FillInputTask'){
+    	||  task.type == 'SumatoriaTask' ||  task.type == 'FillInputTask'
+    	||  task.type == 'TextAreaTask' || task.type =='SelectOptionTask'
+    	|| task.type == 'CheckBoxTask'){
 	//En este punto yo se que traigo y como lo interpreto
 	//var iTask = aTask.instanciate(task);
 	
@@ -614,7 +617,9 @@ if( arr_ls.length == 0){
         	}
 
         	if(arr_ls[i].type == 'ConcatStringTask' || arr_ls[i].type == 'SumatoriaTask'
-        		|| arr_ls[i].type == 'HighLightTask'){
+        		|| arr_ls[i].type == 'HighLightTask' || arr_ls[i].type == 'FillInputTask'
+        		|| arr_ls[i].type == 'TextAreaTask' || arr_ls[i].type =='SelectOptionTask'
+        		|| arr_ls[i].type == 'CheckBoxTask'){
 
          /*   var xPath2 = Object.create(XPathAttribute); 
             xPath2.setValue(arr_ls[i].xPath2.value);
@@ -647,7 +652,7 @@ if( arr_ls.length == 0){
 			var c_t = Manager.getCurrentPrimitiveTasks();
 			c_t.push(c_task);
 
-        	}
+        	}else{
 
             try{
 
@@ -683,6 +688,7 @@ if( arr_ls.length == 0){
         	}catch(err){
             	console.log(err);
             }
+           }
         }
         
         Manager.start();

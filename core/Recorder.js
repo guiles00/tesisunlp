@@ -369,41 +369,13 @@ function handleSelectxPath(){
 	* @method Recorder.editRow    
 	*/
 	,editRow: function(x) {
+	
 	Recorder.createEditorContainer();
 	
     var task = localStorageManager.getObject(x.parentNode.parentNode.id); //@comment Podría traer el objeto instanciado
- 	console.debug(task);
  	var aTask = construct(window[task.type]);
- 	//*Hasta que le encuntre la solucion diferencio las tareas**/
-	//TODOEDIT Esto lo hago para ir pasando el comportamiento a las tareas
-	/*if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
-	 || task.type == 'SumatoriaTask' || task.type == 'FillInputTask' 
-	 || task.type == 'TextAreaTask' || task.type =='SelectOptionTask'
-	 || task.type == 'CheckBoxTask' || task.type == 'DataCollectionTask'
-	 || task.type == 'ClickLinkTask' ){
-*/
-	if(true){
-	//En este punto yo se que traigo y como lo interpreto
-	//var iTask = aTask.instanciate(task);
 	aTask.instanciamela(task);
-	//return;
 	var y = aTask.toHtml();
-
-	}else{
-	var iTask = aTask.init({'id':task.id,
-	'xpath':Object.create(XPathAttribute).init({'value':task.xPath.value})
-	,'value':Object.create(SValueAttribute).init({'value':task.value.value})
-	,'tipo':Object.create(TipoAttribute).init({'value':task.tipo.value})
-	,'state':Object.create(StateAttribute).init({'value':(task.state.value).toString()})
-	,'taskTitle':Object.create(TaskTitleAttribute).init({'value':task.taskTitle.value})
- 	});
-	
-	var y = iTask.toHtml();
-	}
-	//return;
-	// 	var pre = Object.create(Precondition).init(Object.create(UrlAttribute).init({'value':task.precondition.url.value}));	
-	//	iTask.setPrecondition(pre);
-	
 	view.render(document.getElementById("div_inflate"), y);
 		
 	/*****/
@@ -421,21 +393,9 @@ function handleSelectxPath(){
 	//El comportamiento de los botones todavia no se bien como desacoplarlo
 	var b = document.getElementById('id_edit_task');
 	b.onclick = function(){
-   /* if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
-    	||  task.type == 'SumatoriaTask' ||  task.type == 'FillInputTask'
-    	||  task.type == 'TextAreaTask' || task.type =='SelectOptionTask'
-    	|| task.type == 'CheckBoxTask' || task.type == 'DataCollectionTask'
-    	|| task.type == 'ClickLinkTask'){
-*/
-    if(true){	
-	//En este punto yo se que traigo y como lo interpreto
-	//var iTask = aTask.instanciate(task);
+   
+	localStorageManager.setObjectR(aTask.htmlToJson(document.getElementById("div_inflate")));
 	
-	 localStorageManager.setObjectR(aTask.htmlToJson(document.getElementById("div_inflate")));
-	 //return;
-    }else{
-    localStorageManager.setObjectR(iTask.htmlToJson(document.getElementById("div_inflate")));
-    }
   	el = document.getElementById("div_editor_container");
     el.style.visibility = "hidden";
     
@@ -592,28 +552,24 @@ function handleSelectxPath(){
 
 		//Parche!!! Le mando al localStorage el estado de ejecucion		
 		localStorageManager.setStartExecuting();
-//==================================================
-//NO ME CIERRAAAAA!!!!
-Manager.clearCurrentPrimitiveTasks();
-var arr_ls = Manager.initCurrentPrimitiveTasks();
+		//==================================================
+		//NO ME CIERRAAAAA!!!!
+		Manager.clearCurrentPrimitiveTasks();
+		var arr_ls = Manager.initCurrentPrimitiveTasks();
 
-if( arr_ls.length == 0){
-	////console.debug('no hay mas tareas');
-	localStorageManager.setStopExecuting();
-	document.removeEventListener('finalizado',procedureHandler,false);
+		if( arr_ls.length == 0){
+			////console.debug('no hay mas tareas');
+			localStorageManager.setStopExecuting();
+			document.removeEventListener('finalizado',procedureHandler,false);
 
-	return false;
-}
+			return false;
+		}
 
-//=================================================
+		//=================================================
 		
   		var i; //Recorro el array de tareas
         for (i=0;i < arr_ls.length ;i++){
-			console.debug(arr_ls[i]);
-        	//TODO30052015
-			//Hardcodeo para ver si funciona, creo que tengo que modificar la manera en que se instancian las tareas
-
-        	if(arr_ls[i].type == 'LinkATask'){
+        	/*if(arr_ls[i].type == 'LinkATask'){
 			
 			var aug_task = new LinkATask(arr_ls[i].id,arr_ls[i].atributos[1].value,xpath,valor,'',0,arr_ls[i].state);
 			
@@ -621,153 +577,16 @@ if( arr_ls.length == 0){
 			c_t.push(aug_task);
 
         	}
-
-        	/*if(arr_ls[i].type == 'ConcatStringTask' || arr_ls[i].type == 'SumatoriaTask'
-        		|| arr_ls[i].type == 'HighLightTask' || arr_ls[i].type == 'FillInputTask'
-        		|| arr_ls[i].type == 'TextAreaTask' || arr_ls[i].type =='SelectOptionTask'
-        		|| arr_ls[i].type == 'CheckBoxTask' || arr_ls[i].type == 'DataCollectionTask'
-        		|| arr_ls[i].type == 'ClickLinkTask' || arr_ls[i].type == 'RadioTask'){
-*/
-			if(true){	
-         /*   var xPath2 = Object.create(XPathAttribute); 
-            xPath2.setValue(arr_ls[i].xPath2.value);
-            xPath2.htmlId = arr_ls[i].xPath2.htmlId;*/
-
-            	var xPath = Object.create(XPathAttribute); 
-    		xPath.setValue(arr_ls[i].xPath.value);
-			var tipo = Object.create(TipoAttribute); 
-    		tipo.setValue(arr_ls[i].tipo.value);
-
-			if(arr_ls[i].value._type == 'CValueAttribute'){ 
-			var valor = Object.create(CValueAttribute); 
-	    		valor.setValue(arr_ls[i].value.value);
-			}else{
-			var valor = Object.create(SValueAttribute); 
-	    		valor.setValue(arr_ls[i].value.value);
-			}
+			*/         
 			//como es una de las tareas nuevas la convierto otra vez en JSON
 			var json_task = localStorageManager.getObject(arr_ls[i].id);
-			/*if(arr_ls[i].type == 'SumatoriaTask'){
-			var c_task = construct(window[arr_ls[i].type]);
-			console.debug(c_task.instanciamela(json_task));
-			return;	
-			}*/
 			var c_task = construct(window[arr_ls[i].type]);
 			
-			//var c_task = new ConcatStringTask();
 			c_task.instanciamela(json_task);
 			
 			var c_t = Manager.getCurrentPrimitiveTasks();
 			c_t.push(c_task);
 
-        	}else{
-
-            try{
-
-    		//Instancio xPath y Value (wrappers de atributos)
-    		var xPath = Object.create(XPathAttribute); 
-    		xPath.setValue(arr_ls[i].xPath.value);
-			var tipo = Object.create(TipoAttribute); 
-    		tipo.setValue(arr_ls[i].tipo.value);
-
-    		//Lo diferencio con el _type que guardo en cada {} asi instancio el que corresponde
-
-    		//var value = eval(arr_ls[i].value._type);
-    		//value.setValue(arr_ls[i].value.value);
-			if(arr_ls[i].value._type == 'CValueAttribute'){ 
-			var valor = Object.create(CValueAttribute); 
-	    		valor.setValue(arr_ls[i].value.value);
-			}else{
-			var valor = Object.create(SValueAttribute); 
-	    		valor.setValue(arr_ls[i].value.value);
-			}
-			//console.debug(eval(arr_ls[i].value._type));
-	    			
-            }catch(err){
-            	console.log('error atributos');
-            }            
-
-        	try{
-        		//Esto para ver si funciona ok, despues lo saco.
-           if(arr_ls[i].type !== 'ConcatStringTask')
-
-            Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);	
-            
-        	}catch(err){
-            	console.log(err);
-            }
-           }
-        }
-        
-        Manager.start();
-          
-	}
-	,tempclickPlay: function(){
-		//Registro listener
-		document.addEventListener('finalizado',procedureHandler,false);
-
-		//Parche!!! Le mando al localStorage el estado de ejecucion		
-			localStorageManager.setStartExecuting();
-
-//==================================================
-//NO ME CIERRAAAAA!!!!
-Manager.clearCurrentPrimitiveTasks();
-var arr_ls = Manager.initCurrentPrimitiveTasks();
-
-if( arr_ls.length == 0){
-	localStorageManager.setStopExecuting();
-	document.removeEventListener('finalizado',procedureHandler,false);
-
-	return false;
-}
-
-//=================================================
-		
-  		var i; //Recorro el array de tareas
-        for (i=0;i < arr_ls.length ;i++){
-			
-			//Hardcodeo para ver si funciona, creo que tengo que modificar la manera en que se instancian las tareas
-
-        	if(arr_ls[i].type == 'LinkATask'){
-			
-			var aug_task = new LinkATask(arr_ls[i].id,arr_ls[i].atributos[1].value,xpath,valor,'',0,arr_ls[i].state);
-			
-			var c_t = Manager.getCurrentPrimitiveTasks();
-			c_t.push(aug_task);
-
-        	}
-
-            try{
-
-    		//Instancio xPath y Value (wrappers de atributos)
-    		var xPath = Object.create(XPathAttribute); 
-    		xPath.setValue(arr_ls[i].xPath.value);
-			var tipo = Object.create(TipoAttribute); 
-    		tipo.setValue(arr_ls[i].tipo.value);
-
-    		//Lo diferencio con el _type que guardo en cada {} asi instancio el que corresponde
-
-    		//var value = eval(arr_ls[i].value._type);
-    		//value.setValue(arr_ls[i].value.value);
-			if(arr_ls[i].value._type == 'CValueAttribute'){ 
-			var valor = Object.create(CValueAttribute); 
-	    		valor.setValue(arr_ls[i].value.value);
-			}else{
-			var valor = Object.create(SValueAttribute); 
-	    		valor.setValue(arr_ls[i].value.value);
-			}
-			//console.debug(eval(arr_ls[i].value._type));
-	    			
-            }catch(err){
-            	console.log('error atributos');
-            }            
-
-        	try{
-            
-            Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);
-        	}catch(err){
-            	console.log(err);
-            }
         }
         
         Manager.start();

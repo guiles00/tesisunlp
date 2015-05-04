@@ -1,3 +1,5 @@
+ var PrimitiveTask = (function(){
+
  /**
  * @module Tasks
  * PrimitiveTask
@@ -102,3 +104,7 @@ PrimitiveTask.prototype.toJson = function(){
 return JSON.stringify(this);
 }
 
+
+
+ return PrimitiveTask;   
+ })()

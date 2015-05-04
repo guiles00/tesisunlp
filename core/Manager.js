@@ -322,141 +322,13 @@ var Manager = (function () {
 
                 , 1000);
             }
-            ,playFromTask: function(n){
-
-            //Tengo que para la ejecucion y empezar una nueva
-
-            //Registro listener
-            document.addEventListener('finalizado',procedureHandler,false);
-
-            //Parche!!! Le mando al localStorage el estado de ejecucion     
-            
-            localStorageManager.setStartExecuting();
-            //==================================================
-            //NO ME CIERRAAAAA!!!!
-            Manager.clearCurrentPrimitiveTasks();
-            var arr_ls = Manager.initCurrentPrimitiveTasks();
-
-            if( arr_ls.length == 0){
-                ////console.debug('no hay mas tareas');
-                
-                localStorageManager.setStopExecuting();
-                document.removeEventListener('finalizado',procedureHandler,false);
-
-                return false;
-            }
-
-            //=================================================
-        console.debug('y???');
-        var i; //Recorro el array de tareas
-        for (i=0;i < arr_ls.length ;i++){
-            
-            try{
-
-            //Instancio xPath y Value (wrappers de atributos)
-            var xPath = Object.create(XPathAttribute); 
-            xPath.setValue(arr_ls[i].xPath.value);
-            var tipo = Object.create(TipoAttribute); 
-            tipo.setValue(arr_ls[i].tipo.value);
-
-            console.debug('uncanenenen');
-
-            //TODO30052015
-             if(arr_ls[i].type == 'ConcatStringTask'){
-            var xPath2 = Object.create(XPathAttribute); 
-            xPath2.setValue(arr_ls[i].xPath2.value);
-            xPath2.htmlId = arr_ls[i].xPath2.htmlId;
-            console.debug(xPath2);
-            console.debug('uncanenenen');
-            }
-            //Lo diferencio con el _type que guardo en cada {} asi instancio el que corresponde
-
-            //var value = eval(arr_ls[i].value._type);
-            //value.setValue(arr_ls[i].value.value);
-            if(arr_ls[i].value._type == 'CValueAttribute'){ 
-            var valor = Object.create(CValueAttribute); 
-                valor.setValue(arr_ls[i].value.value);
-            }else{
-            var valor = Object.create(SValueAttribute); 
-                valor.setValue(arr_ls[i].value.value);
-            }
-            //console.debug(eval(arr_ls[i].value._type));
-                    
-            }catch(err){
-                console.log('error atributos');
-            }            
-
-            try{
-           
-           if(arr_ls[i].type == 'ConcatStringTask'){
-            Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle,xPath2);
-           
-            }else{
-            Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);
-            } 
-            
-
-            }catch(err){
-                console.log(err);
-            }
-        }
-        console.debug( Manager.getCurrentPrimitiveTasks() );
-        Manager.start(n);
-
-            }
             ,playTaskById: function(id){
 
-
             var task = localStorageManager.getObject(id);
-            //console.debug(task);
-            
-            //Instancio xPath y Value (wrappers de atributos)
-            var xPath = Object.create(XPathAttribute); 
-            xPath.setValue(task.xPath.value);
-            
-            //TODO30052015
-      /*      if(task.type == 'ConcatStringTask'){
-            //TEMP
-            var xPath2 = Object.create(XPathAttribute); 
-            xPath2.setValue(task.xPath2.value);
-            xPath2.htmlId = task.xPath2.htmlId;
-            }*/
-            var tipo = Object.create(TipoAttribute); 
-            tipo.setValue(task.tipo.value);
-            
-            if(task.value._type == 'CValueAttribute'){ 
-            var valor = Object.create(CValueAttribute); 
-                valor.setValue(task.value.value);
-            }else{
-            var valor = Object.create(SValueAttribute); 
-                valor.setValue(task.value.value);
-            }
-            
-            //Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);
-            //Creo el objeto tarea
-            /*if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
-               || task.type == 'SumatoriaTask' || task.type == 'FillInputTask'
-               || task.type == 'TextAreaTask' || task.type =='SelectOptionTask'
-               || task.type == 'CheckBoxTask' || task.type == 'DataCollectionTask'
-               || task.type == 'ClickLinkTask'){
-*/
-             if(true){   
-            //var oTask = Manager.factoryTask(task.id,task.type,xPath,valor,tipo,task.state,task.taskTitle,xPath2);
-            //var oTask = eval(task.type);
             var oTask = construct(window[task.type]);
-
             oTask.instanciamela(task);//.execute();
             oTask.execute();
-            return;
-            }else{
-            var oTask = Manager.factoryTask(task.id,task.type,xPath,valor,tipo,task.state,task.taskTitle);
-            }
-           //ACa tambien hay que diferenciarlo
-            console.debug(oTask);
-            oTask.execute();
             Recorder.refresh();
-            return;   
-
             }
 
             ,init: function(){
@@ -492,7 +364,6 @@ var Manager = (function () {
                 o_task.setLocation(location);
                 localStorageManager.insert(o_task.toJson());
                 Recorder.refresh();
-
             }
             ,addDataCollectionTask: function(concept,data){
 

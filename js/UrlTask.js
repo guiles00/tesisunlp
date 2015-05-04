@@ -6,7 +6,6 @@ function UrlTask(id,xPath,value,tipo,state,taskTitle){
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Init '})
     this.type = "UrlTask";
     this.location = '';
-    this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Click Button '})
     this.id = id || 10;
     this.tipo = tipo || Object.create(TipoAttribute).init({'value':1});  
     this.value = value || Object.create(SValueAttribute).init({'value':''});  

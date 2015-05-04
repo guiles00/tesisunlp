@@ -34,7 +34,8 @@ window.onload = (function(){
 
 	var tasks = ['PrimitiveTasks','AbstractTask','Attribute','Utils'
 	,'NotasTask','SumatoriaTask','ConcatStringTask','HighLightTask'
-	,'FillInputTask','TextAreaTask','SelectOptionTask','CheckBoxTask','DataCollectionTask'];
+	,'FillInputTask','TextAreaTask','SelectOptionTask','CheckBoxTask'
+	,'ClickLinkTask','ClickInputTask','RadioTask','DataCollectionTask','UrlTask'];
 	//Load tasks
 	for (var i = 0; i < tasks.length; i++) {
 	        loadScript(absolute_path+'./js/',tasks[i]+'.js');

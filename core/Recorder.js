@@ -376,10 +376,13 @@ function handleSelectxPath(){
  	var aTask = construct(window[task.type]);
  	//*Hasta que le encuntre la solucion diferencio las tareas**/
 	//TODOEDIT Esto lo hago para ir pasando el comportamiento a las tareas
-	if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
+	/*if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
 	 || task.type == 'SumatoriaTask' || task.type == 'FillInputTask' 
 	 || task.type == 'TextAreaTask' || task.type =='SelectOptionTask'
-	 || task.type == 'CheckBoxTask' || task.type == 'DataCollectionTask' ){
+	 || task.type == 'CheckBoxTask' || task.type == 'DataCollectionTask'
+	 || task.type == 'ClickLinkTask' ){
+*/
+	if(true){
 	//En este punto yo se que traigo y como lo interpreto
 	//var iTask = aTask.instanciate(task);
 	aTask.instanciamela(task);
@@ -418,10 +421,13 @@ function handleSelectxPath(){
 	//El comportamiento de los botones todavia no se bien como desacoplarlo
 	var b = document.getElementById('id_edit_task');
 	b.onclick = function(){
-    if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
+   /* if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
     	||  task.type == 'SumatoriaTask' ||  task.type == 'FillInputTask'
     	||  task.type == 'TextAreaTask' || task.type =='SelectOptionTask'
-    	|| task.type == 'CheckBoxTask' || task.type == 'DataCollectionTask'){
+    	|| task.type == 'CheckBoxTask' || task.type == 'DataCollectionTask'
+    	|| task.type == 'ClickLinkTask'){
+*/
+    if(true){	
 	//En este punto yo se que traigo y como lo interpreto
 	//var iTask = aTask.instanciate(task);
 	
@@ -616,11 +622,13 @@ if( arr_ls.length == 0){
 
         	}
 
-        	if(arr_ls[i].type == 'ConcatStringTask' || arr_ls[i].type == 'SumatoriaTask'
+        	/*if(arr_ls[i].type == 'ConcatStringTask' || arr_ls[i].type == 'SumatoriaTask'
         		|| arr_ls[i].type == 'HighLightTask' || arr_ls[i].type == 'FillInputTask'
         		|| arr_ls[i].type == 'TextAreaTask' || arr_ls[i].type =='SelectOptionTask'
-        		|| arr_ls[i].type == 'CheckBoxTask' || arr_ls[i].type == 'DataCollectionTask'){
-
+        		|| arr_ls[i].type == 'CheckBoxTask' || arr_ls[i].type == 'DataCollectionTask'
+        		|| arr_ls[i].type == 'ClickLinkTask' || arr_ls[i].type == 'RadioTask'){
+*/
+			if(true){	
          /*   var xPath2 = Object.create(XPathAttribute); 
             xPath2.setValue(arr_ls[i].xPath2.value);
             xPath2.htmlId = arr_ls[i].xPath2.htmlId;*/

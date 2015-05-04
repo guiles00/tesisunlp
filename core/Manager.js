@@ -434,10 +434,13 @@ var Manager = (function () {
             
             //Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,valor,tipo,arr_ls[i].state,arr_ls[i].taskTitle);
             //Creo el objeto tarea
-            if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
+            /*if(task.type == 'ConcatStringTask' || task.type == 'HighLightTask'
                || task.type == 'SumatoriaTask' || task.type == 'FillInputTask'
                || task.type == 'TextAreaTask' || task.type =='SelectOptionTask'
-               || task.type == 'CheckBoxTask' || task.type == 'DataCollectionTask'){
+               || task.type == 'CheckBoxTask' || task.type == 'DataCollectionTask'
+               || task.type == 'ClickLinkTask'){
+*/
+             if(true){   
             //var oTask = Manager.factoryTask(task.id,task.type,xPath,valor,tipo,task.state,task.taskTitle,xPath2);
             //var oTask = eval(task.type);
             var oTask = construct(window[task.type]);

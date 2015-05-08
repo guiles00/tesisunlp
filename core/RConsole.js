@@ -460,7 +460,7 @@ var RConsole = {
 	 	var j;
 	 	//var aOptions=['Add Task','Primitive Task','Augmented Task'];
 	 	//Pongo DataCollectorTask temporalmente como opción
-	 	var aOptions=['Add Task','DataCol.','HighLig.','Suma','Notas','Concat'];
+	 	var aOptions=['Add Task','DataCol.','HighLig.','Suma','Notas','Concat','Comp.'];
 		for (j = 0; j < aOptions.length; j = j + 1) {
 			opt = document.createElement('option');
 			opt.value = j;

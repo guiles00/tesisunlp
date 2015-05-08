@@ -118,6 +118,9 @@ var Recorder = {
 		}else if(id_selected == 5){
 		Manager.addConcatStringTask('');			
 		return true;	
+		}else if(id_selected == 6){
+		Manager.addComposedTask('');			
+		return true;	
 		}
 
 		
@@ -671,6 +674,8 @@ function handleSelectxPath(){
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
 
         if(task.state.value == 1 )  tr.style.backgroundColor='green';
+        if(task.state.value == 3 )  tr.style.backgroundColor='blue';
+
         //Hardcodeado!!!!
 	    var pTask = document.createTextNode(text + 'Task - id:'+tr.id);
 	    var spTask = document.createElement('span');

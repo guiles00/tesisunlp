@@ -536,6 +536,15 @@ var Manager = (function () {
                 Recorder.refresh();
                 
             }
+           ,addComposedTask: function(){
+
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new ComposedTask();
+                localStorageManager.insert(a_task.toJson());
+                //No te olvides de actualizar la consola
+                Recorder.refresh();
+                
+            }    
         };
 }());
 

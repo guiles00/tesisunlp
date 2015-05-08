@@ -304,7 +304,11 @@ var RConsole = {
 
 	        var p = document.getElementById('procedures_select').value;
  	      	var bpm = JSON.parse(localStorage.getItem("BPM") );
-	      	RConsole.downloadProcedure('test.json',JSON.stringify( bpm[p] ) );
+ 	      	var shared_data = JSON.parse(localStorage.getItem("SHARED_DATA") );
+ 	      	var data_export = {'BPM':bpm[p],'SHARED_DATA':shared_data};
+
+ 	      	//Exporta el procedimiento actual junto con el shared_data
+	      	RConsole.downloadProcedure('test.json',JSON.stringify( data_export ) );
 			
 		}
 		return b_export;

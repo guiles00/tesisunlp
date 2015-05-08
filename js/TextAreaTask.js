@@ -2,29 +2,18 @@ var TextAreaTask = (function(){
 
 function TextAreaTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
-    this.msg = "Enter String TextArea ";
+   
     this.type = "TextAreaTask";
+    this.value = value || Object.create(SValueAttribute).init({'value':''});     
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Enter String TextArea '})
-    this.id = id || 10;
-    this.tipo = tipo || Object.create(TipoAttribute).init({'value':1});  
-    this.value = value || Object.create(SValueAttribute).init({'value':''});  
-    this.msg = "Init ";
-    this.state = state || Object.create(StateAttribute).init({'value':0}) ;
-    this.location = '';
-    this.xPath = xPath || Object.create(XPathAttribute).init({'value':'sxPath'});
-
-    
+   
 }
 TextAreaTask.prototype = new PrimitiveTask();
 
 TextAreaTask.prototype.instanciamela = function(o){
-    //Se que parametros tiene
-    //Acoplo estos objetos, aunque me parece que deberia usar json
-    //return new ConcatStringTask(o.id,o.xPath,o.value,o.tipo,o.state,o.taskTitle,o.xPath2);
+
     this.id = o.id || 10;
     this.xPath = Object.create(XPathAttribute).init({'value':o.xPath.value});
-   // this.value = (o.value._type =='CValueAttribute')?Object.create(CValueAttribute).init({'value':o.value.value}):Object.create(SValueAttribute).init({'value':o.value.value});
-    // this.value = Object.create(SValueAttribute).init({'value':o.value.value});
     this.tipo = Object.create(TipoAttribute).init({'value':o.tipo.value})
     this.state = Object.create(StateAttribute).init({'value':(o.state.value).toString()})
     this.taskTitle = Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value})

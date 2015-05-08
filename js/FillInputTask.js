@@ -6,27 +6,18 @@ var FillInputTask = (function(){
  */
 function FillInputTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
-    this.msg = "Enter String to Input ";
-    this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Enter String to Input '})
+
     this.type = "FillInputTask";
-    this.id = id || 10;
-    this.tipo = tipo || Object.create(TipoAttribute).init({'value':1});  
     this.value = value || Object.create(SValueAttribute).init({'value':''});  
-    this.msg = "Init ";
-    this.state = state || Object.create(StateAttribute).init({'value':0}) ;
-    this.location = '';
-    this.xPath = xPath || Object.create(XPathAttribute).init({'value':'sxPath'});
+    this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Enter String to Input '})
+    
 }
 FillInputTask.prototype = new PrimitiveTask();
 
 FillInputTask.prototype.instanciamela = function(o){
-    //Se que parametros tiene
-    //Acoplo estos objetos, aunque me parece que deberia usar json
-    //return new ConcatStringTask(o.id,o.xPath,o.value,o.tipo,o.state,o.taskTitle,o.xPath2);
+    //Acoplo estos objetos, no me salio el reviver de JSON
     this.id = o.id || 10;
     this.xPath = Object.create(XPathAttribute).init({'value':o.xPath.value});
-    //this.value = (o.value._type =='CValueAttribute')?Object.create(CValueAttribute).init({'value':o.value.value}):Object.create(SValueAttribute).init({'value':o.value.value});
-    // this.value = Object.create(SValueAttribute).init({'value':o.value.value});
     this.tipo = Object.create(TipoAttribute).init({'value':o.tipo.value})
     this.state = Object.create(StateAttribute).init({'value':(o.state.value).toString()})
     this.taskTitle = Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value})
@@ -85,10 +76,9 @@ var handlers = function(){
     }
 }
 
-FillInputTask.prototype.init = function(c){
+/*FillInputTask.prototype.init = function(c){
   return new FillInputTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
-};
-
+};*/
 
 FillInputTask.prototype.toHtml = function(properties){
     console.debug('this.value');
@@ -118,16 +108,6 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         var str_value = document.getElementById('value_id').value;
         var str_state = document.getElementById('state_id').value;
         var str_tipo = document.getElementById('tipo_id').value;
-
-/*
-        function isJson(str) {
-        try {
-            JSON.parse(str);
-        } catch (e) {
-            return false;
-        }
-        return true;
-        }    */
 
         //Se que un FillInputTask tiene los campos xPath y value
         var xPath = Object.create(XPathAttribute);

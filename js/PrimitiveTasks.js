@@ -7,15 +7,15 @@
  * @constructor
  */
 function PrimitiveTask(id,xPath,value,tipo,state,taskTitle){ //Constructor
-this.tipo = tipo;    
-this.xPath = xPath;
-this.value = value;
-this.state = state;
-this.id = id;
-this.msg = "PrimitiveTask"
-this.type = "PrimitiveTask"
-this.precondition = {};
-this.taskTitle = taskTitle;
+ 
+    this.id = id || 10;
+    this.xPath = xPath || Object.create(XPathAttribute).init({'value':'sxPath'});
+    this.tipo = tipo || Object.create(TipoAttribute).init({'value':1});  
+    this.state = state || Object.create(StateAttribute).init({'value':0}) ;
+    this.type = "PrimitiveTask"
+    this.precondition = {};
+    this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Task Title '})
+
 }
 
 
@@ -69,9 +69,7 @@ PrimitiveTask.prototype.execute = function(){
 
 PrimitiveTask.prototype.finalizo = function(id){
 
-var oTask = localStorageManager.getObject(id);
-console.log('trae objeto '+id);
-console.debug(oTask);
+    var oTask = localStorageManager.getObject(id);
 
     oTask.state.value = 1;
     localStorageManager.setObjectR(JSON.stringify(oTask));
@@ -90,7 +88,7 @@ PrimitiveTask.prototype.toHtml = function(properties){
     var array_elementos = new Array();
     array_elementos.push(this.taskTitle.getHtmlElement());
     array_elementos.push(this.xPath.getHtmlElement());
-    array_elementos.push(this.value.getHtmlElement());
+   // array_elementos.push(this.value.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());
     array_elementos.push(this.tipo.getHtmlElement());
 

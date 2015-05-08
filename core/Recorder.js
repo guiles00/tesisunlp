@@ -17,16 +17,19 @@ var Recorder = {
 		var file = e.target.files;
 		
 	    var reader = new FileReader();
-	    var proc;
+	    var data_import;
 	      // Evento que usa para leer el archivo
 	      reader.onload = (function(file) {
 	        return function(e) {
-	         proc = JSON.parse(e.target.result);
+	         data_import = JSON.parse(e.target.result);
 	        
 	        var p = document.getElementById('procedures_select').value;
  	      	var bpm = JSON.parse(localStorage.getItem("BPM") );
-	      	bpm[p] = proc;
+	      	bpm[p] = data_import.BPM;
 	      	localStorage.setItem("BPM",JSON.stringify(bpm));
+    		//And now the shared data
+    		localStorage.setItem('SHARED_DATA',JSON.stringify(data_import.SHARED_DATA));
+    		
     		Recorder.refresh();
 	        }
 	      })(file);
@@ -348,7 +351,7 @@ function handleSelectxPath(){
 		close_edit.onclick = function(){ 
 		   el = document.getElementById("div_editor_container");
 		   el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";
-		   removeListenersEditBox();
+		   //removeListenersEditBox();
 		}
 
 		var edit_button = document.createElement('input');
@@ -380,6 +383,7 @@ function handleSelectxPath(){
 		
 	/*****/
 	//Hardcodeo el boton |<-|
+	if(typeof task.value != "undefined"){ //Algunas tareas no tienen el atributo value
 	var bind_data = document.createElement("input");
 	bind_data.type = "button";
 	bind_data.value = "<";
@@ -387,8 +391,11 @@ function handleSelectxPath(){
 	bind_data.onclick = function(){ 
 		Recorder.mostrarPocket();
 	}
+
 	var div_value = document.getElementById('value_id').parentNode;
 	div_value.appendChild(bind_data);
+	}
+	/******/
 
 	//El comportamiento de los botones todavia no se bien como desacoplarlo
 	var b = document.getElementById('id_edit_task');

@@ -2,37 +2,29 @@ var ClickInputTask = (function(){
 
 function ClickInputTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
-    this.msg = "Click Button ";
+
     this.type = "ClickInputTask";
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Click Button '})
-    this.id = id || 10;
-    this.tipo = tipo || Object.create(TipoAttribute).init({'value':1});  
-    this.value = value || Object.create(SValueAttribute).init({'value':''});  
-    this.msg = "Init ";
-    this.state = state || Object.create(StateAttribute).init({'value':0}) ;
-    this.location = '';
-    this.xPath = xPath || Object.create(XPathAttribute).init({'value':'sxPath'});
+
 }
 ClickInputTask.prototype = new PrimitiveTask();
-
 
 ClickInputTask.prototype.instanciamela = function(o){
     this.id = o.id || 10;
     this.xPath = Object.create(XPathAttribute).init({'value':o.xPath.value});
-    //this.value = (o.value._type =='CValueAttribute')?Object.create(CValueAttribute).init({'value':o.value.value}):Object.create(SValueAttribute).init({'value':o.value.value});
     this.tipo = Object.create(TipoAttribute).init({'value':o.tipo.value})
     this.state = Object.create(StateAttribute).init({'value':(o.state.value).toString()})
     this.taskTitle = Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value})
-    this.value = (o.value._type =='CValueAttribute')?Object.create(CValueAttribute).init({'concept':o.value.value,'value':o.value.value}):Object.create(SValueAttribute).init({'value':o.value.value});
+   // this.value = (o.value._type =='CValueAttribute')?Object.create(CValueAttribute).init({'concept':o.value.value,'value':o.value.value}):Object.create(SValueAttribute).init({'value':o.value.value});
 
     return this;
              
 }
 
-ClickInputTask.prototype.init = function(c){
+/*ClickInputTask.prototype.init = function(c){
   return new ClickInputTask(c.id,c.xpath,c.value,c.tipo,c.state,c.taskTitle);
 };
-
+*/
 
 /**
 * @method htmlToJson

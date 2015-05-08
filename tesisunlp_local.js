@@ -32,7 +32,7 @@ window.onload = (function(){
 	        loadScript(absolute_path+'./core/',objects[i]+'.js');
 	};
 
-	var tasks = ['PrimitiveTasks','AbstractTask','Attribute','Utils'
+	var tasks = ['PrimitiveTasks','AugmentedTask','AbstractTask','Attribute','Utils'
 	,'NotasTask','SumatoriaTask','ConcatStringTask','HighLightTask'
 	,'FillInputTask','TextAreaTask','SelectOptionTask','CheckBoxTask'
 	,'ClickLinkTask','ClickInputTask','RadioTask','DataCollectionTask','UrlTask'];

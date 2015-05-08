@@ -3,33 +3,26 @@ var SelectOptionTask = (function(){
 //SelectOptionTask
 function SelectOptionTask(id,xPath,value,tipo,state,taskTitle){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
-    this.msg = "SelectOptionTask";
+  
     this.type = "SelectOptionTask";
+    this.value = value || Object.create(SValueAttribute).init({'value':''});     
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Select Option '})
-    this.id = id || 10;
-    this.tipo = tipo || Object.create(TipoAttribute).init({'value':1});  
-    this.value = value || Object.create(SValueAttribute).init({'value':''});  
-    this.msg = "Init ";
-    this.state = state || Object.create(StateAttribute).init({'value':0}) ;
-    this.location = '';
-    this.xPath = xPath || Object.create(XPathAttribute).init({'value':'sxPath'});
+   
 }
 SelectOptionTask.prototype = new PrimitiveTask();
 
 
 
 SelectOptionTask.prototype.instanciamela = function(o){
-    //Se que parametros tiene
-    //Acoplo estos objetos, aunque me parece que deberia usar json
-    //return new ConcatStringTask(o.id,o.xPath,o.value,o.tipo,o.state,o.taskTitle,o.xPath2);
+
     this.id = o.id || 10;
     this.xPath = Object.create(XPathAttribute).init({'value':o.xPath.value});
     this.value = Object.create(SValueAttribute).init({'value':o.value.value});
     this.tipo = Object.create(TipoAttribute).init({'value':o.tipo.value})
     this.state = Object.create(StateAttribute).init({'value':(o.state.value).toString()})
     this.taskTitle = Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value})
-    return this;
-             
+  
+    return this;            
 }
 
 SelectOptionTask.prototype.init = function(c){

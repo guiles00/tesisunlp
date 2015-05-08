@@ -14,29 +14,12 @@ function ConcatStringTask(id,xPath,value,tipo,state,taskTitle,xPath2){
     this.location = '';
     this.xPath2 = xPath2 || Object.create(XPathAttribute).init({'value':'sxPath'});
     this.xPath = xPath || Object.create(XPathAttribute).init({'value':'sxPath2'});
-    this.otroValor = Object.create(SValueAttribute).init({'value':'otroValor'});
+    this.concepto = Object.create(SValueAttribute).init({'value':'concepto','htmlId':'concepto_id','label':'Concepto'});
 
 }
 //Lo pongo como primitiva, por ahora es igual
 ConcatStringTask.prototype = new AbstractTask();
 
-ConcatStringTask.instanciate = function(o){
-    //este no va
-    return;
-    //Se que parametros tiene
-    //Acoplo estos objetos, aunque me parece que deberia usar json
-    //return new ConcatStringTask(o.id,o.xPath,o.value,o.tipo,o.state,o.taskTitle,o.xPath2);
-    return new ConcatStringTask(
-    o.id
-    ,Object.create(XPathAttribute).init({'value':o.xPath.value})
-    ,Object.create(SValueAttribute).init({'value':o.value.value})
-    ,Object.create(TipoAttribute).init({'value':o.tipo.value})
-    ,Object.create(StateAttribute).init({'value':(o.state.value).toString()})
-    ,Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value})
-    ,new XPath2Attribute({'value':o.xPath2.value,'htmlId':o.xPath2.htmlId})
-    );
-             
-}
 ConcatStringTask.prototype.instanciamela = function(o){
 
     //Se que parametros tiene
@@ -49,12 +32,13 @@ ConcatStringTask.prototype.instanciamela = function(o){
     this.state = Object.create(StateAttribute).init({'value':(o.state.value).toString()})
     this.taskTitle = Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value})
     this.xPath2 = Object.create(XPathAttribute).init({'value':o.xPath2.value,'htmlId':'xpath2_id'});
-    this.otroValor = Object.create(SValueAttribute).init({'value':o.otroValor.value,'htmlId':'otro_value_id','label':'Another'});
+    this.concepto = Object.create(SValueAttribute).init({'value':o.concepto.value,'htmlId':'concepto_id','label':'Concepto'});
+
     return this;
              
 }
-ConcatStringTask.prototype.setOtroValor = function(o){
-    this.otroValor = o;
+ConcatStringTask.prototype.setConcepto = function(o){
+    this.concepto = o;
 }
 ConcatStringTask.prototype.execute = function(){
        
@@ -71,8 +55,8 @@ ConcatStringTask.prototype.execute = function(){
         
         var o_value = {"value":value};
         
-        localStorageManager.saveSharedData('Concat'+this.id,o_value); 
-        var show =this.otroValor.getValue();
+        localStorageManager.saveSharedData(this.concepto.value,o_value); 
+       // var show =this.otroValor.getValue();
         /*****/
         this.finalizo(this.id);
 }
@@ -95,7 +79,7 @@ ConcatStringTask.prototype.htmlToJson = function(el_div){
         var str_tipo = document.getElementById('tipo_id').value;
 
         var str_xPath2 = document.getElementById('xpath2_id').value;
-        var str_o_valor = document.getElementById('otro_value_id').value;
+        var str_concepto = document.getElementById('concepto_id').value;
         
         //console.debug(str_xPath2);
         
@@ -132,13 +116,16 @@ ConcatStringTask.prototype.htmlToJson = function(el_div){
   
     var aoValue = Object.create(SValueAttribute);
         aoValue._type = SValueAttribute._type;
-        aoValue.value = str_o_valor;
+        aoValue.value = str_concepto;
         
         
         var o_task = new ConcatStringTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle,xPath2);
         
-        o_task.setOtroValor(aoValue); //Este metodo esta por x segundos, hasta que reescriba el metodo htmlToJSON
-        
+        o_task.setConcepto(aoValue); //Este metodo esta por x segundos, hasta que reescriba el metodo htmlToJSON
+        console.log('concepto');
+        console.debug(aoValue);
+        console.debug(o_task.toJson());
+        console.log('concepto');
     return o_task.toJson();
 }
 
@@ -150,7 +137,7 @@ ConcatStringTask.prototype.toHtml = function(properties){
     array_elementos.push(this.xPath.getHtmlElement());
     array_elementos.push(this.xPath2.getHtmlElement());
     array_elementos.push(this.value.getHtmlElement());
-    array_elementos.push(this.otroValor.getHtmlElement());
+    array_elementos.push(this.concepto.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());
     array_elementos.push(this.tipo.getHtmlElement());
 

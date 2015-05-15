@@ -81,11 +81,11 @@ var handlers = function(){
 };*/
 
 FillInputTask.prototype.toHtml = function(properties){
-    console.debug('this.value');
+    /*console.debug('this.value');
     console.debug(this.value);
     console.debug(this.value.getHtmlElement() );
     console.debug('this.value');
-
+*/
     var array_elementos = new Array();
  
     array_elementos.push(this.taskTitle.getHtmlElement());

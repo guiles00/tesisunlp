@@ -382,6 +382,7 @@ function handleSelectxPath(){
  	var aTask = construct(window[task.type]);
 	aTask.instanciamela(task);
 	var y = aTask.toHtml();
+	
 	view.render(document.getElementById("div_inflate"), y);
 		
 	/*****/

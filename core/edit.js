@@ -66,6 +66,7 @@ var selectElement = {
 
 var inputElement = {
     specs:{}
+    ,_type:'inputElement'
     ,label:''
     ,id:''
     ,value:''
@@ -105,7 +106,7 @@ var view = {
 /**
 * @class inflater
 */
-var inflater = {
+/*var inflater = {
 	properties:[]
 	,elements:[]
 	,inflate: function(){
@@ -140,8 +141,8 @@ var inflater = {
 	return this.elements;
 	}
 }
-
-
+*/
+/*
 var editor = {
 	properties: []
 	,htmlToJson: function(el_div){
@@ -177,7 +178,7 @@ var editor = {
 	return JSON.stringify(obj_json);
 	}
 }
-
+*/
 //Highlighting
 
 

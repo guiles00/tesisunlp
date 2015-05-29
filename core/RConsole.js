@@ -455,7 +455,7 @@ var RConsole = {
 			div_p_task.classList.add("div_p_task_style");
 			var sAddTask = document.createElement('select');
 			sAddTask.className = "tesisunlp_button";
-			var aOptions=['Add Primitive Task','DataCol.','HighLig.','Suma','Notas','Concat','Comp.'];
+			var aOptions=['Add Augmented Task','DataCol.','HighLig.','Suma','Notas','Concat','Comp.'];
 			for (j = 0; j < aOptions.length; j = j + 1) {
 				opt = document.createElement('option');
 				opt.value = j;
@@ -463,7 +463,7 @@ var RConsole = {
 				opt.innerHTML = aOptions[j];
 				sAddTask.appendChild(opt);
 			}
-			var text = document.createTextNode("Primitive Tasks");
+			var text = document.createTextNode("Augmented Tasks");
 			var p = document.createElement("p");
 			p.appendChild(text);
 			div_p_task.appendChild(p);

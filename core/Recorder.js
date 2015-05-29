@@ -100,9 +100,11 @@ var Recorder = {
 		if(id_selected==1){
 			alert("@TODO");
 		}else if(id_selected==2){
-		var div = document.getElementById("div_p_task");
+			
+			var div = document.getElementById("div_p_task");
 		console.debug(div);
-		div.style.display = "initial";	
+		div.style.display = "initial";
+			
 		}
 	}
 	/**  

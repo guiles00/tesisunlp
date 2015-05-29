@@ -93,6 +93,18 @@ var Recorder = {
 
 	return aButton;
 	}	
+	,addTypeTask: function(event){
+		var id_selected = event.target.options[event.target.options.selectedIndex].value;
+		
+		
+		if(id_selected==1){
+			alert("@TODO");
+		}else if(id_selected==2){
+		var div = document.getElementById("div_p_task");
+		console.debug(div);
+		div.style.display = "initial";	
+		}
+	}
 	/**  
 	* Muestra ventana para agregar una tarea primitiva y capturar ese evento
 	* @method addPrimitiveTask    

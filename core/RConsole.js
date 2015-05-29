@@ -449,6 +449,47 @@ var RConsole = {
 								};
 	     return load;
 		 }
+		,createSelectPrimitiveTasks: function(){
+			var div_p_task = document.createElement("div");
+			div_p_task.id="div_p_task";
+			div_p_task.classList.add("div_p_task_style");
+			var sAddTask = document.createElement('select');
+			sAddTask.className = "tesisunlp_button";
+			var aOptions=['Add Primitive Task','DataCol.','HighLig.','Suma','Notas','Concat','Comp.'];
+			for (j = 0; j < aOptions.length; j = j + 1) {
+				opt = document.createElement('option');
+				opt.value = j;
+				if(j===0){opt.disabled = true;opt.selected = true;} 
+				opt.innerHTML = aOptions[j];
+				sAddTask.appendChild(opt);
+			}
+			var text = document.createTextNode("Primitive Tasks");
+			var p = document.createElement("p");
+			p.appendChild(text);
+			div_p_task.appendChild(p);
+			div_p_task.appendChild(sAddTask);
+			var hr = document.createElement("hr");
+			div_p_task.appendChild(hr);
+			var attr = {};
+			var add = this.createButton('Confirm','add_submit',attr);
+			add.onclick  = function(){
+			div_p_task.style.display = "none";
+				
+			}
+			var close = this.createButton('Close','close_submit',attr);
+			close.onclick  = function(){
+			div_p_task.style.display = "none";
+				
+			}
+			//div_p_task.appendChild(add);
+			div_p_task.appendChild(close);
+			
+			//iStop_recorder.addEventListener("click", Recorder.clickStop , false); 
+			
+			sAddTask.addEventListener("change", Recorder.addPrimitiveTask , false); 	
+
+			return div_p_task;		
+		}
 	 ,createaddTasksSelect: function(){
 
 		////console.debug('5. crea Select Tasks');
@@ -458,9 +499,18 @@ var RConsole = {
 	 	
 		sAddTask.setAttribute('id','add_task');
 	 	var j;
-	 	//var aOptions=['Add Task','Primitive Task','Augmented Task'];
-	 	//Pongo DataCollectorTask temporalmente como opción
-	 	var aOptions=['Add Task','DataCol.','HighLig.','Suma','Notas','Concat','Comp.'];
+	 	/** 29-05-2015 **/
+
+	 	/*var aOptions=['Add Task','DataCol.','HighLig.','Suma','Notas','Concat','Comp.'];
+		for (j = 0; j < aOptions.length; j = j + 1) {
+			opt = document.createElement('option');
+			opt.value = j;
+			if(j===0){opt.disabled = true;opt.selected = true;} 
+			opt.innerHTML = aOptions[j];
+			sAddTask.appendChild(opt);
+		}*/
+		
+		var aOptions=['Add Task','Primitive','Augmented'];
 		for (j = 0; j < aOptions.length; j = j + 1) {
 			opt = document.createElement('option');
 			opt.value = j;
@@ -468,8 +518,10 @@ var RConsole = {
 			opt.innerHTML = aOptions[j];
 			sAddTask.appendChild(opt);
 		}
-		
-		sAddTask.addEventListener("change", Recorder.addPrimitiveTask , false); 
+
+		//sAddTask.addEventListener("change", Recorder.addPrimitiveTask , false); 
+
+		sAddTask.addEventListener("change", Recorder.addTypeTask , false); 
 
 		return sAddTask;
 	 }
@@ -704,6 +756,9 @@ var RConsole = {
 		      document.body.appendChild(container);
 
 		}
+	var div_p_task = this.createSelectPrimitiveTasks();
+	//console.debug(div_p_task);
+		body.appendChild(div_p_task);
 
 		body.appendChild(editor_container);
 		body.appendChild(add_container);

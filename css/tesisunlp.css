@@ -163,3 +163,15 @@ font-size: 9px;
 .loadButton{
 	height: 25;
 }
+
+.div_p_task_style{
+	  display: none;
+	  padding: 10;
+	  position: fixed;
+	  top: 50;
+	  left: 100;
+	  z-index: 999;
+	  border:solid 1px #b4b4b4;
+	  background-color: #e1e1e1;
+    
+}

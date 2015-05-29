@@ -10,13 +10,13 @@
 
 var __ROOT__ = window.location.origin +'/content/tesisunlp/';	
 //console.log(__ROOT__);
-//var absolute_path = 'http://localhost/content/tesisunlp/';
-var absolute_path =	__ROOT__;
+var absolute_path = 'http://localhost/content/tesisunlp/';
+//var absolute_path =	__ROOT__;
 var tesis_css = document.createElement('link');
 tesis_css.setAttribute("rel","stylesheet");
 tesis_css.setAttribute("type","text/css");
 //tesis_css.setAttribute("href","http://127.0.0.1/content/tesisunlp/css/tesisunlp.css");
-tesis_css.setAttribute("href",__ROOT__+"/css/tesisunlp.css");
+tesis_css.setAttribute("href",absolute_path+"/css/tesisunlp.css");
 document.head.appendChild(tesis_css);
 
 //Load scripts after loading

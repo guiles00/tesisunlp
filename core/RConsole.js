@@ -433,7 +433,7 @@ var RConsole = {
 		//load.src = "ls.png";
 		//load.src = 'http://s23.postimg.org/j9db6rcc7/image.png';
 		load.src = 'http://raw.githubusercontent.com/guiles/unlptesis/master/images/ls.png';
-		
+		load.classList.add("loadButton");
 		load.value = "LS";
 		load.id = "load";
 
@@ -519,17 +519,27 @@ var RConsole = {
 			div_consola.setAttribute('class','tesisunlp_div_consola');
 			div_consola.style.visibility = "hidden";
 		
-			var hr_el = document.createElement("hr");
-			div_consola.appendChild(hr_el);	
+			//var hr_el = document.createElement("hr");
+			//div_consola.appendChild(hr_el);	
 		
 		return div_consola;
 
+	 }
+	 ,createContain:function(){
+			
+		var div_contain = document.createElement("div");
+			//div_contain.id = "div_consola";		
+			//div_consola.style.cssText = "overflow:scroll;z-index: 300;position:fixed;left: 0px;width:auto;height: 100%;border:solid 1px #e1e1e1;vertical-align: middle;background: #A2AFA0;"; //text-align:center;
+			div_contain.setAttribute('class','contain');
+			
+		return div_contain;		 	
 	 }
 	 ,createHeader: function(){
 	 	////console.debug('8. Crea el div consola header');
 		var div_consola_header = document.createElement("div");
 		div_consola_header.id = "consola_header"
-		
+    	div_consola_header.classList.add('consola_header_style');
+
 		//var hr_el = document.createElement("hr");
 		//	div_consola_header.appendChild(hr_el);	
 		
@@ -539,7 +549,9 @@ var RConsole = {
 	 	////console.debug('9. Crea el div consola table');
 		var div_table_consola = document.createElement("div");
 		div_table_consola.id =  "div_table_consola";
-		div_table_consola.setAttribute('class','aParent');
+		div_table_consola.classList.add('aParent');
+		div_table_consola.classList.add('margen_tabla');
+		
 		//div_table_consola.class = "Table";
 		return div_table_consola;
 	 }
@@ -552,6 +564,7 @@ var RConsole = {
 		//table_consola.style.cssText = "min-width:auto;font-family: Helvetica,Arial; font-size: 16px";
 		//table_consola.setAttribute('class','tesisunlp_table_consola');
 		table_consola.class = "Table";
+		table_consola.classList.add("table_consola_style")
 
 		//	var hr_el = document.createElement("hr");
 		//	table_consola.appendChild(hr_el);	
@@ -615,9 +628,12 @@ var RConsole = {
 		var pocketButton = this.createShowSharedButton();
 		
 		//var mostrarPocket = this.mostrarPocket('M','mpocket_id','')
-		
+		var div_wrapper = document.createElement("div");
+
 		var container = this.createHeaderContainer();
+		
 		var show_hide = this.createShowHide();
+		
 		var container_header = this.createHeader();
 		var table_console_container = this.createTableContainer();
 		var table_console = this.createTable();
@@ -631,24 +647,49 @@ var RConsole = {
 	 	var export_button = this.createExportButton();
 	 	//console.debug(import_proc_button);
 	 	//container_header.appendChild(stopButton);
-	 	container_header.appendChild(recordButton);
-		container_header.appendChild(playButton);
-	 	container_header.appendChild(clearButton);
-	 	container_header.appendChild(addTaksSelect);
-	 	container_header.appendChild(procedures_select);
-	 	container_header.appendChild(del_proc_button);
-	 	container_header.appendChild(loadButton);
-	 	container_header.appendChild(pocketButton);
-		container_header.appendChild(show_import_button);
-		container_header.appendChild(export_button);
-		container_header.appendChild(import_proc_button);
+	 	var contain_first = this.createContain();
+	 	contain_first.appendChild(recordButton);
+		contain_first.appendChild(playButton);
+	 	contain_first.appendChild(clearButton);
+	 	contain_first.appendChild(addTaksSelect);
+		//container_header.appendChild(contain_first);
+		
+		var contain_two = this.createContain();
 	 	
+	 	contain_two.appendChild(procedures_select);
+	 	contain_two.appendChild(del_proc_button);
+
+		var contain_pocket = this.createContain();
+
+ 	 	contain_pocket.appendChild(pocketButton);
+
+	 	//container_header.appendChild(contain_pocket);
+		
+		div_wrapper.appendChild(contain_first);
+		div_wrapper.appendChild(contain_two);
+
+
+		
+		container_header.appendChild(div_wrapper);
+	//parche
+	var br = document.createElement("br");
+	container_header.appendChild(br);
+
+		var contain_three = this.createContain();
+		contain_three.appendChild(loadButton);
+		contain_three.appendChild(show_import_button);
+		contain_three.appendChild(export_button);
+		contain_three.appendChild(import_proc_button);
+	 	container_header.appendChild(contain_three);
+		container_header.appendChild(contain_pocket);
 	 	var hr_el = document.createElement("hr");
-			container_header.appendChild(hr_el);	
+			//container_header.appendChild(br);	
 		
-		
+		//table_console_container.appendChild(br);
 		table_console_container.appendChild(table_console);
+		//container.appendChild(hr_el);
 		container.appendChild(container_header);
+		//
 		container.appendChild(table_console_container);
 		
 

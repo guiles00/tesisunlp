@@ -7,17 +7,23 @@
 **  css --> CSS 
 **  exports --> donde se guardan los procedures en .json
 **/
+
+var __ROOT__ = window.location.origin +'/content/tesisunlp/';	
+//console.log(__ROOT__);
+//var absolute_path = 'http://localhost/content/tesisunlp/';
+var absolute_path =	__ROOT__;
 var tesis_css = document.createElement('link');
 tesis_css.setAttribute("rel","stylesheet");
 tesis_css.setAttribute("type","text/css");
-tesis_css.setAttribute("href","http://127.0.0.1/tesis/tesisunlp/css/tesisunlp.css");
+//tesis_css.setAttribute("href","http://127.0.0.1/content/tesisunlp/css/tesisunlp.css");
+tesis_css.setAttribute("href",__ROOT__+"/css/tesisunlp.css");
 document.head.appendChild(tesis_css);
 
 //Load scripts after loading
 window.onload = (function(){
 
-	var absolute_path = 'http://127.0.0.1/tesis/tesisunlp/';
-	//var absolute_path = 'var/www/tesis/tesisunlp/js/';
+	//var absolute_path = 'http://localhost:81/tesisunlp/';
+	//var absolute_path = 'var/www/content/tesisunlp/js/';
 
 	function loadScript (dir, file) {
 	 var scr = document.createElement("script");
@@ -50,66 +56,3 @@ window.onload = (function(){
 	};
 
 })();
-
-
-/*
-var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/libs/tablednd.js');
-document.head.appendChild(tesis_script);
-*/
-/*var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/core/listeners.js');
-document.head.appendChild(tesis_script);
-
-
-var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/core/localStorageManager.js');
-document.head.appendChild(tesis_script);
-
-var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/core/StorageManager.js');
-document.head.appendChild(tesis_script);
-
-var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/core/main.js');
-document.head.appendChild(tesis_script);
-
-
-var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/core/edit.js');
-document.head.appendChild(tesis_script);
-
-*///Este script es para prueba solamente, usar uglify para unir todos los archivos
-/*var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/js/Attribute.js');
-document.head.appendChild(tesis_script);
-
-var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/js/Utils.js');
-document.head.appendChild(tesis_script);
-*/
-
-
-/*var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/Recorder.js');
-document.head.appendChild(tesis_script);
-*/
-
-/*var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/Manager.js');
-document.head.appendChild(tesis_script);
-*/
-
-/*var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/RConsole.js');
-document.head.appendChild(tesis_script);
-*/
-
-
-
-/*
-var tesis_script = document.createElement('script');
-tesis_script.setAttribute('src','http://127.0.0.1/tesis/tesisunlp/js/PrimitiveTasks.js');
-document.head.appendChild(tesis_script);*/
-
-

@@ -758,7 +758,7 @@ var RConsole = {
 		}
 	var div_p_task = this.createSelectPrimitiveTasks();
 	//console.debug(div_p_task);
-		body.appendChild(div_p_task);
+		container_header.appendChild(div_p_task);
 
 		body.appendChild(editor_container);
 		body.appendChild(add_container);

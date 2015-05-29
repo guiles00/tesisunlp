@@ -170,6 +170,7 @@ font-size: 9px;
 	  position: fixed;
 	  top: 50;
 	  left: 100;
+	  margin-left: 100px;
 	  z-index: 999;
 	  border:solid 1px #b4b4b4;
 	  background-color: #e1e1e1;

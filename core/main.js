@@ -1,4 +1,5 @@
 window.onload = function(){
+	console.log("BPMN INIT...");
 //Check if there is BPMP in localStorage
 var bpmp = localStorage.getItem("BPMP");
 

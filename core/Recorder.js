@@ -95,13 +95,13 @@ var Recorder = {
 	}	
 	,addTypeTask: function(event){
 		var id_selected = event.target.options[event.target.options.selectedIndex].value;
-		
+		event.target.options.selectedIndex = 0;
 		
 		if(id_selected==1){
 			alert("@TODO");
 		}else if(id_selected==2){
 			
-			var div = document.getElementById("div_p_task");
+		var div = document.getElementById("div_p_task");
 		console.debug(div);
 		div.style.display = "initial";
 			

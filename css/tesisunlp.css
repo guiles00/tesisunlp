@@ -187,3 +187,20 @@ font-size: 9px;
 	  background-color: #7f7fff;
     
 }
+.hov {
+		border-style: 1px,solid;
+		border-color:yellow;
+}
+
+.topcorner{
+   		border-style: solid;
+   		border-color:yellow;
+   		color:red;
+   		position:absolute;
+   		top:10;
+   		right:10;
+   		padding: 20;
+}
+.select{
+  		color:red;
+}

@@ -9,6 +9,65 @@ function construct(constructor, args) {
     F.prototype = constructor.prototype;
     return new F();
 }
+function clickSelectedDOM(e){
+	
+		//e.target.className = "select";
+		//e.target.classList.add("select");
+
+		//alert("selection:"+e.target.innerHTML)
+		var xpath = Recorder.createXPathFromElement(e.target);
+	
+		//Agregar Confirm
+		var xpath_id = document.getElementById('xpath_id');
+		xpath_id.value = xpath ;
+
+		//e.target.classList.remove("select");
+		
+		document.removeEventListener('mouseover', DomSelecter,false);
+		//tambien borro esta funcion
+		//console.debug(this);
+		document.removeEventListener('click', clickSelectedDOM,false);
+		
+	};
+
+
+function DomSelecter(e){
+		
+		console.debug(e.target.tagName);
+		//var t = document.getElementById("tagname");
+		//t.innerHTML = e.target.tagName;
+	
+		e.target.classList.add("hov");
+
+		e.target.addEventListener("mouseout",function(e){
+		
+		e.target.classList.remove("hov");
+	
+		})
+	document.addEventListener("click",clickSelectedDOM,false);
+	/*document.addEventListener("click",function(e){
+		//e.target.className = "select";
+		e.target.classList.add("select");
+
+		//alert("selection:"+e.target.innerHTML)
+		var xpath = Recorder.createXPathFromElement(e.target);
+		console.debug(xpath);
+		//alert(xpath);
+		//Agregar Confirm
+		var xpath_id = document.getElementById('xpath_id');
+		console.debug(xpath_id)
+		xpath_id.value = xpath ;
+
+		e.target.classList.remove("select");
+		
+		document.removeEventListener('mouseover', DomSelecter,false);
+		//tambien borro esta funcion
+		//console.debug(this);
+		document.removeEventListener('click', clickSelectedDOM,false);
+		
+	});*/
+	};
+
 var Recorder = {
 	importProcedure: function(e){
 		
@@ -76,7 +135,24 @@ var Recorder = {
     	
     		return true;
     }
-    
+    ,initDomSelector:function(){
+    	
+    	document.addEventListener("mouseover", DomSelecter,false);
+    	/*
+
+		document.addEventListener("click",function(e){
+			//e.target.className = "select";
+			e.target.classList.add("select");
+
+			//alert("selection:"+e.target.innerHTML)
+			var xpath = createXPathFromElement(e.target);
+			console.debug(xpath);
+			alert(xpath);
+			e.target.classList.remove("select");
+			
+			});
+*/
+    }
     /**
      * @method createButton
      */
@@ -161,7 +237,7 @@ var Recorder = {
 		Manager.addSelectOptionTask('');			
 		return true;	
 		}
-		
+
 		return false;
 	}
 	/**  
@@ -280,7 +356,7 @@ var close_task = document.createElement("input");
 	* Muestra ventana para agregar una tarea primitiva o un augmenter
 	* @method addTask    
 	*/
-	,addAugmentedTask: function() {
+	,NOaddAugmentedTask: function() {
 	//===============================================//
 
 function handleSelectxPath(){
@@ -470,6 +546,21 @@ function handleSelectxPath(){
 	var div_value = document.getElementById('value_id').parentNode;
 	div_value.appendChild(bind_data);
 	}
+
+	if(typeof task.xPath != "undefined"){ //Algunas tareas no tienen el atributo value
+	var select_dom = document.createElement("input");
+	select_dom.type = "button";
+	select_dom.value = "<";
+	select_dom.setAttribute('class','tesisunlp_button');
+	select_dom.onclick = function(){ 
+		Recorder.initDomSelector();
+	}
+
+	var div_value = document.getElementById('xpath_id').parentNode;
+	div_value.appendChild(select_dom);
+	}
+
+
 	/******/
 
 	//El comportamiento de los botones todavia no se bien como desacoplarlo

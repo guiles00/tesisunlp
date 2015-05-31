@@ -126,7 +126,7 @@ var RConsole = {
 			
 			//iStop_recorder.addEventListener("click", Recorder.clickStop , false); 
 			
-			sAddTask.addEventListener("change", Recorder.addPrimitiveTask , false); 	
+			sAddTask.addEventListener("change", Recorder.addAugmentedTask , false); 	
 
 			var container_header = document.getElementById("div_consola");
 			container_header.appendChild(div_a_task);

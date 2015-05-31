@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function loadXMLDoc()
+{
+var xmlhttp = new XMLHttpRequest();
+
+xmlhttp.onreadystatechange = function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    //document.getElementById("myDiv").innerHTML = xmlhttp.responseText;
+    }
+    
+  }
+xmlhttp.open("GET","data.json",true);
+xmlhttp.send();
+alert(xmlhttp.responseText);
+}
+function onClicButton(){
+	var text = loadXMLDoc();
+	console.debug(text);
+	document.getElementById("myDiv").innerHTML = text;	
+}
+
+function otroClic(url,callback){
+
+var req = new XMLHttpRequest();
+req.open('GET', 'data.json', false);
+//req.setRequestHeader('X-foo','bar');
+req.send(null);
+if(req.status == 200){
+//alert(req.responseText);
+document.getElementById("myDiv").innerHTML = req.responseText;
+console.debug(req.responseText);	
+}
+//callback();
+//console.debug(callback);	
+	if(typeof callback == 'function'){
+	callback();
+	console.log('nombre');
+	console.debug(callback);	
+	}
+}
+function clic(callback){
+
+var req = new XMLHttpRequest();
+req.open('GET', 'data.json', false);
+//req.setRequestHeader('X-foo','bar');
+req.send(null);
+if(req.status == 200){
+//alert(req.responseText);
+document.getElementById("myDiv").innerHTML = req.responseText;
+console.debug(req.responseText);	
+}
+//callback();
+//console.debug(callback);	
+	if(typeof callback == 'function'){
+	callback();
+	console.log('nombre');
+	console.debug(callback);	
+	}
+}
+window.onload = function(){
+	var button = document.createElement('input');
+	button.type = "button";
+	button.value = "boton";
+	button.onclick = function() { 
+		clic(function(){console.log('call');});
+	}
+
+	var body = document.getElementsByTagName('body')[0];
+   	body.appendChild(button);
+    
+}
+</script>
+
+</head>
+<body>
+
+<div id="myDiv"><h2>Let AJAX change this text</h2></div>
+<button type="button" onclick="otroClic('nada',function(){console.log('hola')})">Change Content</button>
+
+</body>
+</html>

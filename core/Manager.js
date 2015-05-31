@@ -393,28 +393,7 @@ var Manager = (function () {
             }
             ,addHighLightTask: function(searchText){
 
-/*                var o_task;
 
-                var tipo = Object.create(TipoAttribute);
-                    tipo._type = TipoAttribute._type;
-                    tipo.setValue(1);
-                var state = Object.create(StateAttribute);
-                    state._type = StateAttribute._type;
-                    state.setValue(0);
-                var xPath = Object.create(XPathAttribute);
-                    xPath._type = XPathAttribute._type;
-                    xPath.setValue('sxPath');
-                var objValue = Object.create(CValueAttribute);
-                    objValue._type = SValueAttribute._type;     
-                    objValue.setValue(searchText);
-   
-                o_task = new HighLightTask(10,xPath,objValue,tipo,state,null);
-                o_task.setLocation(location);
-                localStorageManager.insert(o_task.toJson());
-                Recorder.refresh();
-
-
-*/
                 //Instancio tarea vacia y guardo en el localStorage
                 var a_task = new HighLightTask();
                 localStorageManager.insert(a_task.toJson());
@@ -505,30 +484,7 @@ var Manager = (function () {
             }
             ,addConcatStringTask: function(){
 
-            /*    var o_task;
-
-                var tipo = Object.create(TipoAttribute);
-                    tipo._type = TipoAttribute._type;
-                    tipo.setValue(1);
-                var state = Object.create(StateAttribute);
-                    state._type = StateAttribute._type;
-                    state.setValue(0);
-                var xPath = Object.create(XPathAttribute);
-                    xPath._type = XPathAttribute._type;
-                    xPath.setValue('sxPath');
-
-                var xPath2 = Object.create(XPathAttribute);
-                    xPath2._type = XPathAttribute._type;
-                    xPath2.setValue('sxPath');
-                    xPath2.htmlId = 'xpath2_id';
-
-                var objValue = Object.create(CValueAttribute);
-                    objValue._type = SValueAttribute._type;     
-                    objValue.setValue(searchText);
-   
-                o_task = new ConcatStringTask(10,xPath,objValue,tipo,state,null,xPath2);
-                localStorageManager.insert(o_task.toJson());
-                */
+           
                 //Instancio tarea vacia y guardo en el localStorage
                 var a_task = new ConcatStringTask();
                 localStorageManager.insert(a_task.toJson());
@@ -544,8 +500,37 @@ var Manager = (function () {
                 //No te olvides de actualizar la consola
                 Recorder.refresh();
                 
-            }    
-        };
+            }
+            ,addFillInputTask: function(){
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new FillInputTask();
+                localStorageManager.insert(a_task.toJson());
+                //Actualizo la consola
+                Recorder.refresh();
+            }
+            ,addTextAreaTask: function(){
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new TextAreaTask();
+                localStorageManager.insert(a_task.toJson());
+                //Actualizo la consola
+                Recorder.refresh();
+            }
+            ,addClickLinkTask: function(){
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new ClickLinkTask();
+                localStorageManager.insert(a_task.toJson());
+                //Actualizo la consola
+                Recorder.refresh();
+            }
+            ,addSelectOptionTask: function(){
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new SelectOptionTask();
+                localStorageManager.insert(a_task.toJson());
+                //Actualizo la consola
+                Recorder.refresh();
+            }
+            
+        }
 }());
 
 /*****TEMPORALMENTE LO PONGO ACA***/

@@ -98,20 +98,77 @@ var Recorder = {
 		event.target.options.selectedIndex = 0;
 		
 		if(id_selected==1){
-			alert("@TODO");
+			RConsole.showAddPrimitiveTask();
 		}else if(id_selected==2){
 			
-		var div = document.getElementById("div_p_task");
+		/*var div = document.getElementById("div_a_task");
 		console.debug(div);
 		div.style.display = "initial";
-			
+		*/
+		RConsole.showAddAugmentedTask();
 		}
+	}
+	,addAugmentedTask: function(event) {
+		var id_selected = event.target.options[event.target.options.selectedIndex].value;
+		
+		//Ya me traje el id ahora vuelvo el select a addTask
+		event.target.options.selectedIndex = 0;
+		//Esto es TEMPORAL, es una cagada
+		if(id_selected == 1){ //Si es DataCollectorTask
+		Manager.addDataCollectionTask('Select a Concept');		
+		return true;	
+		}else if(id_selected == 2){
+		Manager.addHighLightTask('');			
+		return true;	
+		}else if(id_selected == 3){
+		Manager.addSumatoriaTask('');			
+		return true;	
+		}else if(id_selected == 4){
+		Manager.addNotasTask('');			
+		return true;	
+		}else if(id_selected == 5){
+		Manager.addConcatStringTask('');			
+		return true;	
+		}else if(id_selected == 6){
+		Manager.addComposedTask('');			
+		return true;	
+		}
+
+		
+
+		return false;
+	}
+	,addPrimitiveTask: function(event) {
+		var id_selected = event.target.options[event.target.options.selectedIndex].value;
+		
+		//Ya me traje el id ahora vuelvo el select a addTask
+		event.target.options.selectedIndex = 0;
+		
+		/*********************************
+		*Esto es TEMPORAL, es una cagada *
+		**********************************/
+		//'FillInput','TextArea','ClickLink','SelectOption'];
+		if(id_selected == 1){ 
+		Manager.addFillInputTask();		
+		return true;	
+		}else if(id_selected == 2){
+		Manager.addTextAreaTask('');			
+		return true;	
+		}else if(id_selected == 3){
+		Manager.addClickLinkTask('');			
+		return true;	
+		}else if(id_selected == 4){
+		Manager.addSelectOptionTask('');			
+		return true;	
+		}
+		
+		return false;
 	}
 	/**  
 	* Muestra ventana para agregar una tarea primitiva y capturar ese evento
 	* @method addPrimitiveTask    
 	*/
-	,addPrimitiveTask: function(event) {
+	,NOaddPrimitiveTask: function(event) {
 		var id_selected = event.target.options[event.target.options.selectedIndex].value;
 		
 		//Ya me traje el id ahora vuelvo el select a addTask

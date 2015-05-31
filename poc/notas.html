@@ -1,0 +1,59 @@
+<html>
+<head>
+<script src="./notas.js"></script>
+</head>
+<body>
+<div>
+<form action="tratoPost.php" method="POST">
+Nombre: <input type="text" name="nombre" size="25" maxlength="50">
+<label>texto</label>
+<br><br>
+Apellidos: <input type="text" name="apellidos" size="35" maxlength="100">
+<br><br>
+Correo electrónico: <input type="text" value="@" name="correo" size="40" maxlength="100">
+<br><br>
+Población: <input type="text" name="poblacion" size="15" maxlength="50">
+<br><br>
+Provincia: <input type="text" name="provincia" size="15" maxlength="50">
+<textArea></textArea>
+<p>
+  <label for="unittype">Select unit type:</label>
+  <select id="unittype" name="unittype">
+    <option value="1"> Miner </option>
+    <option value="2"> Puffer </option>
+    <option value="3"> Snipey </option>
+    <option value="4"> Max </option>
+    <option value="5"> Firebot </option>
+  </select>
+</p>
+<input class="tesisunlp_button" type="submit" value="Confirmar" ></input>
+<input type="button" value="Tipo Button" ></input>
+
+</form>
+
+<p>
+</br>
+<div>
+<p>
+Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+</p>
+<a href="./otra_pagina.html">Ir a otra pagina dentro del mismo domimio</a>
+<a data-google-track="Click/Action: index/advsearch" href="#toggle_advaced_search" class="b_advanced_search_toggler b-sprite-wrap">
+<i class="b-sprite right_dark"></i>
+Additional search options
+</a>
+<br>
+<a href="#" onclick="toggle_visibility('foo');">Click here to toggle visibility of element #foo</a>
+<div id="foo">This is foo</div>
+</div>
+
+<div id="simulo_tarea">
+
+xPath:<input type="text" value="" id="xpath_notas" ></input>
+Comentario<input type="text" value="" id="comentario_notas" ></input>
+<input type="button" id="agregar_notas" value="agregar"></input>
+
+</div>
+
+</body>
+<html>	

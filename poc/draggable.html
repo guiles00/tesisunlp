@@ -1,0 +1,40 @@
+<html>
+<head>
+
+</head>
+<body>
+<div style="height:500px;width:500;background-color:green;">
+
+    <div id="move" style="border:solid 1px">
+    <input id="dxy" type="button" value="^"></input>
+    xPath:<input type='text' value=''></input><br>
+    Valor:<input type='text' value=''></input>
+    </div>
+</div>
+</body>
+<script>
+window.onload = addListeners();
+
+function addListeners(){
+    document.getElementById('dxy').addEventListener('mousedown', mouseDown, false);
+    window.addEventListener('mouseup', mouseUp, false);
+
+}
+
+function mouseUp()
+{
+    window.removeEventListener('mousemove', divMove, true);
+}
+
+function mouseDown(e){
+  window.addEventListener('mousemove', divMove, true);
+}
+
+function divMove(e){
+    var div = document.getElementById('move');
+  div.style.position = 'absolute';
+  div.style.top = e.clientY + 'px';
+  div.style.left = e.clientX + 'px';
+}
+</script>
+</html>

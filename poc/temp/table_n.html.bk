@@ -1,0 +1,103 @@
+<div id="caja">
+<div id="consola_header">
+		<input type="button" value="Stop" id="stop_record" disabled="true" hidden="false">
+		<input type="button" value="Record" id="start_record">
+		<input type="button" value="Play" id="play_procedure">
+		<input type="button" value="Clear" id="clear">
+		<input type="button" value="LS" id="load">
+		<select id="add_task"><option value="0" disabled="">Add Task</option>
+			<option value="1">Primitive Task</option><option value="2">Augmented Task</option>
+		</select></div>
+<div id="consola_contenido">
+<div id="nro">02</div>
+<div id="fill">FillInputTask</div>
+<div id="botonE"><input type="button" value="E" /></div>
+<div id="botonX"><input type="button" value="X" /></div>
+<div id="nro">02</div>
+<div id="fill">FillInputTask</div>
+<div id="botonE"><input type="button" value="E" /></div>
+<div id="botonX"><input type="button" value="X" /></div>
+<div id="nro">02</div>
+<div id="fill">FillInputTask</div>
+<div id="botonE"><input type="button" value="E" /></div>
+<div id="botonX"><input type="button" value="X" /></div>
+<div id="nro">02</div>
+<div id="fill">FillInputTask</div>
+<div id="botonE"><input type="button" value="E" /></div>
+<div id="botonX"><input type="button" value="X" /></div>
+</div>
+</div>
+        
+<style>
+
+* {
+	margin:0px;
+	padding:0px;
+}
+
+#caja {
+	position:relative;
+	margin:auto;
+	background:#999;
+	height:800px;
+	width:600px;
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	border-bottom-left-radius:20px;
+	border-bottom-right-radius:20px;
+	border-bottom:#CCC solid 10px;
+}
+
+#consola_header{
+	padding-top:20px;
+	text-align:center;
+}
+
+#consola_contenido{
+	margin:40px;
+}
+
+#nro{
+	background:#FDD035;
+	float:left;
+	padding:10px;
+	border-top: 5px solid #777;
+	border-left: 5px solid #777;
+	border-bottom: 5px solid #555;
+	border-top-left-radius:10px;
+	border-bottom-left-radius:10px;
+}
+
+#fill{
+	background:#FFF;
+	float:left;
+	width:320px;
+	padding:10px;
+	border-top: 5px solid #777;
+	border-bottom: 5px solid #555;
+}
+
+#botonE{
+	background:#FFF;
+	float:left;
+	width:50px;
+	padding:7px;
+	border-top: 5px solid #777;
+	border-bottom: 5px solid #555;
+	text-align:center;
+}
+
+#botonX{
+	background:#FFF;
+	float:left;
+	width:50px;
+	padding:7px;
+	border-top: 5px solid #777;
+	border-right: 5px solid #777;
+	border-bottom: 5px solid #555;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius:10px;
+	text-align:center;
+}
+
+</style>

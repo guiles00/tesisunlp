@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+</html>
+<script>
+var shared = {};
+
+shared.helloMundo = function(){
+	console.debug('Guardo en Shared Data un objeto con mas objetos');
+	//Init.
+	var o = new Object();
+	localStorage.setItem('POC_SHARED',JSON.stringify(o));
+}
+shared.getSharedData = function(){
+
+	var data = localStorage.getItem("POC_SHARED");
+
+    //return JSON.stringify(data);    
+    return data;
+}
+
+shared.addConcept = function(concepto,concept){
+
+	var data = JSON.parse(localStorage.getItem("POC_SHARED") );
+	
+	data[concepto] = concept;
+	localStorage.setItem('POC_SHARED',JSON.stringify(data));
+
+	return data;
+}
+
+shared.getConcept = function(){
+
+	var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
+}
+
+
+
+shared.helloMundo();
+console.log(shared.getSharedData());
+shared.addConcept('1',{'clave':'valor'});
+shared.addConcept('2',{'clave1':'valor1'});
+shared.addConcept('animal',{'valor':'PUMA'});
+console.log( 'Traeme la clave animal' );
+var sd = JSON.parse( shared.getSharedData() );
+//console.log(sd['animal']);
+console.log(sd['animal']);
+console.log(sd);
+</script>

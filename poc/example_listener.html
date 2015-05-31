@@ -1,0 +1,136 @@
+<html>
+<head>
+<style type="text/css">
+	.hov {
+		border-style: solid;
+	}
+
+	 .topcorner{
+   		border-style: solid;
+   		border-color:yellow;
+   		color:red;
+   		position:absolute;
+   		top:10;
+   		right:10;
+   		padding: 20;
+  	}
+  	.select{
+  		color:red;
+  	}
+
+</style>
+<script>
+
+function createXPathFromElement(elm) { 
+	   var allNodes = document.getElementsByTagName('*'); 
+	   for (segs = []; elm && elm.nodeType == 1; elm = elm.parentNode) 
+	   { 
+	       if (elm.hasAttribute('id') && false) { //no estra nunca a este if
+	       var uniqueIdCount = 0; 
+	       for (var n=0;n < allNodes.length;n++) { 
+	           if (allNodes[n].hasAttribute('id') && allNodes[n].id == elm.id) uniqueIdCount++; 
+	           if (uniqueIdCount > 1) break; 
+	       }; 
+	       if ( uniqueIdCount == 1) { 
+	           segs.unshift('id("' + elm.getAttribute('id') + '")'); 
+	           return segs.join('/'); 
+	       } else { 
+	           segs.unshift(elm.localName.toLowerCase() + '[@id="' + elm.getAttribute('id') + '"]'); 
+	       } 
+	       } else if (elm.hasAttribute('class') && false) { //Tampoco entra aca 
+	           segs.unshift(elm.localName.toLowerCase() + '[@class="' + elm.getAttribute('class') + '"]'); 
+	       } else { 
+	           for (i = 1, sib = elm.previousSibling; sib; sib = sib.previousSibling) { 
+	       if (sib.localName == elm.localName)  i++; }; 
+	       segs.unshift(elm.localName.toLowerCase() + '[' + i + ']'); 
+	       }; 
+	   }; 
+	   return segs.length ? '/' + segs.join('/') : null; 
+	}
+
+
+
+	document.addEventListener("click",function(e){
+		//e.target.className = "select";
+		e.target.classList.add("select");
+
+		//alert("selection:"+e.target.innerHTML)
+		var xpath = createXPathFromElement(e.target);
+		console.debug(xpath);
+		alert(xpath);
+		e.target.classList.remove("select");
+		
+	});
+
+	document.addEventListener("mouseover", function(e){
+		console.debug(e.target.tagName);
+		var t = document.getElementById("tagname");
+		t.innerHTML = e.target.tagName;
+		//console.debug(t.firstchild);
+
+		//if(e.target.tagName == "P"){
+		//var parent = e.target.parentNode;	
+		//var d = document.createElement("div");
+		//d.style.cssText = "border: solid; ";
+		//var clone = e.target;
+		//	d.appendChild(clone);
+		//	parent.appendChild(d);
+		//e.target.style.cssText = "border-style: solid;";
+		//e.target.className = e.target.className +" hov";
+		e.target.classList.add("hov");
+		//}
+		
+		//e.target.className = "hov";
+		//var p = document.createElement("p");
+		//p.className = "hov";
+		//console.debug(p);
+
+		//p.appendChild(e.target);
+		//;
+		e.target.addEventListener("mouseout",function(e){
+		//if(e.target.tagName == "P"){
+		
+		//e.target.className = "";
+		e.target.classList.remove("hov");
+		//}
+		//e.target.style.cssText = "border-style: solid;";
+		
+		})
+	});
+</script>
+</head>
+<body>
+<div id="tagname" class="topcorner">
+	
+</div>
+<form>
+A<input value="asdasd"></input><br>
+B<input value="asdasd"></input><br>
+B<input value="asdasd"></input><br>
+V<input value="asdasd"></input><br>
+C<input value="asdasd"></input><br>
+D<input value="asdasd"></input><br>
+<h2> Historia del tiempo </h2>
+<div style="color:blue;border:solid"><table>
+<tr><td>Palabra</td><td>Cantidad</td>
+</tr>
+<tr><td>de</td><td>10</td>
+</tr>
+
+</table></div>
+<p>
+	En anteriores hemos visto la transformaci&oacute;n de todo el Datacenter F&iacute;sico al ambiente virtual. Hoy ya es un commodity. No existe Datacenter serio que no piense a futuro tener todo virtualizado. Son pocos los casos en donde no. La virtualizaci&oacute;n es el motor del Cloud Computing, ya no hablemos de si es IaaS, SaaS o PaaS.... el motor debajo de toda implementaci&oacute;n de Cloud es la virtualizaci&oacute;n.</p>
+	<p> Hoy ya hay sistemas que se montan arriba de la virtualizaci&oacute;n para administrar los recursos. Ya se tiene que dejar de hablar de configuraciones artesanales donde aparecen servidores con configuraciones únicas, tareas repetitivas que las seguimos haciendo a mano.... </p><p>todo eso tiene que cambiar. Amazon es la empresa pionera en Cloud Computing. Siempre que analices un tema espec&iacute;fico tenés que ver quienes son los representantes mundiales sobre ese tema. Si investigamos un poco, no hace muchos a&nacute;os hab&iacute;a tres posibles caminos, Amazon (ya consolidado), Vmware y otros (con solo promesas) y OpenStack (naciendo). Este último fue un proyecto en conjunto con la Nasa y Rackspace quienes unieron fuerzas para crear un software que administre el c&oacute;mputo, las redes y el storage para brindar un servicio de Cloud. Esto surgi&oacute; por los costos que incurr&iacute;an en contratar el servicio por afuera y las complicaciones que esto les tra&iacute;a. Crearon OpenStack un software totalmente OpenSource. Acá una peque&nacute;a introducci&oacute;n en espa&nacute;ol:
+</p>
+<p>
+	En anteriores hemos visto la transformaci&oacute;n de todo el Datacenter F&iacute;sico al ambiente virtual. Hoy ya es un commodity. No existe Datacenter serio que no piense a futuro tener todo virtualizado. Son pocos los casos en donde no. La virtualizaci&oacute;n es el motor del Cloud Computing, ya no hablemos de si es IaaS, SaaS o PaaS.... el motor debajo de toda implementaci&oacute;n de Cloud es la virtualizaci&oacute;n.</p>
+	<p> Hoy ya hay sistemas que se montan arriba de la virtualizaci&oacute;n para administrar los recursos. Ya se tiene que dejar de hablar de configuraciones artesanales donde aparecen servidores con configuraciones únicas, tareas repetitivas que las seguimos haciendo a mano.... </p><p>todo eso tiene que cambiar. Amazon es la empresa pionera en Cloud Computing. Siempre que analices un tema espec&iacute;fico tenés que ver quienes son los representantes mundiales sobre ese tema. Si investigamos un poco, no hace muchos a&nacute;os hab&iacute;a tres posibles caminos, Amazon (ya consolidado), Vmware y otros (con solo promesas) y OpenStack (naciendo). Este último fue un proyecto en conjunto con la Nasa y Rackspace quienes unieron fuerzas para crear un software que administre el c&oacute;mputo, las redes y el storage para brindar un servicio de Cloud. Esto surgi&oacute; por los costos que incurr&iacute;an en contratar el servicio por afuera y las complicaciones que esto les tra&iacute;a. Crearon OpenStack un software totalmente OpenSource. Acá una peque&nacute;a introducci&oacute;n en espa&nacute;ol:
+</p>
+<p>
+	En anteriores hemos visto la transformaci&oacute;n de todo el Datacenter F&iacute;sico al ambiente virtual. Hoy ya es un commodity. No existe Datacenter serio que no piense a futuro tener todo virtualizado. Son pocos los casos en donde no. La virtualizaci&oacute;n es el motor del Cloud Computing, ya no hablemos de si es IaaS, SaaS o PaaS.... el motor debajo de toda implementaci&oacute;n de Cloud es la virtualizaci&oacute;n.</p>
+	<p> Hoy ya hay sistemas que se montan arriba de la virtualizaci&oacute;n para administrar los recursos. Ya se tiene que dejar de hablar de configuraciones artesanales donde aparecen servidores con configuraciones únicas, tareas repetitivas que las seguimos haciendo a mano.... </p><p>todo eso tiene que cambiar. Amazon es la empresa pionera en Cloud Computing. Siempre que analices un tema espec&iacute;fico tenés que ver quienes son los representantes mundiales sobre ese tema. Si investigamos un poco, no hace muchos a&nacute;os hab&iacute;a tres posibles caminos, Amazon (ya consolidado), Vmware y otros (con solo promesas) y OpenStack (naciendo). Este último fue un proyecto en conjunto con la Nasa y Rackspace quienes unieron fuerzas para crear un software que administre el c&oacute;mputo, las redes y el storage para brindar un servicio de Cloud. Esto surgi&oacute; por los costos que incurr&iacute;an en contratar el servicio por afuera y las complicaciones que esto les tra&iacute;a. Crearon OpenStack un software totalmente OpenSource. Acá una peque&nacute;a introducci&oacute;n en espa&nacute;ol:
+</p>
+
+</form>
+</body>
+</html>

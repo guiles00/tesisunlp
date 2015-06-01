@@ -1,0 +1,32 @@
+<script>
+
+function saco_corchetes(){
+var concepto = '[valor]';
+console.debug(concepto.substring(1,concepto.length -1));
+}
+
+saco_corchetes();
+document.writeln('Agrego objetos en una carpeta y los levanta??');
+
+//Esto esta en otro archivo que ya lo levante
+var ob1 = {
+	var1:'algun atrbito'
+	,metodo1: function(){
+		alert('Algo me esta picando');
+	}
+}
+function ob2(){
+	var att1 = 'algun valor';
+}
+ob2.prototype.method1 = function(){
+	console.debug('hi from ob2');
+}
+var arr_objects = ['ob1','ob2'];
+//Archivo de configuracion con todos los nombres de objetos
+console.debug( Object.create(ob1 ) );
+console.debug(arr_objects[1]);
+
+var o = new eval(arr_objects[1]);
+console.debug(o );
+//o.method1();
+</script>

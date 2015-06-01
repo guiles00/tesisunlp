@@ -1,0 +1,62 @@
+<html>
+<head>
+<style type="text/css">
+	.animationLiveHighlighting {
+	   border-width:1px;
+	   border-color:red; 
+	   background-color:yellow;
+		}
+	   
+	   /*{border-style: solid;border-width:3px;border-color:red;background-color:yellow;} 
+	   {border-style: solid;border-width:1px;border-color:red;background-color:inherit;}
+*/
+
+</style>
+
+</head>
+<body>
+<p>
+In a production-ready implementation of such a function, there’d be a lot more
+work to do. For example, what if the first argument isn’t an array? What if the second
+isn’t a function? How would you allow the page author to terminate the loop at any
+point? As an exercise, you can augment the function to handle these situations.
+Another exercise you could task yourself with is to enhance the function so that
+the page author can also pass an arbitrary number of arguments to the callback in
+addition to the iteration index.
+But given that apply() and call() do pretty much the same thing, how do we
+decide which to use?
+The high-level answer is the same answer as for many such questions: we’d use
+whichever one improves code clarity. A more practical answer would be to use the one
+that best matches the arguments we have handy. If we have a bunch of unrelated val-
+ues in variables or specified as literals, call() lets us list them directly in its argument
+list. But if we already have the argument values in an array, or if it’s convenient to col-
+lect them as such, apply() could be the better choice.
+</p>
+<div id="div_consola">
+The high-level answer is the same answer as for many such questions: we’d use
+whichever one improves code clarity. A more practical answer would be to use the one
+that best matches the arguments we have handy. If we have a bunch of unrelated val-
+ues in variables or specified as literals, call() lets us list them directly in its argument
+list. But if we already have the argument values in an array, or if it’s convenient to col-
+lect them as such, apply() could be the better choice.
+	
+</div>
+<input type="text" value="" id="searchText"></input>
+<input type="button" value="ok" onclick="doHighlight()">
+</body>
+<script src="highligth.js">
+</script>
+<script type="text/javascript">
+function doHighlight(){
+var searchText = '' ;
+searchText = document.getElementById('searchText').value; 
+console.debug(searchText);
+var high = new LiveHighlight();
+var body = document.getElementsByTagName('body')[0];
+body.innerHTML = high.doHighlight(body.innerHTML,searchText);
+}
+
+searchText('apply','<font>apply</font>')
+</script>
+</html>
+

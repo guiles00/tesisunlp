@@ -52,6 +52,88 @@ var RConsole = {
 
 	return aButton;
 	}
+	,showAddPrimitiveTask: function(){
+
+			var div_p_task = document.createElement("div");
+			div_p_task.id="div_p_task";
+			div_p_task.classList.add("div_p_task_style");
+			var sAddTask = document.createElement('select');
+			sAddTask.className = "tesisunlp_button";
+			var aOptions=['Add Primitive Task','FillInput','TextArea','ClickLink','SelectOption'];
+			for (j = 0; j < aOptions.length; j = j + 1) {
+				opt = document.createElement('option');
+				opt.value = j;
+				if(j===0){opt.disabled = true;opt.selected = true;} 
+				opt.innerHTML = aOptions[j];
+				sAddTask.appendChild(opt);
+			}
+			var text = document.createTextNode("Primitive Tasks");
+			var p = document.createElement("p");
+			p.appendChild(text);
+			div_p_task.appendChild(p);
+			div_p_task.appendChild(sAddTask);
+			var hr = document.createElement("hr");
+			div_p_task.appendChild(hr);
+			var attr = {};
+			var close = this.createButton('Close','close_submit',attr);
+			close.onclick  = function(){
+				var el = document.getElementById('div_p_task');
+ 				el.parentNode.removeChild(el);
+			}
+			//div_p_task.appendChild(add);
+			div_p_task.appendChild(close);
+			
+			//iStop_recorder.addEventListener("click", Recorder.clickStop , false); 
+			
+			sAddTask.addEventListener("change", Recorder.addPrimitiveTask , false); 	
+
+			var container_header = document.getElementById("div_consola");
+			container_header.appendChild(div_p_task);
+
+			return div_p_task;		
+
+	}
+	,showAddAugmentedTask: function(){
+
+			var div_a_task = document.createElement("div");
+			div_a_task.id="div_a_task";
+			div_a_task.classList.add("div_a_task_style");
+			var sAddTask = document.createElement('select');
+			sAddTask.className = "tesisunlp_button";
+			var aOptions=['Add Augmented Task','DataCol.','HighLig.','Suma','Notas','Concat','Comp.'];
+			for (j = 0; j < aOptions.length; j = j + 1) {
+				opt = document.createElement('option');
+				opt.value = j;
+				if(j===0){opt.disabled = true;opt.selected = true;} 
+				opt.innerHTML = aOptions[j];
+				sAddTask.appendChild(opt);
+			}
+			var text = document.createTextNode("Augmented Tasks");
+			var p = document.createElement("p");
+			p.appendChild(text);
+			div_a_task.appendChild(p);
+			div_a_task.appendChild(sAddTask);
+			var hr = document.createElement("hr");
+			div_a_task.appendChild(hr);
+			var attr = {};
+			var close = this.createButton('Close','close_submit',attr);
+			close.onclick  = function(){
+				var el = document.getElementById('div_a_task');
+ 				el.parentNode.removeChild(el);
+			}
+			//div_a_task.appendChild(add);
+			div_a_task.appendChild(close);
+			
+			//iStop_recorder.addEventListener("click", Recorder.clickStop , false); 
+			
+			sAddTask.addEventListener("change", Recorder.addAugmentedTask , false); 	
+
+			var container_header = document.getElementById("div_consola");
+			container_header.appendChild(div_a_task);
+
+			return div_a_task;		
+
+	}
 	,createButtonPocket: function(aValue,anId,attributes){
 
 		var aButton = document.createElement("input");	
@@ -756,9 +838,9 @@ var RConsole = {
 		      document.body.appendChild(container);
 
 		}
-	var div_p_task = this.createSelectPrimitiveTasks();
+	//var div_p_task = this.createSelectPrimitiveTasks();
 	//console.debug(div_p_task);
-		container_header.appendChild(div_p_task);
+	//	container_header.appendChild(div_p_task);
 
 		body.appendChild(editor_container);
 		body.appendChild(add_container);

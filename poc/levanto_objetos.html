@@ -1,0 +1,37 @@
+<html>
+<head>
+<script src="./js/list.js">
+</script>
+
+</head>
+<body>
+</body>
+<script>
+
+console.debug(objects);
+for (var i = 0; i < objects.length; i++) {
+	loadScript('./js/',objects[i]+'.js');
+};
+
+function loadScript (dir, file) {
+ var scr = document.createElement("script");
+ scr.src = dir + file;
+ document.body.appendChild(scr);
+ }
+
+
+</script>
+<script>
+window.onload = function(){
+console.log('pruebo los obejtos');
+console.log('existe?');
+//console.debug(PrimitiveTask);
+//console.debug(A);
+console.log('Heredo?');
+var a = new FillInputTask(); 
+a.sayHi();
+a.sayBye();
+
+}
+</script>
+</html>

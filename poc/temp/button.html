@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<!--width="100" height="100"-->
+<svg id ="play" x="10" accion="play">
+  <rect id="ts-stop" x="7" y="7" width="20" height="20" stroke="green" stroke-width="4" fill="yellow" />
+  <circle id="ts-play" cx="15" cy="15" r="10" stroke="green" stroke-width="4" fill="yellow" />
+ 	
+</svg>
+
+<svg id ="clean" width="100" height="100" accion="clean">
+  <rect id="ts-clean" x="10" y="7" width="20" height="20" stroke="green" stroke-width="4" fill="yellow" />
+  <!--circle id="ts-play" cx="15" cy="15" r="10" stroke="green" stroke-width="4" fill="yellow" /-->
+</svg>
+</body>
+</html>
+<script>
+	var play = document.getElementById("play");
+	//play.setAttribute('accion','stop');
+	var img_stop = document.getElementById("ts-stop");
+	img_stop.style.opacity = "0";
+
+	play.addEventListener('click',function(){
+		var play = document.getElementById("play");
+		//console.log(play.getAttribute('accion'));
+		
+		if(play.getAttribute('accion') == 'stop') {
+			console.log('dentro de stop');
+			console.log(play.getAttribute('accion'));
+		
+			var p = document.getElementById("play");
+			p.setAttribute('accion','play');	
+			
+			var img_stop = document.getElementById("ts-stop");
+			img_stop.style.opacity = "0";
+
+			var img_play = document.getElementById("ts-play");
+			img_play.style.opacity = "100";
+			
+			return false;
+		}
+		if(play.getAttribute('accion') == 'play'){
+			console.log('dentro de play');
+			console.log(play.getAttribute('accion'));
+		
+			var p = document.getElementById("play");
+			p.setAttribute('accion','stop');
+
+			var img_stop = document.getElementById("ts-stop");
+			img_stop.style.opacity = "100";
+			var img_play = document.getElementById("ts-play");
+			img_play.style.opacity = "0";
+			return false;
+		}
+	});
+
+	var clean = document.getElementById("clean");
+	//play.setAttribute('accion','stop');
+	var img_clean = document.getElementById("ts-clean");
+	//img_clean.style.opacity = "0";
+/*
+	play.addEventListener('click',function(){
+		var play = document.getElementById("play");
+		//console.log(play.getAttribute('accion'));
+		
+		if(play.getAttribute('accion') == 'stop') {
+			console.log('dentro de stop');
+			console.log(play.getAttribute('accion'));
+		
+			var p = document.getElementById("play");
+			p.setAttribute('accion','play');	
+			
+			var img_stop = document.getElementById("ts-stop");
+			img_stop.style.opacity = "0";
+
+			var img_play = document.getElementById("ts-play");
+			img_play.style.opacity = "100";
+			
+			return false;
+		}
+		if(play.getAttribute('accion') == 'play'){
+			console.log('dentro de play');
+			console.log(play.getAttribute('accion'));
+		
+			var p = document.getElementById("play");
+			p.setAttribute('accion','stop');
+
+			var img_stop = document.getElementById("ts-stop");
+			img_stop.style.opacity = "100";
+			var img_play = document.getElementById("ts-play");
+			img_play.style.opacity = "0";
+			return false;
+		}
+	});*/
+
+
+</script>
+

@@ -1,28 +1,36 @@
+body{
+
+}
 .tesisunlp_button { 
 	cursor: hand ;
 	/*background-color: #A2AFA0 ;*/
-	background-color: #b4b4b4 ;
+	background-color: #4c4cff ;
 	border:1px solid ;
 	border-color: grey ; 
 	color: black ; 
-	font-family: Helvetica, Arial; 
+	/*font-family: Helvetica, Arial;*/ 
+	font-family: Helvetica, sans-serif;
 	font-size: 9px; font-weight: 400; 
 	padding: 5px 7px 6px; 
 	text-transform: uppercase;vertical-align: bottom;
 	border-radius: 5px;
+	color:#bcbcbc;
+
 } 
 .tesisunlp_button_right{
 	float:right;
 	cursor: hand ;
-	background-color: #b4b4b4 ;
+	background-color: #4c4cff ;
 	border:1px solid ;
 	border-color: grey ; 
 	color: black ; 
-	font-family: Helvetica, Arial; 
+	/*font-family: Helvetica, Arial;*/ 
+	font-family: Helvetica, sans-serif;
 	font-size: 9px; font-weight: 400; 
 	padding: 5px 7px 6px; 
 	text-transform: uppercase;vertical-align: bottom;
 	border-radius: 5px;
+	color:#bcbcbc;
 }
 .cssClass{ outline: 0.25em solid #FFFF00;} 
 
@@ -46,14 +54,15 @@
 	height: 100%;
 	padding: 5;
 	vertical-align: middle;
-	background:#e1e1e1;
+	background:#7f7fff;
 
 }/*#A2AFA0; background: grey; */
-/*border:solid 1px #e1e1e1;*/
+/*border:solid 1px #7f7fff;*/
 .tesisunlp_table_consola {
 
 	min-width:auto;
-	font-family: Helvetica,Arial; 
+	/*font-family: Helvetica,Arial;*/
+	font-family:  Montserrat; 
 	font-size: 16px;
 }
 .table_consola_style{
@@ -62,6 +71,8 @@
 }
 .tabl_consola_style, td{
 	 border-bottom: 1px solid black;
+	 /*font-family: Montserrat, sans-serif;*/
+	 color: #262626;
 }
 .tesisunlp_div_pestana {
 	display: inline-block;
@@ -84,7 +95,7 @@
 }
 .tesisunlp_input_label {
 	/*background-color: #A2AFA0; */
-	background-color: #e1e1e1; 
+	background-color: #7f7fff; 
 	border: 0; border-radius: 2px; 
 	color: black; font-size: 11px; 
 	font-weight: 700; 
@@ -155,7 +166,7 @@ font-size: 9px;
 	
 	padding: 15;
 	display: inline;
-	border:solid 1px #e1e1e1;
+	border:solid 1px #7f7fff;
 	width: 105px;
 
 }
@@ -164,8 +175,8 @@ font-size: 9px;
 	height: 25;
 }
 
-.div_p_task_style{
-	  display: none;
+.div_p_task_style, .div_a_task_style{
+	 /* display: none;*/
 	  padding: 10;
 	  position: fixed;
 	  top: 50;
@@ -173,6 +184,23 @@ font-size: 9px;
 	  margin-left: 50px;
 	  z-index: 999;
 	  border:solid 1px #b4b4b4;
-	  background-color: #e1e1e1;
+	  background-color: #7f7fff;
     
+}
+.hov {
+		border-style: 1px,solid;
+		border-color:yellow;
+}
+
+.topcorner{
+   		border-style: solid;
+   		border-color:yellow;
+   		color:red;
+   		position:absolute;
+   		top:10;
+   		right:10;
+   		padding: 20;
+}
+.select{
+  		color:red;
 }

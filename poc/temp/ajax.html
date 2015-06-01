@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="./rest.js"></script>
+<script>
+
+
+window.onload = function(){
+	var button = document.createElement('input');
+	button.type = "button";
+	button.value = "GET boton";
+	button.onclick = function() { 
+		get(function(){console.log('call');});
+	}
+
+
+	var pbutton = document.createElement('input');
+	pbutton.type = "button";
+	pbutton.value = "PUT boton";
+	pbutton.onclick = function() { 
+		put(function(){/*console.log('call');*/});
+	}
+
+
+	var cbutton = document.createElement('input');
+	cbutton.type = "button";
+	cbutton.value = "CORS boton";
+	cbutton.onclick = function() { 
+		getC(function(){/*console.log('call');*/});
+	}
+
+	var body = document.getElementsByTagName('body')[0];
+   	body.appendChild(button);
+ 	body.appendChild(pbutton);
+ 	body.appendChild(cbutton);
+          
+}
+</script>
+
+</head>
+<body>
+
+<div id="myDiv"><h2>Cliente para probar RESTful</h2></div>
+<!--button type="button" onclick="otroClic('nada',function(){console.log('hola')})">Change Content</button-->
+
+</body>
+</html>

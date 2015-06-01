@@ -8,8 +8,6 @@
 **  exports --> donde se guardan los procedures en .json
 **/
 
-var __ROOT__ = window.location.origin +'/content/tesisunlp/';	
-//console.log(__ROOT__);
 var absolute_path = 'http://localhost/content/tesisunlp/';
 //var absolute_path =	__ROOT__;
 var tesis_css = document.createElement('link');

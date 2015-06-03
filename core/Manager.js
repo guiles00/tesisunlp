@@ -528,6 +528,13 @@ var Manager = (function () {
                 localStorageManager.insert(a_task.toJson());
                 //Actualizo la consola
                 Recorder.refresh();
+            } 
+            ,addClickInputTask: function(){
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new ClickInputTask();
+                localStorageManager.insert(a_task.toJson());
+                //Actualizo la consola
+                Recorder.refresh();
             }
             
         }

@@ -11,9 +11,6 @@ function construct(constructor, args) {
 }
 function clickSelectedDOM(e){
 	
-		//e.target.className = "select";
-		//e.target.classList.add("select");
-
 		//alert("selection:"+e.target.innerHTML)
 		var xpath = Recorder.createXPathFromElement(e.target);
 	
@@ -25,14 +22,17 @@ function clickSelectedDOM(e){
 		
 		document.removeEventListener('mouseover', DomSelecter,false);
 		//tambien borro esta funcion
-		//console.debug(this);
 		document.removeEventListener('click', clickSelectedDOM,false);
 		
 	};
 
-
 function DomSelecter(e){
-		
+
+		e.target.onclick = function(event) {
+		  return false;
+		}
+
+	
 		console.debug(e.target.tagName);
 		//var t = document.getElementById("tagname");
 		//t.innerHTML = e.target.tagName;
@@ -42,8 +42,13 @@ function DomSelecter(e){
 		e.target.addEventListener("mouseout",function(e){
 		
 		e.target.classList.remove("hov");
-	
+		e.target.onclick = function(event) {
+			
+  		return true;
+		}
+		
 		})
+		//
 	document.addEventListener("click",clickSelectedDOM,false);
 	/*document.addEventListener("click",function(e){
 		//e.target.className = "select";
@@ -231,9 +236,13 @@ var Recorder = {
 		Manager.addTextAreaTask('');			
 		return true;	
 		}else if(id_selected == 3){
+		Manager.addClickInputTask('');			
+		return true;	
+		}
+		else if(id_selected == 4){
 		Manager.addClickLinkTask('');			
 		return true;	
-		}else if(id_selected == 4){
+		}else if(id_selected == 5){
 		Manager.addSelectOptionTask('');			
 		return true;	
 		}

@@ -28,7 +28,9 @@ function clickSelectedDOM(e){
 
 function DomSelecter(e){
 
-		e.target.onclick = function(event) {
+		var target = e.target;
+
+		target.onclick = function(event) {
 		  return false;
 		}
 
@@ -42,7 +44,7 @@ function DomSelecter(e){
 		e.target.addEventListener("mouseout",function(e){
 		
 		e.target.classList.remove("hov");
-		e.target.onclick = function(event) {
+		target.onclick = function(event) {
 			
   		return true;
 		}
@@ -156,7 +158,7 @@ var Recorder = {
 			e.target.classList.remove("select");
 			
 			});
-*/
+		*/
     }
     /**
      * @method createButton
@@ -802,11 +804,14 @@ function handleSelectxPath(){
 		  try{
           for (var i=0;i < arr_tasks.length;i++){
 			
-			try{
+		/*	try{
+
+			if(value != 'undefined')
 			var concept = JSON.parse(value).type;	
+			
 			}catch(err){
 				console.log(err);
-			}
+			}*/
              this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
            }
        }catch(err){

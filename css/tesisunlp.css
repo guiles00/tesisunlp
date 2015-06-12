@@ -77,14 +77,20 @@ body{
 }
 .tesisunlp_div_pestana {
 	display: inline-block;
-	background: #A2AFA0;
+	background: #28517A;
 	position: fixed;
-	right: 0;bottom: 3.2em;
+	left: 300;bottom: 3.2em;
 	z-index: 100;
 	font-size: 14px;
 	font-family: Helvetica, arial, freesans, clean, sans-serif;
-	border-top-left-radius:2em;
-	border-bottom-left-radius:2em;
+	border-top-right-radius:2em;
+	border-bottom-right-radius:2em;
+	height: 100px;
+	width: 5px;
+}
+.tesisunlp_div_pestana_cerrado {
+	position: fixed;
+	left:0;bottom: 3.2em;
 }
 .margen_tabla{
 	margin-top: 15px;
@@ -96,16 +102,21 @@ body{
 }
 .tesisunlp_input_label {
 	/*background-color: #A2AFA0; */
-	background-color: #336699; 
+	background-color: #28517A; 
 	border: 0; border-radius: 2px; 
 	color: black; font-size: 11px; 
 	font-weight: 700; 
-	padding: 10px 30px 11px; 
+	padding: 10px 12px 5px; 
 	text-transform: uppercase;vertical-align: bottom;
-	border-top-left-radius:2em;
-	border-bottom-left-radius:2em;
+	border-top-right-radius:2em;
+	border-bottom-right-radius:2em;
+	height: 100px;
+	width: 5px;
 }
-
+.tesisunlp_input_label_cerrado{
+	position: fixed;
+	left:0;bottom: 3.2em;
+}
 .tesisunlp_close_button {
 	position:absolute;
 	float:right;

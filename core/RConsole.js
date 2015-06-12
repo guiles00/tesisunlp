@@ -713,22 +713,32 @@ var RConsole = {
 	div_pestana.id =  "div_pestana"; 
 	//div_pestana.style.cssText = "display: inline-block;background: #37abc8;opacity: 0.67;position: fixed;right: 0;bottom: 3.2em;z-index: 100;font-size: 14px;font-family: Helvetica, arial, freesans, clean, sans-serif;" ;
 	//div_pestana.style.cssText = "display: inline-block;background: #A2AFA0;position: fixed;right: 0;bottom: 3.2em;z-index: 100;font-size: 14px;font-family: Helvetica, arial, freesans, clean, sans-serif;" ;
-	div_pestana.setAttribute('class','tesisunlp_div_pestana');
+	div_pestana.classList.add('tesisunlp_div_pestana');
+	div_pestana.classList.add('tesisunlp_div_pestana_cerrado');
 	var input_label = document.createElement("input");
 	input_label.type = "button";
 	//input_label.style.cssText = "background-color: #A2AFA0; border: 0; border-radius: 2px; color: #fff; font-size: 12px; font-weight: 700; padding: 10px 30px 11px; text-transform: uppercase;vertical-align: bottom;";
 	//input_label.style.cssText = "background-color: #A2AFA0; border: 0; border-radius: 2px; color: black; font-size: 11px; font-weight: 700; padding: 10px 30px 11px; text-transform: uppercase;vertical-align: bottom;";
-	input_label.setAttribute('class','tesisunlp_input_label');
-	input_label.value ="show/hide Console";
+	input_label.classList.add('tesisunlp_input_label');
+	input_label.classList.add('tesisunlp_div_input_cerrado');
+
+	//input_label.value =">";
 	input_label.id ="toc-label";
 	input_label.onclick = function(){ 
+
 
 	var div_consola = document.getElementById('div_consola');
 	var body   = document.body || document.getElementsByTagName('body')[0];
 
 	   if(div_consola.style.visibility=='visible'){
+	   //	input_label.value =">";
+	   	input_label.classList.add('tesisunlp_div_input_cerrado');
+	   	div_pestana.classList.add('tesisunlp_div_pestana_cerrado');
 	   	RConsole.hideConsola();
 		}else{
+		//input_label.value ="<";
+		input_label.classList.remove('tesisunlp_div_input_cerrado');
+		div_pestana.classList.remove('tesisunlp_div_pestana_cerrado');	
 		RConsole.showConsola();
 		}
 	};

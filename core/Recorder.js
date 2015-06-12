@@ -874,12 +874,17 @@ function handleSelectxPath(){
 			Recorder.editRow(this);
 		} ,false);
 
+		//add br
+		var br = document.createElement("br");
+	 	var text1 = document.createTextNode(id+' - '+text);
+	 	var p_text = document.createElement("p");
+	 	p_text.classList.add('task_title_style');
+	 	p_text.appendChild(text1);
 
-	 	var text1 = document.createTextNode(text);
 	    var delete_button = document.createElement('input');
 		delete_button.type = "button";
 		delete_button.value = "Delete";
-		delete_button.setAttribute('class','tesisunlp_button_right');
+		delete_button.classList.add('tesisunlp_button_left');
 
 		delete_button.onclick = function(x){ 
 
@@ -894,7 +899,7 @@ function handleSelectxPath(){
 		var edit_button = document.createElement('input');
 		edit_button.type = "button";
 		edit_button.value = "Edit";
-		edit_button.setAttribute('class','tesisunlp_button_right');
+		edit_button.classList.add('tesisunlp_button_left')
 		edit_button.onclick = function(){
 			//Add Listener to move de edit box
 			addListenersEditBox();
@@ -904,7 +909,7 @@ function handleSelectxPath(){
 	var state_button = document.createElement('input');
 		state_button.type = "button";
 		state_button.value = "P/D";
-		state_button.setAttribute('class','tesisunlp_button_right');
+		state_button.classList.add('tesisunlp_button_left')
 		state_button.onclick = function(){
 		
 		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
@@ -923,7 +928,7 @@ function handleSelectxPath(){
 	var play_button = document.createElement('input');
 		play_button.type = "button";
 		play_button.value = ">";
-		play_button.setAttribute('class','tesisunlp_button_right');
+		play_button.classList.add('tesisunlp_button_left')
 		//play_button.setAttribute('class','tesisunlp_button');
 		play_button.onclick = function(){
 		
@@ -937,17 +942,19 @@ function handleSelectxPath(){
 		Recorder.refresh();
 	*/	};
 
-		var id_text = document.createTextNode(id);
+		//var id_text = document.createTextNode(id+' - ');
 		var br = document.createElement('br');
-		td1.appendChild(id_text);
-		td2.appendChild(text1);
-		td2.appendChild(play_button);
-		td2.appendChild(state_button);
-		td2.appendChild(delete_button);
+		//td2.appendChild(id_text);
+		td2.appendChild(p_text);
+		//td2.appendChild(br);	
 		td2.appendChild(edit_button);
+		td2.appendChild(delete_button);
+		td2.appendChild(state_button);
+		td2.appendChild(play_button);
+
 		
-		td2.appendChild(br);
-		td2.appendChild(spTask);
+		
+		//td2.appendChild(spTask);
 		
 		//tr.appendChild(td1);
 		tr.appendChild(td2);

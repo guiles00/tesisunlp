@@ -87,7 +87,7 @@ var RConsole = {
 			
 			sAddTask.addEventListener("change", Recorder.addPrimitiveTask , false); 	
 
-			var container_header = document.getElementById("div_consola");
+			var container_header = document.getElementById("consola_header");
 			container_header.appendChild(div_p_task);
 
 			return div_p_task;		

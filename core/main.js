@@ -5,6 +5,7 @@ var bpmp = localStorage.getItem("BPMP");
 
 // localStorage.setItem('sumatoria',JSON.stringify({values:[]}));
 //localStorage.setItem('SHARED_DATA',JSON.stringify(new Object()));
+//localStorage.setItem('SHARED_DATA',JSON.stringify(new Object()));
 
 if(!bpmp){
 localStorage.setItem("BPMP",1);    

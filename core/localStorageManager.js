@@ -26,9 +26,7 @@ localStorageManager = {
 
     }
     ,clearPocket:function(){
-        localStorage.setItem("SHARED_DATA",JSON.stringify(new Array()));
-
-
+    localStorage.setItem('SHARED_DATA',JSON.stringify(new Object()));
 
     }
     ,getConceptValue: function(concept){

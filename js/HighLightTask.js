@@ -16,7 +16,7 @@ var HighLightTask = (function(){
     this.value = value || Object.create(SValueAttribute).init({'value':''});  
     this.state = state || Object.create(StateAttribute).init({'value':0}) ;
     this.location = '';
-    this.xPath = xPath || Object.create(XPathAttribute).init({'value':'sxPath'});
+    //this.xPath = xPath || Object.create(XPathAttribute).init({'value':'sxPath'});
 }
 //Lo pongo como primitiva, por ahora es igual
 HighLightTask.prototype = new AbstractTask();
@@ -39,7 +39,7 @@ HighLightTask.prototype.instanciamela = function(o){
     //Acoplo estos objetos, aunque me parece que deberia usar json
     //return new ConcatStringTask(o.id,o.xPath,o.value,o.tipo,o.state,o.taskTitle,o.xPath2);
     this.id = o.id || 10;
-    this.xPath = Object.create(XPathAttribute).init({'value':o.xPath.value});
+    //this.xPath = Object.create(XPathAttribute).init({'value':o.xPath.value});
     this.tipo = Object.create(TipoAttribute).init({'value':o.tipo.value})
     this.state = Object.create(StateAttribute).init({'value':(o.state.value).toString()})
     this.taskTitle = Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value})
@@ -97,7 +97,7 @@ HighLightTask.prototype.htmlToJson = function(el_div){
         oTaskTitle.value = str_taskTitle ;
         
   
-        var o_task = new HighLightTask(this.id,'xPath',oValue,oTipo,oState,oTaskTitle);
+        var o_task = new HighLightTask(this.id,'undefined',oValue,oTipo,oState,oTaskTitle);
     return o_task.toJson();
 }
 

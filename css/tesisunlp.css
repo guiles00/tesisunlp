@@ -53,7 +53,7 @@ body{
 	left: 0px;
 	width: 300px;
 	height: 100%;
-	padding: 5;
+	padding-left: 5;
 	vertical-align: middle;
 	background:#336699;
 
@@ -225,7 +225,7 @@ font-size: 9px;
 	margin-bottom: 5px;
 	/*padding: 30px 10px 10px 10px;*/
 }
-
+/*	
 .tesisunlp_div_consola::-webkit-scrollbar {
     width: 12px;
     background-color:#28517A;
@@ -235,8 +235,8 @@ background-color:#28517A;
 }
 .tesisunlp_div_consola::-webkit-scrollbar-track{
 background-color:#336699;
-
 }
+*/
 /*border-radius:10px;border-radius:10px;
 
 .consola_header_style ::-webkit-scrollbar-track {

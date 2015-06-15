@@ -430,13 +430,26 @@ var Manager = (function () {
                 div.id = "sum_container";
 
                 var stop = document.createElement("input");
-                stop.value="X";
+                stop.classList.add("tesisunlp_button_stop");
+                stop.value="Stop";
                 stop.type="button";
                 stop.addEventListener('click',function(){
                      //Guardo en el objeto creado
                         
                      document.removeEventListener('mouseup', handlerSum,false);
                 });
+
+                var close = document.createElement("input");
+                close.classList.add("tesisunlp_close_button");
+                close.value="X";
+                close.type="button";
+                close.addEventListener('click',function(){
+                     //Guardo en el objeto creado
+                var el = document.getElementById('sum_container');
+                el.parentNode.removeChild(el);
+                     //document.removeEventListener('mouseup', handlerSum,false);
+                });
+
 
                 var div_sum = document.createElement("div");
                 //div.classList.add('topcorner');
@@ -445,6 +458,7 @@ var Manager = (function () {
                 var body = document.getElementsByTagName("body")[0];
                 div.appendChild(div_sum);
                 div.appendChild(stop);
+                div.appendChild(close);
                 
                 body.appendChild(div);
 

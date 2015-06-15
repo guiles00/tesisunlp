@@ -149,6 +149,21 @@ body{
 	text-transform: uppercase;vertical-align: bottom;
 	border-radius: 5px;
 }
+.tesisunlp_button_stop{
+	position:absolute;
+	float:right;
+	bottom:0;
+	right:0;
+	background-color: #28517A ;
+	border:1px solid ;
+	border-color: #28517A ; 
+	color: white ; 
+	font-family: Helvetica, sans-serif;
+	font-size: 9px; font-weight: 400; 
+	text-transform: uppercase;vertical-align: bottom;
+	border-radius: 5px;
+
+}
 .tesisunlp_div_show_pocket {
 	position:absolute;
 	width:auto;
@@ -172,9 +187,13 @@ body{
 	left:50%;
 	margin-top:-100px;
 	margin-left:-100px;
-	background: #A2AFA0;
-	border: solid #A2AFFF;
+	background: #28517A;
+	border: solid #28517A;
 	z-index: 500;
+	color: white; 
+}
+.tesisunlp_text_style{
+padding: 5px;
 }
 
 .animationLiveHighlighting {

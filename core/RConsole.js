@@ -12,8 +12,10 @@ var RConsole = {
 	    aButton.setAttribute('id',anId);
 
 	    aButton.onclick = function(){
+	    	//alert('ok');
 	    var div_show_pocket = document.createElement('DIV');
 	    div_show_pocket.id = 'id_show_pocket';
+
 	    var body = document.getElementsByTagName('body')[0];
         var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
   		//console.debug(array_area);
@@ -25,8 +27,9 @@ var RConsole = {
 		var bClose = document.createElement('input');
 		bClose.type = 'button';
 		bClose.value = 'x';
+		bClose.classList.add("tesisunlp_close_button");
 		//bClose.style.cssText = "position:absolute;float:right;top:0;right:0;";
-		bClose.setAttribute('class','tesisunlp_close_button');
+		//bClose.setAttribute('class','tesisunlp_close_button');
 		bClose.onclick = function(){
 			var el = document.getElementById('id_show_pocket');
  				el.parentNode.removeChild(el);
@@ -35,14 +38,17 @@ var RConsole = {
 		
 
 		var bClear = document.createElement('input');
-		//bClear.type = 'button';
-		bClear.type = 'image';
+		bClear.type = 'button';
+		//bClear.type = 'image';
+		bClear.classList.add("tesisunlp_button_basic");
+
 		//bClear.src = 'clear.png';
 
 		//bClear.src = 'http://s13.postimg.org/ngpmrmhkj/clear.png';
 		bClear.src = 'http://raw.githubusercontent.com/guiles/unlptesis/master/images/clear.png';
 		bClear.value = 'clear';
 		bClear.onclick = function(){
+			//alert('ok');
 			localStorageManager.clearPocket();
 		}
 		div_show_pocket.appendChild(bClear);
@@ -128,7 +134,7 @@ var RConsole = {
 			
 			sAddTask.addEventListener("change", Recorder.addAugmentedTask , false); 	
 
-			var container_header = document.getElementById("div_consola");
+			var container_header = document.getElementById("consola_header");
 			container_header.appendChild(div_a_task);
 
 			return div_a_task;		

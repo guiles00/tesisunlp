@@ -33,6 +33,24 @@ body{
 	color:#D3D3D3;
 	height: 2em;
 }
+
+.tesisunlp_button_basic{
+	float:left;
+	cursor: hand ;
+	background-color: #28517A ;
+	border:1px solid ;
+	border-color: #28517A ; 
+	color: black ; 
+	/*font-family: Helvetica, Arial;*/ 
+	font-family: Helvetica, sans-serif;
+	font-size: 9px; font-weight: 400; 
+	/*padding: 5px 5px 4px;*/ 
+	text-transform: uppercase;vertical-align: bottom;
+	border-radius: 5px;
+	color:#D3D3D3;
+	height: 2em;
+}
+
 .cssClass{ outline: 0.25em solid #FFFF00;} 
 
 .tesisunlp_td { 
@@ -122,6 +140,14 @@ body{
 	float:right;
 	top:0;
 	right:0;
+	background-color: #28517A ;
+	border:1px solid ;
+	border-color: #28517A ; 
+	color: white ; 
+	font-family: Helvetica, sans-serif;
+	font-size: 9px; font-weight: 400; 
+	text-transform: uppercase;vertical-align: bottom;
+	border-radius: 5px;
 }
 .tesisunlp_div_show_pocket {
 	position:absolute;
@@ -131,8 +157,9 @@ body{
 	left:50%;
 	margin-top:-100px;
 	margin-left:-100px;
-	background: #A2AFA0;
-	border: solid black;
+	background: #28517A;
+	border: 1px solid black;
+	padding: 15px 10px 5px 15px;
 }
 .tesisunlp_div_editor_container {
 
@@ -189,7 +216,7 @@ font-size: 9px;
 
 .div_p_task_style, .div_a_task_style{
 	 /* display: none;*/
-	  padding: 10;
+	  padding: 10px;
 	  position: fixed;
 	  top: 50;
 	  left: 100;

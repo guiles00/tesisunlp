@@ -104,8 +104,8 @@ var eventoClick = function(event){
 		//Si hizo clic en un input hay que ver que tipo de input
 		case 'INPUT':
 		//Si es button sigo (Solo para sacar el molesto ClickInput cuando no quiero, despues mejoro el cosigo)
-		if(event.target.type !== 'button') return;
-		
+		//if(event.target.type !== 'button') return;
+		//alert('etro?');
 		var tipo = 0;
 		var el_id = event.target.id;
 		var el_value = event.target.value;

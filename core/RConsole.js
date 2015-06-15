@@ -292,11 +292,12 @@ var RConsole = {
 
 	var div_editor_header = document.createElement("div");	
 	div_editor_header.id = "div_editor_header";
-	div_editor_header.style.cssText="";
+	div_editor_header.classList.add("tesisunlp_text_style");
+
 
 	var el_hr = document.createElement('hr');
 	
-    var header_title = document.createTextNode('Task Editor');
+    var header_title = document.createTextNode(' Task Editor ');
 	//Creo un boton para mover con facilidad el Editor
 	var mov = document.createElement("input");
 	mov.type = "button";
@@ -309,8 +310,8 @@ var RConsole = {
 	
 	var div_editor_preconditions = document.createElement("div");	
 	div_editor_preconditions.id = "div_editor_preconditions";
-	div_editor_preconditions.style.cssText="";
-	var header_title_preconditions = document.createTextNode('Preconditions');
+	div_editor_preconditions.classList.add("tesisunlp_text_style");
+	var header_title_preconditions = document.createTextNode(' Preconditions ');
 	var el_hr_preconditions = document.createElement('hr');
 	div_editor_preconditions.appendChild(header_title_preconditions);	
 	div_editor_preconditions.appendChild(el_hr_preconditions);
@@ -319,6 +320,8 @@ var RConsole = {
 
 	var div_inflate = document.createElement("div");	
 	div_inflate.id = "div_inflate";
+	div_inflate.classList.add("tesisunlp_text_style");
+
 	
 
 	var div_editor_footer = document.createElement("div");	

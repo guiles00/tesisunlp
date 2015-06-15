@@ -42,7 +42,7 @@ var TaskTitleAttribute = {
     ,init: function(c){
         this.value = c.value || '' ;
         this.htmlId = c.htmlId || 'task_title_id'; 
-        this.label = c.label || 'Task Title';
+        this.label = c.label || ' Task Title: ';
         return this;
     }
     ,getHtmlElement: function(){
@@ -83,7 +83,7 @@ var XPathAttribute = {
        
         this.value = c.value || '' ;
         this.htmlId = c.htmlId || 'xpath_id'; 
-        this.label = c.label || 'xPath';
+        this.label = c.label || ' xPath: ';
         return this;
     }
     ,getHtmlElement: function(){
@@ -102,7 +102,7 @@ var TipoAttribute = {
     ,init: function(c){
         this.value = c.value || '' ;
         this.htmlId = c.htmlId || 'tipo_id'; 
-        this.label = c.label || 'Auto';
+        this.label = c.label || ' Auto: ';
         return this;
     } 
     ,getHtmlElement: function(){
@@ -141,7 +141,7 @@ var StateAttribute = {
      ,init: function(c){
         this.value = c.value || '' ;
         this.htmlId = c.htmlId || 'state_id'; 
-        this.label = c.label || 'Ejecutado:';
+        this.label = c.label || ' Ejecutado: ';
         return this;
     }
     ,getHtmlElement: function(){
@@ -161,7 +161,7 @@ var SValueAttribute = {
       ,init: function(c){
         this.value = c.value || '' ;
         this.htmlId = c.htmlId || 'value_id'; 
-        this.label = c.label || 'Value';
+        this.label = c.label || ' Value: ';
         return this;
     }
     ,getHtmlElement: function(){

@@ -751,7 +751,7 @@ var RConsole = {
 	 	var div_consola = document.getElementById('div_consola');
 		var body   = document.body || document.getElementsByTagName('body')[0];
 		div_consola.style.visibility = "visible";
-		body.style.marginLeft = "355px";
+		body.style.marginLeft = "315px";
 	
 	 }
 	 ,hideConsola: function(){

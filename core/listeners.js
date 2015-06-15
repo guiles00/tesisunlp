@@ -48,7 +48,7 @@ var  handlerPocketEvent = function(e) {
 				var concept = prompt('Que dato Guardar','Concept');
 				
 				if(concept){
-
+					console.log( localStorage.getItem("SHARED_DATA"));
 					localStorageManager.saveSharedData(concept,{'value':selection.toString()});
 					//Agrego DataCollectionTask
 					console.log('Add:'+selection.toString());

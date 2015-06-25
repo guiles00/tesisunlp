@@ -162,96 +162,96 @@ el.appendChild(pom);
 
 
 
+function XMLDOMCreator(){
 
-
-
-
-
-
-
-
-//console.log('-----------------------------------');
-////console.log(json_export);
-
-/*    <bpmn:process id="Process_1" isExecutable="false">
-    <bpmn:startEvent id="StartEvent_1">
-      <bpmn:outgoing>SequenceFlow_1</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:task id="Task_1" name="Titulo111">
-      <bpmn:incoming>SequenceFlow_1</bpmn:incoming>
-     <extensionElements>abc</extensionElements>
-    </bpmn:task>
-    <bpmn:sequenceFlow id="SequenceFlow_1" sourceRef="StartEvent_1" targetRef="Task_1" />
-  </bpmn:process>
-*/
-
-/*
-var xw = new XMLWriter('UTF-8');
-xw.formatting = 'indented';//add indentation and newlines
-xw.indentChar = ' ';//indent with spaces
-xw.indentation = 2;//add 2 spaces per level
-
-xw.writeStartDocument( );
-xw.writeDocType('"items.dtd"');
-xw.writeStartElement( 'items' );
-
-  xw.writeComment('button');
-  xw.writeStartElement('item');
-    xw.writeAttributeString( 'id', 'item-1');
-    xw.writeAttributeString( 'enabled', 'true' );
-    xw.writeStartElement( 'code');
-      xw.writeCDATA( '<button>Save</button>' );
-    xw.writeEndElement();
-    xw.writeElementString('description', 'a save button');
-  xw.writeEndElement();
-  
-  xw.writeComment('image');
-  xw.writeStartElement('item');
-    xw.writeAttributeString( 'id', 'item-2');
-    xw.writeAttributeString( 'enabled', 'false' );
-    xw.writeStartElement( 'code');
-      xw.writeCDATA( '<img src="photo.gif" alt="me" />' );
-    xw.writeEndElement();
-    xw.writeElementString('description', 'a pic of myself!');
-  xw.writeEndElement();
-  
-  xw.writeComment('link');
-  xw.writeStartElement('item');
-    xw.writeAttributeString( 'id', 'item-3');
-    xw.writeAttributeString( 'enabled', 'true' );
-    xw.writeStartElement( 'code');
-      xw.writeCDATA( '<a href="http://google.com">Google</a>' );
-    xw.writeEndElement();
-    xw.writeElementString('description', 'a link to Google');
-  xw.writeEndElement();
-  
-xw.writeEndElement();
-xw.writeEndDocument();
-
-console.debug(xw.getDocument() );
-
-function loadXMLDoc(filename)
-{
-if (window.XMLHttpRequest)
-  {
-  xhttp=new XMLHttpRequest();
-  }
-else // code for IE5 and IE6
-  {
-  xhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-xhttp.open("GET",filename,false);
-xhttp.send();
-return xhttp.responseXML;
 }
-*/
-/*
-xmlDoc = loadXMLDoc("./testing_bpmn.xml");
+XMLDOMCreator.prototype.init = function(){
 
-var newel = xmlDoc.createElement("edition1");
+	var bpmn = document.createElementNS('http://your-namespace-uri-here','bpmn:definitions');
+	bpmn.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
+	bpmn.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:bpmn","http://www.omg.org/spec/BPMN/20100524/MODEL");
+	bpmn.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:bpmndi","http://www.omg.org/spec/BPMN/20100524/DI");
+	bpmn.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:di","http://www.omg.org/spec/DD/20100524/DI"); 
+	bpmn.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:dc","http://www.omg.org/spec/DD/20100524/DC");
 
-x = xmlDoc.getElementsByTagName("book")[0];
-//x.appendChild(newel);
-xmlDoc.appendChild(newel);
-//console.debug(xmlDoc);
-*/
+	return bpmn;
+}
+
+XMLDOMCreator.prototype.createElementProcess = function(id){
+
+	var process = document.createElementNS("task",'bpmn:process');
+	process.id= id;
+	process.setAttribute("isExecutable","false");
+	return process;
+}
+
+XMLDOMCreator.prototype.createStartProcess = function(id){
+
+var start = document.createElementNS("task",'bpmn:startEvent');
+	start.id= id;
+	return start;
+}
+
+XMLDOMCreator.prototype.createTaskElement = function(id,title){
+	var task = document.createElementNS("task","bpmn:task");
+	task.id = id;
+	task.setAttribute("name",title);
+	return task;
+}
+
+XMLDOMCreator.prototype.createBPMNDiagramElement = function(id){
+	var diagram = document.createElementNS("diagram",'bpmndi:BPMNDiagram');
+	diagram.id= id;
+	return diagram;
+}
+XMLDOMCreator.prototype.createBPMNPlaneElement = function(id,title){
+	var plane = document.createElementNS("plane",'bpmndi:BPMNPlane');
+	plane.id=id;
+	plane.setAttribute("bpmnElement",title);
+	return plane;
+}
+
+XMLDOMCreator.prototype.createBPMNShapeElement = function(id,title,x,y,width,height){
+	// <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+var shape = document.createElementNS("shape",'bpmndi:BPMNShape');
+	shape.id=id;
+	shape.setAttribute("bpmnElement",title);
+//<dc:Bounds x="173" y="102" width="36" height="36" />
+var dc = document.createElementNS("dc",'dc:Bounds');
+	dc.setAttribute("x",x);
+	dc.setAttribute("y",y);
+	dc.setAttribute("width",width);
+	dc.setAttribute("height",height);
+	shape.appendChild(dc);
+	return shape;
+}
+var c = document.createElement("root");
+
+var domcreator = new XMLDOMCreator();
+var i = domcreator.init();
+var p = domcreator.createElementProcess("Process_1");
+var s = domcreator.createStartProcess("StartEvent_1");
+var t1 = domcreator.createTaskElement("Task_1","FillInputTask");
+var d = domcreator.createBPMNDiagramElement("BPMNDiagram_1");
+var pl = domcreator.createBPMNPlaneElement("BPMNPlane_1","Process_1");
+var sh = domcreator.createBPMNShapeElement("_BPMNShape_StartEvent_2","StartEvent_1","173","102","36","36");
+var sh2 = domcreator.createBPMNShapeElement("Task_1_di","Task_1","300","80","100","80");
+//creo una tarea mas
+//Se crea un elemento para process y un elemento para graficarlo
+var t3 = domcreator.createTaskElement("Task_3","FillInputTask3");
+var sh3 = domcreator.createBPMNShapeElement("Task_3_di","Task_3","500","80","100","80");
+p.appendChild(t3);
+pl.appendChild(sh3);
+//***////
+
+p.appendChild(s);
+p.appendChild(t1);
+pl.appendChild(sh);
+pl.appendChild(sh2);
+d.appendChild(pl);
+i.appendChild(p);
+i.appendChild(d);
+c.appendChild(i);
+
+//console.debug(p);
+console.debug(c);

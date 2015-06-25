@@ -149,19 +149,6 @@ console.debug(container);
 
 
 
-
-
-var linkText = document.createTextNode("my title text");
-var pom = document.createElement('a'); 			
-		  pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(container.innerHTML));
-		  pom.setAttribute('download', 'bpmn.xml');
-	pom.appendChild(linkText)	  
-var el = document.getElementById("container");
-el.appendChild(pom);
-
-
-
-
 function XMLDOMCreator(){
 
 }
@@ -228,7 +215,7 @@ var dc = document.createElementNS("dc",'dc:Bounds');
 var c = document.createElement("root");
 
 var domcreator = new XMLDOMCreator();
-var i = domcreator.init();
+var def = domcreator.init();
 var p = domcreator.createElementProcess("Process_1");
 var s = domcreator.createStartProcess("StartEvent_1");
 var t1 = domcreator.createTaskElement("Task_1","FillInputTask");
@@ -244,14 +231,34 @@ p.appendChild(t3);
 pl.appendChild(sh3);
 //***////
 
+for(var i=4;i<7;i++){
+	//suponte que voy leyendo un array y saco el ID
+var p_t = domcreator.createTaskElement("Task_"+i,"FillInputTask"+i)
+p.appendChild(p_t);
+//calculo las coordenadas
+var x = 500 + i*100;
+var t_s = domcreator.createBPMNShapeElement("Task_"+i+"_di","Task_"+i,x,"80","100","80");
+pl.appendChild(t_s);	
+//console.debug(t_s);
+};
+//console.debug(p);
+
 p.appendChild(s);
 p.appendChild(t1);
 pl.appendChild(sh);
 pl.appendChild(sh2);
 d.appendChild(pl);
-i.appendChild(p);
-i.appendChild(d);
-c.appendChild(i);
+def.appendChild(p);
+def.appendChild(d);
+c.appendChild(def);
 
 //console.debug(p);
 console.debug(c);
+
+var linkText = document.createTextNode("my title text");
+var pom = document.createElement('a'); 			
+		  pom.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(c.innerHTML));
+		  pom.setAttribute('download', 'bpmn.xml');
+	pom.appendChild(linkText)	  
+var el = document.getElementById("container");
+el.appendChild(pom);

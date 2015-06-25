@@ -1,5 +1,11 @@
-var json_export = {"BPM":[{"id":1,"xPath":{"_type":"XPathAttribute","value":"sxPath"},"tipo":{"_type":"Attribute","value":1},"state":{"_type":"StateAttribute","value":0},"type":"UrlTask","precondition":{},"taskTitle":{"value":"Init ","htmlId":"task_title_id","label":" Task Title: "},"msg":"Init ","location":"http://localhost/content/tesisunlp/tesis.html","value":{"_type":"SValueAttribute","value":"http://localhost/content/tesisunlp/tesis.html"}},{"id":5,"xPath":{"_type":"XPathAttribute","value":"/html[1]/body[1]/div[2]/form[1]/input[3]"},"tipo":{"_type":"Attribute","value":1},"state":{"_type":"StateAttribute","value":0},"type":"FillInputTask","precondition":{"url":{"value":"http://localhost/content/tesisunlp/tesis.html","htmlId":"url_id","label":"Url"}},"taskTitle":{"value":"Enter String to Input ","htmlId":"task_title_id","label":" Task Title: "},"value":{"_type":"SValueAttribute","value":"asd"}}],"SHARED_DATA":{"Nombre":{"value":"Guillermo"},"Apellido":{"value":"Caserotto"}}};
+var json_export = {"BPM":[{"id":1,"xPath":{"_type":"XPathAttribute","value":"sxPath"},"tipo":{"_type":"Attribute","value":1},"state":{"_type":"StateAttribute","value":0},"type":"UrlTask","precondition":{},"taskTitle":{"value":"Init ","htmlId":"task_title_id","label":" Task Title: "},"msg":"Init ","location":"http://localhost/content/tesisunlp/tesis.html","value":{"_type":"SValueAttribute","value":"http://localhost/content/tesisunlp/tesis.html"}},{"id":5,"xPath":{"_type":"XPathAttribute","value":"/html[1]/body[1]/div[2]/form[1]/input[3]"},"tipo":{"_type":"Attribute","value":1},"state":{"_type":"StateAttribute","value":0},"type":"FillInputTask","precondition":{"url":{"value":"http://localhost/content/tesisunlp/tesis.html","htmlId":"url_id","label":"Url"}},"taskTitle":{"value":"Enter String to Input ","htmlId":"task_title_id","label":" Task Title: "},"value":{"_type":"SValueAttribute","value":"asd"}}]};
+//console.debug(json_export);
+//var bpmn_data = json_export['BPMN'];
+    var ls = localStorage.getItem("BPM");
+	var o = JSON.parse(ls);
+	var recorro = o.P1;
 
+	
 
 var translator = function(json_data){
 var str = '<?xml version="1.0" encoding="UTF-8"?><bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">';
@@ -230,7 +236,7 @@ var sh3 = domcreator.createBPMNShapeElement("Task_3_di","Task_3","500","80","100
 p.appendChild(t3);
 pl.appendChild(sh3);
 //***////
-
+/*
 for(var i=4;i<7;i++){
 	//suponte que voy leyendo un array y saco el ID
 var p_t = domcreator.createTaskElement("Task_"+i,"FillInputTask"+i)
@@ -242,6 +248,20 @@ pl.appendChild(t_s);
 //console.debug(t_s);
 };
 //console.debug(p);
+*/
+
+
+for (index in recorro) { 
+		console.log(recorro[index]);
+	var p_t = domcreator.createTaskElement("Task_"+recorro[index].id,recorro[index].taskTitle.value+" "+recorro[index].id)
+	p.appendChild(p_t);
+	//calculo las coordenadas
+	var x = 500 + index*100;
+	var t_s = domcreator.createBPMNShapeElement("Task_"+recorro[index].id+"_di","Task_"+recorro[index].id,x,"80","100","80");
+	pl.appendChild(t_s);	
+
+	}
+
 
 p.appendChild(s);
 p.appendChild(t1);

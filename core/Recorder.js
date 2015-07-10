@@ -593,6 +593,19 @@ function handleSelectxPath(){
 		
 		var table = document.createElement("table"); 
 		var tbody = document.createElement("tbody");
+		var th_header = document.createElement("tr");
+		var td_header_c = document.createElement("td");
+		var td_header_v = document.createElement("td");
+		var td_header_x = document.createElement("td");
+		var t_concept = document.createTextNode("Concept");
+		var t_value = document.createTextNode("Value");
+		td_header_c.appendChild(t_concept);
+		td_header_v.appendChild(t_value);
+		th_header.appendChild(td_header_c);
+		th_header.appendChild(td_header_v);
+		th_header.appendChild(td_header_x);
+		tbody.appendChild(th_header);
+
 		//var i;
 		for (var i in shared_data){
 

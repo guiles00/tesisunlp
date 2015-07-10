@@ -1,6 +1,6 @@
 var DataCollectionTask = (function(){
 
-function DataCollectionTask(id,xPath,value,tipo,state,taskTitle/*,destData*/){
+function DataCollectionTask(id,xPath,value,tipo,state,taskTitle,concept){
     PrimitiveTask.call(this,id,xPath,value,tipo,state,taskTitle);
     this.msg = "Init ";
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Data Collection '})
@@ -11,7 +11,8 @@ function DataCollectionTask(id,xPath,value,tipo,state,taskTitle/*,destData*/){
     this.msg = "Init ";
     this.state = state || Object.create(StateAttribute).init({'value':0}) ;
     this.location = '';
-    this.xPath = xPath || Object.create(XPathAttribute).init({'value':'sxPath'});
+    //this.xPath = xPath || Object.create(XPathAttribute).init({'value':'sxPath'});
+    this.concept = concept || Object.create(SValueAttribute).init({'value':''});
 }
 //Lo pongo como primitiva, por ahora es igual
 DataCollectionTask.prototype = new PrimitiveTask();
@@ -23,10 +24,12 @@ DataCollectionTask.prototype.instanciamela = function(o){
     this.id = o.id || 10;
     this.xPath = Object.create(XPathAttribute).init({'value':o.xPath.value});
    // this.value = (o.value._type =='CValueAttribute')?Object.create(CValueAttribute).init({'value':o.value.value}):Object.create(SValueAttribute).init({'value':o.value.value});
-     this.value = Object.create(SValueAttribute).init({'value':o.value.value});
+    this.value = Object.create(SValueAttribute).init({'value':o.value.value});
     this.tipo = Object.create(TipoAttribute).init({'value':o.tipo.value})
     this.state = Object.create(StateAttribute).init({'value':(o.state.value).toString()})
     this.taskTitle = Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value})
+    this.concept = Object.create(SValueAttribute).init({'value':o.concept.value,'htmlId':'concepto_id','label':'Concept: '});
+    
     return this;
              
 }
@@ -74,11 +77,11 @@ DataCollectionTask.prototype.init = function(c){
 DataCollectionTask.prototype.htmlToJson = function(el_div){
 
         var str_taskTitle = document.getElementById('task_title_id').value;
-        var str_xPath = document.getElementById('xpath_id').value;
+       //var str_xPath = document.getElementById('xpath_id').value;
         var str_value = document.getElementById('value_id').value;
         var str_state = document.getElementById('state_id').value;
         var str_tipo = document.getElementById('tipo_id').value;
-        //var str_destData = document.getElementById('tsgc_dest_data_id').value;
+        var str_concept = document.getElementById('concepto_id').value;
 
         function isJson(str) {
         try {
@@ -90,8 +93,8 @@ DataCollectionTask.prototype.htmlToJson = function(el_div){
         }    
 
         //Se que un noFillInputTask tiene los campos xPath y value
-        var xPath = Object.create(XPathAttribute);
-        xPath.value = str_xPath;
+        //var xPath = Object.create(XPathAttribute);
+        //xPath.value = str_xPath;
 
         if(isJson(str_value)) var temp = JSON.parse(str_value);
        
@@ -121,12 +124,18 @@ DataCollectionTask.prototype.htmlToJson = function(el_div){
         oTaskTitle.value = str_taskTitle ;
         
 
-      /*  var oDestData = Object.create(DestDataAttribute);
-        oDestData._type = DestDataAttribute._type;
-        oDestData.value = str_destData ;
-      */  
-        var o_task = new DataCollectionTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle/*,oDestData*/);
-        
+        var oConcept = Object.create(SValueAttribute);
+        oConcept._type = SValueAttribute._type;
+        oConcept.value = str_concept ;
+      
+        var o_task = new DataCollectionTask(this.id,null,oValue,oTipo,oState,oTaskTitle,oConcept);
+
+        /* Este metodo es llamado por el objeto Recorder el cual usa los datos para grabar en el 
+        localStorage --
+        Este es ( por ahora ) el unico caso en que tiene que grabar en otro lado
+        En el objeto localStorageManager voy a diferenciar si es dataCollector y guardo o agrego 
+        un concepto mas en el shared data
+        */
     return o_task.toJson();
 }
 
@@ -135,7 +144,7 @@ DataCollectionTask.prototype.toHtml = function(properties){
     var array_elementos = new Array();
  
     array_elementos.push(this.taskTitle.getHtmlElement());
-    array_elementos.push(this.xPath.getHtmlElement());
+    array_elementos.push(this.concept.getHtmlElement());
     array_elementos.push(this.value.getHtmlElement());
     //array_elementos.push(this.destData.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());

@@ -194,6 +194,15 @@ body{
 }
 .tesisunlp_text_style{
 padding: 5px;
+display: table;
+}
+.edit_row{
+display: table-row;
+
+}
+.edit_cell{
+  display: table-cell;  
+  padding: 3px;
 }
 
 .animationLiveHighlighting {

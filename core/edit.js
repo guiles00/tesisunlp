@@ -18,6 +18,7 @@ var optionsElement = {
         
         var div_select = document.createElement('div');
         div_select.id = this.id;
+      //  div_select.classList.add('edit_row');
         var label = document.createTextNode(this.label);
             div_select.appendChild(label);
         var select = document.createElement('select');
@@ -73,14 +74,28 @@ var inputElement = {
     ,render: function(){
 
         var div_input = document.createElement('div');
+        div_input.classList.add('edit_row');
+
+        var div_1 = document.createElement('div');
+        div_1.classList.add('edit_cell');
+
+        var div_2 = document.createElement('div');
+        div_2.classList.add('edit_cell');
+       
         var label = document.createTextNode(this.label);
             div_input.appendChild(label);
         var input = document.createElement('input');
             input.type = 'text';
             input.id = this.id;
             input.value = this.value;
-            div_input.appendChild(input);
+        
+         div_1.appendChild(label);
+         div_2.appendChild(input);
+    
 
+        // div_input.appendChild(input);
+             div_input.appendChild(div_1);
+             div_input.appendChild(div_2);
     return div_input;
     }
 }

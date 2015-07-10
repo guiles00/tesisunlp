@@ -5,15 +5,15 @@ var  logHandler = function(e) {
 
 //=========================RConsole====================
 var  handlerPocket = function(e) { 
-			console.debug(e.target.nodeName);
+			//console.debug(e.target.nodeName);
 			//Si toque el boton que no haga nada
 			if(e.target.nodeName == 'INPUT') return false;
 			if (window.getSelection) {
           	selection = window.getSelection();
-          	console.debug('en getSelection');
+          	//console.debug('en getSelection');
         	} else if (document.selection) {
           	selection = document.selection.createRange();
-          	console.debug('en createRange');
+          	//console.debug('en createRange');
         	}
 
 			if(selection.toString().length != 0){
@@ -32,15 +32,15 @@ window.onbeforeunload = function(e) {
 };
 
 var  handlerPocketEvent = function(e) { 
-			console.debug(e.target.nodeName);
+			//console.debug(e.target.nodeName);
 			//Si toque el boton que no haga nada
 			if(e.target.nodeName == 'INPUT') return false;
 			if (window.getSelection) {
           	selection = window.getSelection();
-          	console.debug('en getSelection');
+          	//console.debug('en getSelection');
         	} else if (document.selection) {
           	selection = document.selection.createRange();
-          	console.debug('en createRange');
+          	//console.debug('en createRange');
         	}
 
 			if(selection.toString().length != 0){
@@ -51,7 +51,7 @@ var  handlerPocketEvent = function(e) {
 					console.log( localStorage.getItem("SHARED_DATA"));
 					localStorageManager.saveSharedData(concept,{'value':selection.toString()});
 					//Agrego DataCollectionTask
-					console.log('Add:'+selection.toString());
+					//console.log('Add:'+selection.toString());
 					
 					Manager.addDataCollectionTask(concept,selection.toString());
 					selection = '';

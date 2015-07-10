@@ -456,6 +456,10 @@ for (index in data_export) {
 	//alert(title);
 	var p_t = domcreator.createTaskElement("Task_"+data_export[index].id,title+"_"+data_export[index].id)
 	p.appendChild(p_t);
+
+	var p_e = domcreator.createExtensionElement("Ext_"+data_export[index].id);
+	p_t.appendChild(p_e);
+	
 	//calculo las coordenadas
 	var x = 500 + index*100;
 	var t_s = domcreator.createBPMNShapeElement("Task_"+data_export[index].id+"_di","Task_"+data_export[index].id,x,"80","100","80");

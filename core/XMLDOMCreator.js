@@ -42,11 +42,19 @@ XMLDOMCreator.prototype.createBPMNDiagramElement = function(id){
 	diagram.id= id;
 	return diagram;
 }
+
 XMLDOMCreator.prototype.createBPMNPlaneElement = function(id,title){
 	var plane = document.createElementNS("plane",'bpmndi:BPMNPlane');
 	plane.id=id;
 	plane.setAttribute("bpmnElement",title);
 	return plane;
+}
+
+XMLDOMCreator.prototype.createExtensionElement = function(id){
+	var extension = document.createElementNS("extension",'bpmn:extensionElements');
+	extension.id=id;
+	//extension.setAttribute("bpmnElement",title);
+	return extension;
 }
 
 XMLDOMCreator.prototype.createBPMNShapeElement = function(id,title,x,y,width,height){

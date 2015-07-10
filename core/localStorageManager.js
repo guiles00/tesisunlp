@@ -115,20 +115,20 @@ localStorageManager = {
     * @params: json_tasks (un objeto JSON)
     */
     ,setObjectR: function(json_task){
-        console.debug(json_task);
+        //console.debug(json_task);
        // console.log('guarda este objeto');
        // console.debug(json_task);
         var procedure = document.getElementById('procedures_select').value;
 
         var o = JSON.parse(json_task);
-        console.debug(o);
+        //console.debug(o);
         var tasks = localStorage.getItem("BPM");
         var obj_tasks = JSON.parse(tasks);
         var arr_ls = obj_tasks[procedure];
         
         var i;
         for (i = 0; i < arr_ls.length; i = i + 1) {
-            console.debug(arr_ls[i]);
+            //console.debug(arr_ls[i]);
             if(arr_ls[i].id == o.id) {
                 
                 arr_ls[i] = o; 
@@ -137,6 +137,13 @@ localStorageManager = {
     
     obj_tasks[procedure] = arr_ls;
     localStorage.setItem("BPM",JSON.stringify(obj_tasks)); 
+
+    /*Si es DataCollector guarda tambien en el sharedData*/
+    if(o.type == "DataCollectionTask"){
+        localStorageManager.saveSharedData(o.concept.value,o.value);
+        console.debug(o.concept.value);
+        console.debug(o.value.value);
+    }
 
     return true;
     }

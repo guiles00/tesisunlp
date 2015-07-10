@@ -563,12 +563,15 @@ function handleSelectxPath(){
 	select_dom.type = "button";
 	select_dom.value = "<";
 	select_dom.setAttribute('class','tesisunlp_button');
+	
 	select_dom.onclick = function(){ 
 		Recorder.initDomSelector();
 	}
 
-	var div_value = document.getElementById('xpath_id').parentNode;
-	div_value.appendChild(select_dom);
+	//Algunas tareas no tienen el xpath ( El dataCollector por ejemplo.)
+	if( document.getElementById('xpath_id') != null) 
+		document.getElementById('xpath_id').parentNode.appendChild(select_dom);;
+	
 	}
 
 

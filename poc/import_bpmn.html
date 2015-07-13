@@ -1,0 +1,47 @@
+<html>
+<input type="file" id="import_bpmn"></input>
+
+<script>
+	var el = document.getElementById("import_bpmn");
+
+	el.addEventListener('change',importProcedure,false);
+
+	 function importProcedure(e){
+		var arr_o = [];
+		console.debug('lee el archivo');
+		
+		var file = e.target.files;
+		
+	    var reader = new FileReader();
+	    var data_import;
+
+	      // Evento que usa para leer el archivo
+	      reader.onload = (function(file) {
+	        return function(e) {
+	       	
+	       	var root = e.target.result;
+	       	parser = new DOMParser();
+  			xmlDoc = parser.parseFromString(root,"text/xml");
+	       	
+	       var process = xmlDoc.getElementsByTagNameNS("http://www.omg.org/spec/BPMN/20100524/MODEL","process");	       	
+	       var tasks = process[0].childNodes;
+	       for(i in tasks){
+	       	if(typeof tasks[i] == 'object'){
+	       		var o = new Object();
+	       		o.title = tasks[i].id;
+	       		o.type = 'FillInputTask';
+
+	       		arr_o.push(o)		
+	       	 }
+	        }
+	       	console.debug("finalizo importacion");
+	       	console.debug(JSON.stringify(arr_o));
+	       }
+	      })(file);
+	      // Lo lee como un archivo de texto
+	      reader.readAsText(file[0]);
+	      //reader.readAsArrayBuffer(file[0]);
+	}
+
+</script>
+</html>

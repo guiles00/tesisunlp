@@ -104,6 +104,87 @@ var Recorder = {
 
  	      
 	}	
+	,importBPMNProcedure: function(e){
+
+			var arr_o = [];
+		console.debug('lee el archivo');
+		
+		var file = e.target.files;
+		
+	    var reader = new FileReader();
+	    var data_import;
+
+	      // Evento que usa para leer el archivo
+	      reader.onload = (function(file) {
+	        return function(e) {
+	       	
+	       	var root = e.target.result;
+	       	parser = new DOMParser();
+  			xmlDoc = parser.parseFromString(root,"text/xml");
+	       	
+	       var process = xmlDoc.getElementsByTagNameNS("http://www.omg.org/spec/BPMN/20100524/MODEL","process");	       	
+	       var tasks = process[0].childNodes;
+	       //console.debug(tasks);
+	       for(i in tasks){
+	       	console.log(tasks[i]);
+	       	if(typeof tasks[i] == 'object'){
+	       		console.debug(tasks[i]);
+
+	       	if(tasks[i].nodeName !== '#text'){
+	       	
+	       		//var o = new Object();
+	       		//o.title = tasks[i].id;
+	       		//o.type = 'FillInputTask';
+
+	    var tipo = Object.create(TipoAttribute);
+			tipo._type = TipoAttribute._type;
+			tipo.setValue(1);
+
+		var state = Object.create(StateAttribute);
+			state._type = StateAttribute._type;
+			state.setValue(0);
+		var xPath = Object.create(XPathAttribute);
+			xPath._type = XPathAttribute._type;
+			xPath.setValue('sxPath');
+		var objValue = Object.create(SValueAttribute);
+			objValue._type = SValueAttribute._type;		
+			objValue.setValue('el_value');
+
+		var objValue = Object.create(SValueAttribute);
+			objValue._type = SValueAttribute._type;		
+			objValue.setValue('el_value');
+		var taskTitle = Object.create(TaskTitleAttribute).init({'value':tasks[i].id})
+
+			//alert(tasks[i].id)
+	    var o_task = new FillInputTask(i,xPath,objValue,tipo,state,taskTitle);
+
+	    localStorageManager.insert(o_task.toJson());
+	       		arr_o.push(o_task)		
+	       	 }
+	       	 }
+	        }
+
+	      /*  var p = document.getElementById('procedures_select').value;
+ 	      	var bpm = JSON.parse(localStorage.getItem("BPM") );
+	      	
+	      	bpm[p] = arr_o;
+	      	
+	      	localStorage.setItem("BPM",JSON.stringify(bpm));*/
+    		//And now the shared data
+    		//localStorage.setItem('SHARED_DATA',JSON.stringify(data_import.SHARED_DATA));
+    		
+    		Recorder.refresh();
+
+
+	       	console.debug("finalizo importacion");
+	       	console.debug(arr_o);
+	       }
+	      })(file);
+	      // Lo lee como un archivo de texto
+	      reader.readAsText(file[0]);
+	
+
+	}
     ,saveDestData: function(){
 
 		    	//Trae el dato a guardar

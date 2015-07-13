@@ -519,6 +519,17 @@ c.appendChild(def);
 		
 		return b_import;
 	 }
+	 ,createImportBPMNButton: function(){
+		////console.debug('1. crea boton Stop');
+		var b_bpmn_import = document.createElement("input");	
+	    b_bpmn_import.setAttribute('type','file');
+	   // b_bpmn_import.hidden = true;
+	    //b_import.setAttribute('value','I');
+	    b_bpmn_import.setAttribute('id','g_bpmn_import');
+		b_bpmn_import.addEventListener("change", Recorder.importBPMNProcedure , false); 
+		
+		return b_bpmn_import;
+	 }
 	,createStopButton: function(){
 		////console.debug('1. crea boton Stop');
 		var attr_stop = {'disabled':true, 'hidden':false };
@@ -886,6 +897,7 @@ c.appendChild(def);
 		var show_import_button = this.createShowImportButton();
 	 	var export_button = this.createExportButton();
 	 	var bpmn_button = this.createBPMNButton();
+	 	var import_bpmn_button = this.createImportBPMNButton();
 	 	//console.debug(import_proc_button);
 	 	//container_header.appendChild(stopButton);
 	 	var contain_first = this.createContain();
@@ -922,6 +934,7 @@ c.appendChild(def);
 		contain_three.appendChild(bpmn_button);
 		contain_three.appendChild(export_button);
 		contain_three.appendChild(import_proc_button);
+		contain_three.appendChild(import_bpmn_button);
 	 	container_header.appendChild(contain_three);
 		container_header.appendChild(contain_pocket);
 	 	var hr_el = document.createElement("hr");

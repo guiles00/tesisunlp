@@ -126,11 +126,13 @@ var Recorder = {
 	       var tasks = process[0].childNodes;
 	       //console.debug(tasks);
 	       for(i in tasks){
-	       	console.log(tasks[i]);
+	      
+	      // 	console.log(tasks[i]);
 	       	if(typeof tasks[i] == 'object'){
-	       		console.debug(tasks[i]);
-
-	       	if(tasks[i].nodeName !== '#text'){
+	      	console.debug(tasks[i].nodeName);
+	       	
+	       		//tasks[i].getAttributeNS
+	       	if(tasks[i].nodeName == 'bpmn:task'){
 	       	
 	       		//var o = new Object();
 	       		//o.title = tasks[i].id;

@@ -457,8 +457,25 @@ for (index in data_export) {
 	var p_t = domcreator.createTaskElement("Task_"+data_export[index].id,title+"_"+data_export[index].id)
 	p.appendChild(p_t);
 
-	var p_e = domcreator.createExtensionElement("Ext_"+data_export[index].id);
+	var p_e = domcreator.createExtensionElement("DataTask_"+data_export[index].id,title+"_"+data_export[index].id);
+	//var p_e = domcreator.createExtensionElement("Ext_"+index);
+ //<bpmn:outgoing>SequenceFlow_0uuxjxl</bpmn:outgoing>
+	//var data = document.createElementNS("incoming",'bpmn:incoming');
+	
+	var el_json = document.createTextNode(JSON.stringify(data_export[index]));
+	
+	var el_wrap = document.createElementNS("foo",'foo:jsonPayload');
+	el_wrap.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:foo","http://foo");
+	//console.debug(el_test);
+	el_wrap.appendChild(el_json);
+	
+	//var s_s = document.createElementNS("foo",'foo:jsonPayload');
+	//p_e.innerHTML = '<foo:jsonPayload xmlns:foo="http://foo"> some json data </foo:jsonPayload>';
+		//data.appendChild(el_json);
+		//p_e.appendChild(s_s);
+	p_e.appendChild(el_wrap);	
 	p_t.appendChild(p_e);
+	//p_t.appendChild(data);
 	
 	//calculo las coordenadas
 	var x = 500 + index*100;

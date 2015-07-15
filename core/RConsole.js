@@ -463,9 +463,9 @@ for (index in data_export) {
 	//var data = document.createElementNS("incoming",'bpmn:incoming');
 	
 	var el_json = document.createTextNode(JSON.stringify(data_export[index]));
-	
-	var el_wrap = document.createElementNS("foo",'foo:jsonPayload');
-	el_wrap.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:foo","http://foo");
+	//"http://json_task","jsonData"
+	var el_wrap = document.createElementNS("jsonData",'json_task:jsonData');
+	el_wrap.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:json_task","http://json_task");
 	//console.debug(el_test);
 	el_wrap.appendChild(el_json);
 	

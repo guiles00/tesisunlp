@@ -129,40 +129,48 @@ var Recorder = {
 	      
 	      // 	console.log(tasks[i]);
 	       	if(typeof tasks[i] == 'object'){
-	      	console.debug(tasks[i].nodeName);
-	       	
+
 	       		//tasks[i].getAttributeNS
+	       	//Tiene que ser una tarea
 	       	if(tasks[i].nodeName == 'bpmn:task'){
 	       	
-	       		//var o = new Object();
-	       		//o.title = tasks[i].id;
-	       		//o.type = 'FillInputTask';
+	       		var x =	tasks[i].getElementsByTagNameNS("http://json_task","jsonData");
+		      	if(x.length > 0){
+		       	var res_json = (x[0].innerHTML.replace("<![CDATA[", "")).replace("]]>","");
+		       	console.log("guardo esto");
+		       	console.debug(res_json);
+		       	localStorageManager.insert(res_json);
+		      	}else{
+		      		console.log("encontro una tarea vacia");
+		      	}
+	      		       	
+	       	//Suponemos que todos tienen JSON payload (Cuando modifique los graficos se arma estructura esqueleto)
+	       	
+				  /*  var tipo = Object.create(TipoAttribute);
+						tipo._type = TipoAttribute._type;
+						tipo.setValue(1);
 
-	    var tipo = Object.create(TipoAttribute);
-			tipo._type = TipoAttribute._type;
-			tipo.setValue(1);
+					var state = Object.create(StateAttribute);
+						state._type = StateAttribute._type;
+						state.setValue(0);
+					var xPath = Object.create(XPathAttribute);
+						xPath._type = XPathAttribute._type;
+						xPath.setValue('sxPath');
+					var objValue = Object.create(SValueAttribute);
+						objValue._type = SValueAttribute._type;		
+						objValue.setValue('el_value');
 
-		var state = Object.create(StateAttribute);
-			state._type = StateAttribute._type;
-			state.setValue(0);
-		var xPath = Object.create(XPathAttribute);
-			xPath._type = XPathAttribute._type;
-			xPath.setValue('sxPath');
-		var objValue = Object.create(SValueAttribute);
-			objValue._type = SValueAttribute._type;		
-			objValue.setValue('el_value');
+					var objValue = Object.create(SValueAttribute);
+						objValue._type = SValueAttribute._type;		
+						objValue.setValue('el_value');
+					var taskTitle = Object.create(TaskTitleAttribute).init({'value':tasks[i].id})
 
-		var objValue = Object.create(SValueAttribute);
-			objValue._type = SValueAttribute._type;		
-			objValue.setValue('el_value');
-		var taskTitle = Object.create(TaskTitleAttribute).init({'value':tasks[i].id})
+						//alert(tasks[i].id)
+				    var o_task = new FillInputTask(i,xPath,objValue,tipo,state,taskTitle);
 
-			//alert(tasks[i].id)
-	    var o_task = new FillInputTask(i,xPath,objValue,tipo,state,taskTitle);
-
-	    localStorageManager.insert(o_task.toJson());
-	       		arr_o.push(o_task)		
-	       	 }
+				    localStorageManager.insert(o_task.toJson());
+				       		arr_o.push(o_task)		*/
+	       	  }
 	       	 }
 	        }
 

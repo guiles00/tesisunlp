@@ -555,6 +555,12 @@ var Manager = (function () {
                 localStorageManager.insert(a_task.toJson());
                 //Actualizo la consola
                 Recorder.refresh();
+            },addIfTask: function(){
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new IfTask();
+                localStorageManager.insert(a_task.toJson());
+                //Actualizo la consola
+                Recorder.refresh();
             }
             
         }

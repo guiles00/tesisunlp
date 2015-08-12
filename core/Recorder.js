@@ -306,6 +306,9 @@ var Recorder = {
 		}else if(id_selected == 6){
 		Manager.addComposedTask('');			
 		return true;	
+		}else if(id_selected == 7){
+		Manager.addIfTask('');			
+		return true;	
 		}
 
 		

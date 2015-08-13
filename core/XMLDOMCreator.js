@@ -71,6 +71,46 @@ var dc = document.createElementNS("dc",'dc:Bounds');
 	shape.appendChild(dc);
 	return shape;
 }
+//    <bpmn:exclusiveGateway id="ExclusiveGateway_131w4oi" />
+
+XMLDOMCreator.prototype.createGatewayElement = function(id){
+	var gateway = document.createElementNS("extension",'bpmn:exclusiveGateway');
+	gateway.id = id;
+	return gateway;
+}
+XMLDOMCreator.prototype.createBPMNGatewayShapeElement = function(id,title,x,y,width,height){
+	// <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+var shape = document.createElementNS("shape",'bpmndi:BPMNShape');
+	shape.id= id+'_di';
+	shape.setAttribute("bpmnElement",id);
+ //       <dc:Bounds x="253" y="95" width="50" height="50" />
+var dc = document.createElementNS("dc",'dc:Bounds');
+	dc.setAttribute("x",x);
+	dc.setAttribute("y",y);
+	dc.setAttribute("width","50");
+	dc.setAttribute("height","50");
+	shape.appendChild(dc);
+
+var label = document.createElementNS("label",'bpmndi:BPMNLabel');
+	
+	//     <bpmndi:BPMNLabel>
+    //      <dc:Bounds x="233" y="145" width="90" height="20" />
+    //    </bpmndi:BPMNLabel>
+
+var dc_label = document.createElementNS("dc",'dc:Bounds');
+	dc_label.setAttribute("x",(x-20));
+	dc_label.setAttribute("y",(y-20));
+	dc_label.setAttribute("width","90");
+	dc_label.setAttribute("height","20");
+	label.appendChild(dc_label);
+
+	shape.appendChild(label);
+
+console.debug(shape);
+	
+	return shape;
+}
+
 
 return XMLDOMCreator;
 })()

@@ -438,6 +438,7 @@ var RConsole = {
 		var def = domcreator.init();
 		var p = domcreator.createElementProcess("Process_1");
 		var s = domcreator.createStartProcess("StartEvent_1");
+		var ge = domcreator.createGatewayElement("Gateway_1");
 		//var t1 = domcreator.createTaskElement("Task_1","FillInputTask");
 		var d = domcreator.createBPMNDiagramElement("BPMNDiagram_1");
 		var pl = domcreator.createBPMNPlaneElement("BPMNPlane_1","Process_1");
@@ -453,13 +454,38 @@ var RConsole = {
 for (index in data_export) { 
 		
 	var title = data_export[index].taskTitle.value;
-	//alert(title);
+	console.debug(data_export[index].type);
+
+	if( data_export[index].type == 'IfTask') {
+	var p_t = domcreator.createGatewayElement("Gateway_"+data_export[index].id,title+"_"+data_export[index].id)
+	p.appendChild(p_t);
+
+	//var p_e = domcreator.createExtensionElement("DataTask_"+data_export[index].id,title+"_"+data_export[index].id);
+		
+/*	var el_json = document.createTextNode(JSON.stringify(data_export[index]));
+	var el_wrap = document.createElementNS("jsonData",'json_task:jsonData');
+	el_wrap.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:json_task","http://json_task");
+	el_wrap.appendChild(el_json);}
+	*/
+	//p_e.appendChild(el_wrap);	
+	//p_t.appendChild(p_e);
+	
+	//calculo las coordenadas
+	var x = 500 + index*100;
+	var t_s = domcreator.createBPMNGatewayShapeElement("Gateway_"+data_export[index].id,"Gateway_"+data_export[index].id,x,"80","100","80");
+	
+	pl.appendChild(t_s);
+
+
+	}else{
+
 	var p_t = domcreator.createTaskElement("Task_"+data_export[index].id,title+"_"+data_export[index].id)
 	p.appendChild(p_t);
 
 	var p_e = domcreator.createExtensionElement("DataTask_"+data_export[index].id,title+"_"+data_export[index].id);
+	
 	//var p_e = domcreator.createExtensionElement("Ext_"+index);
- //<bpmn:outgoing>SequenceFlow_0uuxjxl</bpmn:outgoing>
+ 	//<bpmn:outgoing>SequenceFlow_0uuxjxl</bpmn:outgoing>
 	//var data = document.createElementNS("incoming",'bpmn:incoming');
 	
 	var el_json = document.createTextNode(JSON.stringify(data_export[index]));
@@ -469,29 +495,34 @@ for (index in data_export) {
 	//console.debug(el_test);
 	el_wrap.appendChild(el_json);
 	
-	//var s_s = document.createElementNS("foo",'foo:jsonPayload');
-	//p_e.innerHTML = '<foo:jsonPayload xmlns:foo="http://foo"> some json data </foo:jsonPayload>';
-		//data.appendChild(el_json);
-		//p_e.appendChild(s_s);
 	p_e.appendChild(el_wrap);	
 	p_t.appendChild(p_e);
-	//p_t.appendChild(data);
 	
 	//calculo las coordenadas
 	var x = 500 + index*100;
 	var t_s = domcreator.createBPMNShapeElement("Task_"+data_export[index].id+"_di","Task_"+data_export[index].id,x,"80","100","80");
-	pl.appendChild(t_s);	
+	pl.appendChild(t_s);
+	
+	}
+	
+	//var s_s = document.createElementNS("foo",'foo:jsonPayload');
+	//p_e.innerHTML = '<foo:jsonPayload xmlns:foo="http://foo"> some json data </foo:jsonPayload>';
+		//data.appendChild(el_json);
+		//p_e.appendChild(s_s);
+	
 
 	}
-
+//var gateway = domcreator.createBPMNGatewayShapeElement("Gateway_1",'title','x','y','width','height');
 
 p.appendChild(s);
+//p.appendChild(ge)
 //p.appendChild(t1);
 pl.appendChild(sh);
-//pl.appendChild(sh2);
+//pl.appendChild(gateway);
 d.appendChild(pl);
 def.appendChild(p);
 def.appendChild(d);
+
 c.appendChild(def);
 
 

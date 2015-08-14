@@ -960,10 +960,11 @@ function handleSelectxPath(){
         */
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
 
-        if(task.state.value == 1 )  tr.style.backgroundColor='green';
-        if(task.state.value == 3 )  tr.style.backgroundColor='blue';
-
-        //Hardcodeado!!!!
+        if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
+        if(task.state.value == 3 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
+        	
+		
+		        //Hardcodeado!!!!
 	    var pTask = document.createTextNode(text + 'Task - id:'+tr.id);
 	    var spTask = document.createElement('span');
 	    spTask.setAttribute('style', 'font-size: 10px'); 
@@ -973,6 +974,10 @@ function handleSelectxPath(){
 	    td1.style.visibility = "hidden";
 	    
 	    var td2 = document.createElement('td');
+	    if(task.state.value == 3 )
+        	td2.classList.add('ident_composite');
+        
+
 	    //var td2 = document.createElement('div');
 	    //td2.class = "Cell";
 	    /*var td3 = document.createElement('td');
@@ -1034,23 +1039,47 @@ function handleSelectxPath(){
 		
 		};
 
+	var show_button = document.createElement('input');
+		show_button.type = "button";
+		show_button.value = "show";
+		show_button.classList.add('tesisunlp_button_left')
+		show_button.onclick = function(){
+		//console.debug(this.parentNode.parentNode.id);	
+		//Este comportamiento va al manager o RConsole
+		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
+		//console.debug(tasks);
+		//por ahora esta separado por comas
+		var arr_id_tasks = task.value.value.split(',');
+		//console.debug(arr_id_tasks);
+		for(var i = 0;i < arr_id_tasks.length;i++){
+		
+		//oculto la tarea //Por ahora idento
+		var inner_el = document.getElementById(arr_id_tasks[i]);
+		
+		if(inner_el.style.display == 'none'){
+			inner_el.style.display ='';
+			//inner_el.firstChild.classList.add('ident_composite');
+			
+		}else{
+			inner_el.style.display ='none';
+			//inner_el.firstChild.classList.add('ident_composite');
+		}	
+
+		} 
+
+		};
 
 	var play_button = document.createElement('input');
 		play_button.type = "button";
 		play_button.value = ">";
 		play_button.classList.add('tesisunlp_button_left')
-		//play_button.setAttribute('class','tesisunlp_button');
 		play_button.onclick = function(){
 		
 		console.debug('Empieza desde aca'+this.parentNode.parentNode.id);
-		//Manager.playFromTask(this.parentNode.parentNode.id);
 		Manager.playTaskById(this.parentNode.parentNode.id);
 
-	/*	var task = localStorageManager.getObject(this.parentNode.parentNode.id);
-		task.state.value = 0;
-		localStorageManager.setObjectR(JSON.stringify(task));
-		Recorder.refresh();
-	*/	};
+	};
+
 
 		//var id_text = document.createTextNode(id+' - ');
 		var br = document.createElement('br');
@@ -1062,6 +1091,11 @@ function handleSelectxPath(){
 		td2.appendChild(state_button);
 		td2.appendChild(play_button);
 
+		//Este boton va solo en los composites
+
+		if(task.type == 'ComposedTask'){
+				td2.appendChild(show_button);	
+		};
 		
 		
 		//td2.appendChild(spTask);
@@ -1091,10 +1125,10 @@ function handleSelectxPath(){
 	    var td5 = document.createElement('td');
 
 		//Pruebo si el doble clic funciona
-		tr.addEventListener("dblclick",function(){
+		/*tr.addEventListener("dblclick",function(){
 			Recorder.editRow(this);
 		} ,false);
-
+		*/
 	 	var text1 = document.createTextNode(text);
 	    var delete_button = document.createElement('input');
 		delete_button.type = "button";

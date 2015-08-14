@@ -1,0 +1,95 @@
+
+<script>
+window.load = function(){
+	var add_task = document.getElementById('add_task');
+	
+	//Oculto los div
+	var add_task_a = document.getElementById('add_task_a');
+
+	var add_task_p = document.getElementById('add_task_p');
+
+}
+
+function mostrar(){
+	var container_add_task_p = document.getElementById('container_add_task_p');
+	container_add_task_p.style.display = "initial";
+}
+function ocultar(){
+	var container_add_task_p = document.getElementById('container_add_task_p');
+	container_add_task_p.style.display = "none";
+}
+</script>
+<style>
+.container_add_task_p {
+	  display: none;
+	  padding: 10;
+	  position: fixed;
+	  top: 50;
+	  left: 100;
+	  z-index: 999;
+	  border:solid 1px #e1e1e1;
+    
+}
+#consola_header{
+	  border:solid 1px #e1e1e1;
+    
+}
+.contain{
+	padding-top: 15;
+	padding: 10;
+	display: inline;
+	border:solid 1px #e1e1e1;
+
+}
+</style>
+<link rel="stylesheet" type="text/css" href="../css/tesisunlp.css"> 
+
+<div id="consolaa_header">
+<div>
+
+<div class="contain">
+
+<input type="image" value="Record" id="start_record" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/record.png" title="Start Record Procedure">
+<input type="image" value="Play" id="play_procedure" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/play.png" title="Play procedure">
+<input type="image" value="CLR" id="clear" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/clear.png" title="clear">
+<select class="tesisunlp_button" id="add_task">
+<option value="0" disabled="" selected="">Add Task</option>
+<option value="1">Primitive</option>
+<option value="2">Augmented</option>
+</select>
+</div>
+<div class="contain">
+<select class="tesisunlp_button" id="procedures_select"
+><option value="P1">P1</option>
+<option value="P2">P2</option>
+<option value="P0">Add</option>
+</select>
+<input type="image" value="DEL" id="delete_procedure" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/delete.png" title="delete_procedure">
+</div>
+<div class="contain">
+<input type="image" value="SHD" id="shared_data" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/shared.png" title="shared_data">
+</div>
+</div>
+<br>
+<div class="contain">
+<input height="25" type="image" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/ls.png" value="LS" id="load">
+<input type="button" value="I" class="tesisunlp_button" id="g_s_import">
+<input type="button" value="E" class="tesisunlp_button" id="g_b_export">
+<input type="file" hidden="" id="g_import">
+</div>
+
+<div class="container_add_task_p" id="container_add_task_p">
+Seleccione Tarea<br>
+<select class="tesisunlp_button" id="add_task_p">
+<option value="0" disabled="" selected="">Add Primitive Task</option>
+<option value="1">FillInput</option>
+<option value="2">TextArea</option>
+<option value="3">ClickButton</option>
+</select>
+</br></br>
+<input type="button" value="aceptar"></input>
+<input type="button" value="cancelar" onclick="ocultar()"></input>
+</div>
+</div>
+</br></br>
+<input type="button" value="mostrar" onclick="mostrar()"></input>

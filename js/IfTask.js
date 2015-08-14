@@ -74,6 +74,7 @@ var that = this;
       that.finalizo(that.id);  
       return;  
     } 
+    console.debug(this.condition.value)
     if(this.condition.value == '1'){
     var id_comp = String(this.value.value);
     console.debug('execute true');

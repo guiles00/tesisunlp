@@ -106,7 +106,7 @@ var RConsole = {
 			div_a_task.classList.add("div_a_task_style");
 			var sAddTask = document.createElement('select');
 			sAddTask.className = "tesisunlp_button";
-			var aOptions=['Add Augmented Task','DataCol.','HighLig.','Suma','Notas','Concat','Comp.','If'];
+			var aOptions=['Add Augmented Task','DataCollector','HighLig.','Suma','Notas','Concat','Composite','If..Then'];
 			for (j = 0; j < aOptions.length; j = j + 1) {
 				opt = document.createElement('option');
 				opt.value = j;

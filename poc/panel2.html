@@ -1,0 +1,152 @@
+<style>
+.tesisunlp_button { 
+	cursor: hand ;
+	background-color: #A2AFA0 ;
+	border:1px solid ;
+	border-color: grey ; 
+	color: black ; 
+	font-family: Helvetica, Arial; 
+	font-size: 9px; font-weight: 400; 
+	padding: 5px 7px 6px; 
+	text-transform: uppercase;vertical-align: bottom;
+} 
+.tesisunlp_button_right{
+	float:right;
+	cursor: hand ;
+	background-color: #A2AFA0 ;
+	border:1px solid ;
+	border-color: grey ; 
+	color: black ; 
+	font-family: Helvetica, Arial; 
+	font-size: 9px; font-weight: 400; 
+	padding: 5px 7px 6px; 
+	text-transform: uppercase;vertical-align: bottom;
+}
+.cssClass{ outline: 0.25em solid #FFFF00;} 
+
+.tesisunlp_td { 
+	border-bottom:1px solid #005000;
+} 
+.tesisunlp_table {  
+	background-color: #A2AFA0;  
+	min-width:323px ;
+	font-family: Helvetica,Arial; 
+	font-size: 11px;
+	width: auto;
+} 
+
+.tesisunlp_div_consola {
+	overflow:scroll;
+	z-index: 300;
+	position:fixed;
+	left: 0px;
+	width: 350px;
+	height: 100%;
+	padding: 5;
+	vertical-align: middle;
+	background: grey; 
+}/*#A2AFA0;*/
+/*border:solid 1px #e1e1e1;*/
+.tesisunlp_table_consola {
+
+	min-width:auto;
+	font-family: Helvetica,Arial; 
+	font-size: 16px;
+}
+
+.tesisunlp_div_pestana {
+	display: inline-block;
+	background: #A2AFA0;
+	position: fixed;
+	right: 0;bottom: 3.2em;
+	z-index: 100;
+	font-size: 14px;
+	font-family: Helvetica, arial, freesans, clean, sans-serif;
+}
+
+.tesisunlp_input_label {
+	background-color: #A2AFA0; 
+	border: 0; border-radius: 2px; 
+	color: black; font-size: 11px; 
+	font-weight: 700; 
+	padding: 10px 30px 11px; 
+	text-transform: uppercase;vertical-align: bottom;
+}
+
+.tesisunlp_close_button {
+	position:absolute;
+	float:right;
+	top:0;
+	right:0;
+}
+.tesisunlp_div_show_pocket {
+	position:absolute;
+	width:auto;
+	height:auto;
+	top:30%;
+	left:50%;
+	margin-top:-100px;
+	margin-left:-100px;
+	background: #A2AFA0;
+	border: solid black;
+}
+.tesisunlp_div_editor_container {
+
+	padding: 10px;
+	visibility: hidden;
+	position:absolute;
+	width:auto;
+	height:auto;
+	top:30%;
+	left:50%;
+	margin-top:-100px;
+	margin-left:-100px;
+	background: #A2AFA0;
+	border: solid #A2AFFF;
+	z-index: 500;
+}
+
+.animationLiveHighlighting {
+	   border-width:1px;
+	   border-color:red; 
+	   background-color:yellow;
+}
+
+.topcorner{
+position:fixed;
+top:1em;
+right:1em;
+height: 100px;
+width: 200px;
+border-color: grey;
+border-style: solid;
+z-index: 500;
+}
+
+.topcorner ul,li {
+list-style-type: none;
+padding: 0px;
+margin: 0px;
+font-size: 9px;
+}
+
+.contain{
+	
+	padding: 15;
+	display: inline;
+	border:solid 1px #e1e1e1;
+	width: 105px;
+
+}
+
+.loadButton{
+	height: 25;
+}
+</style>
+
+<div id="consola_header"><div><div class="contain"><input type="image" value="Record" id="start_record" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/record.png" title="Start Record Procedure"><input type="image" value="Play" id="play_procedure" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/play.png" title="Play procedure"><input type="image" value="CLR" id="clear" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/clear.png" title="clear"></div><div class="contain"><select class="tesisunlp_button" id="add_task"><option value="0" disabled="">Add Task</option><option value="1">DataCol.</option><option value="2">HighLig.</option><option value="3">Suma</option><option value="4">Notas</option><option value="5">Concat</option><option value="6">Comp.</option></select><select class="tesisunlp_button" id="procedures_select"><option value="P1">P1</option><option value="P2">P2</option><option value="P0">Add</option></select><input type="image" value="DEL" id="delete_procedure" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/delete.png" title="delete_procedure"></div></div>
+<div>
+<div class="contain">
+<input type="image" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/ls.png" class="loadButton" value="LS" id="load">
+<input type="button" value="I" class="tesisunlp_button" id="g_s_import"><input type="button" value="E" class="tesisunlp_button" id="g_b_export"><input type="file" hidden="" id="g_import"></div><div class="contain"><input type="image" value="SHD" id="shared_data" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/shared.png" title="shared_data"></div></div>
+</div>

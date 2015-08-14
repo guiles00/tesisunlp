@@ -155,6 +155,16 @@ ComposedTask.prototype.htmlToJson = function(el_div){
         
         var o_task = new ComposedTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
         //o_task.taskTitle = oTaskTitle; //Lo hago por ahora, hay que hacer
+        var arr_id_tasks = str_value.split(',');
+        //console.debug(arr_id_tasks);
+        
+        for(var i = 0;i < arr_id_tasks.length;i++){
+            var task = localStorageManager.getObject(arr_id_tasks[i]);
+            task.state.value = 3;
+            localStorageManager.setObjectR(JSON.stringify(task));
+        } 
+
+
     return o_task.toJson();
 }
 

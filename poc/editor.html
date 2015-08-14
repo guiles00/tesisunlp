@@ -1,0 +1,100 @@
+<html>
+<head>
+<style type="text/css">
+    .aParent div {
+  float: left;
+  clear: none; 
+}
+    
+</style>
+<link rel="stylesheet" type="text/css" href="../css/tesisunlp.css">
+
+</head>
+
+<div id="div_consola" class="tesisunlp_div_consola" style="visibility: visible;">
+   <div id="consola_header" class="consola_header_style">
+      <div>
+         <div class="contain">
+            <input type="image" value="Record" id="start_record" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/record.png" title="Start Record Procedure"><input type="image" value="Play" id="play_procedure" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/play.png" title="Play procedure"><input type="image" value="CLR" id="clear" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/clear.png" title="clear">
+            <select class="tesisunlp_button" id="add_task">
+               <option value="0" disabled="">Add Task</option>
+               <option value="1">Primitive</option>
+               <option value="2">Augmented</option>
+            </select>
+         </div>
+         <div class="contain">
+            <select class="tesisunlp_button" id="procedures_select">
+               <option value="P1">P1</option>
+               <option value="P2">P2</option>
+               <option value="P0">Add</option>
+            </select>
+            <input type="image" value="DEL" id="delete_procedure" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/delete.png" title="delete_procedure">
+         </div>
+      </div>
+      <br>
+      <div class="contain"><input type="image" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/ls.png" class="loadButton" value="LS" id="load"><input type="button" value="I" class="tesisunlp_button" id="g_s_import"><input type="button" value="BPMN" class="tesisunlp_button" id="g_bpmn_export"><input type="button" value="E" class="tesisunlp_button" id="g_b_export"><input type="file" hidden="" id="g_import"><input type="file" id="g_bpmn_import"></div>
+      <div class="contain"><input type="image" value="SHD" id="shared_data" src="http://raw.githubusercontent.com/guiles/unlptesis/master/images/shared.png" title="shared_data"></div>
+   </div>
+   <div id="div_table_consola" class="aParent margen_tabla">
+      <table id="table_consola" class="table_consola_style">
+         <tbody>
+            <tr id="5" style="cursor: move;">
+               <td>
+                  <p class="task_title_style">5 - Enter String to Input </p>
+                  <input type="button" value="Edit" class="tesisunlp_button_left"><input type="button" value="Delete" class="tesisunlp_button_left"><input type="button" value="P/D" class="tesisunlp_button_left"><input type="button" value=">" class="tesisunlp_button_left">
+                  <input type="button" value="show" id="boton" class="tesisunlp_button_left">
+               </td>
+            </tr>
+            <tr id="8" style="cursor: move; display:none;padding-top: 10px; padding-bottom:10px">
+               <td style="">
+                  <p class="task_title_style">8 - ADENTRO </p>
+                  <input type="button" value="Edit" class="tesisunlp_button_left"><input type="button" value="Delete" class="tesisunlp_button_left"><input type="button" value="P/D" class="tesisunlp_button_left"><input type="button" value=">" class="tesisunlp_button_left">
+               </td>
+            </tr>
+            <tr id="6" style="cursor: move; display:none">
+               <td>
+                  <p class="task_title_style">6 - IF .. THEN</p>
+                  <input type="button" value="Edit" class="tesisunlp_button_left"><input type="button" value="Delete" class="tesisunlp_button_left"><input type="button" value="P/D" class="tesisunlp_button_left"><input type="button" value=">" class="tesisunlp_button_left">
+               </td>
+            </tr>
+            <tr id="10" style="cursor: move; background-color: green;">
+               <td>
+                  <p class="task_title_style">10 - Enter String to Input </p>
+                  <input type="button" value="Edit" class="tesisunlp_button_left"><input type="button" value="Delete" class="tesisunlp_button_left"><input type="button" value="P/D" class="tesisunlp_button_left"><input type="button" value=">" class="tesisunlp_button_left">
+               </td>
+            </tr>
+            <tr id="11" style="cursor: move; background-color: green;">
+               <td>
+                  <p class="task_title_style">11 - IF .. THEN</p>
+                  <input type="button" value="Edit" class="tesisunlp_button_left"><input type="button" value="Delete" class="tesisunlp_button_left"><input type="button" value="P/D" class="tesisunlp_button_left"><input type="button" value=">" class="tesisunlp_button_left">
+               </td>
+            </tr>
+            <tr id="13" style="cursor: move;">
+               <td>
+                  <p class="task_title_style">13 - Composed Task </p>
+                  <input type="button" value="Edit" class="tesisunlp_button_left"><input type="button" value="Delete" class="tesisunlp_button_left"><input type="button" value="P/D" class="tesisunlp_button_left"><input type="button" value=">" class="tesisunlp_button_left">
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+</div>
+<script type="text/javascript">
+	var el = document.getElementById('boton');
+	el.addEventListener('click',function(){
+		var inner_el = document.getElementById('8');
+		
+		if(inner_el.style.display == 'none'){
+			inner_el.style.display ='';
+		}else{
+			inner_el.style.display ='none';
+		}	
+		var inner_el = document.getElementById('6');
+		
+		if(inner_el.style.display == 'none'){
+			inner_el.style.display ='';
+		}else{
+			inner_el.style.display ='none';
+		}
+	});
+</script>

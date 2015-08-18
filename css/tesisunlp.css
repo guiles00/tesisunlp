@@ -280,6 +280,14 @@ font-size: 9px;
 	margin-bottom: 5px;
 	/*padding: 30px 10px 10px 10px;*/
 }
+.ident_composite{
+	padding-left : 20px;
+	background-color: "blue";
+	display: "none";
+}
+.tr_composite{
+	display: "none";
+}
 /*	
 .tesisunlp_div_consola::-webkit-scrollbar {
     width: 12px;

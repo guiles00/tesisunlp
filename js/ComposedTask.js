@@ -96,6 +96,8 @@ ComposedTask.prototype.finalizo = function(id){
  */
 ComposedTask.prototype.toHtml = function(properties){
 
+    //console.debug(this.value.getHtmlElement());
+
     var array_elementos = new Array();
     array_elementos.push(this.taskTitle.getHtmlElement());
     array_elementos.push(this.xPath.getHtmlElement());
@@ -155,9 +157,22 @@ ComposedTask.prototype.htmlToJson = function(el_div){
         
         var o_task = new ComposedTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
         //o_task.taskTitle = oTaskTitle; //Lo hago por ahora, hay que hacer
+        
+        
+        var old_task = localStorageManager.getObject(this.id);
+        //console.debug(old_task.value.value.split(','));
+        var arr_old_tasks = old_task.value.value.split(',');
         var arr_id_tasks = str_value.split(',');
         //console.debug(arr_id_tasks);
-        
+        //console.debug(arr_id_tasks)
+
+         //Estado inicial
+        for(var i = 0;i < arr_old_tasks.length;i++){
+        var task = localStorageManager.getObject(arr_old_tasks[i]);
+        task.group.value = 0;
+        localStorageManager.setObjectR(JSON.stringify(task));
+        } 
+
         for(var i = 0;i < arr_id_tasks.length;i++){
             var task = localStorageManager.getObject(arr_id_tasks[i]);
             task.group.value = 1;

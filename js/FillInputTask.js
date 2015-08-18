@@ -94,7 +94,7 @@ FillInputTask.prototype.toHtml = function(properties){
     array_elementos.push(this.state.getHtmlElement());
     array_elementos.push(this.tipo.getHtmlElement());
     array_elementos.push(this.group.getHtmlElement());
-
+    
     return array_elementos;
 }
 

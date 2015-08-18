@@ -11,8 +11,18 @@ this.msg = "AbstractTask"
 this.type = "AbstractTask"
 this.precondition = {};
 this.taskTitle = taskTitle;
+this.group = 0//Object.create(StateAttribute).init({'value':0,'htmlId':'group_id','label':'group'}) ;
+
 }
 
+AbstractTask.prototype.setGroup = function(group){
+  this.group = group;
+};
+
+
+AbstractTask.prototype.getGroup = function(){
+  return this.group;
+};
 AbstractTask.prototype.sayHi = function(p){
   console.log('Hi from AbstractTask');
 };

@@ -961,7 +961,7 @@ function handleSelectxPath(){
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
 
         if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
-        if(task.state.value == 3 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
+        if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
         	
 		
 		        //Hardcodeado!!!!
@@ -974,7 +974,7 @@ function handleSelectxPath(){
 	    td1.style.visibility = "hidden";
 	    
 	    var td2 = document.createElement('td');
-	    if(task.state.value == 3 )
+	    if(task.group.value == 1 )
         	td2.classList.add('ident_composite');
         
 

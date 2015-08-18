@@ -115,6 +115,7 @@ var view = {
           for (var i = 0; i < elements.length; i++) {
 	      target.appendChild(elements[i].render());
           }
+      //console.debug(target);
       }
 };
 

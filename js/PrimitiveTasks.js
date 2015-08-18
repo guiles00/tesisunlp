@@ -15,9 +15,18 @@ function PrimitiveTask(id,xPath,value,tipo,state,taskTitle){ //Constructor
     this.type = "PrimitiveTask"
     this.precondition = {};
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Task Title '})
+    this.group = Object.create(StateAttribute).init({'value':0,'htmlId':'group_id','label':'group'}) ;
 
 }
 
+PrimitiveTask.prototype.setGroup = function(group){
+  this.group = group;
+};
+
+
+PrimitiveTask.prototype.getGroup = function(){
+  return this.group;
+};
 
 PrimitiveTask.prototype.setPrecondition = function(p){
   this.precondition = p;

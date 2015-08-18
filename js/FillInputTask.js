@@ -93,6 +93,7 @@ FillInputTask.prototype.toHtml = function(properties){
     array_elementos.push(this.value.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());
     array_elementos.push(this.tipo.getHtmlElement());
+    array_elementos.push(this.group.getHtmlElement());
 
     return array_elementos;
 }
@@ -108,6 +109,8 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         var str_value = document.getElementById('value_id').value;
         var str_state = document.getElementById('state_id').value;
         var str_tipo = document.getElementById('tipo_id').value;
+        var str_group = document.getElementById('group_id').value;
+
 
         //Se que un FillInputTask tiene los campos xPath y value
         var xPath = Object.create(XPathAttribute);
@@ -140,9 +143,15 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         var oTaskTitle = Object.create(TaskTitleAttribute);
         oTaskTitle._type = TaskTitleAttribute._type;
         oTaskTitle.value = str_taskTitle ;
+
+
+        var oGroup = Object.create(StateAttribute);
+        oGroup._type = StateAttribute._type;
+        oGroup.value = str_tipo;
         
         var o_task = new FillInputTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
         //o_task.taskTitle = oTaskTitle; //Lo hago por ahora, hay que hacer
+        o_task.setGroup(oGroup);
     return o_task.toJson();
 }
 

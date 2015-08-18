@@ -160,7 +160,7 @@ ComposedTask.prototype.htmlToJson = function(el_div){
         
         for(var i = 0;i < arr_id_tasks.length;i++){
             var task = localStorageManager.getObject(arr_id_tasks[i]);
-            task.state.value = 3;
+            task.group.value = 1;
             localStorageManager.setObjectR(JSON.stringify(task));
         } 
 

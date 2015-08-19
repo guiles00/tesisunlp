@@ -912,21 +912,19 @@ function handleSelectxPath(){
           var arr_tasks = tasks[procedure];
           
 		  try{
-          for (var i=0;i < arr_tasks.length;i++){
-			
-		/*	try{
+	          for (var i=0;i < arr_tasks.length;i++){
+		
+				 console.debug(arr_tasks[i].group.value);		
+	             this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
+	          
+	           }
+	       		
+       		}catch(err){
+       			console.log(err);
+       		}
 
-			if(value != 'undefined')
-			var concept = JSON.parse(value).type;	
-			
-			}catch(err){
-				console.log(err);
-			}*/
-             this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
-           }
-       }catch(err){
-       	console.log(err);
-       }
+
+
     	//Drag and drop
        	var tableDnD = new TableDnD();
 	    tableDnD.init(table_consola);
@@ -961,7 +959,7 @@ function handleSelectxPath(){
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
 
         if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
-        if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
+        //if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
         	
 		
 		        //Hardcodeado!!!!
@@ -1044,7 +1042,15 @@ function handleSelectxPath(){
 		show_button.value = "show";
 		show_button.classList.add('tesisunlp_button_left')
 		show_button.onclick = function(){
-		//console.debug(this.parentNode.parentNode.id);	
+		
+		if(this.value == "show"){
+			this.value = "hide";
+		}else{
+			this.value = "show";
+		};
+		//console.debug(this.parentNode.parentNode.id);
+		//var el = document.getElementById(this.parentNode.parentNode.id);
+
 		//Este comportamiento va al manager o RConsole
 		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
 		//console.debug(tasks);

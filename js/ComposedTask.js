@@ -160,19 +160,19 @@ ComposedTask.prototype.htmlToJson = function(el_div){
         
         
         var old_task = localStorageManager.getObject(this.id);
-        //console.debug(old_task.value.value.split(','));
         var arr_old_tasks = old_task.value.value.split(',');
         var arr_id_tasks = str_value.split(',');
-        //console.debug(arr_id_tasks);
-        //console.debug(arr_id_tasks)
 
          //Estado inicial
+        // console.debug(old_task.value.value);
+        //console.debug(arr_old_tasks.length);
+        if(old_task.value.value != ''){
         for(var i = 0;i < arr_old_tasks.length;i++){
         var task = localStorageManager.getObject(arr_old_tasks[i]);
         task.group.value = 0;
         localStorageManager.setObjectR(JSON.stringify(task));
         } 
-
+        }
         for(var i = 0;i < arr_id_tasks.length;i++){
             var task = localStorageManager.getObject(arr_id_tasks[i]);
             task.group.value = 1;

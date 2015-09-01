@@ -109,7 +109,7 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         var str_value = document.getElementById('value_id').value;
         var str_state = document.getElementById('state_id').value;
         var str_tipo = document.getElementById('tipo_id').value;
-        var str_group = document.getElementById('group_id').value;
+        //var str_group = document.getElementById('group_id').value;
 
 
         //Se que un FillInputTask tiene los campos xPath y value
@@ -148,10 +148,14 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         var oGroup = Object.create(StateAttribute);
         oGroup._type = StateAttribute._type;
         oGroup.value = str_tipo;
-        
+       
+        var t = localStorageManager.getObject(this.id);
+        console.debug('t');
+        console.debug(t);
+        console.debug('/t');
         var o_task = new FillInputTask(this.id,xPath,oValue,oTipo,oState,oTaskTitle);
         //o_task.taskTitle = oTaskTitle; //Lo hago por ahora, hay que hacer
-        o_task.setGroup(oGroup);
+        o_task.setGroup(t.group);
     return o_task.toJson();
 }
 

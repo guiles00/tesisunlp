@@ -911,20 +911,73 @@ function handleSelectxPath(){
           var tasks = JSON.parse(o_bpm);
           var arr_tasks = tasks[procedure];
           
-		  try{
+          for (var i=0;i < arr_tasks.length;i++){
+
+          	if(arr_tasks[i].type == 'ComposedTask'){
+          		
+          		this.writeComposite(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
+	             	//split 
+	             	var arr_id_tasks = arr_tasks[i].value.value.split(',');
+	             	//console.debug(arr_id_tasks);
+	             	for(var j = 0;j < arr_id_tasks.length;j++){
+	             		//console.debug(arr_id_tasks[j]);
+	             		var task = localStorageManager.getObject(arr_id_tasks[j]);
+	             		console.debug(task);
+	             		if(task !== false)
+	             		Recorder.writerComposed(task.id,task.taskTitle.value,-1);	
+	             	}
+
+          		console.debug('tarea composite');
+          		console.debug(arr_tasks[i]);
+
+          	}else{
+          		//arr_tasks[i].group.value puede tener dos valores, cuando esta dentro de una tarea cmpuesta se le agrega un objeto (MAL, siempre tendria que tener un objeto)
+          		console.debug('imprimo la tarea');
+          		console.debug(arr_tasks[i].group);
+          		console.debug('/imprimo la tarea');
+
+          		//console.debug(arr_tasks[i].group);
+          		if(arr_tasks[i].group.value == '' || arr_tasks[i].group.value == 0) {
+          			//console.debug(arr_tasks[i]);
+          			Recorder.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);	
+          		}	             		
+          	}
+          	
+
+          }
+
+      
+	/*	  try{
 	          for (var i=0;i < arr_tasks.length;i++){
-		
-				 console.debug(arr_tasks[i].group.value);		
-	             this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
-	          
+				//recorro array de tareas
+				 
+	             if(arr_tasks[i].type == 'ComposedTask'){
+	             	this.writeComposite(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
+	             	//split 
+	             	var arr_id_tasks = arr_tasks[i].value.value.split(',');
+	             	//console.debug(arr_id_tasks);
+	             	for(var j = 0;j < arr_id_tasks.length;j++){
+	             		//console.debug(arr_id_tasks[j]);
+	             		var task = localStorageManager.getObject(arr_id_tasks[j]);
+	             		//console.debug(task)
+	             		Recorder.writer(task.id,task.taskTitle.value,-1);	
+	             	}
+	             	
+
+	             } 
+	             
+	             if( arr_tasks[i].type !== 'ComposedTask'){
+	             	if(arr_tasks[i].group.value = 1)
+	             	this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
+	             } 
+	          	//&& arr_tasks[i].group.value == 1
+	          	//this.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
 	           }
 	       		
        		}catch(err){
        			console.log(err);
        		}
-
-
-
+		*/
     	//Drag and drop
        	var tableDnD = new TableDnD();
 	    tableDnD.init(table_consola);
@@ -932,37 +985,23 @@ function handleSelectxPath(){
 		//StorageManager.getTasks(1); //Este metodo trae los datos y lo muestra en consola ( es asincrono)
 
 	}
-	,writer: function(id,text,index){
+	,writeComposite: function(id,text,index){
 
 		var table_consola = document.getElementById("table_consola");
 
-		//Inserto registro
-		//var tr = document.getElementById('table_consola').insertRow(index);
-        //tr.id = id;
-        
         var tr = document.getElementById('table_consola').insertRow(index);
         tr.id = id;
-        /** Para cuando sepa drag and drop
-        //var tr = document.createElement('div');
-        //tr.class = "Row";
-        //table_consola.appendChild(tr);
-        */
+
         //Trae uno solo
         var task = localStorageManager.getObject(id);
         //Como es asincrono tengo que hacerlo dentro de un callback
-     /*   StorageManager.getTaskById(1,id,function(res) {
-        	console.log('Result: ', res[0].state.value);
-        	if(res[0].state.value == 1 ) 
-        	 tr.style.backgroundColor='green';
-		});
-        */
+     	 
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
-
         if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
         //if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
         	
 		
-		        //Hardcodeado!!!!
+		//Hardcodeado!!!!
 	    var pTask = document.createTextNode(text + 'Task - id:'+tr.id);
 	    var spTask = document.createElement('span');
 	    spTask.setAttribute('style', 'font-size: 10px'); 
@@ -975,18 +1014,305 @@ function handleSelectxPath(){
 	    if(task.group.value == 1 )
         	td2.classList.add('ident_composite');
         
+		//add br
+		var br = document.createElement("br");
+	 	var text1 = document.createTextNode(id+' - '+text);
+	 	var p_text = document.createElement("p");
+	 	p_text.classList.add('task_title_style');
+	 	p_text.appendChild(text1);
 
-	    //var td2 = document.createElement('div');
-	    //td2.class = "Cell";
-	    /*var td3 = document.createElement('td');
-	    var td4 = document.createElement('td');
-	    var td5 = document.createElement('td');
-		*/
-		//Pruebo si el doble clic funciona
-		tr.addEventListener("dblclick",function(){
+	    var delete_button = document.createElement('input');
+		delete_button.type = "button";
+		delete_button.value = "Delete";
+		delete_button.classList.add('tesisunlp_button_left');
+
+		delete_button.onclick = function(x){ 
+
+			//if(confirm('Desea borrar el regitro?')){
+			var id = this.parentNode.parentNode.id;
+			var row = this.parentNode.parentNode.sectionRowIndex;
+			document.getElementById('table_consola').deleteRow(row);
+			localStorageManager.removeElement(id);
+			//}
+		};
+
+		var edit_button = document.createElement('input');
+		edit_button.type = "button";
+		edit_button.value = "Edit";
+		edit_button.classList.add('tesisunlp_button_left')
+		edit_button.onclick = function(){
+			//Add Listener to move de edit box
+			addListenersEditBox();
 			Recorder.editRow(this);
-		} ,false);
+		};
 
+	var state_button = document.createElement('input');
+		state_button.type = "button";
+		state_button.value = "P/D";
+		state_button.classList.add('tesisunlp_button_left')
+		state_button.onclick = function(){
+		
+		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
+		if( task.state.value == 1 ){
+		task.state.value = 0;
+		}else{
+		task.state.value = 1;
+		}
+		localStorageManager.setObjectR(JSON.stringify(task));
+		
+		Recorder.refresh();
+		
+		};
+
+	var show_button = document.createElement('input');
+		show_button.type = "button";
+		show_button.value = "show";
+		show_button.classList.add('tesisunlp_button_left')
+		show_button.onclick = function(){
+		
+		if(this.value == "show"){
+			this.value = "hide";
+		}else{
+			this.value = "show";
+		};
+		//console.debug(this.parentNode.parentNode.id);
+		//var el = document.getElementById(this.parentNode.parentNode.id);
+
+		//Este comportamiento va al manager o RConsole
+		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
+		//console.debug(tasks);
+		//por ahora esta separado por comas
+		var arr_id_tasks = task.value.value.split(',');
+		//console.debug(arr_id_tasks);
+		for(var i = 0;i < arr_id_tasks.length;i++){
+		
+		//oculto la tarea //Por ahora idento
+		var inner_el = document.getElementById(arr_id_tasks[i]);
+		
+		if(inner_el.style.display == 'none'){
+			inner_el.style.display ='';
+			//inner_el.firstChild.classList.add('ident_composite');
+			
+		}else{
+			inner_el.style.display ='none';
+			//inner_el.firstChild.classList.add('ident_composite');
+		}	
+
+		} 
+
+		};
+
+	var play_button = document.createElement('input');
+		play_button.type = "button";
+		play_button.value = ">";
+		play_button.classList.add('tesisunlp_button_left')
+		play_button.onclick = function(){
+		
+		console.debug('Empieza desde aca'+this.parentNode.parentNode.id);
+		Manager.playTaskById(this.parentNode.parentNode.id);
+
+	};
+
+
+		//var id_text = document.createTextNode(id+' - ');
+		var br = document.createElement('br');
+		//td2.appendChild(id_text);
+		td2.appendChild(p_text);
+		//td2.appendChild(br);	
+		td2.appendChild(edit_button);
+		td2.appendChild(delete_button);
+		td2.appendChild(state_button);
+		td2.appendChild(play_button);
+
+		//Este boton va solo en los composites
+		td2.appendChild(show_button);	
+		
+		tr.appendChild(td2);
+		
+
+	}
+	,writerComposed: function(id,text,index){
+
+		var table_consola = document.getElementById("table_consola");
+
+        var tr = document.getElementById('table_consola').insertRow(index);
+        tr.id = id;
+
+        //Trae uno solo
+        var task = localStorageManager.getObject(id);
+        //Como es asincrono tengo que hacerlo dentro de un callback
+     	
+     	//if(task.type == 'ComposedTask') console.debug('uso otro writer');
+     	//if(task.group.value == 1) console.debug('no hago nada');
+ 
+        //Si la tarea se ejecuto ( estado 1 ), se pone verde
+        if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
+        //if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
+        	
+		
+		//Hardcodeado!!!!
+	    var pTask = document.createTextNode(text + 'Task - id:'+tr.id);
+	    var spTask = document.createElement('span');
+	    spTask.setAttribute('style', 'font-size: 10px'); 
+	    spTask.appendChild(pTask);
+	    
+	    var td1 = document.createElement('td');
+	    td1.style.visibility = "hidden";
+	    
+	    var td2 = document.createElement('td');
+	    if(task.group.value == 1 )
+        	td2.classList.add('ident_composite');
+        
+		//add br
+		var br = document.createElement("br");
+	 	var text1 = document.createTextNode(id+' - '+text);
+	 	var p_text = document.createElement("p");
+	 	p_text.classList.add('task_title_style');
+	 	p_text.appendChild(text1);
+
+	    var delete_button = document.createElement('input');
+		delete_button.type = "button";
+		delete_button.value = "Delete";
+		delete_button.classList.add('tesisunlp_button_left');
+
+		delete_button.onclick = function(x){ 
+
+			//if(confirm('Desea borrar el regitro?')){
+			var id = this.parentNode.parentNode.id;
+			var row = this.parentNode.parentNode.sectionRowIndex;
+			document.getElementById('table_consola').deleteRow(row);
+			localStorageManager.removeElement(id);
+			//}
+		};
+
+		var edit_button = document.createElement('input');
+		edit_button.type = "button";
+		edit_button.value = "Edit";
+		edit_button.classList.add('tesisunlp_button_left')
+		edit_button.onclick = function(){
+			//Add Listener to move de edit box
+			addListenersEditBox();
+			Recorder.editRow(this);
+		};
+
+	var state_button = document.createElement('input');
+		state_button.type = "button";
+		state_button.value = "P/D";
+		state_button.classList.add('tesisunlp_button_left')
+		state_button.onclick = function(){
+		
+		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
+		if( task.state.value == 1 ){
+		task.state.value = 0;
+		}else{
+		task.state.value = 1;
+		}
+		localStorageManager.setObjectR(JSON.stringify(task));
+		
+		Recorder.refresh();
+		
+		};
+
+	var show_button = document.createElement('input');
+		show_button.type = "button";
+		show_button.value = "show";
+		show_button.classList.add('tesisunlp_button_left')
+		show_button.onclick = function(){
+		
+		if(this.value == "show"){
+			this.value = "hide";
+		}else{
+			this.value = "show";
+		};
+		//console.debug(this.parentNode.parentNode.id);
+		//var el = document.getElementById(this.parentNode.parentNode.id);
+
+		//Este comportamiento va al manager o RConsole
+		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
+		//console.debug(tasks);
+		//por ahora esta separado por comas
+		var arr_id_tasks = task.value.value.split(',');
+		//console.debug(arr_id_tasks);
+		for(var i = 0;i < arr_id_tasks.length;i++){
+		
+		//oculto la tarea //Por ahora idento
+		var inner_el = document.getElementById(arr_id_tasks[i]);
+		
+		if(inner_el.style.display == 'none'){
+			inner_el.style.display ='';
+			//inner_el.firstChild.classList.add('ident_composite');
+			
+		}else{
+			inner_el.style.display ='none';
+			//inner_el.firstChild.classList.add('ident_composite');
+		}	
+
+		} 
+
+		};
+
+	var play_button = document.createElement('input');
+		play_button.type = "button";
+		play_button.value = ">";
+		play_button.classList.add('tesisunlp_button_left')
+		play_button.onclick = function(){
+		
+		console.debug('Empieza desde aca'+this.parentNode.parentNode.id);
+		Manager.playTaskById(this.parentNode.parentNode.id);
+
+	};
+
+
+		//var id_text = document.createTextNode(id+' - ');
+		var br = document.createElement('br');
+		//td2.appendChild(id_text);
+		td2.appendChild(p_text);
+		//td2.appendChild(br);	
+		td2.appendChild(edit_button);
+		//td2.appendChild(delete_button);
+		td2.appendChild(state_button);
+		td2.appendChild(play_button);
+
+		//Este boton va solo en los composites
+
+		if(task.type == 'ComposedTask'){
+				td2.appendChild(show_button);	
+		};
+		
+		tr.appendChild(td2);
+		}
+	,writer: function(id,text,index){
+
+		var table_consola = document.getElementById("table_consola");
+
+        var tr = document.getElementById('table_consola').insertRow(index);
+        tr.id = id;
+
+        //Trae uno solo
+        var task = localStorageManager.getObject(id);
+        //Como es asincrono tengo que hacerlo dentro de un callback
+     	
+     	//if(task.type == 'ComposedTask') console.debug('uso otro writer');
+     	//if(task.group.value == 1) console.debug('no hago nada');
+ 
+        //Si la tarea se ejecuto ( estado 1 ), se pone verde
+        if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
+        //if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
+        	
+		
+		//Hardcodeado!!!!
+	    var pTask = document.createTextNode(text + 'Task - id:'+tr.id);
+	    var spTask = document.createElement('span');
+	    spTask.setAttribute('style', 'font-size: 10px'); 
+	    spTask.appendChild(pTask);
+	    
+	    var td1 = document.createElement('td');
+	    td1.style.visibility = "hidden";
+	    
+	    var td2 = document.createElement('td');
+	    if(task.group.value == 1 )
+        	td2.classList.add('ident_composite');
+        
 		//add br
 		var br = document.createElement("br");
 	 	var text1 = document.createTextNode(id+' - '+text);
@@ -1103,16 +1429,8 @@ function handleSelectxPath(){
 				td2.appendChild(show_button);	
 		};
 		
-		
-		//td2.appendChild(spTask);
-		
-		//tr.appendChild(td1);
 		tr.appendChild(td2);
-		/*
-		tr.appendChild(td3);
-		tr.appendChild(td4);
-		tr.appendChild(td5);
-		*/}
+		}
 	/**  
 	* Escribe en la consola
 	* @method writer 

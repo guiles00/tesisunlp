@@ -23,6 +23,14 @@ XMLDOMCreator.prototype.createElementProcess = function(id){
 	return process;
 }
 
+XMLDOMCreator.prototype.createElementSubProcess = function(id){
+
+	var sprocess = document.createElementNS("task",'bpmn:subProcess');
+	sprocess.id= id;
+	sprocess.setAttribute("isExpanded","true");
+	return sprocess;
+}
+
 XMLDOMCreator.prototype.createStartProcess = function(id){
 
 var start = document.createElementNS("task",'bpmn:startEvent');
@@ -50,6 +58,8 @@ XMLDOMCreator.prototype.createBPMNPlaneElement = function(id,title){
 	return plane;
 }
 
+
+
 XMLDOMCreator.prototype.createExtensionElement = function(id){
 	var extension = document.createElementNS("extension",'bpmn:extensionElements');
 	extension.id=id;
@@ -71,6 +81,26 @@ var dc = document.createElementNS("dc",'dc:Bounds');
 	shape.appendChild(dc);
 	return shape;
 }
+
+
+XMLDOMCreator.prototype.createBPMNSubProcessShapeElement = function(id,title,x,y,width,height){
+	// <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+var shape = document.createElementNS("shape",'bpmndi:BPMNShape');
+	shape.id=id;
+	shape.setAttribute("bpmnElement",title);
+//<dc:Bounds x="173" y="102" width="36" height="36" />
+var dc = document.createElementNS("dc",'dc:Bounds');
+	dc.setAttribute("x",x);
+	dc.setAttribute("y",y);
+	dc.setAttribute("width",width);
+	dc.setAttribute("height",height);
+	shape.appendChild(dc);
+	return shape;
+}
+
+
+
+
 //    <bpmn:exclusiveGateway id="ExclusiveGateway_131w4oi" />
 
 XMLDOMCreator.prototype.createGatewayElement = function(id){

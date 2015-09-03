@@ -509,16 +509,32 @@ for (index in data_export) {
 	//p_e.innerHTML = '<foo:jsonPayload xmlns:foo="http://foo"> some json data </foo:jsonPayload>';
 		//data.appendChild(el_json);
 		//p_e.appendChild(s_s);
-	
-
 	}
 //var gateway = domcreator.createBPMNGatewayShapeElement("Gateway_1",'title','x','y','width','height');
 
+/*TESTING*/
+var sprocess = domcreator.createElementSubProcess('Testing_SubProcess');
+var sp = domcreator.createTaskElement("Task_1111",'Task_1111');
+sprocess.appendChild(sp);
+
+
+var sp_shape = domcreator.createBPMNSubProcessShapeElement('Testing_SubProcess_di','Testing_SubProcess','80','100','360','200');
+console.debug(sp_shape);
+
+var st_s = domcreator.createBPMNShapeElement("Task_1111_di","Task_1111",'80',"80","100","80");
+
+console.debug(sp);	
+console.debug(st_s);
+/**/
+
 p.appendChild(s);
+p.appendChild(sprocess);
+//p.appendChild(sp);
 //p.appendChild(ge)
 //p.appendChild(t1);
 pl.appendChild(sh);
-//pl.appendChild(gateway);
+pl.appendChild(sp_shape);
+pl.appendChild(st_s);
 d.appendChild(pl);
 def.appendChild(p);
 def.appendChild(d);

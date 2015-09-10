@@ -143,6 +143,133 @@ console.debug(shape);
 	return shape;
 }
 
+XMLDOMCreator.prototype.exportXML = function(){
+	
+	
+	        var p = document.getElementById('procedures_select').value;
+ 	      	var bpm = JSON.parse(localStorage.getItem("BPM") );
+ 	      	//var shared_data = JSON.parse(localStorage.getItem("SHARED_DATA") );
+ 	      	var data_export = bpm[p];
+
+ 	      	/******/
+ 	      	var c = document.createElement("root");
+
+			var domcreator = new XMLDOMCreator();
+			var def = domcreator.init();
+			var p = domcreator.createElementProcess("Process_1");
+			var s = domcreator.createStartProcess("StartEvent_1");
+			var ge = domcreator.createGatewayElement("Gateway_1");
+			var d = domcreator.createBPMNDiagramElement("BPMNDiagram_1");
+			var pl = domcreator.createBPMNPlaneElement("BPMNPlane_1","Process_1");
+			var sh = domcreator.createBPMNShapeElement("_BPMNShape_StartEvent_2","StartEvent_1","173","102","36","36");
+		
+
+for (index in data_export) { 
+		
+	var title = data_export[index].taskTitle.value;
+	console.debug(data_export[index].type);
+
+	if( data_export[index].type == 'IfTask') {
+	var p_t = domcreator.createGatewayElement("Gateway_"+data_export[index].id,title+"_"+data_export[index].id)
+	p.appendChild(p_t);
+
+	//var p_e = domcreator.createExtensionElement("DataTask_"+data_export[index].id,title+"_"+data_export[index].id);
+		
+	/*var el_json = document.createTextNode(JSON.stringify(data_export[index]));
+	var el_wrap = document.createElementNS("jsonData",'json_task:jsonData');
+	el_wrap.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:json_task","http://json_task");
+	el_wrap.appendChild(el_json);}
+	*/
+	//p_e.appendChild(el_wrap);	
+	//p_t.appendChild(p_e);
+	
+	//calculo las coordenadas
+	var x = 500 + index*100;
+	var t_s = domcreator.createBPMNGatewayShapeElement("Gateway_"+data_export[index].id,"Gateway_"+data_export[index].id,x,"80","100","80");
+	
+	pl.appendChild(t_s);
+
+
+	}else if(data_export[index].type == 'ComposedTask'){
+
+		//Por ahora usa el split para sacasr las tareas 
+		    //console.debug(data_export[index]);
+		    var str = String(data_export[index].value.value);
+    		var arr_ids = str.split(',');
+    		//console.debug(arr_ids);
+
+			var sprocess = domcreator.createElementSubProcess('SubProcess'+data_export[index].id);
+			var sp_shape = domcreator.createBPMNSubProcessShapeElement('SubProcess_di','SubProcess'+data_export[index].id,'353','89','350','200');
+
+			for (var j = arr_ids.length - 1; j >= 0; j--) {
+
+		    var task = localStorageManager.getObject(arr_ids[j]);
+			console.debug(task);
+			
+			var d_title = task.taskTitle.value+'_'+task.id;
+
+			var sp = domcreator.createTaskElement('Task_'+d_title,'Task_'+d_title);			
+			sprocess.appendChild(sp);
+			//console.debug(sprocess);
+			var st_s = domcreator.createBPMNShapeElement('Task_'+d_title+'_di','Task_'+d_title,'380',"135","100","80");
+
+			pl.appendChild(st_s);
+			}
+		
+		p.appendChild(sprocess);	
+			console.debug(p);	
+		pl.appendChild(sp_shape);
+
+	}else if( data_export[index].group.value != 1){ //Chequear esto!!!
+		
+		//console.debug();
+	
+	var p_t = domcreator.createTaskElement("Task_"+data_export[index].id,title+"_"+data_export[index].id);
+	p.appendChild(p_t);
+
+	var p_e = domcreator.createExtensionElement("DataTask_"+data_export[index].id,title+"_"+data_export[index].id);
+	
+	//var p_e = domcreator.createExtensionElement("Ext_"+index);
+ 	//<bpmn:outgoing>SequenceFlow_0uuxjxl</bpmn:outgoing>
+	//var data = document.createElementNS("incoming",'bpmn:incoming');
+	
+	var el_json = document.createTextNode(JSON.stringify(data_export[index]));
+	//"http://json_task","jsonData"
+	var el_wrap = document.createElementNS("jsonData",'json_task:jsonData');
+	el_wrap.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:json_task","http://json_task");
+	//console.debug(el_test);
+	el_wrap.appendChild(el_json);
+	
+	p_e.appendChild(el_wrap);	
+	p_t.appendChild(p_e);
+	
+	//calculo las coordenadas
+	var x = 500 + index*100;
+	var t_s = domcreator.createBPMNShapeElement("Task_"+data_export[index].id+"_di","Task_"+data_export[index].id,x,"80","100","80");
+	pl.appendChild(t_s);
+
+	
+	}
+	
+	//var s_s = document.createElementNS("foo",'foo:jsonPayload');
+	//p_e.innerHTML = '<foo:jsonPayload xmlns:foo="http://foo"> some json data </foo:jsonPayload>';
+		//data.appendChild(el_json);
+		//p_e.appendChild(s_s);
+	}
+
+		p.appendChild(s);
+		pl.appendChild(sh);
+		d.appendChild(pl);
+		def.appendChild(p);
+		def.appendChild(d);
+		c.appendChild(def);
+
+
+	return c;
+
+}
+
+
 
 return XMLDOMCreator;
 })()

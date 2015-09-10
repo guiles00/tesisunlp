@@ -416,143 +416,26 @@ var RConsole = {
 		return b_export;
 	 }
 	 ,createBPMNButton: function(){
-		////console.debug('1. crea boton Stop');
-		var b_export = document.createElement("input");	
-	    b_export.setAttribute('type','button');
-	    b_export.setAttribute('value','BPMN');
-	    b_export.setAttribute('class','tesisunlp_button');
-	    b_export.setAttribute('id','g_bpmn_export');
-		//s_import.addEventListener("click", Recorder.import , false); 
-		b_export.onclick = function(){
-			
 
-	        var p = document.getElementById('procedures_select').value;
- 	      	var bpm = JSON.parse(localStorage.getItem("BPM") );
- 	      	//var shared_data = JSON.parse(localStorage.getItem("SHARED_DATA") );
- 	      	var data_export = bpm[p];
-
- 	      	/******/
- 	      	var c = document.createElement("root");
-
-		var domcreator = new XMLDOMCreator();
-		var def = domcreator.init();
-		var p = domcreator.createElementProcess("Process_1");
-		var s = domcreator.createStartProcess("StartEvent_1");
-		var ge = domcreator.createGatewayElement("Gateway_1");
-		//var t1 = domcreator.createTaskElement("Task_1","FillInputTask");
-		var d = domcreator.createBPMNDiagramElement("BPMNDiagram_1");
-		var pl = domcreator.createBPMNPlaneElement("BPMNPlane_1","Process_1");
-		var sh = domcreator.createBPMNShapeElement("_BPMNShape_StartEvent_2","StartEvent_1","173","102","36","36");
-		//var sh2 = domcreator.createBPMNShapeElement("Task_1_di","Task_1","300","80","100","80");
-		//creo una tarea mas
-		//Se crea un elemento para process y un elemento para graficarlo
-	//	var t3 = domcreator.createTaskElement("Task_3","FillInputTask3");
-	//	var sh3 = domcreator.createBPMNShapeElement("Task_3_di","Task_3","500","80","100","80");
-	//	p.appendChild(t3);
-	//	pl.appendChild(sh3);
-
-for (index in data_export) { 
-		
-	var title = data_export[index].taskTitle.value;
-	console.debug(data_export[index].type);
-
-	if( data_export[index].type == 'IfTask') {
-	var p_t = domcreator.createGatewayElement("Gateway_"+data_export[index].id,title+"_"+data_export[index].id)
-	p.appendChild(p_t);
-
-	//var p_e = domcreator.createExtensionElement("DataTask_"+data_export[index].id,title+"_"+data_export[index].id);
-		
-/*	var el_json = document.createTextNode(JSON.stringify(data_export[index]));
-	var el_wrap = document.createElementNS("jsonData",'json_task:jsonData');
-	el_wrap.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:json_task","http://json_task");
-	el_wrap.appendChild(el_json);}
-	*/
-	//p_e.appendChild(el_wrap);	
-	//p_t.appendChild(p_e);
+	 			var b_export = document.createElement("input");	
+			    b_export.setAttribute('type','button');
+	    		b_export.setAttribute('value','BPMN');
+	    		b_export.setAttribute('class','tesisunlp_button');
+	    		b_export.setAttribute('id','g_bpmn_export');
 	
-	//calculo las coordenadas
-	var x = 500 + index*100;
-	var t_s = domcreator.createBPMNGatewayShapeElement("Gateway_"+data_export[index].id,"Gateway_"+data_export[index].id,x,"80","100","80");
-	
-	pl.appendChild(t_s);
+				
+	    		b_export.onclick = function(){
+	    			
+	    			var domcreator = new XMLDOMCreator();
+	    			var c = domcreator.exportXML();
+	    			
+	    			//Exporta el procedimiento actual junto con el shared_data
+	    			RConsole.downloadBPMN('test.bpmn',c.innerHTML );
+	    		}	
 
+ 	      	
+	      	
 
-	}else{
-
-	var p_t = domcreator.createTaskElement("Task_"+data_export[index].id,title+"_"+data_export[index].id)
-	p.appendChild(p_t);
-
-	var p_e = domcreator.createExtensionElement("DataTask_"+data_export[index].id,title+"_"+data_export[index].id);
-	
-	//var p_e = domcreator.createExtensionElement("Ext_"+index);
- 	//<bpmn:outgoing>SequenceFlow_0uuxjxl</bpmn:outgoing>
-	//var data = document.createElementNS("incoming",'bpmn:incoming');
-	
-	var el_json = document.createTextNode(JSON.stringify(data_export[index]));
-	//"http://json_task","jsonData"
-	var el_wrap = document.createElementNS("jsonData",'json_task:jsonData');
-	el_wrap.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:json_task","http://json_task");
-	//console.debug(el_test);
-	el_wrap.appendChild(el_json);
-	
-	p_e.appendChild(el_wrap);	
-	p_t.appendChild(p_e);
-	
-	//calculo las coordenadas
-	var x = 500 + index*100;
-	var t_s = domcreator.createBPMNShapeElement("Task_"+data_export[index].id+"_di","Task_"+data_export[index].id,x,"80","100","80");
-	pl.appendChild(t_s);
-	
-	}
-	
-	//var s_s = document.createElementNS("foo",'foo:jsonPayload');
-	//p_e.innerHTML = '<foo:jsonPayload xmlns:foo="http://foo"> some json data </foo:jsonPayload>';
-		//data.appendChild(el_json);
-		//p_e.appendChild(s_s);
-	}
-//var gateway = domcreator.createBPMNGatewayShapeElement("Gateway_1",'title','x','y','width','height');
-
-/*TESTING*/
-var sprocess = domcreator.createElementSubProcess('Testing_SubProcess');
-var sp = domcreator.createTaskElement("Task_1111",'Task_1111');
-sprocess.appendChild(sp);
-
-
-var sp_shape = domcreator.createBPMNSubProcessShapeElement('Testing_SubProcess_di','Testing_SubProcess','353','89','350','200');
-console.debug(sp_shape);
-
-var st_s = domcreator.createBPMNShapeElement("Task_1111_di","Task_1111",'380',"135","100","80");
-
-console.debug(sp);	
-console.debug(st_s);
-/**/
-
-p.appendChild(s);
-p.appendChild(sprocess);
-//p.appendChild(sp);
-//p.appendChild(ge)
-//p.appendChild(t1);
-pl.appendChild(sh);
-pl.appendChild(sp_shape);
-pl.appendChild(st_s);
-d.appendChild(pl);
-def.appendChild(p);
-def.appendChild(d);
-
-c.appendChild(def);
-
-
-
- 	      	/*****/
-
-
-
-
-
- 	      	//Exporta el procedimiento actual junto con el shared_data
-	      	RConsole.downloadBPMN('test.bpmn',c.innerHTML );
-			
-		}
 		return b_export;
 	 }
 	,createShowImportButton: function(){

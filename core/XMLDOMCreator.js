@@ -27,7 +27,7 @@ XMLDOMCreator.prototype.createElementSubProcess = function(id){
 
 	var sprocess = document.createElementNS("task",'bpmn:subProcess');
 	sprocess.id= id;
-	sprocess.setAttribute("isExpanded","true");
+	//sprocess.setAttribute("isExpanded","true");
 	return sprocess;
 }
 
@@ -88,6 +88,8 @@ XMLDOMCreator.prototype.createBPMNSubProcessShapeElement = function(id,title,x,y
 var shape = document.createElementNS("shape",'bpmndi:BPMNShape');
 	shape.id=id;
 	shape.setAttribute("bpmnElement",title);
+	shape.setAttribute("isExpanded","true");
+
 //<dc:Bounds x="173" y="102" width="36" height="36" />
 var dc = document.createElementNS("dc",'dc:Bounds');
 	dc.setAttribute("x",x);

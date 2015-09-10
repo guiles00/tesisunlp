@@ -10,7 +10,7 @@ function PrimitiveTask(id,xPath,value,tipo,state,taskTitle){ //Constructor
  
     this.id = id || 10;
     this.xPath = xPath || Object.create(XPathAttribute).init({'value':'sxPath'});
-    this.tipo = tipo || Object.create(TipoAttribute).init({'value':1});  
+    this.tipo = tipo || Object.create(AutoAttribute).init({'value':1});  
     this.state = state || Object.create(StateAttribute).init({'value':0}) ;
     this.type = "PrimitiveTask"
     this.precondition = {};

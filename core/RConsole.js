@@ -518,10 +518,10 @@ var sp = domcreator.createTaskElement("Task_1111",'Task_1111');
 sprocess.appendChild(sp);
 
 
-var sp_shape = domcreator.createBPMNSubProcessShapeElement('Testing_SubProcess_di','Testing_SubProcess','80','100','360','200');
+var sp_shape = domcreator.createBPMNSubProcessShapeElement('Testing_SubProcess_di','Testing_SubProcess','353','89','350','200');
 console.debug(sp_shape);
 
-var st_s = domcreator.createBPMNShapeElement("Task_1111_di","Task_1111",'80',"80","100","80");
+var st_s = domcreator.createBPMNShapeElement("Task_1111_di","Task_1111",'380',"135","100","80");
 
 console.debug(sp);	
 console.debug(st_s);

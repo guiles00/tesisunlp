@@ -97,6 +97,28 @@ var XPathAttribute = {
     , __proto__ : Attribute
 }
 
+var AutoAttribute = {
+    type:'AutoAttribute'
+    ,init: function(c){
+        this.value = c.value || '' ;
+        this.htmlId = c.htmlId || 'auto_id'; 
+        this.label = c.label || ' Manual: ';
+        this.checked = c.checked || false ;
+        return this;
+    } 
+    ,getHtmlElement: function(){
+        var check_element = Object.create(checkElement);
+        check_element.label = this.getLabel();
+        check_element.id =   this.getHtmlId();
+        //check_element.value = this.getValue();
+
+        check_element.checked = (this.getValue() == 0)? true : false;
+       return check_element;
+    }
+    , __proto__ : Attribute
+} 
+
+
 var TipoAttribute = {
     type:'TipoAttribute'
     ,init: function(c){

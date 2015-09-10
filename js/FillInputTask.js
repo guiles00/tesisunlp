@@ -18,9 +18,9 @@ FillInputTask.prototype.instanciamela = function(o){
     //Acoplo estos objetos, no me salio el reviver de JSON
     this.id = o.id || 10;
     this.xPath = Object.create(XPathAttribute).init({'value':o.xPath.value});
-    this.tipo = Object.create(TipoAttribute).init({'value':o.tipo.value})
-    this.state = Object.create(StateAttribute).init({'value':(o.state.value).toString()})
-    this.taskTitle = Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value})
+    this.tipo = Object.create(AutoAttribute).init({'value':o.tipo.value});
+    this.state = Object.create(StateAttribute).init({'value':(o.state.value).toString()});
+    this.taskTitle = Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value});
     this.value = (o.value._type =='CValueAttribute')?Object.create(CValueAttribute).init({'concept':o.value.value,'value':o.value.value}):Object.create(SValueAttribute).init({'value':o.value.value});
 
     return this;
@@ -108,10 +108,11 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         var str_xPath = document.getElementById('xpath_id').value;
         var str_value = document.getElementById('value_id').value;
         var str_state = document.getElementById('state_id').value;
-        var str_tipo = document.getElementById('tipo_id').value;
+        var str_tipo = document.getElementById('auto_id').checked;
         //var str_group = document.getElementById('group_id').value;
 
-
+       // console.debug(str_tipo);
+       // return;
         //Se que un FillInputTask tiene los campos xPath y value
         var xPath = Object.create(XPathAttribute);
         xPath.value = str_xPath;
@@ -136,10 +137,19 @@ FillInputTask.prototype.htmlToJson = function(el_div){
         oState.value = str_state;
         
 
-        var oTipo = Object.create(TipoAttribute);
+//Reemplazo el atributo tipo por el atributo Automatico(Para determinar si las tareas son automaticas o manuales)
+
+        var oTipo = Object.create(AutoAttribute);
+        oTipo._type = TipoAttribute._type;
+        oTipo.value = (str_tipo == true)? 0 : 1;
+
+
+       /* var oTipo = Object.create(TipoAttribute);
         oTipo._type = TipoAttribute._type;
         oTipo.value = str_tipo;
+        */
 
+//****
         var oTaskTitle = Object.create(TaskTitleAttribute);
         oTaskTitle._type = TaskTitleAttribute._type;
         oTaskTitle.value = str_taskTitle ;

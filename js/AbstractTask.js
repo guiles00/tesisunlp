@@ -11,7 +11,9 @@ this.msg = "AbstractTask"
 this.type = "AbstractTask"
 this.precondition = {};
 this.taskTitle = taskTitle;
-this.group = 0//Object.create(StateAttribute).init({'value':0,'htmlId':'group_id','label':'group'}) ;
+//this.group = 0//Object.create(StateAttribute).init({'value':0,'htmlId':'group_id','label':'group'}) ;
+this.group = Object.create(StateAttribute).init({'value':0,'htmlId':'group_id','label':'group'}) ;
+
 
 }
 

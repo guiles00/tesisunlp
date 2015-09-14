@@ -16,6 +16,7 @@ function PrimitiveTask(id,xPath,value,tipo,state,taskTitle){ //Constructor
     this.precondition = {};
     this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Task Title '})
     this.group = Object.create(StateAttribute).init({'value':0,'htmlId':'group_id','label':'group'}) ;
+    this.shared = false;
 
 }
 

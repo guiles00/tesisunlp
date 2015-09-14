@@ -15,15 +15,18 @@ var RConsole = {
 	    	//alert('ok');
 	    var div_show_pocket = document.createElement('DIV');
 	    div_show_pocket.id = 'id_show_pocket';
-
+	    
 	    var body = document.getElementsByTagName('body')[0];
         var array_area = JSON.parse(localStorage.getItem("SHARED_DATA"));
+  		
   		//console.debug(array_area);
   		var texto = document.createTextNode(localStorage.getItem("SHARED_DATA"));
 		//visibility: hidden;
   		//div_show_pocket.style.cssText="position:absolute;width:auto;height:auto;top:30%;left:50%;margin-top:-100px;margin-left:-100px;background-color:rgb(225, 218, 185);border: solid black;";
 		div_show_pocket.setAttribute('class','tesisunlp_div_show_pocket');
+		
 		div_show_pocket.appendChild(texto);
+
 		var bClose = document.createElement('input');
 		bClose.type = 'button';
 		bClose.value = 'x';
@@ -55,6 +58,9 @@ var RConsole = {
 		body.appendChild(div_show_pocket);
 
 	    }
+
+
+
 
 	return aButton;
 	}
@@ -328,14 +334,28 @@ var RConsole = {
 	div_editor_footer.id = "div_editor_footer";
 	div_editor_footer.style.cssText="";
     
-    //div_consola.style.visibility = "hidden";
+    
+var div_editor_postconditions = document.createElement("div");	
+	div_editor_postconditions.id = "div_editor_postconditions";
+	div_editor_postconditions.classList.add("tesisunlp_text_style");
+	var header_title_postconditions = document.createTextNode(' PostConditions ');
+	var el_hr_postconditions = document.createElement('hr');
+	div_editor_postconditions.appendChild(header_title_postconditions);	
+	div_editor_postconditions.appendChild(el_hr_postconditions);
+
+	//div_consola.style.visibility = "hidden";
     div_editor_container.appendChild(div_editor_header);
     div_editor_container.appendChild(div_editor_preconditions);
     div_editor_container.appendChild(div_inflate);
+    div_editor_container.appendChild(div_editor_postconditions);
     div_editor_container.appendChild(div_editor_footer);
 	//div_consola.appendChild(div_editor);
 	
 	//console.debug(div_editor_footer);
+
+
+
+
 	return div_editor_container;
 	}
 	/**

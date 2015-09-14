@@ -175,7 +175,12 @@ body{
 	background: #28517A;
 	border: 1px solid black;
 	padding: 15px 10px 5px 15px;
+
 }
+.tesisunlp_div_show_pocket > * {
+font-color: white;
+}
+
 .tesisunlp_div_editor_container {
 
 	padding: 10px;

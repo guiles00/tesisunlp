@@ -615,11 +615,19 @@ function handleSelectxPath(){
 		edit_button.id = "id_edit_task";
 		edit_button.setAttribute('class','tesisunlp_button');
 
+		var exec_button = document.createElement('input');
+		exec_button.type = "button";
+		exec_button.value = "Execute";
+		exec_button.id = "id_exec_task";
+		exec_button.setAttribute('class','tesisunlp_button');
+
+
 	    var div_footer = document.getElementById("div_editor_footer");
 	    div_footer.innerHTML="";
 		var el_hr = document.createElement('hr');
 		div_footer.appendChild(el_hr);
 		div_footer.appendChild(edit_button); 
+		div_footer.appendChild(exec_button); 
 	   	div_footer.appendChild(close_edit); 
 	}
 	/**  
@@ -677,10 +685,30 @@ function handleSelectxPath(){
    
 	localStorageManager.setObjectR(aTask.htmlToJson(document.getElementById("div_inflate")));
 	
-  	el = document.getElementById("div_editor_container");
-    el.style.visibility = "hidden";
+  	//el = document.getElementById("div_editor_container");
+    //el.style.visibility = "hidden";
     
     Recorder.refresh();
+
+	}; 
+
+
+	//El comportamiento de los botones todavia no se bien como desacoplarlo
+	var b_exec = document.getElementById('id_exec_task');
+	b_exec.onclick = function(){
+   
+	//var task = localStorageManager.getObject
+	
+	var task = localStorageManager.getObject(x.parentNode.parentNode.id);
+	var oTask = construct(window[task.type]);
+        oTask.instanciamela(task);//.execute();
+        oTask.execute();
+    Recorder.refresh();
+	
+  	//el = document.getElementById("div_editor_container");
+    //el.style.visibility = "hidden";
+    
+    //Recorder.refresh();
 
 	}; 
 
@@ -696,6 +724,8 @@ function handleSelectxPath(){
 		var td_header_x = document.createElement("td");
 		var t_concept = document.createTextNode("Concept");
 		var t_value = document.createTextNode("Value");
+		
+
 		td_header_c.appendChild(t_concept);
 		td_header_v.appendChild(t_value);
 		th_header.appendChild(td_header_c);
@@ -705,11 +735,15 @@ function handleSelectxPath(){
 
 		//var i;
 		for (var i in shared_data){
+		console.debug(shared_data[i])	;
 
 		var sel_button = document.createElement('input');
 		sel_button.type = "button";
 		sel_button.value = "S";
 		sel_button.setAttribute('class','tesisunlp_button');
+
+
+
 		/*****************************************/
 		sel_button.onclick = function(x){ 
 		//@offlineComment A tener en cuenta  typeof yourVariable === 'object'
@@ -729,10 +763,31 @@ function handleSelectxPath(){
 		var tr = document.createElement("tr");
 		var td_concept = document.createElement("td");
 		var t_node = document.createTextNode(i);
+		
 		td_concept.appendChild(t_node);
+		/*var i_cvalue = document.createElement('input');
+			i_cvalue.class = "shared_edit";
+			i_cvalue.value = i;
+		
+		td_concept.appendChild(i_cvalue);
+		*/
 		var td_data = document.createElement("td");
-		var t_data = document.createTextNode(shared_data[i].value);
-		td_data.appendChild(t_data);
+		
+		
+
+	//	var t_data = document.createTextNode(shared_data[i].value);
+	//	td_data.appendChild(t_data);
+	
+	//Creo un input 
+	var i_value = document.createElement('input');
+	i_value.class = "shared_edit";
+	i_value.value = shared_data[i].value;
+	
+	//Le agrego el event handler
+	i_value.addEventListener("change", editSharedData , false);
+
+		td_data.appendChild(i_value);
+	
 		var b = document.createElement("td");
 		b.appendChild(sel_button);
 
@@ -742,6 +797,15 @@ function handleSelectxPath(){
 	
 		tbody.appendChild(tr);
 	
+				function editSharedData(x){
+					console.debug('guarda esto');
+					console.debug(x.target.value);
+					console.debug(x.target.parentNode.parentNode.firstChild.innerHTML);
+					var concept = x.target.parentNode.parentNode.firstChild.innerHTML;
+
+					localStorageManager.saveSharedData(concept,{'value':x.target.value});
+				}
+
    		} 		
 		table.appendChild(tbody);
    		return table;	
@@ -1066,14 +1130,14 @@ function handleSelectxPath(){
 
 	var show_button = document.createElement('input');
 		show_button.type = "button";
-		show_button.value = "show";
+		show_button.value = "hide";
 		show_button.classList.add('tesisunlp_button_left')
 		show_button.onclick = function(){
 		
-		if(this.value == "show"){
-			this.value = "hide";
-		}else{
+		if(this.value == "hide"){
 			this.value = "show";
+		}else{
+			this.value = "hide";
 		};
 		//console.debug(this.parentNode.parentNode.id);
 		//var el = document.getElementById(this.parentNode.parentNode.id);

@@ -7,11 +7,12 @@ var Attribute = {
     ,htmlId:''
     ,label:''
     ,htmlElement:''
+    //,hidden:false
     ,init: function(c){
 
         this.value = c.value || 'aValue' ;
         this.htmlId = c.htmlId || 'aId'; 
-        this.label = c.label || 'aLabel';
+        this.label = c.label || 'aLabel';        
         return this;
     }
     ,setValue: function(value){

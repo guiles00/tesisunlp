@@ -9,7 +9,8 @@ function FillInputTask(id,xPath,value,tipo,state,taskTitle){
 
     this.type = "FillInputTask";
     this.value = value || Object.create(SValueAttribute).init({'value':''});  
-    this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Enter String to Input '})
+    this.taskTitle = taskTitle || Object.create(TaskTitleAttribute).init({'value':'Enter String to Input '});
+    this.shared = false;
     
 }
 FillInputTask.prototype = new PrimitiveTask();
@@ -22,6 +23,12 @@ FillInputTask.prototype.instanciamela = function(o){
     this.state = Object.create(StateAttribute).init({'value':(o.state.value).toString()});
     this.taskTitle = Object.create(TaskTitleAttribute).init({'value':o.taskTitle.value});
     this.value = (o.value._type =='CValueAttribute')?Object.create(CValueAttribute).init({'concept':o.value.value,'value':o.value.value}):Object.create(SValueAttribute).init({'value':o.value.value});
+
+
+    //Guardar en shared data?
+
+    this.shared = Object.create(AutoAttribute).init({'value':false});  //Esto es temporal
+
 
     return this;
              
@@ -93,7 +100,7 @@ FillInputTask.prototype.toHtml = function(properties){
     array_elementos.push(this.value.getHtmlElement());
     array_elementos.push(this.state.getHtmlElement());
     array_elementos.push(this.tipo.getHtmlElement());
-    array_elementos.push(this.group.getHtmlElement());
+    //array_elementos.push(this.group.getHtmlElement());
     
     return array_elementos;
 }
@@ -104,6 +111,9 @@ FillInputTask.prototype.toHtml = function(properties){
 */
 FillInputTask.prototype.htmlToJson = function(el_div){
 
+        /*var el_test = document.getElementById('div_inflate');
+        console.debug(el_test);
+        */
         var str_taskTitle = document.getElementById('task_title_id').value;
         var str_xPath = document.getElementById('xpath_id').value;
         var str_value = document.getElementById('value_id').value;

@@ -118,8 +118,8 @@ HighLightTask.prototype.toHtml = function(properties){
  *
  */
 
-function doHighlight(bodyText, searchTerm, highlightStartTag, highlightEndTag) 
-{
+function doHighlight(bodyText, searchTerm, highlightStartTag, highlightEndTag) {
+  var count = 0;
   // the highlightStartTag and highlightEndTag parameters are optional
   if ((!highlightStartTag) || (!highlightEndTag)) {
     highlightStartTag = "<font class='animationLiveHighlighting'>";
@@ -154,12 +154,13 @@ function doHighlight(bodyText, searchTerm, highlightStartTag, highlightEndTag)
           bodyText = bodyText.substr(i + searchTerm.length);
           lcBodyText = bodyText.toLowerCase();
           i = -1;
+          count++;
         }
     }
       }
     }
   }
-  
+  if(count>0)console.debug(count);
   return newText;
 };
 

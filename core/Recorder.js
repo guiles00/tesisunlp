@@ -600,8 +600,8 @@ function handleSelectxPath(){
 		close_edit.type = "button";
 		close_edit.value = "X";
 		//close_edit.style.cssText = "position:absolute;float:right;top:0;right:0;";
-		close_edit.setAttribute('class','tesisunlp_button');
-
+		//close_edit.setAttribute('class','tesisunlp_button');
+		close_edit.setAttribute('class','tesisunlp_close_button');
 
 		close_edit.onclick = function(){ 
 		   el = document.getElementById("div_editor_container");
@@ -619,7 +619,7 @@ function handleSelectxPath(){
 		exec_button.type = "button";
 		exec_button.value = "Execute";
 		exec_button.id = "id_exec_task";
-		exec_button.setAttribute('class','tesisunlp_button');
+		exec_button.setAttribute('class','tesisunlp_button_right');
 
 
 	    var div_footer = document.getElementById("div_editor_footer");
@@ -627,8 +627,8 @@ function handleSelectxPath(){
 		var el_hr = document.createElement('hr');
 		div_footer.appendChild(el_hr);
 		div_footer.appendChild(edit_button); 
-		div_footer.appendChild(exec_button); 
 	   	div_footer.appendChild(close_edit); 
+	   	div_footer.appendChild(exec_button);
 	}
 	/**  
 	* 
@@ -798,9 +798,9 @@ function handleSelectxPath(){
 		tbody.appendChild(tr);
 	
 				function editSharedData(x){
-					console.debug('guarda esto');
-					console.debug(x.target.value);
-					console.debug(x.target.parentNode.parentNode.firstChild.innerHTML);
+					//console.debug('guarda esto');
+					//console.debug(x.target.value);
+					//console.debug(x.target.parentNode.parentNode.firstChild.innerHTML);
 					var concept = x.target.parentNode.parentNode.firstChild.innerHTML;
 
 					localStorageManager.saveSharedData(concept,{'value':x.target.value});

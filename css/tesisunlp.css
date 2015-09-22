@@ -33,7 +33,21 @@ body{
 	color:#D3D3D3;
 	height: 2em;
 }
-
+.tesisunlp_button_right{
+	float: right;
+	/*background-color: #A2AFA0 ;*/
+	background-color: #28517A ;
+	border:1px solid ;
+	border-color: grey ; 
+	color: black ; 
+	/*font-family: Helvetica, Arial;*/ 
+	font-family: Helvetica, sans-serif;
+	font-size: 9px; font-weight: 400; 
+	padding: 5px 7px 6px; 
+	text-transform: uppercase;vertical-align: bottom;
+	border-radius: 5px;
+	color:#FFFFFF;
+}
 .tesisunlp_button_basic{
 	float:left;
 	cursor: hand ;
@@ -88,7 +102,7 @@ body{
 	width: 100%;
 	/*border: 1px solid black;*/
 }
-.tabl_consola_style, td{
+.tabl_consola_style > td{
 	 border-bottom: 1px solid black;
 	 /*font-family: Montserrat, sans-serif;*/
 	 color: #262626;
@@ -145,7 +159,7 @@ body{
 	border-color: #28517A ; 
 	color: white ; 
 	font-family: Helvetica, sans-serif;
-	font-size: 9px; font-weight: 400; 
+	font-size: 12px; font-weight: 400; 
 	text-transform: uppercase;vertical-align: bottom;
 	border-radius: 5px;
 }
@@ -175,9 +189,10 @@ body{
 	background: #28517A;
 	border: 1px solid black;
 	padding: 15px 10px 5px 15px;
+	color: white;
 
 }
-.tesisunlp_div_show_pocket > * {
+.tesisunlp_div_show_pocket:nth-child(odd){
 font-color: white;
 }
 

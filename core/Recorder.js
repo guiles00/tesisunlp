@@ -880,10 +880,11 @@ function handleSelectxPath(){
 		localStorageManager.setStopRecording();
 	}  
      
-	var table = document.getElementById('table_consola');
+	/*var table = document.getElementById('table_consola');
     var tableDnD = new TableDnD();
-    	tableDnD.init(table);
+    	tableDnD.init(table);*/
 	}
+
 	/**  
 	* Para de grabar 
 	* @method clickStop   
@@ -1043,8 +1044,8 @@ function handleSelectxPath(){
        		}
 		*/
     	//Drag and drop
-       	var tableDnD = new TableDnD();
-	    tableDnD.init(table_consola);
+       	/*var tableDnD = new TableDnD();
+	    tableDnD.init(table_consola);*/
 		//Trae desde la base
 		//StorageManager.getTasks(1); //Este metodo trae los datos y lo muestra en consola ( es asincrono)
 
@@ -1061,10 +1062,11 @@ function handleSelectxPath(){
         //Como es asincrono tengo que hacerlo dentro de un callback
      	 
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
-        if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
+        
         //if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
-        	
-		
+        tr.style.backgroundColor = 'gray';
+		if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
+
 		//Hardcodeado!!!!
 	    var pTask = document.createTextNode(text + 'Task - id:'+tr.id);
 	    var spTask = document.createElement('span');
@@ -1165,6 +1167,66 @@ function handleSelectxPath(){
 		} 
 
 		};
+/*Event Handler*/
+var pasabaporaqui = function(e){
+	
+	console.debug('pasaba por aca');
+	console.debug(e.target.parentNode.nodeName);
+	
+	//e.target.parentNode.nodeType
+	if(e.target.parentNode.nodeName == 'TR'){
+		console.debug(e.target.parentNode.id);
+
+	}
+};
+/**/
+
+
+
+	var add_button = document.createElement('input');
+		add_button.type = "button";
+		add_button.value = "add";
+		add_button.classList.add('tesisunlp_button_left')
+		add_button.onclick = function(){
+			//alert('agrega tarea');
+			
+			var el = document.getElementById('table_consola');
+			console.debug(el.rows);
+			for(var i = 0 ; i < el.rows.length ; i++){
+				console.debug(el.rows[i]);
+
+				//el.rows[i].addEventListener('click', pasabaporaqui );
+
+				//agrego boton para ver que onda
+				var b = document.createElement("input");
+				b.type = "button";
+				b.className = "add_button";
+				b.value = "x";
+
+				b.onclick = function(e){
+					console.debug(e.target.parentNode.id);
+					//saca los elementos
+					var els = document.getElementsByClassName('add_button');
+
+					//console.debug(els);
+					for(var i = 0 ; i < els.length ; i++){
+						console.debug(els[i]);
+					}
+				};
+
+				el.rows[i].appendChild(b);
+
+
+			}
+			//el.childNodes.map.call()
+			/*el.rows.map(function(o){
+				o.addEventListener('hover',function(){
+					console.debug('paso por aqui');
+				});
+			});*/
+
+		}
+	
 
 	var play_button = document.createElement('input');
 		play_button.type = "button";
@@ -1182,7 +1244,8 @@ function handleSelectxPath(){
 		var br = document.createElement('br');
 		//td2.appendChild(id_text);
 		td2.appendChild(p_text);
-		//td2.appendChild(br);	
+		//td2.appendChild(br);
+		td2.appendChild(add_button);	
 		td2.appendChild(edit_button);
 		td2.appendChild(delete_button);
 		td2.appendChild(state_button);
@@ -1210,10 +1273,10 @@ function handleSelectxPath(){
      	//if(task.group.value == 1) console.debug('no hago nada');
  
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
-        if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
+        
         //if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
-        	
-		
+        tr.style.backgroundColor = 'gray';	
+		if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
 		//Hardcodeado!!!!
 	    var pTask = document.createTextNode(text + 'Task - id:'+tr.id);
 	    var spTask = document.createElement('span');
@@ -1288,9 +1351,7 @@ function handleSelectxPath(){
 		}else{
 			this.value = "show";
 		};
-		//console.debug(this.parentNode.parentNode.id);
-		//var el = document.getElementById(this.parentNode.parentNode.id);
-
+		
 		//Este comportamiento va al manager o RConsole
 		var task = localStorageManager.getObject(this.parentNode.parentNode.id);
 		//console.debug(tasks);
@@ -1315,6 +1376,7 @@ function handleSelectxPath(){
 
 		};
 
+	
 	var play_button = document.createElement('input');
 		play_button.type = "button";
 		play_button.value = ">";
@@ -1343,8 +1405,11 @@ function handleSelectxPath(){
 				td2.appendChild(show_button);	
 		};
 		
+
+
 		tr.appendChild(td2);
 		}
+
 	,writer: function(id,text,index){
 
 		var table_consola = document.getElementById("table_consola");
@@ -1378,11 +1443,21 @@ function handleSelectxPath(){
         	td2.classList.add('ident_composite');
         
 		//add br
+		
 		var br = document.createElement("br");
 	 	var text1 = document.createTextNode(id+' - '+text);
+
+	 	var text_type = document.createTextNode(task.type);
+	 	var span_type = document.createElement('span');
+	 	span_type.style.fontSize = '10px';
+	 	span_type.appendChild(text_type);
+
 	 	var p_text = document.createElement("p");
+	 	
 	 	p_text.classList.add('task_title_style');
 	 	p_text.appendChild(text1);
+		p_text.appendChild(br);
+		p_text.appendChild(span_type);
 
 	    var delete_button = document.createElement('input');
 		delete_button.type = "button";

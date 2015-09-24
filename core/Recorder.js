@@ -1187,11 +1187,12 @@ var pasabaporaqui = function(e){
 		add_button.type = "button";
 		add_button.value = "add";
 		add_button.classList.add('tesisunlp_button_left')
-		add_button.onclick = function(){
+		add_button.onclick = function(e){
 			//alert('agrega tarea');
-			
+			//console.debug(e.target.parentNode.parentNode.id);
+			var comp_id = e.target.parentNode.parentNode.id;
 			var el = document.getElementById('table_consola');
-			console.debug(el.rows);
+			//console.debug(el.rows);
 			for(var i = 0 ; i < el.rows.length ; i++){
 				console.debug(el.rows[i]);
 
@@ -1205,12 +1206,27 @@ var pasabaporaqui = function(e){
 
 				b.onclick = function(e){
 					console.debug(e.target.parentNode.id);
+					console.debug('este es el id para la area');
+					console.debug(comp_id);
+					var task = localStorageManager.getObject(e.target.parentNode.id);
+					task.group.value = 1;
+					localStorageManager.setObjectR(JSON.stringify(task));
+					//console.debug(task);
+					var comp_task = localStorageManager.getObject(comp_id);
+					comp_task.value.value = e.target.parentNode.id;
+					localStorageManager.setObjectR(JSON.stringify(comp_task));
+
+					//refresh
+					Recorder.refresh();
+
+
 					//saca los elementos
+					
 					var els = document.getElementsByClassName('add_button');
 
 					//console.debug(els);
 					for(var i = 0 ; i < els.length ; i++){
-						console.debug(els[i]);
+					//	console.debug(els[i]);
 					}
 				};
 

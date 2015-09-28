@@ -1188,21 +1188,88 @@ var pasabaporaqui = function(e){
 		add_button.value = "add";
 		add_button.classList.add('tesisunlp_button_left')
 		add_button.onclick = function(e){
-			//alert('agrega tarea');
-			//console.debug(e.target.parentNode.parentNode.id);
+
 			var comp_id = e.target.parentNode.parentNode.id;
 			var el = document.getElementById('table_consola');
+	
+			if( e.target.value == 'add' ){
+
+				for(var i = 0 ; i < el.rows.length ; i++){
+					console.debug(el.rows[i].id);
+
+					//agrego boton para ver que onda
+					var b = document.createElement("input");
+					b.type = "checkbox";
+					b.className = "add_button";
+					b.value = el.rows[i].id;
+
+					el.rows[i].appendChild(b);
+
+					e.target.value = 'sel';					
+
+				}	
+				
+
+			}else if( e.target.value == 'sel' ){
+
+				//busca las tareas seleccionadas
+				var els = document.getElementsByClassName('add_button');
+				
+				
+				for(var i = 0 ; i < els.length ; i++){
+						//console.debug(els[i]);
+						if(els[i].checked) { //Si esta seleccionado realizo las modificaciones
+
+							//console.debug(els[i].value);
+							var task = localStorageManager.getObject(els[i].value);
+							task.group.value = 1;
+							localStorageManager.setObjectR(JSON.stringify(task));
+							
+							var comp_task = localStorageManager.getObject(comp_id);
+						
+							//console.debug('comp_task.value.value');
+							//console.debug(typeof comp_task.value.value);
+							if( comp_task.value.value == ''){
+								var arr_values = Array();
+							}else{
+								var arr_values = comp_task.value.value.split(',');
+							}
+
+							
+							console.debug('arr_values');
+							console.debug(arr_values.le);
+							console.debug(typeof arr_values);
+							console.debug('arr_values');
+							arr_values.push(els[i].value);
+							//console.debug(arr_values);
+							comp_task.value.value = arr_values.join();
+							//console.debug(comp_task.value.value);
+							//console.debug(typeof comp_task.value.value);
+							localStorageManager.setObjectR(JSON.stringify(comp_task));
+						}
+
+				}
+
+				e.target.value = 'sel';
+
+				//refresh
+				Recorder.refresh();
+
+			};
+			
 			//console.debug(el.rows);
+			/*
 			for(var i = 0 ; i < el.rows.length ; i++){
-				console.debug(el.rows[i]);
+				console.debug(el.rows[i].id);
 
 				//el.rows[i].addEventListener('click', pasabaporaqui );
 
 				//agrego boton para ver que onda
 				var b = document.createElement("input");
-				b.type = "button";
+				b.type = "checkbox";
 				b.className = "add_button";
-				b.value = "x";
+				b.value = el.rows[i].id;
+
 
 				b.onclick = function(e){
 					console.debug(e.target.parentNode.id);
@@ -1231,9 +1298,8 @@ var pasabaporaqui = function(e){
 				};
 
 				el.rows[i].appendChild(b);
-
-
 			}
+			*/
 			//el.childNodes.map.call()
 			/*el.rows.map(function(o){
 				o.addEventListener('hover',function(){
@@ -1642,6 +1708,7 @@ var pasabaporaqui = function(e){
 		localStorageManager.setObjectR(JSON.stringify(task));
 		};
 
+		
 		var id_text = document.createTextNode(id);
 
 		td1.appendChild(id_text);
@@ -1649,6 +1716,7 @@ var pasabaporaqui = function(e){
 		td3.appendChild(edit_button);
 		td4.appendChild(delete_button);
 		td5.appendChild(state_button);
+		
 		tr.appendChild(td1);
 		tr.appendChild(td2);
 		tr.appendChild(td3);

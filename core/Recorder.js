@@ -1141,6 +1141,7 @@ function handleSelectxPath(){
 		}else{
 			this.value = "hide";
 		};
+
 		//console.debug(this.parentNode.parentNode.id);
 		//var el = document.getElementById(this.parentNode.parentNode.id);
 
@@ -1150,21 +1151,21 @@ function handleSelectxPath(){
 		//por ahora esta separado por comas
 		var arr_id_tasks = task.value.value.split(',');
 		//console.debug(arr_id_tasks);
-		for(var i = 0;i < arr_id_tasks.length;i++){
-		
-		//oculto la tarea //Por ahora idento
-		var inner_el = document.getElementById(arr_id_tasks[i]);
-		
-		if(inner_el.style.display == 'none'){
-			inner_el.style.display ='';
-			//inner_el.firstChild.classList.add('ident_composite');
+			for(var i = 0;i < arr_id_tasks.length;i++){
 			
-		}else{
-			inner_el.style.display ='none';
-			//inner_el.firstChild.classList.add('ident_composite');
-		}	
+			//oculto la tarea //Por ahora idento
+			var inner_el = document.getElementById(arr_id_tasks[i]);
+			
+				if(inner_el.style.display == 'none'){
+					inner_el.style.display ='';
+					//inner_el.firstChild.classList.add('ident_composite');
+					
+				}else{
+					inner_el.style.display ='none';
+					//inner_el.firstChild.classList.add('ident_composite');
+				}	
 
-		} 
+			} 
 
 		};
 /*Event Handler*/
@@ -1215,14 +1216,15 @@ var pasabaporaqui = function(e){
 				//busca las tareas seleccionadas
 				var els = document.getElementsByClassName('add_button');
 				
-				
+				var id_composite = e.target.parentNode.parentNode.id;
+
 				for(var i = 0 ; i < els.length ; i++){
 						//console.debug(els[i]);
 						if(els[i].checked) { //Si esta seleccionado realizo las modificaciones
 
-							//console.debug(els[i].value);
+							
 							var task = localStorageManager.getObject(els[i].value);
-							task.group.value = 1;
+							task.group.value = id_composite;
 							localStorageManager.setObjectR(JSON.stringify(task));
 							
 							var comp_task = localStorageManager.getObject(comp_id);
@@ -1236,10 +1238,10 @@ var pasabaporaqui = function(e){
 							}
 
 							
-							console.debug('arr_values');
-							console.debug(arr_values.le);
-							console.debug(typeof arr_values);
-							console.debug('arr_values');
+							//console.debug('arr_values');
+							//console.debug(arr_values.le);
+							//console.debug(typeof arr_values);
+							//console.debug('arr_values');
 							arr_values.push(els[i].value);
 							//console.debug(arr_values);
 							comp_task.value.value = arr_values.join();
@@ -1369,7 +1371,7 @@ var pasabaporaqui = function(e){
 	    td1.style.visibility = "hidden";
 	    
 	    var td2 = document.createElement('td');
-	    if(task.group.value == 1 )
+	    if(task.group.value > 0 )
         	td2.classList.add('ident_composite');
         
 		//add br
@@ -1470,6 +1472,43 @@ var pasabaporaqui = function(e){
 
 	};
 
+		//Este boton es para sacar la tarea del composite
+		var out_button = document.createElement('input');
+		out_button.type = "button";
+		out_button.value = "O";
+		out_button.classList.add('tesisunlp_button_left');
+
+		out_button.onclick = function(e){
+			//console.debug(e.target.parentNode.parentNode.id);
+			var task = localStorageManager.getObject(e.target.parentNode.parentNode.id);
+			var composite_id = task.group.value;
+			
+			task.group.value = 0;
+
+			localStorageManager.setObjectR(JSON.stringify(task));
+			//Le saco el id de la tarea, siempre tiene que estar
+			var c_task = localStorageManager.getObject(composite_id);
+			
+			console.debug('saco saco saco');
+			console.debug(composite_id);
+			console.debug(c_task.value.value.split(','));
+			
+			var array_tasks = c_task.value.value.split(',');
+			var index = array_tasks.indexOf(e.target.parentNode.parentNode.id);
+			
+			if (index > -1) {
+			    array_tasks.splice(index, 1);
+			}
+
+			console.debug(array_tasks);
+			console.debug('saco saco saco');
+			//Y la saco de la tarea compuesta
+			c_task.value.value = array_tasks.join();
+			localStorageManager.setObjectR(JSON.stringify(c_task));
+
+			Recorder.refresh();
+		}
+
 
 		//var id_text = document.createTextNode(id+' - ');
 		var br = document.createElement('br');
@@ -1477,7 +1516,7 @@ var pasabaporaqui = function(e){
 		td2.appendChild(p_text);
 		//td2.appendChild(br);	
 		td2.appendChild(edit_button);
-		//td2.appendChild(delete_button);
+		td2.appendChild(out_button);
 		td2.appendChild(state_button);
 		td2.appendChild(play_button);
 

@@ -1064,7 +1064,7 @@ function handleSelectxPath(){
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
         
         //if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
-        tr.style.backgroundColor = 'gray';
+        tr.style.backgroundColor = '#2d5b89';
 		if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
 
 		//Hardcodeado!!!!
@@ -1359,7 +1359,7 @@ var pasabaporaqui = function(e){
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
         
         //if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
-        tr.style.backgroundColor = 'gray';	
+        tr.style.backgroundColor = '#2d5b89';	
 		if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
 		//Hardcodeado!!!!
 	    var pTask = document.createTextNode(text + 'Task - id:'+tr.id);

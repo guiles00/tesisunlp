@@ -36,10 +36,10 @@ window.onload = (function(){
 	        loadScript(absolute_path+'./core/',objects[i]+'.js');
 	};
 
-	var tasks = ['PrimitiveTasks','AbstractTask','AugmentedTask','ComposedTask','IfTask','Attribute','Utils'
+	var tasks = ['Attribute','PrimitiveTasks','AbstractTask','AugmentedTask','ComposedTask','IfTask','Utils'
 	,'NotasTask','SumatoriaTask','ConcatStringTask','HighLightTask'
 	,'FillInputTask','TextAreaTask','SelectOptionTask','CheckBoxTask'
-	,'ClickLinkTask','ClickInputTask','RadioTask','DataCollectionTask','UrlTask'];
+	,'ClickLinkTask','ClickInputTask','RadioTask','DataCollectionTask','UrlTask','SimpleHideTask','SimpleWrapTask'];
 	//Load tasks
 	for (var i = 0; i < tasks.length; i++) {
 	        loadScript(absolute_path+'./js/',tasks[i]+'.js');

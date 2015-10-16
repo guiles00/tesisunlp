@@ -307,6 +307,12 @@ var Recorder = {
 		Manager.addComposedTask('');			
 		return true;	
 		}else if(id_selected == 7){
+		Manager.addSimpleHideTask('');			
+		return true;	
+		}else if(id_selected == 8){
+		Manager.addSimpleWrapTask('');			
+		return true;	
+		}else if(id_selected == 9){
 		Manager.addIfTask('');			
 		return true;	
 		}
@@ -1003,7 +1009,7 @@ function handleSelectxPath(){
 
           		//console.debug(arr_tasks[i].group);
           		if(arr_tasks[i].group.value == '' || arr_tasks[i].group.value == 0) {
-          			//console.debug(arr_tasks[i]);
+          			console.debug(arr_tasks[i]);
           			Recorder.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);	
           		}	             		
           	}

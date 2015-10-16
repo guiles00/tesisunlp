@@ -1,7 +1,7 @@
 var AbstractTask =(function(){
 
 
- function AbstractTask(id,xPath,value,tipo,state,taskTitle){ //Constructor
+function AbstractTask(id,xPath,value,tipo,state,taskTitle){ //Constructor
 this.tipo = tipo;    
 this.xPath = xPath;
 this.value = value;
@@ -11,8 +11,10 @@ this.msg = "AbstractTask"
 this.type = "AbstractTask"
 this.precondition = {};
 this.taskTitle = taskTitle;
-this.group = 0//Object.create(StateAttribute).init({'value':0,'htmlId':'group_id','label':'group'}) ;
+//this.group = 0//Object.create(StateAttribute).init({'value':0,'htmlId':'group_id','label':'group'}) ;
+this.group = Object.create(StateAttribute).init({'value':0,'htmlId':'group_id','label':'group'}) ;
 //this.group = Object.create(StateAttribute).init({'value':0,'htmlId':'group_id','label':'group'}) ;
+
 
 
 }

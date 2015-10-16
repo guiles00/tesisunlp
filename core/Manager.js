@@ -561,6 +561,18 @@ var Manager = (function () {
                 localStorageManager.insert(a_task.toJson());
                 //Actualizo la consola
                 Recorder.refresh();
+            },addSimpleHideTask:function(){
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new SimpleHideTask();
+                localStorageManager.insert(a_task.toJson());
+                //Actualizo la consola
+                Recorder.refresh();
+            },addSimpleWrapTask:function(){
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new SimpleWrapTask();
+                localStorageManager.insert(a_task.toJson());
+                //Actualizo la consola
+                Recorder.refresh();
             }
             
         }

@@ -949,6 +949,9 @@ var div_editor_postconditions = document.createElement("div");
 		      document.body.appendChild(container);
 
 		}
+
+			console.debug('veo si esta el body');
+	console.debug(body);
 	//var div_p_task = this.createSelectPrimitiveTasks();
 	//console.debug(div_p_task);
 	//	container_header.appendChild(div_p_task);

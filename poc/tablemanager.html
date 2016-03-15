@@ -39,7 +39,7 @@
   		color:red;
   	}
 
-    .border {
+    .hide {
     display:none;
     }
 </style>
@@ -54,7 +54,7 @@
                 <tr>                   
                    <!--th>actuacion_id</th-->
                    <th></th>
-                   <th class="hov">PREF.</th>
+                   <th>PREF.</th>
                    <th>ACTUACIÓN</th>
                    <th>FECHA</th>
                    <th>ASUNTO</th>
@@ -2485,7 +2485,7 @@ function filtrar(){
                   var texto_filtrar = array_filter[j].value;
                   //console.debug('compara esto:'+text_a_comparar+' con esto:'+texto_filtrar);
 
-                  if(! text_a_comparar.includes(texto_filtrar) ) tabla.rows[i].classList.add('border');
+                  if(! text_a_comparar.includes(texto_filtrar) ) tabla.rows[i].classList.add('hide');
                 
                 }      
              };
@@ -2502,7 +2502,7 @@ function reset(){
                          //console.debug(tabla.rows[i].cells[1].innerText);                       
                        // if ( tabla.rows[i].cells[1].innerText.indexOf('BEC') === -1 ){
                             
-                            tabla.rows[i].classList.remove('border');
+                            tabla.rows[i].classList.remove('hide');
                        // };
                      };
                      

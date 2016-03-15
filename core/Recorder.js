@@ -315,6 +315,10 @@ var Recorder = {
 		}else if(id_selected == 9){
 		Manager.addIfTask('');			
 		return true;	
+		}else if(id_selected == 10){
+			alert('nada');
+		Manager.addTableManagerTask('');			
+		return true;	
 		}
 
 		

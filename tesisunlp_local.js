@@ -37,7 +37,7 @@ window.onload = (function(){
 	};
 
 	var tasks = ['Attribute','PrimitiveTasks','AbstractTask','AugmentedTask','ComposedTask','IfTask','Utils'
-	,'NotasTask','SumatoriaTask','ConcatStringTask','HighLightTask'
+	,'TableManagerTask','NotasTask','SumatoriaTask','ConcatStringTask','HighLightTask'
 	,'FillInputTask','TextAreaTask','SelectOptionTask','CheckBoxTask'
 	,'ClickLinkTask','ClickInputTask','RadioTask','DataCollectionTask','UrlTask','SimpleHideTask','SimpleWrapTask'];
 	//Load tasks

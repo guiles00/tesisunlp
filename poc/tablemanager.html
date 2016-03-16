@@ -2402,7 +2402,7 @@ window.onload = (function(){
                 //////////////////////////////
 
                 var boton_filtrar = document.createElement("input");
-                boton_filtrar.value="Filtrar";
+                boton_filtrar.value="Show Header";
                 boton_filtrar.type="button";
                 boton_filtrar.addEventListener('click',function(){
                       //alert('empieza a filtrar la tabla: '+id_tabla);	
@@ -2425,6 +2425,28 @@ window.onload = (function(){
                      
                      //reemplazo tabla con la que filtre
                 });
+                ////////////////////////////////////////Boton para guardar en el sharedData
+                var boton_save = document.createElement("input");
+                    boton_save.value="Save Table";
+                    boton_save.type="button";
+                
+                boton_save.addEventListener('click',function(){
+                
+                var tabla_filtrada = document.getElementById(id_tabla);
+                
+                for (var i = 1; i < tabla_filtrada.rows.length ; i++) {
+                    
+                    if (! (tabla_filtrada.rows[i].classList.contains('hide')) ) {
+                        
+                        console.debug(tabla_filtrada.rows[i]);
+
+                    }
+                }
+                
+                });
+                //////////////////////////////////////
+
+        
 
                 //////////////////////////////
 
@@ -2438,6 +2460,7 @@ window.onload = (function(){
                 div.appendChild(div_sum);
                 div.appendChild(stop);
                 div.appendChild(boton_filtrar);
+                div.appendChild(boton_save);
                 
                 body.appendChild(div);
 

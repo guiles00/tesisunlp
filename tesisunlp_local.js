@@ -39,7 +39,7 @@ window.onload = (function(){
 	var tasks = ['Attribute','PrimitiveTasks','AbstractTask','AugmentedTask','ComposedTask','IfTask','Utils'
 	,'TableManagerTask','NotasTask','SumatoriaTask','ConcatStringTask','HighLightTask'
 	,'FillInputTask','TextAreaTask','SelectOptionTask','CheckBoxTask'
-	,'ClickLinkTask','ClickInputTask','RadioTask','DataCollectionTask','UrlTask','SimpleHideTask','SimpleWrapTask'];
+	,'ClickLinkTask','ClickInputTask','RadioTask','DataCollectionTask','UrlTask','SimpleHideTask','SimpleWrapTask','IteratorTask'];
 	//Load tasks
 	for (var i = 0; i < tasks.length; i++) {
 	        loadScript(absolute_path+'./js/',tasks[i]+'.js');

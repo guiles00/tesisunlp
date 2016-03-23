@@ -1,0 +1,25 @@
+<html>
+<head>
+	<script src="./Jsonp.js"></script>
+</head>
+<body>
+<script>
+
+var jsonp = Object.create(JSONP);
+//console.debug(TaskTitleAttribute);
+jsonp.sayHello();
+jsonp.send_request_jsonp('http://www.telize.com/jsonip', function(data) {
+   console.debug(data);
+   var el = document.getElementById('res');
+   console.debug(el);
+   //el.innerHTML('nada');
+});
+
+window.load = (function(){
+	//console.debug(TaskTitleAttribute);
+})();
+</script>
+<div id="res"></div>
+</body>
+
+</html>

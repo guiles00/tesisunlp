@@ -176,15 +176,19 @@ var Manager = (function () {
         	,start: function(n){
                
                 var indice = n - 1 || 0;
-		        console.debug('ejecuta desde:'+indice);
+		        
                 Manager.setIndice(indice);
 
                   document.addEventListener('finalizado',procedureHandler,false);
 
                   var arr_tareas = Manager.getCurrentPrimitiveTasks();
+                  
+                  //console.debug('arr_tareas');
+                  //console.debug(arr_tareas);
+                  
                   var indice = Manager.getIndice();
                   var task = arr_tareas[indice]; 
-            
+                  
                   task.execute();  
            
                   
@@ -300,7 +304,6 @@ var Manager = (function () {
                     function () {    
 
                         var indice = Manager.getIndice();           
-                        
                         
                         if(typeof arr_tareas[indice] == "undefined") {
                             //Asumo que finalizo el procedimiento
@@ -576,6 +579,12 @@ var Manager = (function () {
             },addTableManagerTask:function(){
                 //Instancio tarea vacia y guardo en el localStorage
                 var a_task = new TableManagerTask();
+                localStorageManager.insert(a_task.toJson());
+                //Actualizo la consola
+                Recorder.refresh();
+            },addIteratorTask:function(){
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new IteratorTask();
                 localStorageManager.insert(a_task.toJson());
                 //Actualizo la consola
                 Recorder.refresh();

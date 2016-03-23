@@ -1,0 +1,113 @@
+<html>
+<head>
+<script src="./Jsonp.js"></script>
+</head>
+<body>
+	<button id="clickme">Cliqueame</button>
+	<div id="res"></div>
+	    <span id="ipaddress"></span>
+
+</body>
+<script>
+
+function DisplayIP(response) {
+        document.getElementById("ipaddress").innerHTML = "Your IP Address is " + response.ip;
+     //console.debug(response);
+     //alert('hola');
+}
+
+window.load = (function(){
+
+
+
+function jsonp(url, callback) {
+    var callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+       	
+    window[callbackName] = function(data) {
+        delete window[callbackName];
+        document.body.removeChild(script);
+        callback(data);
+    };
+
+    var script = document.createElement('script');
+    script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
+    document.body.appendChild(script);
+}
+
+var el = document.getElementById('clickme');
+
+el.addEventListener('click',function(e){
+
+jsonp('http://www.telize.com/jsonip', function(data) {
+   console.debug(data);
+   //alert('todo ok?');
+});
+
+/*var callback = 'DisplayIP';
+jsonp('http://localhost/content/tesisunlp/poc/test.json', function(data) {
+   console.debug(data);
+});
+*/
+
+});
+
+/*
+window.myJsonpCallback = function(data) {
+    // handle requested data from server
+    alert(data);
+};
+
+var scriptEl = document.createElement('script');
+scriptEl.setAttribute('src',
+    'http://jsonp-aware-endpoint.com/user?callback=myJsonpCallback&id=123');
+document.body.appendChild(scriptEl);
+*/
+/*
+function loadScript (id, src, callback) {
+
+     // Crear elemento
+     var script = document.createElement("script");
+
+     // Atributos del script
+     script.setAttribute("type", "text/javascript");
+     script.setAttribute("src", src + "?callback=" + callback);
+     script.setAttribute("id", id);
+
+     // Insertar script en la cabecera
+     document.getElementsByTagName("head")[0].appendChild(script);
+
+}
+
+function nada(data){
+console.debug('nada');
+}
+
+loadScript('1','http://www.telize.com/jsonip','DisplayIP');
+*/
+
+
+/*var el = document.getElementById('clickme');
+
+el.addEventListener('click',function(e){
+console.debug(e.target);	
+
+		var url = 'http://localhost/content/tesisunlp/poc/notas.js';
+		
+		//Envia peticion a la apiREST
+		send_request_jsonp(url, function(data) {
+	   	
+	   		var el = document.getElementById('res');
+			alert('y?');
+	   		el.innerHTML(url);
+			console.debug(url);
+			console.debug(data);
+		});	
+});
+*/
+
+
+
+
+})();
+</script>
+</html>

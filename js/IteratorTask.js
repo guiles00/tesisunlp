@@ -1,4 +1,44 @@
+function procedureIteratorHandler(e){
+        
 
+   //var indice = Manager.getIndice();           
+    console.debug(e.detail)
+    //Si llego un finalizado incrementa indice
+    Recorder.refresh();
+    //Manager.incrementIndice(); 
+    //Manager.executeNextTaskWithTimer();                     
+    //IteratorTask.executeNextTask();
+    
+    //trae la proxima tarea y ejecuta
+    var arr = JSON.parse(localStorage.getItem(e.detail.iterator));
+    
+          
+         for (var i = 0;i < arr.length;i++){
+                   
+                   
+                   if(arr[i].state === 0 ) { 
+                      console.debug(arr[i]);
+                      
+                      var it = new IteratorTask;
+                      if( confirm('ejecuta next task?') ){
+                      it.executeNextTask(e.detail.iterator,arr[i].id);  
+                      alert('Execute Next Task');
+                      }
+                      
+                      
+                   }else{
+                    
+                   }
+            }
+
+
+console.log(
+        "Ejecuto esta tarea dentro del Iterator y la da como finalizada "+e.currentTarget.nodeName+", "
+        +e.detail.id+": "+e.detail.message
+    );
+    //refresco la consola
+    
+}
 
  var IteratorTask = (function(){
 
@@ -98,27 +138,35 @@ var that = this;
 
 }
 
+IteratorTask.prototype.executeNextTask = function(iterator,id){
+
+    alert('Ejecuta tarea de Iterator de '+iterator+'con id'+id);
+
+    var arr_task = JSON.parse(localStorage.getItem(iterator));
+
+            var task = localStorageManager.getObject(id);
+            var oTask = construct(window[task.type]);
+                    oTask.instanciamela(task);//.execute();
+                    oTask.execute();
+
+            console.debug('ejecuto esta tarea y la pongo en ejecutada');
+            var st = JSON.parse(localStorage.getItem(iterator));
+            console.debug(st);
+            for(var j = 0 ; j < st.length ; j++){
+                if(st.id == id) 
+                st[j].state = 1;               
+            }
+            console.debug(st);
+            localStorage.setItem(iterator,JSON.stringify(st));
+
+}
+
+
 IteratorTask.prototype.execute = function(){
 
 
+//localStorage.clear();
 
-function procedureIteratorHandler(e){
-        
-
-   //var indice = Manager.getIndice();           
-    console.debug(e)
-    //Si llego un finalizado incrementa indice
-    Recorder.refresh();
-    Manager.incrementIndice(); 
-    Manager.executeNextTaskWithTimer();                     
-
-console.log(
-        "Ejecuto esta tarea dentro del Iterator y la da como finalizada "+e.currentTarget.nodeName+", "
-        +e.detail.id+": "+e.detail.message
-    );
-    //refresco la consola
-    
-}
 
 document.addEventListener('Iteratorfinalizado',procedureIteratorHandler,false);
 //ejecuta las tareas que tiene
@@ -127,7 +175,7 @@ document.addEventListener('Iteratorfinalizado',procedureIteratorHandler,false);
 var store = 'IT'+this.id;
 
 var s_iterator = localStorage.getItem(store);
-alert(s_iterator);
+
 if( s_iterator == null ){
     console.debug(s_iterator);
     alert('entro acaaaaaa');
@@ -144,35 +192,40 @@ if( s_iterator == null ){
     localStorage.setItem(store,JSON.stringify(iterantes));
 }
    
-var arr = JSON.parse(localStorage.getItem(store));
+var arr_task = JSON.parse(localStorage.getItem(store));
 
-for(var i = 0; i < arr.length; i++){
-console.debug('ejecuta');
-console.debug(arr[i]);
+//for(var i = 0; i < arr.length; i++){
+alert('ejecuta el primero y usa el listener');
+console.debug(localStorage.getItem(store))
 
-    if(arr[i].state == 0){
-        console.debug(arr[i].state);
-        alert('Ejecuta esssto');
-            var task = localStorageManager.getObject(arr[i].id);
+    //if(arr[i].state == 0){
+        
+       
+            var task = localStorageManager.getObject(arr_task[0].id);
             var oTask = construct(window[task.type]);
                     oTask.instanciamela(task);//.execute();
                     oTask.execute();
 
-            console.debug('ejecuto esta tarea');
-            arr[i].state = 1;           
-            localStorage.setItem(store,JSON.stringify(arr));          
-    }
-    
-}
 
-console.debug(arr);
+
+            console.debug('ejecuto esta tarea');
+            arr_task[0].state = 1;           
+            localStorage.setItem(store,JSON.stringify(arr_task));
+        
+            var event = new CustomEvent("Iteratorfinalizado",{detail: { message: "Finalizado",id: this.id,iterator:store},bubbles: true,cancelable: true});
+            document.dispatchEvent(event);
+          
+return;
+    //}
+    
+//}
+
 
 
 
 //    var event = new CustomEvent("Iteratorfinalizado",{detail: { message: "Finalizado",id: this.id,},bubbles: true,cancelable: true});
 //    document.dispatchEvent(event);
 
-return;
 /*var that = this;
 
 

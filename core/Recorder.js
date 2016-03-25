@@ -315,6 +315,12 @@ var Recorder = {
 		}else if(id_selected == 9){
 		Manager.addIfTask('');			
 		return true;	
+		}else if(id_selected == 10){
+		Manager.addTableManagerTask('');			
+		return true;	
+		}else if(id_selected == 11){
+		Manager.addIteratorTask('');			
+		return true;	
 		}
 
 		
@@ -921,7 +927,6 @@ function handleSelectxPath(){
 		//NO ME CIERRAAAAA!!!!
 		Manager.clearCurrentPrimitiveTasks();
 		var arr_ls = Manager.initCurrentPrimitiveTasks();
-
 		if( arr_ls.length == 0){
 			////console.debug('no hay mas tareas');
 			localStorageManager.setStopExecuting();
@@ -984,7 +989,7 @@ function handleSelectxPath(){
           
           for (var i=0;i < arr_tasks.length;i++){
 
-          	if(arr_tasks[i].type == 'ComposedTask'){
+          	if(arr_tasks[i].type == 'ComposedTask' || arr_tasks[i].type == 'IteratorTask'){
           		
           		this.writeComposite(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
 	             	//split 

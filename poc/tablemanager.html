@@ -1,0 +1,2595 @@
+<!doctype html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script type="text/javascript" source="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<style type="text/css">
+	.hov {
+		border-style: solid !important;
+		outline-color: yellow !important;
+		background:#F3F3F3;
+
+	}
+
+	.topcorner{
+		position:fixed;
+		top:1em;
+		right:1em;
+		height: 100px;
+		width: 800px;
+		border-color: grey;
+		border-style: solid;
+		z-index: 500;
+        background-color: #286090;
+        color:"white";
+
+	}
+    .inner_topcorner{
+        position:fixed;
+        top:10em;
+        right:1em;
+        height: 500px;
+        width: 800px;
+        border-color: grey;
+        border-style: solid;
+        z-index: 600;
+        background-color: #286090;
+    }
+  	.select{
+  		color:red;
+  	}
+
+    .hide {
+    display:none;
+    }
+</style>
+</head>
+<body>
+<div class="panel-body">
+<div class="table-responsive">
+	<br>
+	<button id="table_manager">Start Table Manager</button><!-- -->
+<table class="table table-responsive table-striped table-bordered table-hover" id="tabla_actuacion">
+            <thead>
+                <tr>                   
+                   <!--th>actuacion_id</th-->
+                   <th></th>
+                   <th>PREF.</th>
+                   <th>ACTUACIÓN</th>
+                   <th>FECHA</th>
+                   <th>ASUNTO</th>
+                   <th>DIRIGIDO</th>  
+                   <th>ASIGNACION INICIAL</th>
+                   <th>CAUSANTE</th>
+                   <th>RECIBIO</th>
+                   <th></th>
+               </tr>
+           </thead>
+           <tbody>
+               
+                <tr class="border">
+                <td> 160 </td>
+                <td> BEC </td>
+                <td> 159 </td>
+                <td> 10/03/2016 </td>
+                <td> Informa sobre estado de la carrera </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Altomari, Silvia A. </td>
+                <td> Varela, Vanina </td>
+                <!--td> 163 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/163">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 159 </td>
+                <td> BEC </td>
+                <td> 158 </td>
+                <td> 09/03/2016 </td>
+                <td> Aclaración de materia cursada y solicita prorroga </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Besio Moreno, Virginia </td>
+                <td> Varela, Vanina </td>
+                <!--td> 162 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/162">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 158 </td>
+                <td> BEC </td>
+                <td> 157 </td>
+                <td> 09/03/2016 </td>
+                <td> Solicitud de beca-Adjunto </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Sagel, Paula </td>
+                <td> Varela, Vanina </td>
+                <!--td> 161 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/161">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 157 </td>
+                <td> BEC </td>
+                <td> 156 </td>
+                <td> 08/03/2016 </td>
+                <td> Beca adjunta documentación </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Gonzalez, María del Pilar </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 160 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/160">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 156 </td>
+                <td> BEC </td>
+                <td> 155 </td>
+                <td> 08/03/2016 </td>
+                <td> Becas. Certificados Laborales </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Romero, Ariel </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 159 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/159">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 155 </td>
+                <td> BEC </td>
+                <td> 154 </td>
+                <td> 08/03/2016 </td>
+                <td> Certificación aprobación y completitud plan de estudio año 2013 </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Gliksberg, Miguel </td>
+                <td> Alter, Marilina </td>
+                <!--td> 158 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/158">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 154 </td>
+                <td> BEC </td>
+                <td> 153 </td>
+                <td> 08/03/2016 </td>
+                <td> Constancia de aprobación y completitud plan de estudio año 2014 </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Gliksberg, Miguel </td>
+                <td> Alter, Marilina </td>
+                <!--td> 157 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/157">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 153 </td>
+                <td> ADM </td>
+                <td> 152 </td>
+                <td> 08/03/2016 </td>
+                <td> informe de actividades del observatorio de Género </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Formacion Judicial y Administrativo </td>
+                <td> Maffía , Diana </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 156 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/156">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 152 </td>
+                <td> BEC </td>
+                <td> 151 </td>
+                <td> 08/03/2016 </td>
+                <td> SOLICITUD DE RENOVACIÓN DE BECA </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Del Moral María Fernanda </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 155 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/155">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 151 </td>
+                <td> BEC </td>
+                <td> 150 </td>
+                <td> 08/03/2016 </td>
+                <td> Dictamen Evaluativo requerido para la solicitud de beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Brinso, Agustín </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 154 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/154">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 150 </td>
+                <td> BEC </td>
+                <td> 149 </td>
+                <td> 08/03/2016 </td>
+                <td> Adjunta documentación para su beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Chiodi, Cecilia Andrea </td>
+                <td> Alter, Marilina </td>
+                <!--td> 153 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/153">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 149 </td>
+                <td> BEC </td>
+                <td> 148 </td>
+                <td> 08/03/2016 </td>
+                <td> Adjunta fotocopiaque ha terminado el posgrado de Especialización en Administración de Justicia </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Alesio, María Elena </td>
+                <td> Alter, Marilina </td>
+                <!--td> 152 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/152">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 148 </td>
+                <td> BEC </td>
+                <td> 147 </td>
+                <td> 07/03/2016 </td>
+                <td> Informa situación beca 2015.- </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Vania, María Carla </td>
+                <td> Varela, Vanina </td>
+                <!--td> 151 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/151">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 147 </td>
+                <td> BEC </td>
+                <td> 146 </td>
+                <td> 07/03/2016 </td>
+                <td> Solicita prorroga.- </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Latrónico, Diego Ignacio </td>
+                <td> Varela, Vanina </td>
+                <!--td> 150 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/150">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 146 </td>
+                <td> BEC </td>
+                <td> 145 </td>
+                <td> 07/03/2016 </td>
+                <td> Acredita merias curasadas y solicita prorroga.- </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Riveros, Natalia Margarita </td>
+                <td> Varela, Vanina </td>
+                <!--td> 149 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/149">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 145 </td>
+                <td> BEC </td>
+                <td> 144 </td>
+                <td> 07/03/2016 </td>
+                <td> Solicitud de beca- Adjunto </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Hilaire chaneton,Pablo </td>
+                <td> Varela, Vanina </td>
+                <!--td> 148 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/148">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 144 </td>
+                <td> BEC </td>
+                <td> 143 </td>
+                <td> 07/03/2016 </td>
+                <td> Solicitud de beca </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> De Marco Calzada, Gabriela Paulina </td>
+                <td> Varela, Vanina </td>
+                <!--td> 147 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/147">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 143 </td>
+                <td> BEC </td>
+                <td> 142 </td>
+                <td> 07/03/2016 </td>
+                <td> Acredita meterias-Adjunto </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Berardinelli, Ignacio </td>
+                <td> Varela, Vanina </td>
+                <!--td> 146 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/146">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 142 </td>
+                <td> BEC </td>
+                <td> 141 </td>
+                <td> 07/03/2016 </td>
+                <td> Informa el reintegro de beca otorgado 2014.- </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Laspeñas, TomásPedro </td>
+                <td> Varela, Vanina </td>
+                <!--td> 145 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/145">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 141 </td>
+                <td> BEC </td>
+                <td> 140 </td>
+                <td> 07/03/2016 </td>
+                <td> Adjuntar formulario. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Buitrago, Nocolas </td>
+                <td> Varela, Vanina </td>
+                <!--td> 144 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/144">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 140 </td>
+                <td> BEC </td>
+                <td> 139 </td>
+                <td> 07/03/2016 </td>
+                <td> Solicitud de beca- Adjunto </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Boruchowicz, Ariela </td>
+                <td> Varela, Vanina </td>
+                <!--td> 143 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/143">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 139 </td>
+                <td> BEC </td>
+                <td> 138 </td>
+                <td> 04/03/2016 </td>
+                <td> Solicita beca- Adjunto </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Harrinngton, María </td>
+                <td> Varela, Vanina </td>
+                <!--td> 142 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/142">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 138 </td>
+                <td> BEC </td>
+                <td> 137 </td>
+                <td> 04/03/2016 </td>
+                <td> Manifiesta sobre finalización de carrera </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Real Salvador, Gastón Emiliano </td>
+                <td> Varela, Vanina </td>
+                <!--td> 141 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/141">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 137 </td>
+                <td> BEC </td>
+                <td> 136 </td>
+                <td> 04/03/2016 </td>
+                <td> Solicitud de beca- Adjunto </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Karamanukian, Federico Julian </td>
+                <td> Varela, Vanina </td>
+                <!--td> 140 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/140">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 136 </td>
+                <td> BEC </td>
+                <td> 135 </td>
+                <td> 04/03/2016 </td>
+                <td> Manifiesta sobre finalización de carrera.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Racauchi, Nicolas E </td>
+                <td> Varela, Vanina </td>
+                <!--td> 139 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/139">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 135 </td>
+                <td> BEC </td>
+                <td> 134 </td>
+                <td> 04/03/2016 </td>
+                <td> Manifiesta sobre finalización de carrera </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Garcia Garaygorta, Alejandro R </td>
+                <td> Varela, Vanina </td>
+                <!--td> 138 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/138">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 134 </td>
+                <td> BEC </td>
+                <td> 133 </td>
+                <td> 04/03/2016 </td>
+                <td> Beca. Prorroga en la entrega del certificado de calificaciones obtenidas. (Adjunta formulario) </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Bellino Valeria </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 137 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/137">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 133 </td>
+                <td> BEC </td>
+                <td> 132 </td>
+                <td> 04/03/2016 </td>
+                <td> Acredita Materia </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Lentino, Marianela </td>
+                <td> Varela, Vanina </td>
+                <!--td> 136 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/136">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 132 </td>
+                <td> BEC </td>
+                <td> 131 </td>
+                <td> 04/03/2016 </td>
+                <td> Solicitud de beca- Adjunto </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Aguilar, Mariana Griselda </td>
+                <td> Varela, Vanina </td>
+                <!--td> 135 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/135">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 131 </td>
+                <td> BEC </td>
+                <td> 130 </td>
+                <td> 04/03/2016 </td>
+                <td> Acredita materias </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Degiovani, Gabriel Mario </td>
+                <td> Varela, Vanina </td>
+                <!--td> 134 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/134">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 130 </td>
+                <td> BEC </td>
+                <td> 129 </td>
+                <td> 04/03/2016 </td>
+                <td> Acredita materias </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Bagnatto, Juan P. </td>
+                <td> Varela, Vanina </td>
+                <!--td> 133 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/133">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 129 </td>
+                <td> BEC </td>
+                <td> 128 </td>
+                <td> 03/03/2016 </td>
+                <td> Solicitud de beca, adjuntos </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Rojas, Isabel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 132 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/132">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 128 </td>
+                <td> BEC </td>
+                <td> 127 </td>
+                <td> 03/03/2016 </td>
+                <td> Acredita materias </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Buricca, Nora Fabiana </td>
+                <td> Varela, Vanina </td>
+                <!--td> 131 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/131">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 127 </td>
+                <td> BEC </td>
+                <td> 126 </td>
+                <td> 03/03/2016 </td>
+                <td> Acredita materias correspondientes al 2014. </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Biroccio, Juan Cruz </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 129 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/129">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 126 </td>
+                <td> BEC </td>
+                <td> 125 </td>
+                <td> 03/03/2016 </td>
+                <td> Refiere a acreditación de materias año 2015
+ </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Valerga, Juan martín </td>
+                <td> Varela, Vanina </td>
+                <!--td> 130 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/130">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 125 </td>
+                <td> BEC </td>
+                <td> 124 </td>
+                <td> 03/03/2016 </td>
+                <td> Renovación de beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Crezenzi, Rafael </td>
+                <td> Varela, Vanina </td>
+                <!--td> 128 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/128">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 124 </td>
+                <td> BEC </td>
+                <td> 123 </td>
+                <td> 03/03/2016 </td>
+                <td> Acredita materias 2014/2015 </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Draguilow, Luis Marcelo </td>
+                <td> Varela, Vanina </td>
+                <!--td> 127 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/127">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 123 </td>
+                <td> BEC </td>
+                <td> 122 </td>
+                <td> 03/03/2016 </td>
+                <td> Acredita materias cursadas </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Tafuri, Carolina </td>
+                <td> Varela, Vanina </td>
+                <!--td> 126 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/126">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 122 </td>
+                <td> BEC </td>
+                <td> 121 </td>
+                <td> 03/03/2016 </td>
+                <td> Solicitud de beca. Adjunta formularios correspondientes. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Buitrago Nicolas </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 125 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/125">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 121 </td>
+                <td> BEC </td>
+                <td> 120 </td>
+                <td> 03/03/2016 </td>
+                <td> Becas. Acredita materias cursadas, con respectivas calificaciones </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Buitrago Nicolas </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 124 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/124">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 120 </td>
+                <td> BEC </td>
+                <td> 119 </td>
+                <td> 02/03/2016 </td>
+                <td> Manifiesta sobre materias de 2014.- </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Ricapito, María Victoria </td>
+                <td> Varela, Vanina </td>
+                <!--td> 123 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/123">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 119 </td>
+                <td> BEC </td>
+                <td> 118 </td>
+                <td> 02/03/2016 </td>
+                <td> Dictamen Evaluativo </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Ure, Mariano Ernesto </td>
+                <td> Varela, Vanina </td>
+                <!--td> 122 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/122">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 118 </td>
+                <td> BEC </td>
+                <td> 117 </td>
+                <td> 02/03/2016 </td>
+                <td> Acredita Certificado Analítico </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Cuomo, Vanina S. </td>
+                <td> Varela, Vanina </td>
+                <!--td> 121 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/121">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 117 </td>
+                <td> BEC </td>
+                <td> 116 </td>
+                <td> 02/03/2016 </td>
+                <td> Acredita </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Bergallo, María del Pilar </td>
+                <td> Varela, Vanina </td>
+                <!--td> 120 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/120">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 116 </td>
+                <td> BEC </td>
+                <td> 115 </td>
+                <td> 02/03/2016 </td>
+                <td> Acredita materias </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Guzovsky, Yamila </td>
+                <td> Varela, Vanina </td>
+                <!--td> 119 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/119">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 115 </td>
+                <td> BEC </td>
+                <td> 114 </td>
+                <td> 02/03/2016 </td>
+                <td> Solicitud de Beca. Adjunta certificado analítico expedidopor el departamento de Posgrado de la Facultad de Derecho de la Uba. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Bordoy María De Los Angeles </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 118 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/118">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 114 </td>
+                <td> BEC </td>
+                <td> 113 </td>
+                <td> 02/03/2016 </td>
+                <td> Solicitud de beca. Adjunta certificado analítico expedido por el departamento de Posgrado de la Facultad de Derecho de la Uba. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Ferrando María Paula  </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 117 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/117">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 113 </td>
+                <td> BEC </td>
+                <td> 112 </td>
+                <td> 02/03/2016 </td>
+                <td> Acredita materias </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Truyen,Luis Alberto </td>
+                <td> Varela, Vanina </td>
+                <!--td> 116 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/116">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 112 </td>
+                <td> BEC </td>
+                <td> 111 </td>
+                <td> 02/03/2016 </td>
+                <td> Acredita materias </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Truyen,Luis Alberto </td>
+                <td> Varela, Vanina </td>
+                <!--td> 115 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/115">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 111 </td>
+                <td> BEC </td>
+                <td> 110 </td>
+                <td> 02/03/2016 </td>
+                <td> Acredita materias </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Barabani, Santiago </td>
+                <td> Varela, Vanina </td>
+                <!--td> 114 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/114">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 110 </td>
+                <td> BEC </td>
+                <td> 109 </td>
+                <td> 02/03/2016 </td>
+                <td> Solicita prórroga </td>
+                <td> Molina Quiroga, Eduardo </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Truyen,Luis Alberto </td>
+                <td> Varela, Vanina </td>
+                <!--td> 113 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/113">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 109 </td>
+                <td>  </td>
+                <td> 108 </td>
+                <td> 01/03/2016 </td>
+                <td> Acredita certificado Adjunto </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Fons, Helvecia </td>
+                <td> Varela, Vanina </td>
+                <!--td> 111 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/111">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 108 </td>
+                <td> BEC </td>
+                <td> 107 </td>
+                <td> 01/03/2016 </td>
+                <td> Acredita materia </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Gattinoni de mujia, María </td>
+                <td> Varela, Vanina </td>
+                <!--td> 110 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/110">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 107 </td>
+                <td> BEC </td>
+                <td> 106 </td>
+                <td> 01/03/2016 </td>
+                <td> Solicita prórroga  </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Esperuguin, Jorgelina  </td>
+                <td> Varela, Vanina </td>
+                <!--td> 109 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/109">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 106 </td>
+                <td> BEC </td>
+                <td> 105 </td>
+                <td> 01/03/2016 </td>
+                <td> Solicita prórroga </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Zerbino,Larisa Paula </td>
+                <td> Varela, Vanina </td>
+                <!--td> 108 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/108">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 105 </td>
+                <td> BEC </td>
+                <td> 104 </td>
+                <td> 01/03/2016 </td>
+                <td> Acredita carrera </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Cáseres, Gladys B. </td>
+                <td> Varela, Vanina </td>
+                <!--td> 107 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/107">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 104 </td>
+                <td> BEC </td>
+                <td> 103 </td>
+                <td> 01/03/2016 </td>
+                <td> Acompaña formulario de solicitud </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Crocitta, Lucio Oscar </td>
+                <td> Varela, Vanina </td>
+                <!--td> 106 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/106">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 103 </td>
+                <td> BEC </td>
+                <td> 102 </td>
+                <td> 01/03/2016 </td>
+                <td> Acredita materias </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Ferrarini, carolina Soledad </td>
+                <td> Varela, Vanina </td>
+                <!--td> 105 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/105">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 102 </td>
+                <td> BEC </td>
+                <td> 101 </td>
+                <td> 01/03/2016 </td>
+                <td> Renovación - Adjuntos </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Coria, Facundo Maximo </td>
+                <td> Varela, Vanina </td>
+                <!--td> 104 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/104">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 101 </td>
+                <td> BEC </td>
+                <td> 100 </td>
+                <td> 01/03/2016 </td>
+                <td> Solicita renovación de Beca. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Gabioud Eduardo f. </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 103 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/103">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 100 </td>
+                <td> BEC </td>
+                <td> 99 </td>
+                <td> 01/03/2016 </td>
+                <td> Beca otorgada, aclara error en un certificado. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Yuvone Natalia </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 102 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/102">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 99 </td>
+                <td> BEC </td>
+                <td> 98 </td>
+                <td> 01/03/2016 </td>
+                <td> Solicitud de la renovación del otorgamiento de beca, para cursar el 2 año de la maestría en Derecho Administrativo  Universidad Austral. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Yuvone Natalia </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 101 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/101">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 98 </td>
+                <td> BEC </td>
+                <td> 97 </td>
+                <td> 01/03/2016 </td>
+                <td> Acredita meterias 2015
+ </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Acerbo, Julieta </td>
+                <td> Varela, Vanina </td>
+                <!--td> 100 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/100">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 97 </td>
+                <td> BEC </td>
+                <td> 96 </td>
+                <td> 01/03/2016 </td>
+                <td> Certificados laborales-Adjunto </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Romero, Ariel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 99 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/99">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 96 </td>
+                <td> BEC </td>
+                <td> 95 </td>
+                <td> 01/03/2016 </td>
+                <td> Solicita prórroga para presentar certificado de materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Menendez Casariego, Carlos </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 98 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/98">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 95 </td>
+                <td> BEC </td>
+                <td> 94 </td>
+                <td> 01/03/2016 </td>
+                <td> Solicita prórroga para enviar certificado de facultad de materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Bertone, Analía </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 97 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/97">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 94 </td>
+                <td> BEC </td>
+                <td> 93 </td>
+                <td> 30/11/-0001 </td>
+                <td> Solicita prórroga- Adjuntos </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Rapaport, Florencia </td>
+                <td> Varela, Vanina </td>
+                <!--td> 96 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/96">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 93 </td>
+                <td> BEC </td>
+                <td> 92 </td>
+                <td> 01/03/2016 </td>
+                <td> Solicitud-Adjuntos </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Rapaport, Florencia </td>
+                <td> Varela, Vanina </td>
+                <!--td> 95 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/95">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 92 </td>
+                <td> BEC </td>
+                <td> 91 </td>
+                <td> 01/03/2016 </td>
+                <td> acreditación de materias cursadas 2014.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> García Garaygorta, Alejandro </td>
+                <td> Varela, Vanina </td>
+                <!--td> 94 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/94">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 91 </td>
+                <td> BEC </td>
+                <td> 90 </td>
+                <td> 01/03/2016 </td>
+                <td> Solicita prórroga </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> De Marco Calzada, gabriela Paulina </td>
+                <td> Varela, Vanina </td>
+                <!--td> 93 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/93">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 90 </td>
+                <td> BEC </td>
+                <td> 89 </td>
+                <td> 29/02/2016 </td>
+                <td> Solicita Renovación - adjuntos </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Yapur, María de la Paz </td>
+                <td> Varela, Vanina </td>
+                <!--td> 92 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/92">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 89 </td>
+                <td> BEC </td>
+                <td> 88 </td>
+                <td> 29/02/2016 </td>
+                <td> acreditación de materias  </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Yapur, María de la Paz </td>
+                <td> Varela, Vanina </td>
+                <!--td> 91 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/91">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 88 </td>
+                <td> BEC </td>
+                <td> 87 </td>
+                <td> 29/02/2016 </td>
+                <td> Solicitud de beca- Adjuntos </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Panick Postan, Marina Ailin </td>
+                <td> Varela, Vanina </td>
+                <!--td> 90 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/90">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 87 </td>
+                <td> BEC </td>
+                <td> 86 </td>
+                <td> 29/02/2016 </td>
+                <td> acreditación de materias cursadas año 2014.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Panick Postan, Marina Ailin </td>
+                <td> Varela, Vanina </td>
+                <!--td> 89 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/89">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 86 </td>
+                <td> BEC </td>
+                <td> 85 </td>
+                <td> 29/02/2016 </td>
+                <td> Solicita Beca  - adjuntos </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Callegaro, Romanella </td>
+                <td> Varela, Vanina </td>
+                <!--td> 88 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/88">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 85 </td>
+                <td> BEC </td>
+                <td> 84 </td>
+                <td> 29/02/2016 </td>
+                <td> Solicitud de beca,CV, Información de la carrera, certificado evaluativo, Copia de titulo.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Petroni, Ivana Gretel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 87 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/87">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 84 </td>
+                <td> BEC </td>
+                <td> 83 </td>
+                <td> 29/02/2016 </td>
+                <td> Adjunta certificado analítico de materias cursadas.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Martinez Perez,Mora Julieta </td>
+                <td> Varela, Vanina </td>
+                <!--td> 86 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/86">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 83 </td>
+                <td> BEC </td>
+                <td> 82 </td>
+                <td> 29/02/2016 </td>
+                <td> Adjunta Formulario de solicitud, Información de la carrera, CV, Copia de certificado laboral, Dictamen Evaluativo,  </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Feola, Romina </td>
+                <td> Varela, Vanina </td>
+                <!--td> 85 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/85">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 82 </td>
+                <td> BEC </td>
+                <td> 81 </td>
+                <td> 29/02/2016 </td>
+                <td> Desiste a la beca solicitada.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Becerra, Carolina </td>
+                <td> Varela, Vanina </td>
+                <!--td> 84 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/84">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 81 </td>
+                <td> BEC </td>
+                <td> 80 </td>
+                <td> 29/02/2016 </td>
+                <td> Solicitud de beca, Información de la carrera, CV, copia del titulo.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Ure, Mariano Ernesto </td>
+                <td> Varela, Vanina </td>
+                <!--td> 83 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/83">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 80 </td>
+                <td> BEC </td>
+                <td> 79 </td>
+                <td> 29/02/2016 </td>
+                <td> Solicitud Beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Piñeiro, Ignacio </td>
+                <td> Varela, Vanina </td>
+                <!--td> 82 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/82">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 79 </td>
+                <td> BEC </td>
+                <td> 78 </td>
+                <td> 29/02/2016 </td>
+                <td> Renovación de beca-adjunto </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Derman, Ezequiel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 81 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/81">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 78 </td>
+                <td> BEC </td>
+                <td> 77 </td>
+                <td> 30/11/-0001 </td>
+                <td> Beca otorgada, Detalle de materias cursadas y pedido de prórroga dispuesto en el art 20 inc. 2º. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Viola Sabrina </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 80 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/80">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 77 </td>
+                <td> BEC </td>
+                <td> 76 </td>
+                <td> 29/02/2016 </td>
+                <td> Beca otorgada, Adicional para cursar carrera de Posgrado en Derecho. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Aguirre Ahumada Mariangeles </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 79 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/79">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 76 </td>
+                <td> BEC </td>
+                <td> 75 </td>
+                <td> 29/02/2016 </td>
+                <td> justifica incumplimiento del plazo establecido para presentar certificados de aprobación de materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Iriarte Lopez, María Agustina </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 78 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/78">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 75 </td>
+                <td> BEC </td>
+                <td> 74 </td>
+                <td> 29/02/2016 </td>
+                <td> Responde intimación que  ha cursado y aprobado materias  </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Giovagnoli, María Luz </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 77 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/77">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 74 </td>
+                <td> BEC </td>
+                <td> 73 </td>
+                <td> 29/02/2016 </td>
+                <td> CERTIFICADO DE MATERIAS APROBADAS Y CURSADAS AÑO 2015 </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Gomez Chiapetta, Claudia Fabiana </td>
+                <td> Varela, Vanina </td>
+                <!--td> 76 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/76">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 73 </td>
+                <td> BEC </td>
+                <td> 72 </td>
+                <td> 29/02/2016 </td>
+                <td> Formulario de solicitud de Beca , informe sobre la carrera, copia del Título, cv y Dictamen Evaluativo. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Monteleone, Natalia </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 75 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/75">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 72 </td>
+                <td> BEC </td>
+                <td> 71 </td>
+                <td> 29/02/2016 </td>
+                <td> Solicita prórroga para acreditar materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Brinso, Agustín </td>
+                <td> Varela, Vanina </td>
+                <!--td> 74 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/74">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 71 </td>
+                <td> BEC </td>
+                <td> 70 </td>
+                <td> 29/02/2016 </td>
+                <td> Acredita certificado de materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> García Garaygorta, Alejandro </td>
+                <td> Varela, Vanina </td>
+                <!--td> 73 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/73">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 70 </td>
+                <td> BEC </td>
+                <td> 69 </td>
+                <td> 29/02/2016 </td>
+                <td> Certificado de materias cursadas.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Racauchi, Nicolas E </td>
+                <td> Varela, Vanina </td>
+                <!--td> 72 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/72">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 69 </td>
+                <td> BEC </td>
+                <td> 68 </td>
+                <td> 29/02/2016 </td>
+                <td> Solicita Prorrogapara creditacion de materias cursadas.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Acosta, María Eugenia </td>
+                <td> Varela, Vanina </td>
+                <!--td> 71 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/71">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 68 </td>
+                <td> BEC </td>
+                <td> 67 </td>
+                <td> 29/02/2016 </td>
+                <td> Solicita renovación,, Formulario, Evaluación de desempeño, constancia de pedido de certificado laboral.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Ferreyra, Agustín </td>
+                <td> Varela, Vanina </td>
+                <!--td> 70 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/70">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 67 </td>
+                <td> BEC </td>
+                <td> 66 </td>
+                <td> 29/02/2016 </td>
+                <td> Solicita prorroga.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Ferreyra, Agustín </td>
+                <td> Varela, Vanina </td>
+                <!--td> 69 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/69">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 66 </td>
+                <td> BEC </td>
+                <td> 65 </td>
+                <td> 29/02/2016 </td>
+                <td> Solicitud de Beca. Prórroga para cumplimentar con el art 20. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Delvecchio Honoria </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 68 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/68">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 65 </td>
+                <td> BEC </td>
+                <td> 64 </td>
+                <td> 29/02/2016 </td>
+                <td> certificado de materias cursadas.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Gilardenghi, Karina </td>
+                <td> Varela, Vanina </td>
+                <!--td> 67 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/67">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 64 </td>
+                <td> BEC </td>
+                <td> 63 </td>
+                <td> 29/02/2016 </td>
+                <td> Certificado de materias cursadas.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Paredes zambrano, Cristina Vanessa </td>
+                <td> Varela, Vanina </td>
+                <!--td> 66 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/66">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 63 </td>
+                <td> CAP </td>
+                <td> 62 </td>
+                <td> 26/02/2016 </td>
+                <td> Incorporación de la prueba en el debate oral y publico </td>
+                <td> Córdoba, Lucrecia </td>
+                <td> Departamento de Formacion Judicial y Administrativo </td>
+                <td>  Martinez Vega, María </td>
+                <td> Varela, Vanina </td>
+                <!--td> 65 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/65">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 62 </td>
+                <td> BEC </td>
+                <td> 61 </td>
+                <td> 26/02/2016 </td>
+                <td> Acredita materias cursadas año 2014.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Besip Moreno, Virginia </td>
+                <td> Varela, Vanina </td>
+                <!--td> 64 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/64">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 61 </td>
+                <td> BEC </td>
+                <td> 60 </td>
+                <td> 26/02/2016 </td>
+                <td> Beca. Acreditación de materias cursadas durante el 2015. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Crescenzi Rafael </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 63 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/63">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 60 </td>
+                <td> BEC </td>
+                <td> 59 </td>
+                <td> 26/02/2016 </td>
+                <td> Desiste  a pedido de beca. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Lastres, María Laura </td>
+                <td> Varela, Vanina </td>
+                <!--td> 62 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/62">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 59 </td>
+                <td> BEC </td>
+                <td> 58 </td>
+                <td> 26/02/2016 </td>
+                <td> solicita prórroga </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Pedreira, María Sol </td>
+                <td> Varela, Vanina </td>
+                <!--td> 61 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/61">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 58 </td>
+                <td> BEC </td>
+                <td> 57 </td>
+                <td> 25/02/2016 </td>
+                <td> Beca, acreditación de materias cursadas.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Magri, Noelia Alejandra </td>
+                <td> Varela, Vanina </td>
+                <!--td> 60 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/60">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 57 </td>
+                <td> BEC </td>
+                <td> 56 </td>
+                <td> 30/11/-0001 </td>
+                <td> Beca, acreditacion de materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Bava, Lucrecia </td>
+                <td> Varela, Vanina </td>
+                <!--td> 59 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/59">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 56 </td>
+                <td> BEC </td>
+                <td> 55 </td>
+                <td> 25/02/2016 </td>
+                <td> beca, acreditación de materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Sicardi, Mariano </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 58 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/58">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 55 </td>
+                <td> BEC </td>
+                <td> 54 </td>
+                <td> 25/02/2016 </td>
+                <td> beca, fotocopia certificada de titulo universitario. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Ortiz Celoria,Daniela </td>
+                <td> Varela, Vanina </td>
+                <!--td> 57 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/57">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 54 </td>
+                <td> CAP </td>
+                <td> 53 </td>
+                <td> 25/02/2016 </td>
+                <td> Informe sobre asistencia alumna cursoHerramientas de Internet ,30/09/15 </td>
+                <td> Córdoba, Lucrecia </td>
+                <td> Departamento de Formacion Judicial y Administrativo </td>
+                <td> Jaichenco Andrea </td>
+                <td> Varela, Vanina </td>
+                <!--td> 56 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/56">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 53 </td>
+                <td> BEC </td>
+                <td> 52 </td>
+                <td> 25/02/2016 </td>
+                <td> Beca, </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Juan Lima ,Fernando E. </td>
+                <td> Varela, Vanina </td>
+                <!--td> 55 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/55">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 52 </td>
+                <td> BEC </td>
+                <td> 51 </td>
+                <td> 25/02/2016 </td>
+                <td> Dictamen evaluativo Dra. Natalia L. Yuvone LP Nº 2856 </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Juan Lima ,Fernando E. </td>
+                <td> Varela, Vanina </td>
+                <!--td> 54 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/54">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 51 </td>
+                <td> BEC </td>
+                <td> 50 </td>
+                <td> 25/02/2016 </td>
+                <td> Beca, adjunta: formulario de solicitud, dictamen evaluativo,certificado de revista.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Izcovich, Natasha </td>
+                <td> Varela, Vanina </td>
+                <!--td> 53 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/53">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 50 </td>
+                <td> CNV </td>
+                <td> 49 </td>
+                <td> 24/02/2016 </td>
+                <td> Convenio Fundación Libra (actividad "entrenamiento en mediación transformativa")  </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Fariña, Gustavo </td>
+                <td> Varela, Vanina </td>
+                <!--td> 52 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/52">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 49 </td>
+                <td> BEC </td>
+                <td> 48 </td>
+                <td> 24/02/2016 </td>
+                <td> solicitud de beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Crocitta, Lucio Oscar </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 51 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/51">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 48 </td>
+                <td> BEC </td>
+                <td> 47 </td>
+                <td> 24/02/2016 </td>
+                <td> Beca,  Adjunta formulario de solicitud de beca, Informacion de carga horaria, curriculum, Dictamen evaluativo y constancia de titulo.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Augier, Marcela Noemi </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 50 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/50">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 47 </td>
+                <td> BEC </td>
+                <td> 46 </td>
+                <td> 24/02/2016 </td>
+                <td> Beca, adjunta: formulario de solicitud dictamen evaluativo  </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Sarrailh, Araceli Maite </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 49 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/49">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 46 </td>
+                <td> BEC </td>
+                <td> 45 </td>
+                <td> 24/02/2016 </td>
+                <td> Beca, acreditación de materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Sarrailh, Araceli Maite </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 48 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/48">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 45 </td>
+                <td> BEC </td>
+                <td> 44 </td>
+                <td> 24/02/2016 </td>
+                <td> beca, Acreditación de materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Gonzalez, Raquel </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 47 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/47">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 44 </td>
+                <td> BEC </td>
+                <td> 43 </td>
+                <td> 24/02/2016 </td>
+                <td> solicita libre deuda </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Hernandez Siri, Gustavo </td>
+                <td> Varela, Vanina </td>
+                <!--td> 46 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/46">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 43 </td>
+                <td> ADM </td>
+                <td> 42 </td>
+                <td> 24/02/2016 </td>
+                <td> nota rrhh 98/16 - devolución calificaciones anuales 2015 CFJ </td>
+                <td> Córdoba, Lucrecia </td>
+                <td> Departamento de Formacion Judicial y Administrativo </td>
+                <td> Romero, Ariel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 45 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/45">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 42 </td>
+                <td> BEC </td>
+                <td> 41 </td>
+                <td> 24/02/2016 </td>
+                <td> Solicita beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Silva Verges, Diego </td>
+                <td> Varela, Vanina </td>
+                <!--td> 44 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/44">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 41 </td>
+                <td> BEC </td>
+                <td> 40 </td>
+                <td> 30/11/-0001 </td>
+                <td> Beca, acompaña Certificado analítico y certificado de finalización de materias.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Carrere, Gastón </td>
+                <td> Varela, Vanina </td>
+                <!--td> 43 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/43">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 40 </td>
+                <td> BEC </td>
+                <td> 39 </td>
+                <td> 24/02/2016 </td>
+                <td> Informe que detalla agentes con becas pendientes </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Hernández Siri Gustavo Claudio </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 42 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/42">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 39 </td>
+                <td> BEC </td>
+                <td> 38 </td>
+                <td> 24/02/2016 </td>
+                <td> Solicitud de Beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Becerra, Carolina </td>
+                <td> Alter, Marilina </td>
+                <!--td> 41 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/41">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 38 </td>
+                <td> BEC </td>
+                <td> 37 </td>
+                <td> 24/02/2016 </td>
+                <td> Solicitud de beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Temponi, Pablo Ariel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 40 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/40">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 37 </td>
+                <td> BEC </td>
+                <td> 36 </td>
+                <td> 24/02/2016 </td>
+                <td> Beca, solicita prórroga para acreditar materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Gonzalez, maría Elena </td>
+                <td> Varela, Vanina </td>
+                <!--td> 39 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/39">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 36 </td>
+                <td> BEC </td>
+                <td> 35 </td>
+                <td> 24/02/2016 </td>
+                <td> Beca,Solicita prorroga para acreditar materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Chaves, Juan </td>
+                <td> Varela, Vanina </td>
+                <!--td> 38 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/38">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 35 </td>
+                <td> BEC </td>
+                <td> 34 </td>
+                <td> 23/02/2016 </td>
+                <td> Beca Acompaña certificado analítico y solicita prórroga en el plazo dispuesto para acreditar materia. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Tipito, Lucia </td>
+                <td> Varela, Vanina </td>
+                <!--td> 37 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/37">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 34 </td>
+                <td> BEC </td>
+                <td> 33 </td>
+                <td> 23/02/2016 </td>
+                <td> acompaña certificado expedido por la UBA </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Derman, Ezequiel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 36 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/36">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 33 </td>
+                <td> BEC </td>
+                <td> 32 </td>
+                <td> 23/02/2016 </td>
+                <td> Copia certificada del analítico emitido por el departamento de Posgrado de la Facultad de Derecho de la UBA.. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Gil Belloni Agustina </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 35 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/35">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 32 </td>
+                <td> BEC </td>
+                <td> 31 </td>
+                <td> 22/02/2016 </td>
+                <td> Solicita beca, Situación académica. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Lew, Ezequiel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 34 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/34">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 31 </td>
+                <td> BEC </td>
+                <td> 30 </td>
+                <td> 22/02/2016 </td>
+                <td> Certificado expedido por la universidad Di Tella con las materias cursadas. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> María Emilia Bavio </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 33 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/33">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 30 </td>
+                <td> BEC </td>
+                <td> 29 </td>
+                <td> 22/02/2016 </td>
+                <td> Solicitud de beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Paravagna, María Belen </td>
+                <td> Varela, Vanina </td>
+                <!--td> 32 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/32">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 29 </td>
+                <td> BEC </td>
+                <td> 28 </td>
+                <td> 22/02/2016 </td>
+                <td>  Solicitud de beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Conde Poyo, Alejandro Javier </td>
+                <td> Varela, Vanina </td>
+                <!--td> 31 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/31">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 28 </td>
+                <td> BEC </td>
+                <td> 27 </td>
+                <td> 22/02/2016 </td>
+                <td> Renovación de beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Neschuk, Fabiana Raquel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 30 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/30">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 27 </td>
+                <td> BEC </td>
+                <td> 26 </td>
+                <td> 22/02/2016 </td>
+                <td> Beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Trapani, Magalí </td>
+                <td> Varela, Vanina </td>
+                <!--td> 29 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/29">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 26 </td>
+                <td> BEC </td>
+                <td> 25 </td>
+                <td> 22/02/2016 </td>
+                <td> Beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Rodriguez Drago, Mariana Paula </td>
+                <td> Varela, Vanina </td>
+                <!--td> 28 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/28">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 25 </td>
+                <td> BEC </td>
+                <td> 24 </td>
+                <td> 19/02/2016 </td>
+                <td> remite certificados laborales  </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Fabián Meta- Direc. RR.HH. CM </td>
+                <td>  </td>
+                <!--td> 27 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/27">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 24 </td>
+                <td> BEC </td>
+                <td> 23 </td>
+                <td> 19/02/2016 </td>
+                <td> Solicitud de Beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Lastres, María Laura </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 26 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/26">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 23 </td>
+                <td> CAP </td>
+                <td> 22 </td>
+                <td> 19/02/2016 </td>
+                <td> Solicitud de curso en oficina "Programación Neurolinguística - Módulo I - Técnicas para lograr una Comunicación Eficaz" en Juzg. CAyT 14 </td>
+                <td> Córdoba, Lucrecia </td>
+                <td> Departamento de Formacion Judicial y Administrativo </td>
+                <td> Fastman, Lisandro E. </td>
+                <td> Alter, Marilina </td>
+                <!--td> 25 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/25">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 22 </td>
+                <td> BEC </td>
+                <td> 21 </td>
+                <td> 19/02/2016 </td>
+                <td> Renovacion de Beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Antonucci Posso, María Soledad </td>
+                <td>  </td>
+                <!--td> 24 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/24">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 21 </td>
+                <td> BEC </td>
+                <td> 20 </td>
+                <td> 19/02/2016 </td>
+                <td> listado de materias aprobadas y notas de posgrado , 2015 </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Antonucci Posso, María Soledad </td>
+                <td>  </td>
+                <!--td> 23 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/23">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 20 </td>
+                <td> BEC </td>
+                <td> 19 </td>
+                <td> 18/02/2016 </td>
+                <td> Adjunta el certificado de las materias cursadas y aprobadas durante el año 2015
+ </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Claudia Gomez Chiappetta </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 22 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/22">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 19 </td>
+                <td> BEC </td>
+                <td> 18 </td>
+                <td> 18/02/2016 </td>
+                <td> Entrega de copia certificada de materias correspondientes al 1 año de maestria en derecho penal. </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Olivera, Joaquín Santiago </td>
+                <td> Jalife, Juan Miguel </td>
+                <!--td> 21 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/21">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 18 </td>
+                <td> BEC </td>
+                <td> 17 </td>
+                <td> 17/02/2016 </td>
+                <td> Solicitud de Beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Froment, Tomás Daniel  </td>
+                <td> Alter, Marilina </td>
+                <!--td> 20 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/20">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 17 </td>
+                <td> BEC </td>
+                <td> 16 </td>
+                <td> 17/02/2016 </td>
+                <td> Solicitud de Beca  </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> D' Alessio, Maria Julia  </td>
+                <td> Alter, Marilina </td>
+                <!--td> 19 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/19">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 16 </td>
+                <td> CAP </td>
+                <td> 15 </td>
+                <td> 16/02/2016 </td>
+                <td> Solicita Curso en Oficina </td>
+                <td> Cordoba, Lucrecia  </td>
+                <td> Departamento de Formacion Judicial y Administrativo </td>
+                <td> Fuertes, Claudia Mariel </td>
+                <td> Romulo, Paula Mariana </td>
+                <!--td> 18 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/18">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 15 </td>
+                <td> ADM </td>
+                <td> 14 </td>
+                <td> 15/02/2016 </td>
+                <td> solicitud de informe -libre deuda </td>
+                <td> Fodor, Sandra  </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Siri, Gustavo </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 17 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/17">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 14 </td>
+                <td> BEC </td>
+                <td> 13 </td>
+                <td> 12/02/2016 </td>
+                <td> Acreditación Materias 2011 </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Camblong, Mariano Javier </td>
+                <td> Alter, Marilina </td>
+                <!--td> 16 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/16">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 13 </td>
+                <td> BEC </td>
+                <td> 12 </td>
+                <td> 12/02/2016 </td>
+                <td> Remite certificados laborales </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Romero, Ariel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 15 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/15">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 12 </td>
+                <td> BEC </td>
+                <td> 11 </td>
+                <td> 12/02/2016 </td>
+                <td> Acreditación Materias 2014 y 2015 </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Michaine,Nicolás Uriel </td>
+                <td> Alter, Marilina </td>
+                <!--td> 14 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/14">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 11 </td>
+                <td> BEC </td>
+                <td> 10 </td>
+                <td> 12/02/2016 </td>
+                <td> Solicitud de Beca </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Ortiz, Celoria Daniela </td>
+                <td> Alter, Marilina </td>
+                <!--td> 13 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/13">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 10 </td>
+                <td> BEC </td>
+                <td> 9 </td>
+                <td> 05/02/2016 </td>
+                <td> Solicita renovación de beca </td>
+                <td> Fodor,Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Oliveira, Joaquín Santiago </td>
+                <td> Varela, Vanina </td>
+                <!--td> 12 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/12">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 9 </td>
+                <td> BEC </td>
+                <td> 8 </td>
+                <td> 05/02/2016 </td>
+                <td> Remite certificado laborales </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Romero, Ariel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 11 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/11">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 8 </td>
+                <td> BEC </td>
+                <td> 7 </td>
+                <td> 04/02/2016 </td>
+                <td> Solicitud de beca </td>
+                <td> Fodor Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Gomez Chiapetta Claudia Fabiana </td>
+                <td> Varela, Vanina </td>
+                <!--td> 10 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/10">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 7 </td>
+                <td> BEC </td>
+                <td> 6 </td>
+                <td> 04/02/2016 </td>
+                <td> Declaración Jurada de Materias cursadas </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Trapani, Magalí </td>
+                <td> Varela, Vanina </td>
+                <!--td> 9 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/9">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 6 </td>
+                <td> BEC </td>
+                <td> 5 </td>
+                <td> 04/02/2016 </td>
+                <td> Solicita prorroga para acreditar materias </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Michaine,Nicolás Uriel </td>
+                <td> Varela, Vanina </td>
+                <!--td> 8 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/8">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 5 </td>
+                <td> CAP </td>
+                <td> 4 </td>
+                <td> 04/02/2016 </td>
+                <td> Solicita Curso de Escritura I Y II y  La Palabra en acción Mod. en Oficina-Para PCyF Nº 2 </td>
+                <td> Córdoba, Lucrecia </td>
+                <td> Departamento de Formacion Judicial y Administrativo </td>
+                <td> Calo Maiza, Diego </td>
+                <td> Varela, Vanina </td>
+                <!--td> 7 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/7">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 4 </td>
+                <td> BEC </td>
+                <td> 3 </td>
+                <td> 03/02/2016 </td>
+                <td> Declaración Jurada, detalles de materias cursadas.- </td>
+                <td> Fodor, Sandra </td>
+                <td> Departamento de Convenios y Becas </td>
+                <td> Sicardi, Mariano </td>
+                <td> Ferraro, Pedro </td>
+                <!--td> 6 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/6">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 3 </td>
+                <td> CAP </td>
+                <td> 2 </td>
+                <td> 03/02/2016 </td>
+                <td> Solicita curso en oficina manejo excel </td>
+                <td>  Cordoba, Lucrecia   </td>
+                <td> Departamento de Formacion Judicial y Administrativo </td>
+                <td> Perrupato, Alejandra </td>
+                <td> Varela, Vanina </td>
+                <!--td> 5 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/5">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 2 </td>
+                <td> ADM </td>
+                <td> 1 </td>
+                <td> 02/02/2016 </td>
+                <td> Remite Calendario </td>
+                <td> Molina Quiroga, Eduardo  </td>
+                <td> Centro de Formación Judicial </td>
+                <td> Gargiulo, Sergio </td>
+                <td> Varela, Vanina </td>
+                <!--td> 4 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/4">Ver</a></td>
+
+            </tr>
+                        <tr>
+                <td> 1 </td>
+                <td>  </td>
+                <td> 0 </td>
+                <td> 30/11/-0001 </td>
+                <td>  </td>
+                <td>  </td>
+                <td>  </td>
+                <td>  </td>
+                <td>  </td>
+                <!--td> 1 </td-->
+                <td> <a href="http://cfj.gov.ar/beta/public/editActuacion/1">Ver</a></td>
+
+            </tr>
+                
+        </tbody>
+    </table>
+</div>
+</div>
+
+<script>
+
+function highlihter_tabla(e){
+	console.debug(e);
+}
+//armar consola del manager
+
+window.onload = (function(){
+	var seleccionado = 0;
+	var id_tabla = '';
+	var el = document.getElementById("table_manager");
+    var obj_header = [];
+
+		el.addEventListener("click",function(){
+			
+					//Comienza a escuchar eventos
+					document.addEventListener("mouseover",function(e){
+					
+					//console.debug(e.target);
+					
+					
+					if(e.target.tagName == 'TH' && seleccionado == 0){
+						if( confirm("Seleccionar esta tabla?") ){
+								
+							var el_nom = document.getElementById("nombre_tabla");
+							id_tabla = e.target.parentNode.parentNode.parentNode.id;
+								
+							var text = document.createTextNode('Id Table: '+id_tabla);
+                			el_nom.appendChild(text); 	
+                			
+							var el_table_sel = e.target.parentNode.parentNode.parentNode;
+							el_table_sel.addEventListener('click',function(e){
+							
+
+							});
+							//highlihter_tabla
+							seleccionado = 1;
+                            var header = e.target.parentNode.cells;
+                            //console.debug(e.target.parentNode.cells);
+                            
+
+                            /////////////////////Arma cabecera/array
+                            for (var i = 0; i < header.length ; i++) {
+                                 
+                                // console.debug(header[i].innerText);
+                                 if(header[i].innerText != ''){
+
+                                   var text = header[i].innerText;
+                                   var obj_element = {order:i, header:text, value: ''};
+                                    
+                                   obj_header.push(obj_element);    
+                                 }
+                             };
+                            //console.debug(obj_header);
+                            ///////////////////
+						}
+					};
+					//console.debug(seleccionado);
+				/*	e.target.classList.add("hov");
+					
+					e.target.addEventListener("mouseout",function(e){
+					
+					e.target.classList.remove("hov");	
+
+					});
+				*/	
+					//var el_table = document.getElementById("tabla_actuacion");	
+					
+					});	
+		//////////////////////////////////////////////////////////////////////////
+
+       		var div = document.createElement("div");
+                div.classList.add('topcorner');
+                div.id = "sum_container";
+
+                var stop = document.createElement("input");
+                stop.value="X";
+                stop.type="button";
+                stop.addEventListener('click',function(){
+                    
+                     //document.removeEventListener('mouseup', handlerSum,false);
+                });
+
+                //////////////////////////////
+
+                var boton_filtrar = document.createElement("input");
+                boton_filtrar.value="Show Header";
+                boton_filtrar.type="button";
+                boton_filtrar.addEventListener('click',function(){
+                      //alert('empieza a filtrar la tabla: '+id_tabla);	
+                     //console.debug(obj_header);
+                     //document.removeEventListener('mouseup', handlerSum,false);
+                     createUIFilter();
+                     //Trae tabla que voy a filtrar
+                     var tabla = document.getElementById(id_tabla);
+                     
+                     //Filtra //tabla.rows.length
+                     /*for (var i = 1; i < tabla.rows.length ; i++) {
+                         //console.debug('compara esto');
+                         //console.debug(tabla.rows[i].cells[1].innerText);                       
+                        if ( tabla.rows[i].cells[1].innerText.indexOf('BEC') === -1 ){
+                            
+                            tabla.rows[i].classList.add('border');
+                        };
+                     };*/
+                     
+                     
+                     //reemplazo tabla con la que filtre
+                });
+                ////////////////////////////////////////Boton para guardar en el sharedData
+                var boton_save = document.createElement("input");
+                    boton_save.value="Save Table";
+                    boton_save.type="button";
+                
+                boton_save.addEventListener('click',function(){
+                
+                var tabla_filtrada = document.getElementById(id_tabla);
+                
+                for (var i = 1; i < tabla_filtrada.rows.length ; i++) {
+                    
+                    if (! (tabla_filtrada.rows[i].classList.contains('hide')) ) {
+                        
+                        console.debug(tabla_filtrada.rows[i]);
+
+                    }
+                }
+                
+                });
+                //////////////////////////////////////
+
+        
+
+                //////////////////////////////
+
+
+                var div_sum = document.createElement("div");
+                //div.classList.add('topcorner');
+                div_sum.id = "nombre_tabla";
+                //var text = document.createTextNode('Id Table: ');
+                //div_sum.appendChild(text);
+                var body = document.getElementsByTagName("body")[0];
+                div.appendChild(div_sum);
+                div.appendChild(stop);
+                div.appendChild(boton_filtrar);
+                div.appendChild(boton_save);
+                
+                body.appendChild(div);
+
+
+		//////////////////////////////////////////////////////////////////////////
+		});
+function filtrar(){
+    
+    var table_filter = document.getElementById('g_table_filter');
+    //Recorro y veo si tiene valores
+    
+    var array_filter = []; 
+    for (var i = 0; i < table_filter.rows.length ; i++) {
+        console.debug(table_filter.rows[i].cells[0].innerText);    
+        console.debug(table_filter.rows[i].cells[1].firstChild.value);
+        //creo el filtro
+       
+        var order = table_filter.rows[i].id;
+        var filter_value = table_filter.rows[i].cells[1].firstChild.value;
+        if(filter_value != ''){
+            var element = { order: order ,value:filter_value };
+            array_filter.push(element);
+        }   
+       
+
+    }
+ 
+
+
+                var tabla = document.getElementById(id_tabla);
+                     
+             //Filtra //tabla.rows.length
+             for (var i = 1; i < tabla.rows.length ; i++) {
+                 //console.debug('compara esto');
+                 //console.debug(tabla.rows[i].cells[1].innerText);                       
+                    //console.debug('agarra la fila'+i);
+                    //console.debug(tabla.rows[i].cells);
+                    //console.debug('compara con esto');
+                    //console.debug(array_filter);    
+                  
+                for (var j = 0; j < array_filter.length ; j++) { 
+                    //recorro para comparar
+                    
+                  var text_a_comparar = tabla.rows[i].cells[ array_filter[j].order ].innerText;
+                  var texto_filtrar = array_filter[j].value;
+                  //console.debug('compara esto:'+text_a_comparar+' con esto:'+texto_filtrar);
+
+                  if(! text_a_comparar.includes(texto_filtrar) ) tabla.rows[i].classList.add('hide');
+                
+                }      
+             };
+                     
+}
+
+function reset(){
+    
+          var tabla = document.getElementById(id_tabla);
+                     
+                     //Filtra //tabla.rows.length
+                     for (var i = 1; i < tabla.rows.length ; i++) {
+                         //console.debug('compara esto');
+                         //console.debug(tabla.rows[i].cells[1].innerText);                       
+                       // if ( tabla.rows[i].cells[1].innerText.indexOf('BEC') === -1 ){
+                            
+                            tabla.rows[i].classList.remove('hide');
+                       // };
+                     };
+                     
+}
+
+function createUIFilter(){
+    
+    var div_filter = document.createElement("div");
+                  
+                div_filter.id = "div_filter";
+                div_filter.classList.add('inner_topcorner');
+                
+                var sum_container = document.getElementById("sum_container");
+                
+                 var table = document.createElement('table');
+                     table.id = 'g_table_filter';
+                 //for (var i = 0; i < obj_header.length ; i++) {
+                   //console.debug( Object.keys(obj_header) );
+
+                   for (var prop in obj_header) {
+
+                    //console.debug(Object.keys(obj_header[prop]));
+                    //console.debug(Object.keys(obj_header[prop]));
+                    //creo elemento
+                    var tr = document.createElement('tr');
+                    tr.id = obj_header[prop].order;
+                    var td_title = document.createElement('td');
+                    td_title.style.color = "white";
+                    td_title.innerText = obj_header[prop].header;
+
+                    var td_value = document.createElement('td');
+                    var input_value = document.createElement('input');
+                    input_value.type = "text";
+
+                    td_value.appendChild(input_value);
+
+                    tr.appendChild(td_title);
+                    tr.appendChild(td_value);
+
+                    table.appendChild(tr);   
+                 }
+                 
+                 
+                div_filter.appendChild(table);
+                 //botones
+                var button_save = document.createElement('input');
+                button_save.type = 'button';
+                button_save.value = 'Save Filter';
+                button_save.addEventListener('click',filtrar,false);
+
+                var button_reset = document.createElement('input');
+                button_reset.type = 'button';
+                button_reset.value = 'Reset';
+                button_reset.addEventListener('click',reset,false);
+
+                div_filter.appendChild(button_save);
+                div_filter.appendChild(button_reset);
+
+                sum_container.appendChild(div_filter);
+                
+}
+
+})();
+
+</script>
+</body>
+</html>

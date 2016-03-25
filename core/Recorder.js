@@ -307,6 +307,12 @@ var Recorder = {
 		Manager.addComposedTask('');			
 		return true;	
 		}else if(id_selected == 7){
+		Manager.addSimpleHideTask('');			
+		return true;	
+		}else if(id_selected == 8){
+		Manager.addSimpleWrapTask('');			
+		return true;	
+		}else if(id_selected == 9){
 		Manager.addIfTask('');			
 		return true;	
 		}
@@ -1003,7 +1009,7 @@ function handleSelectxPath(){
 
           		//console.debug(arr_tasks[i].group);
           		if(arr_tasks[i].group.value == '' || arr_tasks[i].group.value == 0) {
-          			//console.debug(arr_tasks[i]);
+          			console.debug(arr_tasks[i]);
           			Recorder.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);	
           		}	             		
           	}
@@ -1064,7 +1070,7 @@ function handleSelectxPath(){
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
         
         //if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
-        tr.style.backgroundColor = 'gray';
+        tr.style.backgroundColor = '#2d5b89';
 		if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
 
 		//Hardcodeado!!!!
@@ -1141,6 +1147,7 @@ function handleSelectxPath(){
 		}else{
 			this.value = "hide";
 		};
+
 		//console.debug(this.parentNode.parentNode.id);
 		//var el = document.getElementById(this.parentNode.parentNode.id);
 
@@ -1150,21 +1157,21 @@ function handleSelectxPath(){
 		//por ahora esta separado por comas
 		var arr_id_tasks = task.value.value.split(',');
 		//console.debug(arr_id_tasks);
-		for(var i = 0;i < arr_id_tasks.length;i++){
-		
-		//oculto la tarea //Por ahora idento
-		var inner_el = document.getElementById(arr_id_tasks[i]);
-		
-		if(inner_el.style.display == 'none'){
-			inner_el.style.display ='';
-			//inner_el.firstChild.classList.add('ident_composite');
+			for(var i = 0;i < arr_id_tasks.length;i++){
 			
-		}else{
-			inner_el.style.display ='none';
-			//inner_el.firstChild.classList.add('ident_composite');
-		}	
+			//oculto la tarea //Por ahora idento
+			var inner_el = document.getElementById(arr_id_tasks[i]);
+			
+				if(inner_el.style.display == 'none'){
+					inner_el.style.display ='';
+					//inner_el.firstChild.classList.add('ident_composite');
+					
+				}else{
+					inner_el.style.display ='none';
+					//inner_el.firstChild.classList.add('ident_composite');
+				}	
 
-		} 
+			} 
 
 		};
 /*Event Handler*/
@@ -1188,21 +1195,89 @@ var pasabaporaqui = function(e){
 		add_button.value = "add";
 		add_button.classList.add('tesisunlp_button_left')
 		add_button.onclick = function(e){
-			//alert('agrega tarea');
-			//console.debug(e.target.parentNode.parentNode.id);
+
 			var comp_id = e.target.parentNode.parentNode.id;
 			var el = document.getElementById('table_consola');
+	
+			if( e.target.value == 'add' ){
+
+				for(var i = 0 ; i < el.rows.length ; i++){
+					console.debug(el.rows[i].id);
+
+					//agrego boton para ver que onda
+					var b = document.createElement("input");
+					b.type = "checkbox";
+					b.className = "add_button";
+					b.value = el.rows[i].id;
+
+					el.rows[i].appendChild(b);
+
+					e.target.value = 'sel';					
+
+				}	
+				
+
+			}else if( e.target.value == 'sel' ){
+
+				//busca las tareas seleccionadas
+				var els = document.getElementsByClassName('add_button');
+				
+				var id_composite = e.target.parentNode.parentNode.id;
+
+				for(var i = 0 ; i < els.length ; i++){
+						//console.debug(els[i]);
+						if(els[i].checked) { //Si esta seleccionado realizo las modificaciones
+
+							
+							var task = localStorageManager.getObject(els[i].value);
+							task.group.value = id_composite;
+							localStorageManager.setObjectR(JSON.stringify(task));
+							
+							var comp_task = localStorageManager.getObject(comp_id);
+						
+							//console.debug('comp_task.value.value');
+							//console.debug(typeof comp_task.value.value);
+							if( comp_task.value.value == ''){
+								var arr_values = Array();
+							}else{
+								var arr_values = comp_task.value.value.split(',');
+							}
+
+							
+							//console.debug('arr_values');
+							//console.debug(arr_values.le);
+							//console.debug(typeof arr_values);
+							//console.debug('arr_values');
+							arr_values.push(els[i].value);
+							//console.debug(arr_values);
+							comp_task.value.value = arr_values.join();
+							//console.debug(comp_task.value.value);
+							//console.debug(typeof comp_task.value.value);
+							localStorageManager.setObjectR(JSON.stringify(comp_task));
+						}
+
+				}
+
+				e.target.value = 'sel';
+
+				//refresh
+				Recorder.refresh();
+
+			};
+			
 			//console.debug(el.rows);
+			/*
 			for(var i = 0 ; i < el.rows.length ; i++){
-				console.debug(el.rows[i]);
+				console.debug(el.rows[i].id);
 
 				//el.rows[i].addEventListener('click', pasabaporaqui );
 
 				//agrego boton para ver que onda
 				var b = document.createElement("input");
-				b.type = "button";
+				b.type = "checkbox";
 				b.className = "add_button";
-				b.value = "x";
+				b.value = el.rows[i].id;
+
 
 				b.onclick = function(e){
 					console.debug(e.target.parentNode.id);
@@ -1231,9 +1306,8 @@ var pasabaporaqui = function(e){
 				};
 
 				el.rows[i].appendChild(b);
-
-
 			}
+			*/
 			//el.childNodes.map.call()
 			/*el.rows.map(function(o){
 				o.addEventListener('hover',function(){
@@ -1291,7 +1365,7 @@ var pasabaporaqui = function(e){
         //Si la tarea se ejecuto ( estado 1 ), se pone verde
         
         //if(task.group.value == 1 )  tr.style.display = 'none';//tr.classList.add('tr_composite');
-        tr.style.backgroundColor = 'gray';	
+        tr.style.backgroundColor = '#2d5b89';	
 		if(task.state.value == 1 )  tr.style.backgroundColor = 'green';
 		//Hardcodeado!!!!
 	    var pTask = document.createTextNode(text + 'Task - id:'+tr.id);
@@ -1303,7 +1377,7 @@ var pasabaporaqui = function(e){
 	    td1.style.visibility = "hidden";
 	    
 	    var td2 = document.createElement('td');
-	    if(task.group.value == 1 )
+	    if(task.group.value > 0 )
         	td2.classList.add('ident_composite');
         
 		//add br
@@ -1404,6 +1478,43 @@ var pasabaporaqui = function(e){
 
 	};
 
+		//Este boton es para sacar la tarea del composite
+		var out_button = document.createElement('input');
+		out_button.type = "button";
+		out_button.value = "O";
+		out_button.classList.add('tesisunlp_button_left');
+
+		out_button.onclick = function(e){
+			//console.debug(e.target.parentNode.parentNode.id);
+			var task = localStorageManager.getObject(e.target.parentNode.parentNode.id);
+			var composite_id = task.group.value;
+			
+			task.group.value = 0;
+
+			localStorageManager.setObjectR(JSON.stringify(task));
+			//Le saco el id de la tarea, siempre tiene que estar
+			var c_task = localStorageManager.getObject(composite_id);
+			
+			console.debug('saco saco saco');
+			console.debug(composite_id);
+			console.debug(c_task.value.value.split(','));
+			
+			var array_tasks = c_task.value.value.split(',');
+			var index = array_tasks.indexOf(e.target.parentNode.parentNode.id);
+			
+			if (index > -1) {
+			    array_tasks.splice(index, 1);
+			}
+
+			console.debug(array_tasks);
+			console.debug('saco saco saco');
+			//Y la saco de la tarea compuesta
+			c_task.value.value = array_tasks.join();
+			localStorageManager.setObjectR(JSON.stringify(c_task));
+
+			Recorder.refresh();
+		}
+
 
 		//var id_text = document.createTextNode(id+' - ');
 		var br = document.createElement('br');
@@ -1411,7 +1522,7 @@ var pasabaporaqui = function(e){
 		td2.appendChild(p_text);
 		//td2.appendChild(br);	
 		td2.appendChild(edit_button);
-		//td2.appendChild(delete_button);
+		td2.appendChild(out_button);
 		td2.appendChild(state_button);
 		td2.appendChild(play_button);
 
@@ -1642,6 +1753,7 @@ var pasabaporaqui = function(e){
 		localStorageManager.setObjectR(JSON.stringify(task));
 		};
 
+		
 		var id_text = document.createTextNode(id);
 
 		td1.appendChild(id_text);
@@ -1649,6 +1761,7 @@ var pasabaporaqui = function(e){
 		td3.appendChild(edit_button);
 		td4.appendChild(delete_button);
 		td5.appendChild(state_button);
+		
 		tr.appendChild(td1);
 		tr.appendChild(td2);
 		tr.appendChild(td3);

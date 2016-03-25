@@ -1,0 +1,97 @@
+<html>
+<script>
+
+var xhr = {
+    
+    send_request_jsonp: function (url, callback) {
+    var callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+    window[callbackName] = function(data) {
+        delete window[callbackName];
+        document.body.removeChild(script);
+        callback(data);
+    };
+
+    var script = document.createElement('script');
+    script.src = url + (url.indexOf('?') >= 0 ? '&' : '?') + 'callback=' + callbackName;
+    document.body.appendChild(script);
+    }
+    ,load: function (url, callback) {
+        var xhr;
+         
+        if(typeof XMLHttpRequest !== 'undefined') xhr = new XMLHttpRequest();
+        else {
+            var versions = ["MSXML2.XmlHttp.5.0", 
+                            "MSXML2.XmlHttp.4.0",
+                            "MSXML2.XmlHttp.3.0", 
+                            "MSXML2.XmlHttp.2.0",
+                            "Microsoft.XmlHttp"]
+ 
+             for(var i = 0, len = versions.length; i < len; i++) {
+                try {
+                    xhr = new ActiveXObject(versions[i]);
+                    break;
+                }
+                catch(e){}
+             } // end for
+        }
+         
+        xhr.onreadystatechange = ensureReadiness;
+         
+        function ensureReadiness() {
+            if(xhr.readyState < 4) {
+                return;
+            }
+             
+            if(xhr.status !== 200) {
+                return;
+            }
+ 
+            // all is well  
+            if(xhr.readyState === 4) {
+                callback(xhr);
+            }           
+        }
+         
+        xhr.open('GET', url, true);
+        xhr.send('');
+    }
+
+}
+
+console.debug(xhr);
+
+
+</script>
+<body>
+<div id="container"></div>
+<script>
+//http://www.telize.com/jsonip
+var t = Object.create(xhr);
+t.load('https://httpbin.org/get', function(xhr) {
+    document.getElementById('container').innerHTML = xhr.responseText;
+    //document.getElementById('container').innerHTML = xhr;
+});
+// Our simplified "load" function accepts a URL and CALLBACK parameter.
+/*xhr.load('https://httpbin.org/get', function(xhr) {
+    document.getElementById('container').innerHTML = xhr.responseText;
+    //document.getElementById('container').innerHTML = xhr;
+});
+
+/*
+xhr.send_request_jsonp('https://httpbin.org/get', function(xhr) {
+    //document.getElementById('container').innerHTML = xhr.responseText;
+    var r = JSON.parse(xhr.responseText);
+    console.debug(r);
+    document.getElementById('container').innerHTML = 'r';
+});
+*/
+/*xhr.send_request_jsonp('https://httpbin.org/get', function(xhr) {
+    //document.getElementById('container').innerHTML = xhr.responseText;
+    var r = JSON.parse(xhr.responseText);
+    console.debug(r);
+});*/
+
+
+</script>
+</body>
+</html>

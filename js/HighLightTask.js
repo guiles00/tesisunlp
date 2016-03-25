@@ -184,4 +184,4 @@ function searchText(a){
 }
 return HighLightTask;
 
-})()
+})();

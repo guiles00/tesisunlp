@@ -112,7 +112,7 @@ var RConsole = {
 			div_a_task.classList.add("div_a_task_style");
 			var sAddTask = document.createElement('select');
 			sAddTask.className = "tesisunlp_button";
-			var aOptions=['Add Augmented Task','DataCollector','HighLig.','Suma','Notas','Concat','Composite','If..Then'];
+			var aOptions=['Add Augmented Task','DataCollector','HighLig.','Suma','Notas','Concat','Composite','SimpleHide','SimpleWrap','If..Then'];
 			for (j = 0; j < aOptions.length; j = j + 1) {
 				opt = document.createElement('option');
 				opt.value = j;
@@ -828,6 +828,24 @@ var div_editor_postconditions = document.createElement("div");
 		body.style.marginLeft = "315px";
 	
 	 }
+	 ,moveTasks: function(){
+
+	 	var move_tasks = document.createElement("input");	
+	    move_tasks.setAttribute('type','button');
+	   // b_bpmn_import.hidden = true;
+	    move_tasks.setAttribute('value','M');
+	    move_tasks.setAttribute('class','tesisunlp_button');
+	    move_tasks.setAttribute('id','g_bpmn_move_tasks');
+		move_tasks.addEventListener("click", function(e){
+			//console.debug(e.target);
+			var tableDnD = new TableDnD();
+	    	tableDnD.init(table_consola);
+
+		} , false); 
+		
+		return move_tasks;
+
+	 }
 	 ,hideConsola: function(){
 	 	var div_consola = document.getElementById('div_consola');
 		var body   = document.body || document.getElementsByTagName('body')[0];
@@ -865,6 +883,8 @@ var div_editor_postconditions = document.createElement("div");
 	 	var export_button = this.createExportButton();
 	 	var bpmn_button = this.createBPMNButton();
 	 	var import_bpmn_button = this.createImportBPMNButton();
+
+	 	var move_tasks_button = this.moveTasks();
 	 	//console.debug(import_proc_button);
 	 	//container_header.appendChild(stopButton);
 	 	var contain_first = this.createContain();
@@ -900,8 +920,11 @@ var div_editor_postconditions = document.createElement("div");
 		contain_three.appendChild(show_import_button);
 		contain_three.appendChild(bpmn_button);
 		contain_three.appendChild(export_button);
+		contain_three.appendChild(move_tasks_button);
 		contain_three.appendChild(import_proc_button);
 		contain_three.appendChild(import_bpmn_button);
+
+		
 	 	container_header.appendChild(contain_three);
 		container_header.appendChild(contain_pocket);
 	 	var hr_el = document.createElement("hr");
@@ -926,6 +949,9 @@ var div_editor_postconditions = document.createElement("div");
 		      document.body.appendChild(container);
 
 		}
+
+			console.debug('veo si esta el body');
+	console.debug(body);
 	//var div_p_task = this.createSelectPrimitiveTasks();
 	//console.debug(div_p_task);
 	//	container_header.appendChild(div_p_task);

@@ -1,4 +1,4 @@
-function procedureIteratorHandler(e){
+/*function procedureIteratorHandler(e){
         
 
    //var indice = Manager.getIndice();           
@@ -22,7 +22,7 @@ function procedureIteratorHandler(e){
                       var it = new IteratorTask;
                       if( confirm('ejecuta next task?') ){
                       it.executeNextTask(e.detail.iterator,arr[i].id);  
-                      alert('Execute Next Task');
+                      //alert('Execute Next Task');
                       }
                       
                       
@@ -38,7 +38,7 @@ console.log(
     );
     //refresco la consola
     
-}
+}*/
 
  var IteratorTask = (function(){
 
@@ -119,7 +119,7 @@ var that = this;
              var task = localStorageManager.getObject(arr_ids[i]);
                 var oTask = construct(window[task.type]);
                 oTask.instanciamela(task);//.execute();
-        alert(task.id);
+        //alert(task.id);
 
             Manager.playTaskById(task.id);
                  //oTask.execute();
@@ -127,7 +127,7 @@ var that = this;
               //  Recorder.refresh();
 
    // };
-   // alert(j);
+   // //alert(j);
 };
     console.debug(localStorage.getItem('BPME'));
     that.finalizo(that.id);
@@ -140,7 +140,7 @@ var that = this;
 
 IteratorTask.prototype.executeNextTask = function(iterator,id){
 
-    alert('Ejecuta tarea de Iterator de '+iterator+'con id'+id);
+    //alert('Ejecuta tarea de Iterator de '+iterator+'con id'+id);
 
     var arr_task = JSON.parse(localStorage.getItem(iterator));
 
@@ -164,11 +164,44 @@ IteratorTask.prototype.executeNextTask = function(iterator,id){
 
 IteratorTask.prototype.execute = function(){
 
+localStorage.setItem("BPMEXECUTIONIT",1);
+localStorage.setItem("CONT",1);
+localStorage.setItem("ITERADOR",this.id);
+//traigo los ids para armar el array de ejecucion
+console.debug(this.value.value);
+    //var arr_tasks = [[3,13,12,16]];
+    var arr_tasks = this.value.value.split(',');
+    var iterantes = [];
+
+    //for(var i = 0; i < arr_tasks.length; i++){
+        var el = {tasks:arr_tasks,state:0};
+        iterantes.push(el);  
+    //}
+var el_c = {task_id:arr_tasks[arr_tasks.length - 1]};        
+iterantes.push(el_c);
+
+var el_v = {vueltas:2};        
+iterantes.push(el_v);
+
+//var el_cont = {cont:0};        
+//iterantes.push(el_cont);
+        
+localStorage.setItem('IT6',JSON.stringify(iterantes));
+Manager.initCurrentIteratorTasks();
+//alert('init currentTarget00');
+//console.debug(Manager.getCurrentIteratorTasks() );
+
+////alert('initCurrentIteratorTasks');
+//return;
+//this.finalizo(this.id);
+Manager.startIterator();
+//Recorder.clickPlayIterator();
+return;
 
 //localStorage.clear();
 
 
-document.addEventListener('Iteratorfinalizado',procedureIteratorHandler,false);
+//document.addEventListener('Iteratorfinalizado',procedureIteratorHandler,false);
 //ejecuta las tareas que tiene
 
 
@@ -178,7 +211,7 @@ var s_iterator = localStorage.getItem(store);
 
 if( s_iterator == null ){
     console.debug(s_iterator);
-    alert('entro acaaaaaa');
+    //alert('entro acaaaaaa');
     //Guarda en el store por primera vez
     var arr_tasks = this.value.value.split(',');
     var iterantes = [];
@@ -195,7 +228,7 @@ if( s_iterator == null ){
 var arr_task = JSON.parse(localStorage.getItem(store));
 
 //for(var i = 0; i < arr.length; i++){
-alert('ejecuta el primero y usa el listener');
+//alert('ejecuta el primero y usa el listener');
 console.debug(localStorage.getItem(store))
 
     //if(arr[i].state == 0){

@@ -11,7 +11,7 @@ function construct(constructor, args) {
 }
 function clickSelectedDOM(e){
 	
-		//alert("selection:"+e.target.innerHTML)
+		////alert("selection:"+e.target.innerHTML)
 		var xpath = Recorder.createXPathFromElement(e.target);
 	
 		//Agregar Confirm
@@ -56,10 +56,10 @@ function DomSelecter(e){
 		//e.target.className = "select";
 		e.target.classList.add("select");
 
-		//alert("selection:"+e.target.innerHTML)
+		////alert("selection:"+e.target.innerHTML)
 		var xpath = Recorder.createXPathFromElement(e.target);
 		console.debug(xpath);
-		//alert(xpath);
+		////alert(xpath);
 		//Agregar Confirm
 		var xpath_id = document.getElementById('xpath_id');
 		console.debug(xpath_id)
@@ -165,7 +165,7 @@ var Recorder = {
 						objValue.setValue('el_value');
 					var taskTitle = Object.create(TaskTitleAttribute).init({'value':tasks[i].id})
 
-						//alert(tasks[i].id)
+						////alert(tasks[i].id)
 				    var o_task = new FillInputTask(i,xPath,objValue,tipo,state,taskTitle);
 
 				    localStorageManager.insert(o_task.toJson());
@@ -242,10 +242,10 @@ var Recorder = {
 			//e.target.className = "select";
 			e.target.classList.add("select");
 
-			//alert("selection:"+e.target.innerHTML)
+			////alert("selection:"+e.target.innerHTML)
 			var xpath = createXPathFromElement(e.target);
 			console.debug(xpath);
-			alert(xpath);
+			//alert(xpath);
 			e.target.classList.remove("select");
 			
 			});
@@ -927,6 +927,7 @@ function handleSelectxPath(){
 		//NO ME CIERRAAAAA!!!!
 		Manager.clearCurrentPrimitiveTasks();
 		var arr_ls = Manager.initCurrentPrimitiveTasks();
+
 		if( arr_ls.length == 0){
 			////console.debug('no hay mas tareas');
 			localStorageManager.setStopExecuting();
@@ -960,6 +961,31 @@ function handleSelectxPath(){
         }
         
         Manager.start();
+          
+	}
+	,clickPlayIterator: function(){
+		
+		//Registro listener
+		document.addEventListener('finalizado',procedureHandler,false);
+
+		//Parche!!! Le mando al localStorage el estado de ejecucion		
+		localStorageManager.setStartExecuting();
+		//==================================================
+		//NO ME CIERRAAAAA!!!!
+		/*Manager.clearCurrentPrimitiveTasks();
+		var arr_ls = Manager.initCurrentPrimitiveTasks();
+
+		if( arr_ls.length == 0){
+			////console.debug('no hay mas tareas');
+			localStorageManager.setStopExecuting();
+			document.removeEventListener('finalizado',procedureHandler,false);
+
+			return false;
+		}*/
+
+		//=================================================
+
+        Manager.startIterator();
           
 	}
 	/**  

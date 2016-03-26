@@ -12,6 +12,15 @@
  /**
  * @class Manager
  */
+function pausecomp(millis)
+                 {
+                  var date = new Date();
+                  var curDate = null;
+                  do { curDate = new Date(); }
+                  while(curDate-date < millis);
+        }
+
+
 function procedureHandler(e){
         
     var indice = Manager.getIndice();           
@@ -19,8 +28,13 @@ function procedureHandler(e){
     //Si llego un finalizado incrementa indice
     Recorder.refresh();
     Manager.incrementIndice(); 
-    Manager.executeNextTaskWithTimer();                     
-
+    if(localStorage.getItem('BPMEXECUTIONIT') == '1'){
+   // alert('entro en bpm');
+    Manager.executeNextIteratorTaskWithTimer(2);
+    }else{
+    Manager.executeNextTaskWithTimer();                         
+    }
+    
 console.log(
         "Ejecuto esta tarea y la da como finalizada "+e.currentTarget.nodeName+", "
         +e.detail.id+": "+e.detail.message
@@ -30,10 +44,11 @@ console.log(
 }
 
 
-
 var Manager = (function () {
 	"use strict";
     var currentPrimitiveTasks = []; //Array de las tareas a realizar cuando se ejecuta el Manager
+    var currentIteratorTasks = [];
+    var executeTasksIterator = [];
     var primitiveTasks = ['FillInputTask','SelectOptionTask','TextAreaTask','CheckBoxTask']; //Un array de tareas que puede realizar
     var indice;
     var arr_tareas;
@@ -119,20 +134,33 @@ var Manager = (function () {
         * @method incrementIndice
         */
 		     incrementIndice: function(){
+                
 				this.indice = this.indice + 1;
+                //alert(this.indice);
 		     }
+             ,incrementIteratorIndice: function(){
+                
+                this.iteratorIndice = this.iteratorIndice + 1;
+                //alert(this.indice);
+             }
         /**
         * @method getIndice
         */
 		     ,getIndice: function(){
 				return this.indice;
 		     }
+             ,getIteratorIndice: function(){
+                return this.iteratorIndice;
+             }
         /**
         * @method setIndice
         */     
 		     ,setIndice:function(val){
 		     	this.indice = val;	
 		      }
+              ,setIteratorIndice:function(val){
+                this.iteratorIndice = val;  
+              }
         /**
         * @method getNextTask
         */       
@@ -170,6 +198,89 @@ var Manager = (function () {
                        }
             	}
         	}
+            ,armaElarray: function(){
+
+            //Manager.clearCurrentIteratorTasks();
+            this.executeTasksIterator = [];
+            var arr_ls = Manager.getCurrentIteratorTasks();
+                    
+                console.debug(arr_ls);    
+                    var i; //Recorro el array de tareas
+                    for (i=0;i < arr_ls.length ;i++){
+                            
+                        //como es una de las tareas nuevas la convierto otra vez en JSON
+                        var json_task = localStorageManager.getObject(arr_ls[i].id);
+                        var c_task = construct(window[arr_ls[i].type]);
+                        console.debug(c_task);
+                        //alert(arr_ls[i].id);
+                        c_task.instanciamela(json_task);
+                        
+                        //var c_t = Manager.getCurrentIteratorTasks();
+                        this.executeTasksIterator.push(c_task);
+                        
+                    }
+           // console.debug(this.executeTasksIterator);        
+           // //alert('asdasdas');
+            }
+            ,startIterator: function(n){
+               //Manager.armaElarray();
+               //alert('llama a este y este se encarga de todo');
+
+                var indice = 0;
+                //alert(indice);
+                Manager.setIteratorIndice(indice);
+
+                  document.addEventListener('finalizado',procedureHandler,false);
+
+                  var arr_tareas = Manager.getCurrentIteratorTasks();
+                  //var arr_tareas.length  
+                  console.debug(arr_tareas);
+                 // alert('arr_tareas');
+                    
+                  //var indice = Manager.getIndice();
+                  var task = arr_tareas[indice]; 
+                 // alert(indice);
+                  task.execute();  
+
+                  //alert('ejecuta esta tarea');
+                  //alert(task.id);
+                  //console.debug('ejecuta esta tarea');
+                    
+               /* if(task.id == 9 ){
+                    alert('entro aca?')
+                    localStorageManager.poneTareasenCero();
+                    //Temporalmente agrego un contador al Iterador
+                    var cont = parseInt(localStorage.getItem('CONT'));
+                    cont = cont + 1; 
+                    localStorage.setItem('CONT',cont);
+                localStorage.setItem("BPMEXECUTIONIT",0);
+
+                }*/
+               // alert(task.id);
+              /*  var cont = localStorage.getItem('CONT');
+               
+                console.debug('contador: '+cont);
+               
+                if(cont <= 2){
+                    Manager.resumeIterator(cont);
+                    //alert('segui ejecutando');
+                // Manager.playTaskById(6);   
+                }else{
+                localStorage.setItem("BPMEXECUTIONIT",0);
+                localStorage.setItem("CONT",0);
+                Manager.finalizoTarea(6);
+                }*/
+                    //Si el contador es mas a 2 finalizo las dos tareas
+                 
+                 
+                  //Manager.finalizoTarea(6);  
+                  
+                  //console.debug('ejecuto o no ejecuto?');
+                  //Manager.executeNextTaskWithTimer();
+            }
+            ,resumeIterator: function(n){
+                console.debug('sigue ejecutando '+n);
+            }
         /**
         * @method start
         */  
@@ -190,17 +301,36 @@ var Manager = (function () {
                   var task = arr_tareas[indice]; 
                   
                   task.execute();  
-           
+                 
+                  //Si es iterator, lo saco del localStorage 
+                  //Y si es la ultima tarea para ejecutar, las pongo otra vez en estado 0
+                 // var v = localStorageManager.traeLasVueltas();
+                  //if(v == 2) Manager.finalizoTarea(6);
                   
-                  //console.debug('ejecuto o no ejecuto?');
-		          //Manager.executeNextTaskWithTimer();
+                  //var oTask = localStorageManager.getObject(6);
+//&& oTask.state.value == 0
+                  //
+                 // Manager.finalizoTarea(6);  
+                  //traigo los datos del iterator
+                  
+
         	}
+            ,finalizoTarea: function(id){
+                    
+                    var oTask = localStorageManager.getObject(id);
+
+                    oTask.state.value = 1;
+                    localStorageManager.setObjectR(JSON.stringify(oTask));
+            }
         /**
         * @method clearCurrentPrimitiveTasks
         */       
         	,clearCurrentPrimitiveTasks: function(){
             currentPrimitiveTasks=[];
         	}
+            ,clearCurrentIteratorTasks: function(){
+            currentIteratorTasks=[];
+            }
         /**
         * @method addPrimitiveTask
         */   //Manager.addPrimitiveTask(arr_ls[i].id,arr_ls[i].type,xPath,value,0,arr_ls[i].state);
@@ -250,13 +380,24 @@ var Manager = (function () {
         * @method getCurrentPrimitiveTasks
         */  
         //Que me devuelva las que estan en estado 0, para ejectuar
-        	,getCurrentPrimitiveTasks: function(){
-        	return currentPrimitiveTasks;
+        	,getCurrentIteratorTasks: function(){
+             var tasks = localStorageManager.getCurrentIteratorTasks();
+               return tasks;        
+        	//return currentIteratorTasks;
         	}
-            
+            ,getCurrentPrimitiveTasks: function(){
+            return currentPrimitiveTasks;
+            }
             ,initCurrentPrimitiveTasks: function(){
                this.currentPrimitiveTasks = [];
                var tasks = localStorageManager.getCurrentTasks();
+               return tasks;
+            }
+            ,initCurrentIteratorTasks: function(){
+               this.currentIteratorTasks = [];
+               var tasks = localStorageManager.getCurrentIteratorTasks();
+               console.debug(tasks);
+               //alert('asdasdasd11111');
                return tasks;
             }
         /**
@@ -317,7 +458,89 @@ var Manager = (function () {
                      
                             var task = arr_tareas[indice]; 
                             task.execute();
+            
+
+                            //Manager.incrementIndice(); 
+                            //Manager.executeNextTaskWithTimer();                     
+
+                    }
+
+                , 1000);
+            }
+            ,executeNextIteratorTaskWithTimer: function(n){
+              //alert('ejecuta');
+              //  pausecomp(1000);
+
+            //Tiene que traer las tareas del localStorage
+            var arr_tareas =  Manager.getCurrentIteratorTasks();
+            //Esto hay que modificarlo, no me gusta como esta
+            //Si el indice es igual( ya llego a ejecutar todas las tareas)
+            
+         /*   var indice = Manager.getIndice();           
+                        //alert('indice'+indice);
+                        if(typeof arr_tareas[indice] == "undefined") {
+                            //Asumo que finalizo el procedimiento
+                            //Fijate un metodo que trae la siguiente tarea 
+                            //La finalizacion del procedimiento pone en cero el estado y sale.    
                             
+                            localStorageManager.setStopExecuting();
+                            return false;
+                        }
+                        //siempre trae las tareas con estado 0, este if esta al pedo.
+                     
+                            var task = arr_tareas[indice]; 
+                            task.execute();
+                        
+         */
+
+                setTimeout(
+                    function () {    
+
+                        var indice = Manager.getIteratorIndice();
+                        console.debug(arr_tareas);           
+                        //alert('Ejecuta esta tarea indice '+indice);
+                        if(typeof arr_tareas[indice] == "undefined") {
+                            //Asumo que finalizo el procedimiento
+                            //Fijate un metodo que trae la siguiente tarea 
+                            //La finalizacion del procedimiento pone en cero el estado y sale.    
+                            
+                            localStorageManager.setStopExecuting();
+                            return false;
+                        }
+                        //siempre trae las tareas con estado 0, este if esta al pedo.
+                     
+                        var task = arr_tareas[indice]; 
+                            task.execute();
+                    var ultima_tarea = JSON.parse(localStorage.getItem('IT6'))[1].task_id;
+                    var cont = parseInt(localStorage.getItem('CONT'));
+
+                    /*if(cont == 2){
+                     console.debug(Manager.getCurrentIteratorTasks());
+                     //alert('finaliza');   
+                     Manager.finalizoTarea(6); //Sacale el hardcodeo por el amor de jesucristo
+                     localStorage.setItem("BPMEXECUTIONIT",0);   
+                    }*/
+                   // alert(ultima_tarea);
+                    if(task.id == ultima_tarea){
+                    if(cont == 2){
+                    var it = localStorage.getItem('ITERADOR');
+                     Manager.finalizoTarea(it); //Sacale el hardcodeo por el amor de jesucristo
+                     Recorder.refresh();
+                     localStorage.setItem("BPMEXECUTIONIT",0);
+                     return;   
+                    }
+                   // alert('realizo '+cont+' vueltas');
+                    localStorageManager.poneTareasenCero();
+                    //Temporalmente agrego un contador al Iterador
+                    cont = cont + 1; 
+                    localStorage.setItem('CONT',cont);
+                    //localStorage.setItem("BPMEXECUTIONIT",0);
+                    
+                    Manager.startIterator();
+                    }
+                    
+                    
+
                             //Manager.incrementIndice(); 
                             //Manager.executeNextTaskWithTimer();                     
 

@@ -251,6 +251,87 @@ localStorageManager = {
         }*/
     return currentTasks;
     }
+    ,getCurrentIteratorTasks: function(){
+        //ponele que trajo estos tres
+        var tareas = JSON.parse(localStorage.getItem('IT6'))[0].tasks;
+        var currentTasks = new Array();
+        for(var i = 0; i < tareas.length ; i++){
+         //   alert('tareas?');
+        var o = localStorageManager.getObject(tareas[i]);
+            
+       // console.debug(o);
+        var c_task = construct(window[o.type]);
+            c_task.instanciamela(o);
+        
+        //agrega si falta ejecutar
+        console.debug(o.state.value);
+        if(o.state.value == 0)
+             currentTasks.push(c_task);    
+
+        }
+        console.debug(currentTasks);
+        //alert('currentTasks');
+        
+        /*var o3 = localStorageManager.getObject(3);
+        var o13 = localStorageManager.getObject(13);
+        var o12 = localStorageManager.getObject(12);
+        
+        var c_task3 = construct(window[o3.type]);
+            c_task3.instanciamela(o3);
+        
+        currentTasks.push(c_task3);
+
+
+        var c_task13 = construct(window[o13.type]);
+            c_task13.instanciamela(o13);
+        
+        currentTasks.push(c_task13);
+        
+
+        var c_task12 = construct(window[o12.type]);
+            c_task12.instanciamela(o12);
+        
+        currentTasks.push(c_task12);        
+        */
+       // currentTasks.push(o5);
+       // currentTasks.push(o3);
+       // currentTasks.push(o1);
+      // currentTasks.push(o5);
+                
+
+        /*var i;
+        for (i = 0; i < arr_ls.length; i = i + 1) {
+            if(arr_ls[i].state.value == 0) {
+                currentTasks.push(arr_ls[i]);
+            }
+        };*/
+
+        //console.debug(currentTasks);
+        //alert('averla');
+    return currentTasks;
+    }
+    ,poneTareasenCero: function(){
+       
+        var tasks = localStorage.getItem('IT6');
+        var arr_t = JSON.parse(tasks)[0].tasks;
+        //console.debug(arr_t);
+        for(var i = 0 ; i < arr_t.length ; i++){
+
+        var oTask = localStorageManager.getObject(arr_t[i]);
+
+        oTask.state.value = 0;
+        localStorageManager.setObjectR(JSON.stringify(oTask));
+
+        }                
+        Recorder.refresh();
+        //alert('pongo tareas en cero');
+    }
+    ,traeLasVueltas: function(){
+        var tasks = localStorage.getItem('IT6');
+        var v = JSON.parse(tasks)[2].vueltas;
+        
+        return v;
+    }
     ,removeElement: function(id){
         
         var procedure = document.getElementById('procedures_select').value;

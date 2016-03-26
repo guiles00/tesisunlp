@@ -546,7 +546,7 @@ var Manager = (function () {
 
                     }
 
-                , 1000);
+                , 2000);
             }
             ,playTaskById: function(id){
 

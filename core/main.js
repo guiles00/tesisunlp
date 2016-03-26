@@ -36,7 +36,7 @@ if(localStorage.getItem("BPMEXECUTIONIT") == 1){
 	
 	//console.debug(localStorage.getItem('IT6'));
 	Recorder.refresh();
-	RConsole.showConsola();
+	//RConsole.showConsola();
 	//Manager.resumeIterator(6);
 	Manager.startIterator();
 }

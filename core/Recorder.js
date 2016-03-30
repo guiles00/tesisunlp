@@ -321,7 +321,11 @@ var Recorder = {
 		}else if(id_selected == 11){
 		Manager.addIteratorTask('');			
 		return true;	
+		}else if(id_selected == 12){
+		Manager.addTableManagerTask('');			
+		return true;	
 		}
+
 
 		
 

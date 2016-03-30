@@ -329,3 +329,34 @@ background-color:#336699;
     border-radius: 10px;
 }
 */
+
+
+.table_manager_topcorner{
+	position:fixed;
+	top:1em;
+	right:1em;
+	height: 100px;
+	width: 800px;
+	border-color: grey;
+	border-style: solid;
+	z-index: 500;
+    background-color: #286090;
+    color:"white";
+
+}
+
+.inner_topcorner{
+    position:fixed;
+    top:10em;
+    right:1em;
+    height: 500px;
+    width: 800px;
+    border-color: grey;
+    border-style: solid;
+    z-index: 600;
+    background-color: #286090;
+}
+
+.hide {
+display:none;
+}

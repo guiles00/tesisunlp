@@ -1,3 +1,113 @@
+var seleccionado = 0; //Es TEMPORAL, como vairas cosas y nunca las cambie :P
+var id_tabla = '';
+var obj_header = [];
+//Esto es una funcion que va a un evento, lo tengo que poner afuera
+function tableHeaderHandler(e){
+                //Comienza a escuchar eventos
+                    
+                    if(e.target.tagName == 'TH' && seleccionado == 0){
+                        if( confirm("Seleccionar esta tabla?") ){
+                                
+                            var el_nom = document.getElementById("div_table_manager_container");
+                            id_tabla = e.target.parentNode.parentNode.parentNode.id;
+                                
+                            var text = document.createTextNode('Id Table: '+id_tabla);
+                            el_nom.appendChild(text);   
+                            
+                            var el_table_sel = e.target.parentNode.parentNode.parentNode;
+                            el_table_sel.addEventListener('click',function(e){
+                            
+
+                            });
+                            //highlihter_tabla
+                            seleccionado = 1;
+                            var header = e.target.parentNode.cells;
+                            //console.debug(e.target.parentNode.cells);
+                            
+
+                            /////////////////////Arma cabecera/array
+                            for (var i = 0; i < header.length ; i++) {
+                                 
+                                // console.debug(header[i].innerText);
+                                 if(header[i].innerText != ''){
+
+                                   var text = header[i].innerText;
+                                   var obj_element = {order:i, header:text, value: ''};
+                                    
+                                   obj_header.push(obj_element);    
+                                 }
+                             };
+                            //console.debug(obj_header);
+                            ///////////////////
+                        }
+                    };
+}
+
+function filtrar(){
+    
+    var table_filter = document.getElementById('g_table_filter');
+    //Recorro y veo si tiene valores
+    
+    var array_filter = []; 
+    for (var i = 0; i < table_filter.rows.length ; i++) {
+        console.debug(table_filter.rows[i].cells[0].innerText);    
+        console.debug(table_filter.rows[i].cells[1].firstChild.value);
+        //creo el filtro
+       
+        var order = table_filter.rows[i].id;
+        var filter_value = table_filter.rows[i].cells[1].firstChild.value;
+        if(filter_value != ''){
+            var element = { order: order ,value:filter_value };
+            array_filter.push(element);
+        }   
+       
+
+    }
+ 
+
+
+                var tabla = document.getElementById(id_tabla);
+                     
+             //Filtra //tabla.rows.length
+             for (var i = 1; i < tabla.rows.length ; i++) {
+                 //console.debug('compara esto');
+                 //console.debug(tabla.rows[i].cells[1].innerText);                       
+                    //console.debug('agarra la fila'+i);
+                    //console.debug(tabla.rows[i].cells);
+                    //console.debug('compara con esto');
+                    //console.debug(array_filter);    
+                  
+                for (var j = 0; j < array_filter.length ; j++) { 
+                    //recorro para comparar
+                    
+                  var text_a_comparar = tabla.rows[i].cells[ array_filter[j].order ].innerText;
+                  var texto_filtrar = array_filter[j].value;
+                  //console.debug('compara esto:'+text_a_comparar+' con esto:'+texto_filtrar);
+
+                  if(! text_a_comparar.includes(texto_filtrar) ) tabla.rows[i].classList.add('hide');
+                
+                }      
+             };
+                     
+}
+
+
+function reset(){
+    
+          var tabla = document.getElementById(id_tabla);
+                     
+                     //Filtra //tabla.rows.length
+                     for (var i = 1; i < tabla.rows.length ; i++) {
+                         //console.debug('compara esto');
+                         //console.debug(tabla.rows[i].cells[1].innerText);                       
+                       // if ( tabla.rows[i].cells[1].innerText.indexOf('BEC') === -1 ){
+                            
+                            tabla.rows[i].classList.remove('hide');
+                       // };
+                     };
+                     
+}
+
 var TableManagerTask = (function(){
 
 
@@ -30,15 +140,126 @@ TableManagerTask.prototype.instanciamela = function(o){
     return this;
              
 }
+
+TableManagerTask.prototype.escucharTabla = function(){
+     document.addEventListener("click",tableHeaderHandler,false);
+}
+
 TableManagerTask.prototype.execute = function(){
        
-    if( confirm('finalizo') ) {
+    
+    this.createMasterUI();
+    this.escucharTabla();
+
+ /*   if( confirm('finalizo') ) {
         this.finalizo(this.id);
     }else{
         return false;
     }
+   */ 
     
-    
+}
+TableManagerTask.prototype.createUIFilter = function(){
+   
+    var div_filter = document.createElement("div");
+                  
+                div_filter.id = "div_filter";
+                div_filter.classList.add('inner_topcorner');
+                
+                var sum_container = document.getElementById("div_table_manager_container");
+                
+                 var table = document.createElement('table');
+                     table.id = 'g_table_filter';
+                 //for (var i = 0; i < obj_header.length ; i++) {
+                   //console.debug( Object.keys(obj_header) );
+
+                   for (var prop in obj_header) {
+
+                    //console.debug(Object.keys(obj_header[prop]));
+                    //console.debug(Object.keys(obj_header[prop]));
+                    //creo elemento
+                    var tr = document.createElement('tr');
+                    tr.id = obj_header[prop].order;
+                    var td_title = document.createElement('td');
+                    td_title.style.color = "white";
+                    td_title.innerText = obj_header[prop].header;
+
+                    var td_value = document.createElement('td');
+                    var input_value = document.createElement('input');
+                    input_value.type = "text";
+
+                    td_value.appendChild(input_value);
+
+                    tr.appendChild(td_title);
+                    tr.appendChild(td_value);
+
+                    table.appendChild(tr);   
+                 }
+                 
+                 
+                div_filter.appendChild(table);
+                 //botones
+                var button_save = document.createElement('input');
+                button_save.type = 'button';
+                button_save.value = 'Save Filter';
+                button_save.addEventListener('click',filtrar,false);
+
+                var button_reset = document.createElement('input');
+                button_reset.type = 'button';
+                button_reset.value = 'Reset';
+                button_reset.addEventListener('click',reset,false);
+
+                div_filter.appendChild(button_save);
+                div_filter.appendChild(button_reset);
+
+                sum_container.appendChild(div_filter);
+ 
+}
+TableManagerTask.prototype.createMasterUI = function(){
+
+            var div = document.createElement("div");
+                div.classList.add('table_manager_topcorner');
+                div.id = "div_table_manager_container";
+
+                var close = document.createElement("input");
+                close.classList.add('tesisunlp_close_button');
+                close.value="X";
+                close.type="button";
+                close.addEventListener('click',function(e){
+                        
+                        var el = document.getElementById('div_table_manager_container');
+                        el.remove();
+                        
+                        document.removeEventListener("click",tableHeaderHandler,false);
+                });
+
+                var boton_filtrar = document.createElement("input");
+                boton_filtrar.value="Show Header";
+                boton_filtrar.type="button";
+                boton_filtrar.addEventListener('click',function(){
+                     var table_manager = new TableManagerTask();
+
+                     table_manager.createUIFilter();
+                     
+                     //Trae tabla que voy a filtrar
+                     //var tabla = document.getElementById(id_tabla);
+                   
+                });
+
+
+                //var div_sum = document.createElement("div");
+                
+                //div_sum.id = "nombre_tabla";
+                
+                var body = document.getElementsByTagName("body")[0];
+                //div.appendChild(div_sum);
+                div.appendChild(close);
+                div.appendChild(boton_filtrar);
+                //div.appendChild(boton_save);
+                
+                body.appendChild(div);
+
+
 }
 TableManagerTask.prototype.setLocation = function(url){
     this.location = url;

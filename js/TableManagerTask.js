@@ -84,7 +84,7 @@ function filtrar(){
                   var texto_filtrar = array_filter[j].value;
                   //console.debug('compara esto:'+text_a_comparar+' con esto:'+texto_filtrar);
 
-                  if(! text_a_comparar.includes(texto_filtrar) ) tabla.rows[i].classList.add('hide');
+                  if(! text_a_comparar.toUpperCase().includes(texto_filtrar.toUpperCase()) ) tabla.rows[i].classList.add('hide');
                 
                 }      
              };
@@ -201,7 +201,7 @@ TableManagerTask.prototype.createUIFilter = function(){
                  //botones
                 var button_save = document.createElement('input');
                 button_save.type = 'button';
-                button_save.value = 'Save Filter';
+                button_save.value = 'Apply Filter';
                 button_save.addEventListener('click',filtrar,false);
 
                 var button_reset = document.createElement('input');

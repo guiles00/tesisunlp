@@ -46,51 +46,89 @@ function tableHeaderHandler(e){
 function filtrar(){
     
     var table_filter = document.getElementById('g_table_filter');
-    //Recorro y veo si tiene valores
     
-    var array_filter = []; 
-    for (var i = 0; i < table_filter.rows.length ; i++) {
-        console.debug(table_filter.rows[i].cells[0].innerText);    
-        console.debug(table_filter.rows[i].cells[1].firstChild.value);
-        //creo el filtro
-       
-        var order = table_filter.rows[i].id;
-        var filter_value = table_filter.rows[i].cells[1].firstChild.value;
-        if(filter_value != ''){
-            var element = { order: order ,value:filter_value };
-            array_filter.push(element);
-        }   
-       
+    //Recorro y veo si tiene valores
+       var array_filter = []; 
+       var array_json = []; 
+            
+            for (var i = 0; i < table_filter.rows.length ; i++) {
+                console.debug(table_filter.rows[i].cells[0].innerText);    
+                console.debug(table_filter.rows[i].cells[1].firstChild.value);
+                //creo el filtro
+               
+               
+                var order = table_filter.rows[i].id;
+                var filter_value = table_filter.rows[i].cells[1].firstChild.value;
+                if(filter_value != ''){
+                    var element = { order: order ,value:filter_value };
+                    array_filter.push(element);
+                }   
+            }
+        
+        var tabla = document.getElementById(id_tabla);
+        
+          for( var i = 0 ; i < tabla.rows[0].cells.length ; i++){
+                //console.debug(tabla.rows[0].cells[i].innerText);
+                array_json.push(tabla.rows[0].cells[i].innerText);
+           }
+             
 
-    }
- 
 
-
-                var tabla = document.getElementById(id_tabla);
-                     
              //Filtra //tabla.rows.length
              for (var i = 1; i < tabla.rows.length ; i++) {
-                 //console.debug('compara esto');
-                 //console.debug(tabla.rows[i].cells[1].innerText);                       
-                    //console.debug('agarra la fila'+i);
-                    //console.debug(tabla.rows[i].cells);
-                    //console.debug('compara con esto');
-                    //console.debug(array_filter);    
-                  
+                
                 for (var j = 0; j < array_filter.length ; j++) { 
-                    //recorro para comparar
+            
+                   //recorro para comparar
                     
                   var text_a_comparar = tabla.rows[i].cells[ array_filter[j].order ].innerText;
                   var texto_filtrar = array_filter[j].value;
                   //console.debug('compara esto:'+text_a_comparar+' con esto:'+texto_filtrar);
 
-                  if(! text_a_comparar.toUpperCase().includes(texto_filtrar.toUpperCase()) ) tabla.rows[i].classList.add('hide');
-                
+                  if(! text_a_comparar.toUpperCase().includes(texto_filtrar.toUpperCase()) ) {
+                        
+                        tabla.rows[i].classList.add('hide');
+                        
+                    }else{
+                        guardaElemento(array_json,tabla.rows[i]);
+                    } 
                 }      
              };
-                     
+             
+             
+           
 }
 
+
+function guardaElemento(header,data){
+//localStorage.setItem('beca',JSON.stringify([]));
+//trae localStorage
+var items = JSON.parse(localStorage.getItem('beca'));
+
+var elemento = {};
+
+for(var i = 0; i < data.cells.length ; i++){
+    //elemento. No me juzguen
+    if( !(header[i] == '')){
+        elemento[header[i]] = data.cells[i].innerText;       
+    }
+}
+
+items.push(elemento);
+
+localStorage.setItem('beca',JSON.stringify(items));
+
+return elemento;
+}
+
+function saveData(){
+    
+    var data = document.getElementById(id_tabla);
+
+    console.debug(data);
+
+    
+}
 
 function reset(){
     
@@ -209,8 +247,16 @@ TableManagerTask.prototype.createUIFilter = function(){
                 button_reset.value = 'Reset';
                 button_reset.addEventListener('click',reset,false);
 
+                var button_save_data = document.createElement('input');
+                button_save_data.type = 'button';
+                button_save_data.value = 'Save Data';
+                button_save_data.addEventListener('click',saveData,false);
+
+                
+
                 div_filter.appendChild(button_save);
                 div_filter.appendChild(button_reset);
+                div_filter.appendChild(button_save_data);
 
                 sum_container.appendChild(div_filter);
  

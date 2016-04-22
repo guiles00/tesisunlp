@@ -751,7 +751,7 @@ function handleSelectxPath(){
 
 		//var i;
 		for (var i in shared_data){
-		console.debug(shared_data[i])	;
+		//console.debug(shared_data[i])	;
 
 		var sel_button = document.createElement('input');
 		sel_button.type = "button";
@@ -796,7 +796,7 @@ function handleSelectxPath(){
 	
 	//Creo un input 
 	var i_value = document.createElement('input');
-	i_value.class = "shared_edit";
+	i_value.classList.add('shared_edit');
 	i_value.value = shared_data[i].value;
 	
 	//Le agrego el event handler

@@ -24,7 +24,7 @@ function tableHeaderHandler(e){
                             var header = e.target.parentNode.cells;
                             //console.debug(e.target.parentNode.cells);
                             
-
+                            localStorage.setItem(id_tabla,JSON.stringify([]));  
                             /////////////////////Arma cabecera/array
                             for (var i = 0; i < header.length ; i++) {
                                  
@@ -103,7 +103,7 @@ function filtrar(){
 function guardaElemento(header,data){
 //localStorage.setItem('beca',JSON.stringify([]));
 //trae localStorage
-var items = JSON.parse(localStorage.getItem('beca'));
+var items = JSON.parse(localStorage.getItem(id_tabla));
 
 var elemento = {};
 
@@ -116,7 +116,7 @@ for(var i = 0; i < data.cells.length ; i++){
 
 items.push(elemento);
 
-localStorage.setItem('beca',JSON.stringify(items));
+localStorage.setItem(id_tabla,JSON.stringify(items));
 
 return elemento;
 }

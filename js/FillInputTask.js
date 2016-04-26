@@ -63,11 +63,12 @@ var handlers = function(){
     var iterator = document.evaluate(this.xPath.getValue(),document,null,0,null);
     var node = iterator.iterateNext();
     //Auto = 1 , Manual = 0
-    
+    //Traigo el contador NO se de donde lo saco, supngo que es cuando trae el tipo de dato que es ArrValue o detecta que es un valor complejo como array de objetos.
+     var cont = JSON.parse(localStorage.getItem('CONT'));
     if(node){
         if(this.tipo.getValue() == 1){
         Manager.highlightElement(node)
-        node.value = this.value.getValue();
+        node.value = this.value.getValue(cont);
         this.finalizo(this.id);
         }else{
                 Manager.highlightElement(node)

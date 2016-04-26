@@ -512,6 +512,8 @@ var Manager = (function () {
                         var task = arr_tareas[indice]; 
                             task.execute();
                     var ultima_tarea = JSON.parse(localStorage.getItem('IT6'))[1].task_id;
+                    var long_array = JSON.parse(localStorage.getItem('IT6'))[2].vueltas;
+                    
                     var cont = parseInt(localStorage.getItem('CONT'));
 
                     /*if(cont == 2){
@@ -522,7 +524,7 @@ var Manager = (function () {
                     }*/
                    // alert(ultima_tarea);
                     if(task.id == ultima_tarea){
-                    if(cont == 2){
+                    if(cont == long_array){
                     var it = localStorage.getItem('ITERADOR');
                      Manager.finalizoTarea(it); //Sacale el hardcodeo por el amor de jesucristo
                      Recorder.refresh();

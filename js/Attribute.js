@@ -209,13 +209,25 @@ var CValueAttribute = {
         
         return this;
     }
-    ,getValue: function(){
+    ,getValue: function(n){
+    
+    var array = JSON.parse(localStorage.getItem('actuacion'));
+    //traigo el objeto, la vuelta del array se la paso en getValue, de alguna manera
+    var obj = array[n - 1];
+    
+    console.debug('trae valor');
+    console.debug(array);
+    console.debug(obj);
+    console.debug('trae valor');
 
     var concept = this.value.substring(1,this.value.length -1);
-    //console.debug(concept);
+    console.debug(concept); //Este concept es el nombre del header
+    console.debug(obj[concept]);
+    console.debug('Este es el valor que va a usar');
              //   console.debug('entro a este getValue');
              //   console.log(localStorageManager.getConceptValue(concept));
-    return localStorageManager.getConceptValue(concept);
+    //return localStorageManager.getConceptValue(concept);
+    return obj[concept];
     }
     ,getConcept: function(){
         return this.concept;
@@ -232,6 +244,55 @@ var CValueAttribute = {
     , __proto__ : Attribute
 
 }
+
+
+var ArrValueAttribute = {
+    _type:'ArrValueAttribute'
+     ,init: function(c){
+        this.value = c.value || '' ;
+        this.htmlId = c.htmlId || 'value_id'; 
+        this.label = c.label || 'Value';
+        this.concept = c.concept || 'concept1';
+        
+        return this;
+    }
+    ,getValue: function(n){
+    
+    var array = JSON.parse(localStorage.getItem('actuacion'));
+    //traigo el objeto, la vuelta del array se la paso en getValue, de alguna manera
+    var obj = array[n - 1];
+    
+    console.debug('trae valor');
+    console.debug(array);
+    console.debug(obj);
+    console.debug('trae valor');
+    alert('trae la tabla');
+    var concept = this.value.substring(1,this.value.length -1);
+    console.debug(concept); //Este concept es el nombre del header
+    console.debug(obj[concept]);
+    console.debug('Este es el valor que va a usar');
+             //   console.debug('entro a este getValue');
+             //   console.log(localStorageManager.getConceptValue(concept));
+    //return localStorageManager.getConceptValue(concept);
+    return obj[concept];
+    }
+    ,getConcept: function(){
+        return this.concept;
+    }
+    ,getHtmlElement: function(){
+        var input_element = Object.create(inputElement);
+        input_element.label = this.getLabel();
+        //input_element.value = this.getValue();
+        input_element.value = this.getConcept();
+        input_element.id =   this.getHtmlId();
+            
+       return input_element;
+    }
+    , __proto__ : Attribute
+
+}
+
+
 var OValueAttribute = {
      _type:'OValueAttribute'
       ,init: function(c){
@@ -250,6 +311,9 @@ var OValueAttribute = {
     }
     , __proto__ : Attribute
 }
+
+
+
 
 var UrlAttribute = {
      _type:'UrlAttribute'
@@ -272,6 +336,8 @@ var UrlAttribute = {
     }
     , __proto__ : Attribute
 }
+
+
 
 //Objeto que encapsula varios atributos y comportamiento
 var Precondition = {

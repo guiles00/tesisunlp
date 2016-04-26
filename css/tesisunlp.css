@@ -215,7 +215,7 @@ font-color: white;
 	margin-left:-100px;
 	background: #28517A;
 	border: solid #28517A;
-	z-index: 500;
+	z-index: 1500;
 	color: white; 	
 }
 .edit_cell > input{

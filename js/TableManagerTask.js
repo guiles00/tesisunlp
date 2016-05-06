@@ -1,23 +1,29 @@
 var seleccionado = 0; //Es TEMPORAL, como vairas cosas y nunca las cambie :P
 var id_tabla = '';
 var obj_header = [];
+var gtask = {};
+
 //Esto es una funcion que va a un evento, lo tengo que poner afuera
 function tableHeaderHandler(e){
                 //Comienza a escuchar eventos
-                    
+                    //traigo el ID de la tarea
+                    //console.debug(task);
                     if(e.target.tagName == 'TH' && seleccionado == 0){
                         if( confirm("Seleccionar esta tabla?") ){
                                 
                             var el_nom = document.getElementById("div_table_manager_container");
                             id_tabla = e.target.parentNode.parentNode.parentNode.id;
-                                
+                            
+                            //Guardo el nombre de la tabla -- TENIENDO EN CUENTA QUE SIEMPRE TIENE UN ID
+                            gtask.value.value = id_tabla;
+                            localStorageManager.setObjectR(JSON.stringify(gtask));
+    
                             var text = document.createTextNode('Id Table: '+id_tabla);
                             el_nom.appendChild(text);   
                             
                             var el_table_sel = e.target.parentNode.parentNode.parentNode;
                             el_table_sel.addEventListener('click',function(e){
                             
-
                             });
                             //highlihter_tabla
                             seleccionado = 1;
@@ -37,7 +43,7 @@ function tableHeaderHandler(e){
                                    obj_header.push(obj_element);    
                                  }
                              };
-                            //console.debug(obj_header);
+                            
                             ///////////////////
                         }
                     };
@@ -185,7 +191,26 @@ TableManagerTask.prototype.escucharTabla = function(){
 
 TableManagerTask.prototype.execute = function(){
        
+        this.finalizo(this.id);
     
+}
+TableManagerTask.prototype.conf = function(){
+       
+    //pongo la tarea como variable global, no es buena idea, pero quiero que funcione, dspues veo como lo arreglo.
+    gtask = localStorageManager.getObject(this.id);
+    
+    //Tiene una tabla asignada?
+    //console.debug(gtask.value.value);
+    if(gtask.value.value !=''){
+
+       // var el_nom = document.getElementById("div_table_manager_container");
+        id_tabla = gtask.value.value;
+                            
+       // var text = document.createTextNode('Id Table: '+id_tabla);
+       // el_nom.appendChild(text);   
+                            
+    } 
+
     this.createMasterUI();
     this.escucharTabla();
 

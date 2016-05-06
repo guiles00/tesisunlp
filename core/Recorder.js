@@ -1675,6 +1675,9 @@ var pasabaporaqui = function(e){
 		}else{
 			this.value = "show";
 		};
+
+
+	
 		//console.debug(this.parentNode.parentNode.id);
 		//var el = document.getElementById(this.parentNode.parentNode.id);
 
@@ -1711,8 +1714,24 @@ var pasabaporaqui = function(e){
 		console.debug('Empieza desde aca'+this.parentNode.parentNode.id);
 		Manager.playTaskById(this.parentNode.parentNode.id);
 
-	};
+		};
 
+		var task = localStorageManager.getObject(id);
+
+		//Le agrego una condicion, si es TableManager (Esto lo tengo que desacoplar de aca, cada tarea le dice que boton agregar)
+		var conf_button = document.createElement('input');
+		conf_button.type = "button";
+		conf_button.value = "conf";
+		conf_button.classList.add('tesisunlp_button_left')
+		conf_button.onclick = function(){
+		//console.debug('Empieza desde aca'+this.parentNode.parentNode.id);
+		//Manager.playTaskById(this.parentNode.parentNode.id);
+		    
+            var oTask = construct(window[task.type]);
+            oTask.instanciamela(task);//.execute();
+            oTask.conf();
+
+		}
 
 		//var id_text = document.createTextNode(id+' - ');
 		var br = document.createElement('br');
@@ -1723,7 +1742,10 @@ var pasabaporaqui = function(e){
 		td2.appendChild(delete_button);
 		td2.appendChild(state_button);
 		td2.appendChild(play_button);
-
+		
+		if(task.type == 'TableManagerTask'){ 
+			td2.appendChild(conf_button);
+		}
 		//Este boton va solo en los composites
 
 		if(task.type == 'ComposedTask'){

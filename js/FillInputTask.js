@@ -67,8 +67,17 @@ var handlers = function(){
      var cont = JSON.parse(localStorage.getItem('CONT'));
     if(node){
         if(this.tipo.getValue() == 1){
+            /**/
+        // Create a new 'change' event
+        var event = new Event('change');
+
+            /**/
+
         Manager.highlightElement(node)
         node.value = this.value.getValue(cont);
+        // Dispatch it.
+        node.dispatchEvent(event);
+
         this.finalizo(this.id);
         }else{
                 Manager.highlightElement(node)

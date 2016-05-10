@@ -512,6 +512,8 @@ var Manager = (function () {
                         var task = arr_tareas[indice]; 
                             task.execute();
                     var ultima_tarea = JSON.parse(localStorage.getItem('IT6'))[1].task_id;
+                    var long_array = JSON.parse(localStorage.getItem('IT6'))[2].vueltas;
+                    
                     var cont = parseInt(localStorage.getItem('CONT'));
 
                     /*if(cont == 2){
@@ -522,7 +524,7 @@ var Manager = (function () {
                     }*/
                    // alert(ultima_tarea);
                     if(task.id == ultima_tarea){
-                    if(cont == 2){
+                    if(cont == long_array){
                     var it = localStorage.getItem('ITERADOR');
                      Manager.finalizoTarea(it); //Sacale el hardcodeo por el amor de jesucristo
                      Recorder.refresh();
@@ -808,6 +810,12 @@ var Manager = (function () {
             },addIteratorTask:function(){
                 //Instancio tarea vacia y guardo en el localStorage
                 var a_task = new IteratorTask();
+                localStorageManager.insert(a_task.toJson());
+                //Actualizo la consola
+                Recorder.refresh();
+            },addTableManagerTask:function(){
+                //Instancio tarea vacia y guardo en el localStorage
+                var a_task = new TableManagerTask();
                 localStorageManager.insert(a_task.toJson());
                 //Actualizo la consola
                 Recorder.refresh();

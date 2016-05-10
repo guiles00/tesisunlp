@@ -1,14 +1,10 @@
-body{
-
-}
 .tesisunlp_button { 
 	cursor: hand ;
-	/*background-color: #A2AFA0 ;*/
 	background-color: #28517A ;
 	border:1px solid ;
 	border-color: grey ; 
 	color: black ; 
-	/*font-family: Helvetica, Arial;*/ 
+	
 	font-family: Helvetica, sans-serif;
 	font-size: 9px; font-weight: 400; 
 	padding: 5px 7px 6px; 
@@ -24,10 +20,8 @@ body{
 	border:1px solid ;
 	border-color: #28517A ; 
 	color: black ; 
-	/*font-family: Helvetica, Arial;*/ 
 	font-family: Helvetica, sans-serif;
 	font-size: 9px; font-weight: 400; 
-	/*padding: 5px 5px 4px;*/ 
 	text-transform: uppercase;vertical-align: bottom;
 	border-radius: 5px;
 	color:#D3D3D3;
@@ -35,12 +29,10 @@ body{
 }
 .tesisunlp_button_right{
 	float: right;
-	/*background-color: #A2AFA0 ;*/
 	background-color: #28517A ;
 	border:1px solid ;
 	border-color: grey ; 
 	color: black ; 
-	/*font-family: Helvetica, Arial;*/ 
 	font-family: Helvetica, sans-serif;
 	font-size: 9px; font-weight: 400; 
 	padding: 5px 7px 6px; 
@@ -55,10 +47,8 @@ body{
 	border:1px solid ;
 	border-color: #28517A ; 
 	color: black ; 
-	/*font-family: Helvetica, Arial;*/ 
 	font-family: Helvetica, sans-serif;
 	font-size: 9px; font-weight: 400; 
-	/*padding: 5px 5px 4px;*/ 
 	text-transform: uppercase;vertical-align: bottom;
 	border-radius: 5px;
 	color:#D3D3D3;
@@ -70,6 +60,7 @@ body{
 .tesisunlp_td { 
 	border-bottom:1px solid #005000;
 } 
+
 .tesisunlp_table {  
 	background-color: #A2AFA0;  
 	min-width:323px ;
@@ -89,25 +80,28 @@ body{
 	vertical-align: middle;
 	background:#336699;
 
-}/*#A2AFA0; background: grey; */
-/*border:solid 1px #336699;*/
+}
 .tesisunlp_table_consola {
 
 	min-width:auto;
-	/*font-family: Helvetica,Arial;*/
+	
 	font-family:  Montserrat; 
 	font-size: 16px;
 }
+
 .table_consola_style{
 	width: 100%;
-	/*border: 1px solid black;*/
 }
-.table_consola_style  td, .tesisunlp_div_show_pocket td{
+/*.table_consola_style > tr, .tesisunlp_div_show_pocket > tr{
 	 border-bottom: 1px solid black;
-	 /*font-family: Montserrat, sans-serif;*/
-	 /*color: #262626;*/
 	 color:white;
-}
+}*/
+
+/*.table_consola_style > input, .tesisunlp_div_show_pocket > input{
+	 
+	 color:black;
+}*/
+
 .tesisunlp_div_pestana {
 	display: inline-block;
 	background: #28517A;
@@ -125,16 +119,16 @@ body{
 	position: fixed;
 	left:0;bottom: 3.2em;
 }
+
 .margen_tabla{
 	margin-top: 15px;
-	/*border: 1px solid black;*/
 }
 
 .consola_header_style{
 	margin-top: 5px;
 }
+
 .tesisunlp_input_label {
-	/*background-color: #A2AFA0; */
 	background-color: #28517A; 
 	border: 0; border-radius: 2px; 
 	color: black; font-size: 11px; 
@@ -150,6 +144,7 @@ body{
 	position: fixed;
 	left:0;bottom: 3.2em;
 }
+
 .tesisunlp_close_button {
 	position:absolute;
 	float:right;
@@ -179,6 +174,7 @@ body{
 	border-radius: 5px;
 
 }
+
 .tesisunlp_div_show_pocket {
 	position:absolute;
 	width:auto;
@@ -192,6 +188,15 @@ body{
 	padding: 15px 10px 5px 15px;
 	color: white;
 
+}
+
+.tesisunlp_div_show_pocket > tr > td{
+ 
+	 font-color:white;
+}
+
+.shared_edit{
+	color: black;
 }
 .tesisunlp_div_show_pocket:nth-child(odd){
 font-color: white;
@@ -210,13 +215,18 @@ font-color: white;
 	margin-left:-100px;
 	background: #28517A;
 	border: solid #28517A;
-	z-index: 500;
-	color: white; 
+	z-index: 1500;
+	color: white; 	
 }
+.edit_cell > input{
+	color: black; 
+}
+
 .tesisunlp_text_style{
 padding: 5px;
 display: table;
 }
+
 .edit_row{
 display: table-row;
 
@@ -243,7 +253,7 @@ border-style: solid;
 z-index: 500;
 }
 
-.topcorner ul,li {
+.topcorner > ul, .topcorner > li {
 list-style-type: none;
 padding: 0px;
 margin: 0px;
@@ -264,7 +274,7 @@ font-size: 9px;
 }
 
 .div_p_task_style, .div_a_task_style{
-	 /* display: none;*/
+
 	  padding: 10px;
 	  position: fixed;
 	  top: 50;
@@ -299,7 +309,7 @@ font-size: 9px;
 	font-size: 14px;
 	color: #E5E5E5;
 	margin-bottom: 5px;
-	/*padding: 30px 10px 10px 10px;*/
+
 }
 .ident_composite{
 	padding-left : 20px;
@@ -309,23 +319,38 @@ font-size: 9px;
 .tr_composite{
 	display: "none";
 }
-/*	
-.tesisunlp_div_consola::-webkit-scrollbar {
-    width: 12px;
-    background-color:#28517A;
-}
-.tesisunlp_div_consola::-webkit-scrollbar-thumb{
-background-color:#28517A;
-}
-.tesisunlp_div_consola::-webkit-scrollbar-track{
-background-color:#336699;
-}
-*/
-/*border-radius:10px;border-radius:10px;
 
-.consola_header_style ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-    -webkit-border-radius: 10px;
-    border-radius: 10px;
+
+.table_manager_topcorner{
+	position:fixed;
+	top:1em;
+	right:1em;
+	height: 100px;
+	width: 400px;
+	border-color: grey;
+	border-style: solid;
+	z-index: 1500;
+    /*background-color: #286090;*/
+    background: rgba(40,96,144, 0.8);
+    color:"white";
+    /*opacity: 0.8;*/
+
+}
+
+.inner_topcorner{
+    position:fixed;
+    top:10em;
+    right:1em;
+    height: 500px;
+    width: 400px;
+    border-color: grey;
+    border-style: solid;
+    z-index: 1600;
+    /*background-color: #286090;*/
+    background: rgba(40,96,144, 0.8);
+}
+
+.hide {
+display:none;
 }
 */

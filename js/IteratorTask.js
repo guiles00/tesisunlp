@@ -180,7 +180,16 @@ console.debug(this.value.value);
 var el_c = {task_id:arr_tasks[arr_tasks.length - 1]};        
 iterantes.push(el_c);
 
-var el_v = {vueltas:2};        
+//Cuantas vueltas son y por que vuelta va?
+//Lo saco el array que seleccione desde el sharedData
+
+// Ponele que el array es beca
+var table = JSON.parse(localStorage.getItem('actuacion')); //condicion, tiene que ser un array. y Lo selecciono desde THIS
+//console.debug('table.length');
+//console.debug(table.length);
+//console.debug('table.length');
+var cant = table.length;
+var el_v = {vueltas:cant};        
 iterantes.push(el_v);
 
 //var el_cont = {cont:0};        

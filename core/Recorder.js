@@ -3,6 +3,7 @@
  * @class Recorder
  */
 function construct(constructor, args) {
+	
     function F() {
         return constructor.apply(this, args);
     }

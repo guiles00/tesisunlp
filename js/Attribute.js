@@ -211,7 +211,7 @@ var CValueAttribute = {
     }
     ,getValue: function(n){
     
-    var array = JSON.parse(localStorage.getItem('actuacion'));
+    var array = JSON.parse(localStorage.getItem('beca'));
     //traigo el objeto, la vuelta del array se la paso en getValue, de alguna manera
     var obj = array[n - 1];
     

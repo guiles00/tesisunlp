@@ -7,7 +7,7 @@ var gtask = {};
 function tableHeaderHandler(e){
                 //Comienza a escuchar eventos
                     //traigo el ID de la tarea
-                    console.debug(e.target.tagName);
+                    //console.debug(task);
                     if(e.target.tagName == 'TH' && seleccionado == 0){
                         if( confirm("Seleccionar esta tabla?") ){
                                 
@@ -399,3 +399,8 @@ TableManagerTask.prototype.toHtml = function(properties){
 }
 return TableManagerTask;
 })();
+
+
+
+var tablemanager = new TableManagerTask;
+

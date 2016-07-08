@@ -184,7 +184,7 @@ iterantes.push(el_c);
 //Lo saco el array que seleccione desde el sharedData
 
 // Ponele que el array es beca
-var table = JSON.parse(localStorage.getItem('actuacion')); //condicion, tiene que ser un array. y Lo selecciono desde THIS
+var table = JSON.parse(localStorage.getItem('beca')); //condicion, tiene que ser un array. y Lo selecciono desde THIS
 //console.debug('table.length');
 //console.debug(table.length);
 //console.debug('table.length');

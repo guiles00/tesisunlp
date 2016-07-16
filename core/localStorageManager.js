@@ -72,8 +72,10 @@ localStorageManager = {
         for (i = 0; i < arr_ls.length; i = i + 1) {
            
             if(arr_ls[i].id == id) return arr_ls[i];
+       // console.debug(arr_ls[i]);
+        //alert(id);
         };
-    //Si no trajo ninguna
+            //Si no trajo ninguna
     return false;
     }
     /**
@@ -259,18 +261,20 @@ localStorageManager = {
          //   alert('tareas?');
         var o = localStorageManager.getObject(tareas[i]);
             
-       // console.debug(o);
+        //console.debug(o);
+        //alert('?');
+        if(o != false){
+
         var c_task = construct(window[o.type]);
-            c_task.instanciamela(o);
-        
-        //agrega si falta ejecutar
-        console.debug(o.state.value);
-        if(o.state.value == 0)
-             currentTasks.push(c_task);    
+            c_task.instanciamela(o);   
+       
+            if(o.state.value == 0)
+                 currentTasks.push(c_task);    
+            }
 
         }
-        console.debug(currentTasks);
-        //alert('currentTasks');
+        
+        //agrega si falta ejecutar
         
         /*var o3 = localStorageManager.getObject(3);
         var o13 = localStorageManager.getObject(13);

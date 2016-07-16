@@ -19,6 +19,7 @@ function ComposedTask(id,xPath,value,tipo,state,taskTitle){ //Constructor
     this.value = value || Object.create(CValueAttribute).init({'value':value});
 
 }
+
 ComposedTask.prototype = new AbstractTask();
 
 

@@ -210,6 +210,7 @@ var Manager = (function () {
                             
                         //como es una de las tareas nuevas la convierto otra vez en JSON
                         var json_task = localStorageManager.getObject(arr_ls[i].id);
+
                         var c_task = construct(window[arr_ls[i].type]);
                         console.debug(c_task);
                         //alert(arr_ls[i].id);

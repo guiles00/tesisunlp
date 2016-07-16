@@ -4,11 +4,19 @@
  */
 function construct(constructor, args) {
 	
+	//if(typeof args == 'undefined') return false;
+    
     function F() {
+
         return constructor.apply(this, args);
     }
+    if(typeof constructor == 'undefined') return false;
+
     F.prototype = constructor.prototype;
+    
     return new F();
+
+
 }
 function clickSelectedDOM(e){
 	
@@ -687,8 +695,9 @@ function handleSelectxPath(){
 	,editRow: function(x) {
 	
 	Recorder.createEditorContainer();
-	
-    var task = localStorageManager.getObject(x.parentNode.parentNode.id); //@comment Podría traer el objeto instanciado
+    var task = localStorageManager.getObject(x.parentNode.parentNode.id); 
+  
+    //@comment Podría traer el objeto instanciado
  	var aTask = construct(window[task.type]);
 	aTask.instanciamela(task);
 	var y = aTask.toHtml();
@@ -1050,10 +1059,12 @@ function handleSelectxPath(){
           var o_bpm = localStorage.getItem("BPM");
           var tasks = JSON.parse(o_bpm);
           var arr_tasks = tasks[procedure];
-          
-          for (var i=0;i < arr_tasks.length;i++){
+          //console.debug(arr_tasks);
+         // alert('x.parentNode.parentNode.id');
 
-          	if(arr_tasks[i].type == 'ComposedTask' || arr_tasks[i].type == 'IteratorTask'){
+          for (var i=0;i < arr_tasks.length;i++){
+ 
+         	if(arr_tasks[i].type == 'ComposedTask' || arr_tasks[i].type == 'IteratorTask'){
           		
           		this.writeComposite(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);
 	             	//split 
@@ -1067,18 +1078,19 @@ function handleSelectxPath(){
 	             		Recorder.writerComposed(task.id,task.taskTitle.value,-1);	
 	             	}
 
-          		console.debug('tarea composite');
-          		console.debug(arr_tasks[i]);
+          		//console.debug('tarea composite');
+          		//console.debug(arr_tasks[i]);
 
           	}else{
           		//arr_tasks[i].group.value puede tener dos valores, cuando esta dentro de una tarea cmpuesta se le agrega un objeto (MAL, siempre tendria que tener un objeto)
-          		console.debug('imprimo la tarea');
-          		console.debug(arr_tasks[i].group);
-          		console.debug('/imprimo la tarea');
+          		/*console.debug('imprimo la tareassss');
+          		console.debug(arr_tasks[i].id);
+          		console.debug(arr_tasks[i].taskTitle.value);
+          		console.debug('/imprimo la tareassss');*/
 
           		//console.debug(arr_tasks[i].group);
           		if(arr_tasks[i].group.value == '' || arr_tasks[i].group.value == 0) {
-          			console.debug(arr_tasks[i]);
+          			//console.debug(arr_tasks[i]);
           			Recorder.writer(arr_tasks[i].id,arr_tasks[i].taskTitle.value,-1);	
           		}	             		
           	}
@@ -1423,7 +1435,6 @@ var pasabaporaqui = function(e){
 
         var tr = document.getElementById('table_consola').insertRow(index);
         tr.id = id;
-
         //Trae uno solo
         var task = localStorageManager.getObject(id);
         //Como es asincrono tengo que hacerlo dentro de un callback
@@ -1607,7 +1618,7 @@ var pasabaporaqui = function(e){
 		}
 
 	,writer: function(id,text,index){
-
+			    
 		var table_consola = document.getElementById("table_consola");
 
         var tr = document.getElementById('table_consola').insertRow(index);

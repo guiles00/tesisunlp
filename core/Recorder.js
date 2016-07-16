@@ -125,40 +125,49 @@ var Recorder = {
 	       	
 	       var process = xmlDoc.getElementsByTagNameNS("http://www.omg.org/spec/BPMN/20100524/MODEL","process");	       	
 	       var tasks = process[0].childNodes;
-	       //console.debug(tasks);
+	       
 	       for(i in tasks){
 	      
-	      // 	console.log(tasks[i]);
 	       	if(typeof tasks[i] == 'object'){
-	       		//console.debug(tasks[i]);
-	       		//tasks[i].getAttributeNS
 	       	//Tiene que ser una tarea
-	       //	var x =	tasks[i].getElementsByTagNameNS("bpmn2","task");
-	       if(tasks[i].nodeName == 'bpmn2:task' || tasks[i].nodeName == 'bpmn:task'){
+	       
+	       if(tasks[i].nodeName == 'bpmn2:task'){
 				
-	      		var bpmn2_id = tasks[i].id;
+				var bpmn2_id = tasks[i].id;
 	      		var bpmn2_type = tasks[i].getAttribute('task:type');
-console.debug('bpmn2_type');
-	      		console.debug(bpmn2_type);
+	      		var bpmn2_title = tasks[i].getAttribute('name');
 	      		
-	      		if(bpmn2_type){ 
-	      			/*Creo una tarea vacia */
-	      		var bpmn2_json_task = '{"id":2,"xPath":{"value":"sxPath","htmlId":"xpath_id","label":" xPath: "},"tipo":{"value":1,"htmlId":"auto_id","label":" Manual: ","checked":false}'+
-	      		',"state":{"value":"","htmlId":"state_id","label":" Ejecutado: "}'+
-	      		',"type":"'+bpmn2_type+'","precondition":{}'+
-	      		',"taskTitle":{"value":"EXPORTADO ","htmlId":"task_title_id","label":" Task Title: "}'+
-	      		',"group":{"value":"","htmlId":"group_id","label":"group"}'+
-	      		',"shared":false,"value":{"value":"","htmlId":"value_id","label":" Value: "}} ';
+                
+				
+				//Si tiene data de antes la importo
+				var json_payload = tasks[i].getElementsByTagNameNS("http://json_task","jsonData")
+				if( json_payload.length > 0) {
+					//SI HAY QUE MODIFICAR ESTA TAREA COMO HAGO?				
+				  	var res_json = (json_payload[0].innerHTML.replace("<![CDATA[", "")).replace("]]>","");
+		       		localStorageManager.insert(res_json);
 
-	      		localStorageManager.insert(bpmn2_json_task);
-	      		}
+				}else{
+
+
+		      		if(bpmn2_type){ 
+		      			/*Creo una tarea vacia */
+		      		var bpmn2_json_task = '{"id":2,"xPath":{"value":"sxPath","htmlId":"xpath_id","label":" xPath: "},"tipo":{"value":1,"htmlId":"auto_id","label":" Manual: ","checked":false}'+
+		      		',"state":{"value":"","htmlId":"state_id","label":" Ejecutado: "}'+
+		      		',"type":"'+bpmn2_type+'","precondition":{}'+
+		      		',"taskTitle":{"value":"'+bpmn2_title+'","htmlId":"task_title_id","label":" Task Title: "}'+
+		      		',"group":{"value":"","htmlId":"group_id","label":"group"}'+
+		      		',"shared":false,"value":{"value":"","htmlId":"value_id","label":" Value: "}} ';
+
+		      		localStorageManager.insert(bpmn2_json_task);
+		      		}
+				}
 	       }
 	      		
 
-	       	if(tasks[i].nodeName == 'bpmn:task'){
+	       /*	if(tasks[i].nodeName == 'bpmn2:task'){ */
 	       		
 
-	       		
+	       		/*
 	       		var x =	tasks[i].getElementsByTagNameNS("http://json_task","jsonData");
 		      	if(x.length > 0){
 		       	var res_json = (x[0].innerHTML.replace("<![CDATA[", "")).replace("]]>","");
@@ -167,7 +176,7 @@ console.debug('bpmn2_type');
 		       	localStorageManager.insert(res_json);
 		      	}else{
 		      		console.log("encontro una tarea vacia");
-		      	}
+		      	}*/
 	      		
 	       	//Suponemos que todos tienen JSON payload (Cuando modifique los graficos se arma estructura esqueleto)
 	       	
@@ -195,7 +204,7 @@ console.debug('bpmn2_type');
 
 				    localStorageManager.insert(o_task.toJson());
 				       		arr_o.push(o_task)		*/
-	       	  }
+	       	 /* }*/
 	       	 }
 	        }
 

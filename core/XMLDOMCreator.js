@@ -5,9 +5,9 @@ function XMLDOMCreator(){
 }
 XMLDOMCreator.prototype.init = function(){
 
-	var bpmn = document.createElementNS('http://your-namespace-uri-here','bpmn:definitions');
+	var bpmn = document.createElementNS('http://your-namespace-uri-here','bpmn2:definitions');
 	bpmn.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:xsi","http://www.w3.org/2001/XMLSchema-instance");
-	bpmn.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:bpmn","http://www.omg.org/spec/BPMN/20100524/MODEL");
+	bpmn.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:bpmn2","http://www.omg.org/spec/BPMN/20100524/MODEL");
 	bpmn.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:bpmndi","http://www.omg.org/spec/BPMN/20100524/DI");
 	bpmn.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:di","http://www.omg.org/spec/DD/20100524/DI"); 
 	bpmn.setAttributeNS("http://www.w3.org/2000/xmlns/","xmlns:dc","http://www.omg.org/spec/DD/20100524/DC");
@@ -17,7 +17,7 @@ XMLDOMCreator.prototype.init = function(){
 
 XMLDOMCreator.prototype.createElementProcess = function(id){
 
-	var process = document.createElementNS("task",'bpmn:process');
+	var process = document.createElementNS("task",'bpmn2:process');
 	process.id= id;
 	process.setAttribute("isExecutable","false");
 	return process;
@@ -25,7 +25,7 @@ XMLDOMCreator.prototype.createElementProcess = function(id){
 
 XMLDOMCreator.prototype.createElementSubProcess = function(id){
 
-	var sprocess = document.createElementNS("task",'bpmn:subProcess');
+	var sprocess = document.createElementNS("task",'bpmn2:subProcess');
 	sprocess.id= id;
 	//sprocess.setAttribute("isExpanded","true");
 	return sprocess;
@@ -33,15 +33,17 @@ XMLDOMCreator.prototype.createElementSubProcess = function(id){
 
 XMLDOMCreator.prototype.createStartProcess = function(id){
 
-var start = document.createElementNS("task",'bpmn:startEvent');
+var start = document.createElementNS("task",'bpmn2:startEvent');
 	start.id= id;
 	return start;
 }
 
-XMLDOMCreator.prototype.createTaskElement = function(id,title){
-	var task = document.createElementNS("task","bpmn:task");
+XMLDOMCreator.prototype.createTaskElement = function(id,title,type){
+	var task = document.createElementNS("task","bpmn2:task");
 	task.id = id;
+
 	task.setAttribute("name",title);
+	task.setAttribute("type",type);
 	return task;
 }
 
@@ -61,7 +63,7 @@ XMLDOMCreator.prototype.createBPMNPlaneElement = function(id,title){
 
 
 XMLDOMCreator.prototype.createExtensionElement = function(id){
-	var extension = document.createElementNS("extension",'bpmn:extensionElements');
+	var extension = document.createElementNS("extension",'bpmn2:extensionElements');
 	extension.id=id;
 	//extension.setAttribute("bpmnElement",title);
 	return extension;
@@ -106,7 +108,7 @@ var dc = document.createElementNS("dc",'dc:Bounds');
 //    <bpmn:exclusiveGateway id="ExclusiveGateway_131w4oi" />
 
 XMLDOMCreator.prototype.createGatewayElement = function(id){
-	var gateway = document.createElementNS("extension",'bpmn:exclusiveGateway');
+	var gateway = document.createElementNS("extension",'bpmn2:exclusiveGateway');
 	gateway.id = id;
 	return gateway;
 }
@@ -208,7 +210,7 @@ for (index in data_export) {
 			
 			var d_title = task.taskTitle.value+'_'+task.id;
 
-			var sp = domcreator.createTaskElement('Task_'+d_title,'Task_'+d_title);			
+			var sp = domcreator.createTaskElement('Task_'+d_title,'Task_'+d_title,'ComposedTask');			
 			sprocess.appendChild(sp);
 			//console.debug(sprocess);
 			var st_s = domcreator.createBPMNShapeElement('Task_'+d_title+'_di','Task_'+d_title,'380',"135","100","80");
@@ -224,7 +226,7 @@ for (index in data_export) {
 		
 		//console.debug();
 	
-	var p_t = domcreator.createTaskElement("Task_"+data_export[index].id,title+"_"+data_export[index].id);
+	var p_t = domcreator.createTaskElement("Task_"+data_export[index].id,title+"_"+data_export[index].id,data_export[index].type);
 	p.appendChild(p_t);
 
 	var p_e = domcreator.createExtensionElement("DataTask_"+data_export[index].id,title+"_"+data_export[index].id);
